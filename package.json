@@ -34,6 +34,7 @@
     "jest": "^24.9.0",
     "lodash-es": "^4.17.15",
     "metro-react-native-babel-preset": "^0.56.0",
+    "moment": "^2.24.0",
     "react-dom": "16.8.6",
     "react-test-renderer": "16.8.6"
   },
