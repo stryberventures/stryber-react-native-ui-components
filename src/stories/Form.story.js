@@ -7,4 +7,4 @@ import CenterView from '../components/CenterView';
 
 storiesOf('Form', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('Login Form', () => <Form />);
+  .add('Login Form', () => <Form />, {notes: 'Use with context and have fun'});
