@@ -1,8 +1,8 @@
-import { FAVORITED_CARD } from "./types";
+import {FAVORITED_CARD} from './types';
 
 export const favoritedCard = id => {
   return {
     type: FAVORITED_CARD,
-    payload: id
+    payload: id,
   };
 };

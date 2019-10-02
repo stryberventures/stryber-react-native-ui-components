@@ -9,7 +9,7 @@ storiesOf('Card', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('default', () => (
     <Card
-      image={require('../assets/images/charizard.jpg')}
+      image={require('../static/images/charizard.jpg')}
       text={'Charizard'}
       is_favorite={false}
       action={linkTo('Card', 'favorited')}
@@ -17,7 +17,7 @@ storiesOf('Card', module)
   ))
   .add('favorited', () => (
     <Card
-      image={require('../assets/images/charizard.jpg')}
+      image={require('../static/images/charizard.jpg')}
       text={'Charizard'}
       is_favorite={true}
       action={linkTo('Card', 'default')}

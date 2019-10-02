@@ -1,1 +1,1 @@
-export const FAVORITED_CARD = "FAVORITED_CARD";
+export const FAVORITED_CARD = 'FAVORITED_CARD';

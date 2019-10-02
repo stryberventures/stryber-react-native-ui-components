@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {Platform, Dimensions} from 'react-native';
 import Vocabulary from '../i18n';
 
@@ -193,21 +192,5 @@ export const Validator = {
 };
 
 export const pixelToDp = pixel => pixel;
-
-export const customHooks = {
-  useForm(initialValues) {
-    const [values, setValues] = useState(initialValues);
-
-    return [
-      values,
-      e => {
-        setValues({
-          ...values,
-          [e.target.name]: e.target.value,
-        });
-      },
-    ];
-  },
-};
 
 export const pixelFontToDp = pixel => pixel;

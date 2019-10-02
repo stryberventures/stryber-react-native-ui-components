@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {customHooks} from '../../utils';
+import {customHooks} from '../../core';
 import Input from '../Input';
 
 const Form = () => {
@@ -9,14 +9,12 @@ const Form = () => {
   return (
     <View>
       <Input
-        style={{width: 250}}
         name="email"
         value={values.email}
         onChange={handleChange}
         placeholder="Email"
       />
       <Input
-        style={{width: 250}}
         name="password"
         value={values.password}
         onChange={handleChange}

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { View } from "react-native";
-import PropTypes from "prop-types";
+import React, {Component} from 'react';
+import {View} from 'react-native';
+import PropTypes from 'prop-types';
 
-import { connect } from "react-redux";
-import { favoritedCard } from "../../redux/actions";
-import Card from "../Card";
+import {connect} from 'react-redux';
+import {favoritedCard} from '../../redux/actions';
+import Card from '../Card';
 
 class CardList extends Component {
   render() {
@@ -28,22 +28,22 @@ class CardList extends Component {
 
 const styles = {
   container: {
-    flex: 1
-  }
+    flex: 1,
+  },
 };
 
 CardList.propTypes = {
   cards: PropTypes.array.isRequired,
-  favoritedCard: PropTypes.func.isRequired
+  favoritedCard: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ cards }) => {
+const mapStateToProps = ({cards}) => {
   return cards;
 };
 
 export default connect(
   mapStateToProps,
   {
-    favoritedCard
-  }
+    favoritedCard,
+  },
 )(CardList);
