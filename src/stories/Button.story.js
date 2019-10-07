@@ -1,30 +1,55 @@
 import React from 'react';
+import {ScrollView, SafeAreaView} from 'react-native';
 
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
-import {withKnobs, color, text, object} from '@storybook/addon-knobs';
+import {withKnobs, color, text, object, select} from '@storybook/addon-knobs';
 
-import {theme} from '../constants';
+import {defaultTheme} from '../constants';
 import Button from '../components/Button';
 import Text from '../components/Text';
 import CenterView from '../components/CenterView';
 import {gradientMarkdown} from '../static/markdown/gradientButton.js';
 
 storiesOf('Button', module)
+  .addParameters({
+    component: Button,
+  })
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('all', () => (
+    <SafeAreaView>
+      <ScrollView>
+        <Button gradient onPress={action('clicked-gradient')}>
+          <Text bold white center>
+            Button text
+          </Text>
+        </Button>
+        <Button shadow color="white" onPress={action('clicked-shadow')}>
+          <Text center semibold>
+            Button text
+          </Text>
+        </Button>
+        <Button onPress={action('clicked-link')}>
+          <Text grey caption center style={{textDecorationLine: 'underline'}}>
+            Button text
+          </Text>
+        </Button>
+      </ScrollView>
+    </SafeAreaView>
+  ))
   .add(
     'with gradient',
     () => {
-      const buttonText = text('Button text', 'Hello Button', 'Text');
+      // for Button
       const gradientColor1 = color(
         'Gradient First Color',
-        theme.colors.primary,
+        defaultTheme.colors.primary,
         'Gradient',
       );
       const gradientColor2 = color(
         'Gradient Second Color',
-        theme.colors.secondary,
+        defaultTheme.colors.secondary,
         'Gradient',
       );
       const colorPosition1 = object(
@@ -37,6 +62,23 @@ storiesOf('Button', module)
         {x: 1, y: 1},
         'Gradient',
       );
+      // for Text
+      const textColorsSelect = select(
+        'Colors',
+        {
+          accent: 'accent',
+          primary: 'primary',
+          secondary: 'secondary',
+          tertiary: 'tertiary',
+          black: 'black',
+          white: 'white',
+          gray: 'gray',
+          gray2: 'gray2',
+        },
+        'white',
+        'Text',
+      );
+      const buttonText = text('Button text', 'Hello Button', 'Text');
       return (
         <Button
           startColor={gradientColor1}
@@ -44,8 +86,8 @@ storiesOf('Button', module)
           start={colorPosition1}
           end={colorPosition2}
           gradient
-          onPress={action('clicked-text')}>
-          <Text bold white center>
+          onPress={action('clicked-gradient')}>
+          <Text bold {...{[textColorsSelect]: true}} center>
             {buttonText}
           </Text>
         </Button>
@@ -53,10 +95,17 @@ storiesOf('Button', module)
     },
     {notes: {markdown: gradientMarkdown}},
   )
-  .add('with some emoji', () => (
-    <Button onPress={action('clicked-emoji')}>
-      <Text grey caption center>
-        😀 😎 👍 💯
+  .add('with shadow', () => (
+    <Button shadow color="white" onPress={action('clicked-shadow')}>
+      <Text center semibold>
+        Button text
+      </Text>
+    </Button>
+  ))
+  .add('used like link', () => (
+    <Button onPress={action('clicked-link')}>
+      <Text grey caption center style={{textDecorationLine: 'underline'}}>
+        Button text
       </Text>
     </Button>
   ));

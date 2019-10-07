@@ -1,3 +1,5 @@
-import * as theme from './theme';
+import * as defaultTheme from './theme';
 
-export {theme};
+export const THEME_KEY = 'THEME_KEY';
+
+export {defaultTheme};

@@ -1170,6 +1170,11 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@react-native-community/async-storage@^1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.6.2.tgz#a19ca7149c4dfe8216f2330e6b1ebfe2d075ef92"
+  integrity sha512-EJGsbrHubK1mGxPjWB74AaHAd5m9I+Gg2RRPZzMK6org7QOU9WOBnIMFqoeVto3hKOaEPlk8NV74H6G34/2pZQ==
+
 "@react-native-community/cli-platform-android@^2.6.0", "@react-native-community/cli-platform-android@^2.9.0":
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-platform-android/-/cli-platform-android-2.9.0.tgz#28831e61ce565a2c7d1905852fce1eecfd33cb5e"
@@ -1344,6 +1349,15 @@
     core-js "^3.0.1"
     fast-deep-equal "^2.0.1"
 
+"@storybook/addon-ondevice-backgrounds@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-ondevice-backgrounds/-/addon-ondevice-backgrounds-5.2.1.tgz#c54b35effc005071d1f63bbbb4dd3da322c8d14c"
+  integrity sha512-aVpqwv8AD9S2o5vEMpbvFG0X4ZdBqc3+MSTdjSyeYk18xvxSBHtGtpwy09+P73I0DS6kzSA8sKLbDmbsG+KPBQ==
+  dependencies:
+    "@storybook/addons" "5.2.1"
+    core-js "^3.0.1"
+    prop-types "^15.7.2"
+
 "@storybook/addon-ondevice-knobs@^5.2.1":
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/@storybook/addon-ondevice-knobs/-/addon-ondevice-knobs-5.2.1.tgz#4afc06ffc61b0942a764c68c4f80d69e5dfcbfbb"
@@ -1369,6 +1383,15 @@
     core-js "^3.0.1"
     prop-types "^15.7.2"
     react-native-simple-markdown "^1.1.0"
+
+"@storybook/addon-options@^5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-options/-/addon-options-5.2.1.tgz#86aad315b21868524751899daf000599eb81f215"
+  integrity sha512-LwWr9vt0NToKM0wiPDzNIZZIR2nLSQ4moPtzMpzWNbYj1iCAHSkKxiCcN5425cVLNy3kJYD70rSYrhPKwPpwCA==
+  dependencies:
+    "@storybook/addons" "5.2.1"
+    core-js "^3.0.1"
+    util-deprecate "^1.0.2"
 
 "@storybook/addon-storyshots@^5.2.1":
   version "5.2.1"

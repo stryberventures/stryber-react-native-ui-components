@@ -1,3 +1,5 @@
+const key = 'Default';
+
 const colors = {
   accent: '#F3534A',
   primary: '#0AC4BA',
@@ -50,4 +52,4 @@ const fonts = {
   },
 };
 
-export {colors, sizes, fonts};
+export {key, colors, sizes, fonts};

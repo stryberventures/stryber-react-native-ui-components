@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text} from 'react-native';
+import withTheme from '../withTheme';
+import getStyles from './styles';
 
-import {theme} from '../../constants';
-
-export default class Typography extends Component {
+class Typography extends Component {
   render() {
     const {
       h1,
@@ -16,7 +16,6 @@ export default class Typography extends Component {
       size,
       transform,
       align,
-      // styling
       regular,
       bold,
       semibold,
@@ -25,9 +24,8 @@ export default class Typography extends Component {
       light,
       center,
       right,
-      spacing, // letter-spacing
-      height, // line-height
-      // colors
+      spacing,
+      height,
       color,
       accent,
       primary,
@@ -39,8 +37,10 @@ export default class Typography extends Component {
       gray2,
       style,
       children,
+      theme,
       ...props
     } = this.props;
+    const styles = getStyles(theme);
 
     const textStyles = [
       styles.text,
@@ -66,7 +66,6 @@ export default class Typography extends Component {
       right && styles.right,
       color && styles[color],
       color && !styles[color] && {color},
-      // color shortcuts
       accent && styles.accent,
       primary && styles.primary,
       secondary && styles.secondary,
@@ -75,7 +74,7 @@ export default class Typography extends Component {
       white && styles.white,
       gray && styles.gray,
       gray2 && styles.gray2,
-      style, // rewrite predefined styles
+      style,
     ];
 
     return (
@@ -86,46 +85,4 @@ export default class Typography extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-  // default style
-  text: {
-    fontSize: theme.sizes.font,
-    color: theme.colors.black,
-  },
-  // variations
-  regular: {
-    fontWeight: 'normal',
-  },
-  bold: {
-    fontWeight: 'bold',
-  },
-  semibold: {
-    fontWeight: '500',
-  },
-  medium: {
-    fontWeight: '500',
-  },
-  light: {
-    fontWeight: '200',
-  },
-  // position
-  center: {textAlign: 'center'},
-  right: {textAlign: 'right'},
-  // colors
-  accent: {color: theme.colors.accent},
-  primary: {color: theme.colors.primary},
-  secondary: {color: theme.colors.secondary},
-  tertiary: {color: theme.colors.tertiary},
-  black: {color: theme.colors.black},
-  white: {color: theme.colors.white},
-  gray: {color: theme.colors.gray},
-  gray2: {color: theme.colors.gray2},
-  // fonts
-  h1: theme.fonts.h1,
-  h2: theme.fonts.h2,
-  h3: theme.fonts.h3,
-  title: theme.fonts.title,
-  body: theme.fonts.body,
-  caption: theme.fonts.caption,
-  small: theme.fonts.small,
-});
+export default withTheme(Typography);
