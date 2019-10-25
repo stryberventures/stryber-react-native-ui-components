@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import {merge, cloneDeep} from 'lodash-es';
 
-import {ThemeContext} from '../../core/themeProvider';
 import {THEME_KEY, defaultTheme} from '../../constants';
+
+export const ThemeContext = React.createContext();
 
 const ThemeContextProvider = ({children, themes = [defaultTheme]}) => {
   const [themeID, setThemeID] = useState();

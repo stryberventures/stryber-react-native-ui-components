@@ -4,4 +4,7 @@ export default {
     justifyContent: 'center',
     paddingHorizontal: 20,
   },
+  middle: {
+    alignItems: 'center',
+  },
 };

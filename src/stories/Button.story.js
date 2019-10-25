@@ -1,5 +1,4 @@
 import React from 'react';
-import {ScrollView, SafeAreaView} from 'react-native';
 
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
@@ -17,27 +16,6 @@ storiesOf('Button', module)
   })
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('all', () => (
-    <SafeAreaView>
-      <ScrollView>
-        <Button gradient onPress={action('clicked-gradient')}>
-          <Text bold white center>
-            Button text
-          </Text>
-        </Button>
-        <Button shadow color="white" onPress={action('clicked-shadow')}>
-          <Text center semibold>
-            Button text
-          </Text>
-        </Button>
-        <Button onPress={action('clicked-link')}>
-          <Text grey caption center style={{textDecorationLine: 'underline'}}>
-            Button text
-          </Text>
-        </Button>
-      </ScrollView>
-    </SafeAreaView>
-  ))
   .add(
     'with gradient',
     () => {
@@ -87,7 +65,7 @@ storiesOf('Button', module)
           end={colorPosition2}
           gradient
           onPress={action('clicked-gradient')}>
-          <Text bold {...{[textColorsSelect]: true}} center>
+          <Text header bold {...{[textColorsSelect]: true}} center>
             {buttonText}
           </Text>
         </Button>
@@ -97,14 +75,44 @@ storiesOf('Button', module)
   )
   .add('with shadow', () => (
     <Button shadow color="white" onPress={action('clicked-shadow')}>
-      <Text center semibold>
+      <Text header center semibold>
+        Button text
+      </Text>
+    </Button>
+  ))
+  .add('primary', () => (
+    <Button color="primary" onPress={action('clicked-shadow')}>
+      <Text header white center bold>
+        Button text
+      </Text>
+    </Button>
+  ))
+  .add('secondary', () => (
+    <Button border color="transparent" onPress={action('clicked-shadow')}>
+      <Text primary header center bold>
+        Button text
+      </Text>
+    </Button>
+  ))
+  .add('with ripple', () => (
+    <Button
+      ripple
+      border
+      color="transparent"
+      onPress={action('clicked-shadow')}>
+      <Text primary header center bold>
         Button text
       </Text>
     </Button>
   ))
   .add('used like link', () => (
     <Button onPress={action('clicked-link')}>
-      <Text grey caption center style={{textDecorationLine: 'underline'}}>
+      <Text
+        header
+        grey
+        caption
+        center
+        style={{textDecorationLine: 'underline'}}>
         Button text
       </Text>
     </Button>

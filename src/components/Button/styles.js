@@ -5,7 +5,7 @@ const getStyles = (theme = defaultTheme) =>
   StyleSheet.create({
     button: {
       borderRadius: theme.sizes.radius,
-      height: theme.sizes.base * 3,
+      height: theme.sizes.buttonHeight,
       justifyContent: 'center',
       marginVertical: theme.sizes.padding / 3,
     },

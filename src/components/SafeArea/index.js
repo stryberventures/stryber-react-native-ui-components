@@ -1,31 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import SafeAreaView from 'react-native-safe-area-view';
-
+import {SafeAreaView} from 'react-native';
 
 import styles from './styles';
-import { isIphoneX } from '../../utils';
-
 
 class SafeArea extends Component {
-  static forceInset = { top: 28, bottom: 25, horizontal: 'never' };
   render() {
-    const {
-      style, transparent,
-    } = this.props;
+    const {style, transparent, children} = this.props;
     return (
-      <SafeAreaProvider>
       <SafeAreaView
-        forceInset={isIphoneX()
-          ? Object.assign({}, SafeArea.forceInset, this.props.forceInset)
-          : { top: 'never', bottom: 'never', horizontal: 'never' }}
-        style={[styles.container, style, transparent ? styles.transparent : {}]}
-      >
-        {this.props.children}
+        style={[
+          styles.container,
+          style,
+          transparent ? styles.transparent : {},
+        ]}>
+        {children}
       </SafeAreaView>
-      </SafeAreaProvider>
     );
   }
 }

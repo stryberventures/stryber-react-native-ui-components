@@ -6,10 +6,10 @@ export const customHooks = {
 
     return [
       values,
-      e => {
+      ({name, text}) => {
         setValues({
           ...values,
-          [e.target.name]: e.target.value,
+          [name]: text,
         });
       },
     ];

@@ -1,14 +1,14 @@
-import React from "react";
-import { ScrollView } from "react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { createStore } from "redux";
-import reducers from "../../redux/reducers";
+import React from 'react';
+import {ScrollView} from 'react-native';
+import {Provider as ReduxProvider} from 'react-redux';
+import {createStore} from 'redux';
+import reducers from '../../redux/reducers';
 
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 const store = createStore(reducers);
 
-const Provider = ({ children }) => {
+const Provider = ({children}) => {
   return (
     <ReduxProvider store={store}>
       <ScrollView contentContainerStyle={styles.content}>{children}</ScrollView>
@@ -18,12 +18,12 @@ const Provider = ({ children }) => {
 
 const styles = {
   content: {
-    alignItems: "center"
-  }
+    alignItems: 'center',
+  },
 };
 
 Provider.propTypes = {
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
 };
 
 export default Provider;

@@ -27,6 +27,7 @@ const getStyles = (theme = defaultTheme) =>
     // position
     center: {textAlign: 'center'},
     right: {textAlign: 'right'},
+    left: {textAlign: 'left'},
     // colors
     accent: {color: theme.colors.accent},
     primary: {color: theme.colors.primary},

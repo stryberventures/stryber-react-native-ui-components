@@ -1,22 +1,30 @@
 const key = 'Default';
 
 const colors = {
-  accent: '#F3534A',
-  primary: '#0AC4BA',
+  accent: '#d0021b',
+  accent2: '#ea3546',
+  primary: '#007aff',
   secondary: '#2BDA8E',
   tertiary: '#FFE358',
   black: '#323643',
   white: '#FFFFFF',
-  gray: '#9DA3B4',
-  gray2: '#C5CCD6',
+  gray: '#cfe2f2',
+  gray2: '#95acbf',
+  darkGrey: '#54738c',
 };
 
 const sizes = {
   // global sizes
   base: 16,
   font: 14,
-  radius: 6,
+  radius: 8,
   padding: 25,
+  checkbox: 25,
+  checkboxIcon: 15,
+  inputHeight: 43,
+  buttonHeight: 44,
+  borderWidth: 1,
+  paddingHorizontal: 12,
 
   // font sizes
   h1: 26,

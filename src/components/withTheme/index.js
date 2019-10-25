@@ -1,11 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, forwardRef} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {ThemeContext} from '../../core/themeProvider';
+import {ThemeContext} from '../ThemeContextProvider';
 import {THEME_KEY, defaultTheme} from '../../constants';
 
 export default function withTheme(Component) {
-  return props => {
+  return forwardRef((props, ref) => {
     const {
       themes = [defaultTheme],
       themeID = 'Default',
@@ -24,7 +24,8 @@ export default function withTheme(Component) {
         themes={themes}
         theme={getTheme(themeID)}
         setTheme={setTheme}
+        ref={ref}
       />
     );
-  };
+  });
 }

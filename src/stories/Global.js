@@ -12,9 +12,9 @@ addDecorator(getStory => (
 
 addParameters({
   backgrounds: [
-    {name: 'light', value: '#eeeeee', default: true},
+    {name: 'light', value: '#eeeeee'},
     {name: 'dark', value: '#222222'},
     {name: 'black', value: '#000000'},
-    {name: 'white', value: '#ffffff'},
+    {name: 'white', value: '#ffffff', default: true},
   ],
 });
