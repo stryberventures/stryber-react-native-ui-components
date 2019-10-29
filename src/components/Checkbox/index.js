@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Text from '../Text';
 import Block from '../Block';
 import withTheme from '../withTheme';
-import getStyles, {textStyle} from './styles';
+import getStyles from './styles';
 
 class Checkbox extends Component {
   constructor(props) {
@@ -36,14 +36,20 @@ class Checkbox extends Component {
     }
   };
 
+  renderRadioIcon = () => {
+    const styles = getStyles(this.props.theme);
+    return <Block style={styles.radioIcon} flex={false} />;
+  };
+
   renderCheckIcon = () => {
     const {checked, springValue} = this.state;
-    const {iconComponent, theme} = this.props;
-    const styles = getStyles(theme, checked);
+    const {iconComponent, theme, radio} = this.props;
+    const styles = getStyles(theme, checked, radio);
     return (
       <Animated.View
         style={[styles.checkbox, {transform: [{scale: springValue}]}]}>
         {(this.state.checked && iconComponent) ||
+          (this.state.checked && radio && this.renderRadioIcon()) ||
           (this.state.checked && (
             <Icon
               {...this.props}
@@ -57,9 +63,9 @@ class Checkbox extends Component {
   };
 
   render() {
-    const {text, textColor, fontFamily, fontSize, opacity, theme} = this.props;
+    const {text, opacity, theme} = this.props;
 
-    const styles = getStyles(theme);
+    const styles = getStyles(theme, this.state.checked);
 
     return (
       <TouchableOpacity
@@ -68,15 +74,7 @@ class Checkbox extends Component {
         onPress={this.spring.bind(this, Easing.bounce)}>
         {this.renderCheckIcon()}
         <Block style={styles.textContainer}>
-          <Text
-            style={textStyle(
-              this.state.checked,
-              textColor,
-              fontFamily,
-              fontSize,
-            )}>
-            {text}
-          </Text>
+          <Text style={styles.textStyle}>{text}</Text>
         </Block>
       </TouchableOpacity>
     );

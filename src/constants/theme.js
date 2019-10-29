@@ -19,7 +19,7 @@ const sizes = {
   font: 14,
   radius: 8,
   padding: 25,
-  checkbox: 25,
+  checkbox: 22,
   checkboxIcon: 15,
   buttonHeight: 44,
 

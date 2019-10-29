@@ -8,4 +8,7 @@ storiesOf('Checkbox', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('default', () => {
     return <Checkbox isChecked={true} />;
+  })
+  .add('radio', () => {
+    return <Checkbox radio isChecked={true} />;
   });
