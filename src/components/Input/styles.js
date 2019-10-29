@@ -1,14 +1,19 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../../constants';
 
-const getStyles = (
+const getStyles = ({
   theme = defaultTheme,
   focused = false,
   disabled = false,
   error = false,
   additionalPaddingLeft = 0,
-) =>
+  disablePaddingRight = false,
+}) =>
   StyleSheet.create({
+    container: {
+      overflow: 'hidden',
+      borderRadius: theme.sizes.radius,
+    },
     input: {
       borderWidth: theme.sizes.borderWidth,
       borderColor: focused ? theme.colors.primary : theme.colors.gray,
@@ -18,15 +23,22 @@ const getStyles = (
       paddingHorizontal: theme.sizes.paddingHorizontal,
       paddingLeft: theme.sizes.paddingHorizontal + additionalPaddingLeft,
       backgroundColor: disabled ? '#f0f0f0' : 'transparent',
-      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'row',
+      paddingRight: disablePaddingRight ? 0 : theme.sizes.paddingHorizontal,
+    },
+    placeholder: {
+      position: 'absolute',
+      top: 13,
+      left: additionalPaddingLeft + theme.sizes.paddingHorizontal,
     },
     toggle: {
-      position: 'absolute',
       width: theme.sizes.base * 2,
       height: theme.sizes.base * 2,
-      flex: 1,
-      right: 0,
-      bottom: 0,
+      color: '#000',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginVertical: 0,
     },
     leftBorder: {
       width: 7,
@@ -51,11 +63,6 @@ const getStyles = (
       color: theme.colors.gray2,
       fontSize: 12,
     },
-    placeholder: {
-      position: 'absolute',
-      top: 13,
-      left: theme.sizes.paddingHorizontal + additionalPaddingLeft,
-    },
     textInput: {
       fontSize: theme.sizes.font,
       fontWeight: '500',
@@ -70,6 +77,9 @@ const getStyles = (
       position: 'absolute',
       height: theme.sizes.inputHeight,
       zIndex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingRight: 11.5,
     },
     rotatedBlock: {
       position: 'absolute',
@@ -77,9 +87,13 @@ const getStyles = (
       right: 0,
       top: 4,
       height: theme.sizes.inputHeight - 8,
-      backgroundColor: theme.colors.primary,
-      transform: [{rotate: '45deg'}],
+      transform: [
+        {rotateZ: '146deg'},
+        {rotateX: '-10rad'},
+        {rotateY: '-10rad'},
+      ],
       borderRadius: theme.sizes.radius,
+      zIndex: -3,
     },
     additionalLeftBlock: {
       position: 'absolute',
@@ -87,7 +101,11 @@ const getStyles = (
       left: 0,
       top: 0,
       height: theme.sizes.inputHeight,
-      backgroundColor: theme.colors.primary,
+    },
+    rightBlock: {
+      height: '100%',
+      justifyContent: 'center',
+      flex: 0,
     },
   });
 

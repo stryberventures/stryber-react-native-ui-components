@@ -5,6 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import getStyles from './styles';
 import withTheme from '../withTheme';
 import Ripple from '../Ripple';
+import Block from '../Block';
 
 class Button extends React.Component {
   ripple = React.createRef();
@@ -39,9 +40,10 @@ class Button extends React.Component {
     const rippleStyles = {
       ...rippleInsets,
 
-      top: allStyles
-        ? allStyles.margin || allStyles.marginVertical || allStyles.marginTop
-        : theme.sizes.padding / 3,
+      // top: allStyles
+      //   ? allStyles.margin || allStyles.marginVertical || allStyles.marginTop
+      //   : theme.sizes.padding / 3,
+      top: 0,
       height: theme.sizes.buttonHeight,
       position: 'absolute',
     };
@@ -118,6 +120,7 @@ class Button extends React.Component {
           startColor || styles.primary.backgroundColor,
           endColor || styles.secondary.backgroundColor,
         ],
+        style: buttonStyles,
       };
     }
 
@@ -127,12 +130,10 @@ class Button extends React.Component {
         activeOpacity={opacity || 0.8}
         onPress={this.handlePress}
         style={buttonStyles}>
-        <View pointerEvents="box-only">
-          <Component style={buttonStyles} {...gradientProps}>
-            {children}
-          </Component>
+        <Block middle pointerEvents="box-only">
+          <Component {...gradientProps}>{children}</Component>
           {this.renderRipple()}
-        </View>
+        </Block>
       </TouchableOpacity>
     );
   }

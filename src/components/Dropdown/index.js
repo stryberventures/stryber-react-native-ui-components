@@ -364,7 +364,6 @@ class Dropdown extends PureComponent {
         disabled
         renderAccessory={this.renderAccessory}
         ref={this.input}
-        icon="ios-arrow-down"
       />
     );
   }

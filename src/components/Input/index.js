@@ -77,10 +77,13 @@ class Input extends Component {
     this.setState({value});
   }
 
-  renderLabel() {
+  renderLabel = () => {
     const {theme, placeholderLabel, placeholder, required} = this.props;
     const {movePlaceholder} = this.state;
-    const styles = getStyles(theme);
+    const styles = getStyles({
+      theme,
+      additionalPaddingLeft: this.getAdditionalPadding(),
+    });
 
     if (!movePlaceholder) {
       return null;
@@ -107,12 +110,12 @@ class Input extends Component {
         </Animated.Text>
       </Animated.View>
     );
-  }
+  };
 
   renderToggle() {
     const {secure, rightLabel, theme} = this.props;
     const {toggleSecure} = this.state;
-    const styles = getStyles(theme);
+    const styles = getStyles({theme});
 
     if (!secure) {
       return null;
@@ -126,7 +129,7 @@ class Input extends Component {
           rightLabel
         ) : (
           <Icon
-            color={theme.colors.gray}
+            color={theme.colors.primary}
             size={theme.sizes.font * 1.35}
             name={!toggleSecure ? 'md-eye' : 'md-eye-off'}
           />
@@ -135,27 +138,9 @@ class Input extends Component {
     );
   }
 
-  renderIcon() {
-    const {icon, theme} = this.props;
-
-    if (!icon) {
-      return;
-    }
-    const styles = getStyles(theme);
-
-    return (
-      <Icon
-        style={styles.toggle}
-        color={theme.colors.gray}
-        size={theme.sizes.font * 1.35}
-        name={icon}
-      />
-    );
-  }
-
   renderRight() {
     const {rightLabel, rightStyle, onRightPress, theme} = this.props;
-    const styles = getStyles(theme);
+    const styles = getStyles({theme});
 
     if (!rightLabel) {
       return null;
@@ -177,7 +162,7 @@ class Input extends Component {
   renderError() {
     const {error} = this.state;
     const {theme, errorStyle} = this.props;
-    const styles = getStyles(theme);
+    const styles = getStyles({theme});
 
     if (!error) {
       return null;
@@ -222,6 +207,23 @@ class Input extends Component {
     this.setState({movePlaceholder: true});
   }
 
+  getAdditionalPadding = () => {
+    const {withLeftBorder, icon} = this.props;
+    return withLeftBorder ? 7 : icon ? 45 : 0;
+  };
+
+  getBlockBackgroundColor = () => {
+    const {theme, disabled} = this.props;
+    const {error} = this.state;
+
+    if (disabled) {
+      return theme.colors.gray2;
+    } else if (error) {
+      return theme.colors.accent;
+    }
+    return theme.colors.primary;
+  };
+
   render() {
     const {
       name,
@@ -241,17 +243,20 @@ class Input extends Component {
       placeholder,
       required,
       withLeftBorder,
+      icon,
       ...props
     } = this.props;
     const {toggleSecure, focused, error} = this.state;
-    const additionalPadding = withLeftBorder ? 7 : 0;
-    const styles = getStyles(
+
+    const styles = getStyles({
       theme,
       focused,
       disabled,
       error,
-      additionalPadding,
-    );
+      additionalPaddingLeft: this.getAdditionalPadding(),
+      disablePaddingRight: secure,
+    });
+
     const isSecure = toggleSecure ? false : secure;
 
     const inputStyles = [
@@ -273,23 +278,31 @@ class Input extends Component {
       <Block flex={false}>
         <Block
           flex={false}
-          style={{overflow: 'hidden', borderRadius: 8}}
+          style={styles.container}
           margin={[theme.sizes.base, 0]}>
-          {withLeftBorder && (
-            <Block
-              color={error ? 'accent' : 'primary'}
-              style={styles.leftBorder}
-            />
-          )}
-          <Block style={styles.leftBlock}>
-            <Block style={styles.additionalLeftBlock} />
-            <Block style={styles.rotatedBlock} />
-          </Block>
           <TouchableWithoutFeedback onPress={() => ref.current.focus()}>
             <Block flex={false} style={inputStyles}>
+              {withLeftBorder && (
+                <Block
+                  color={this.getBlockBackgroundColor()}
+                  style={styles.leftBorder}
+                />
+              )}
+              {!!icon() && (
+                <Block style={styles.leftBlock}>
+                  <Block
+                    style={styles.additionalLeftBlock}
+                    color={this.getBlockBackgroundColor()}
+                  />
+                  <Block
+                    style={styles.rotatedBlock}
+                    color={this.getBlockBackgroundColor()}
+                  />
+                  {icon()}
+                </Block>
+              )}
               <Block
                 animated
-                flex={false}
                 style={{
                   transform: [
                     {
@@ -335,10 +348,9 @@ class Input extends Component {
                   value={this.getValue()}
                 />
               </Block>
+              <Block style={styles.rightBlock}>{this.renderToggle()}</Block>
             </Block>
           </TouchableWithoutFeedback>
-          {this.renderToggle()}
-          {this.renderIcon()}
           {this.renderRight()}
           {this.renderLabel()}
         </Block>
@@ -355,6 +367,7 @@ Input.defaultProps = {
   onBlur: () => {},
   placeholderLabel: '',
   withLeftBorder: true,
+  icon: () => {},
 };
 
 export default withTheme(

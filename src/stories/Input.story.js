@@ -6,6 +6,7 @@ import {withKnobs, text} from '@storybook/addon-knobs';
 
 import Input from '../components/Input';
 import CenterView from '../components/CenterView';
+import {UserIcon} from '../components/Icons';
 
 const placeholder = text('Placeholder', 'Input');
 
@@ -62,5 +63,29 @@ storiesOf('Input', module)
     />
   ))
   .add('with icon', () => (
-    <Input email withLeftBorder={false} placeholder={placeholder} />
-  ));
+    <Input
+      email
+      withLeftBorder={false}
+      placeholder={placeholder}
+      icon={() => <UserIcon />}
+    />
+  ))
+  .add('with icon disabled', () => (
+    <Input
+      email
+      withLeftBorder={false}
+      disabled
+      placeholder={placeholder}
+      icon={() => <UserIcon />}
+    />
+  ))
+  .add('with icon error', () => (
+    <Input
+      email
+      withLeftBorder={false}
+      error="Error text"
+      placeholder={placeholder}
+      icon={() => <UserIcon />}
+    />
+  ))
+  .add('password', () => <Input secure placeholder={placeholder} />);
