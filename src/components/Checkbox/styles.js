@@ -28,7 +28,7 @@ const getStyles = (theme = defaultTheme, checked = false, radio = false) =>
       borderRadius: 4,
     },
     textStyle: {
-      fontSize: 16,
+      fontSize: theme.sizes.base,
       color: checked ? theme.colors.primary : theme.colors.darkGrey,
     },
   });

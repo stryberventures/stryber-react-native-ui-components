@@ -27,13 +27,14 @@ const sizes = {
   inputHeight: 43,
   borderWidth: 1,
   paddingHorizontal: 12,
+  //header
+  header: 50,
 
   // font sizes
   h1: 26,
   h2: 20,
   h3: 18,
-  title: 18,
-  header: 16,
+  title: 16,
   body: 14,
   caption: 12,
 };
