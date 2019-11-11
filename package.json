@@ -6,10 +6,11 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -p 7007"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",
+    "@react-native-community/datetimepicker": "^2.1.0",
     "jest-static-stubs": "^0.0.1",
     "react": "16.8.6",
     "react-native": "0.60.5",

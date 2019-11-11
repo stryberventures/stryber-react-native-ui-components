@@ -153,7 +153,7 @@ Switch.propTypes = {
   rightContainerStyle: PropTypes.any,
   leftContainerStyle: PropTypes.any,
 
-  text: PropTypes.text,
+  text: PropTypes.string,
 };
 
 export default withTheme(Switch);

@@ -78,7 +78,7 @@ class Input extends Component {
   }
 
   renderLabel = () => {
-    const {theme, placeholderLabel, placeholder, required} = this.props;
+    const {theme, placeholder, required} = this.props;
     const {movePlaceholder} = this.state;
     const styles = getStyles({
       theme,
@@ -104,9 +104,7 @@ class Input extends Component {
             styles.placeholderAnimatedText,
             {fontSize: this.state.animated.placeholder.fontSize},
           ]}>
-          {`${placeholderLabel.length ? placeholderLabel : placeholder} ${
-            required ? '*' : ''
-          }`}
+          {`${placeholder} ${required ? '*' : ''}`}
         </Animated.Text>
       </Animated.View>
     );
@@ -244,6 +242,7 @@ class Input extends Component {
       required,
       withLeftBorder,
       icon,
+      borderColor,
       ...props
     } = this.props;
     const {toggleSecure, focused, error} = this.state;
@@ -255,6 +254,7 @@ class Input extends Component {
       error,
       additionalPaddingLeft: this.getAdditionalPadding(),
       disablePaddingRight: secure,
+      borderColor,
     });
 
     const isSecure = toggleSecure ? false : secure;
@@ -263,6 +263,7 @@ class Input extends Component {
       styles.input,
       error && {borderColor: theme.colors.accent},
       style,
+      borderColor && {borderColor: borderColor},
     ];
     const ref = innerRef || this.inputRef;
 
@@ -273,6 +274,8 @@ class Input extends Component {
       : phone
       ? 'phone-pad'
       : 'default';
+
+    const editable = placeholderLabel ? !placeholderLabel : !disabled;
 
     return (
       <Block flex={false}>
@@ -341,17 +344,17 @@ class Input extends Component {
                     onChange({name, type, text: val});
                   }}
                   ref={ref}
-                  editable={!disabled}
-                  placeholder={placeholder}
+                  editable={editable}
+                  placeholder={placeholder || placeholderLabel}
                   placeholderTextColor={theme.colors.gray2}
                   {...props}
                   value={this.getValue()}
                 />
               </Block>
               <Block style={styles.rightBlock}>{this.renderToggle()}</Block>
+              {this.renderRight()}
             </Block>
           </TouchableWithoutFeedback>
-          {this.renderRight()}
           {this.renderLabel()}
         </Block>
         {this.renderError()}
@@ -368,6 +371,7 @@ Input.defaultProps = {
   placeholderLabel: '',
   withLeftBorder: true,
   icon: () => {},
+  placeholder: '',
 };
 
 export default withTheme(
