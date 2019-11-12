@@ -9,6 +9,7 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import withTheme from '../withTheme';
 import DropdownItem from '../DropdownItem';
@@ -99,74 +100,81 @@ class Dropdown extends PureComponent {
     }
 
     const dimensions = Dimensions.get('window');
-    this.container.current.measureInWindow((x, y, containerWidth) => {
-      const {opacity} = this.state;
+    this.container.current.measureInWindow(
+      (x, y, containerWidth, containerHeight) => {
+        const {opacity} = this.state;
 
-      const delay = Math.max(
-        0,
-        rippleDuration - animationDuration - (Date.now() - timestamp),
-      );
-      const selected = this.selectedIndex();
+        const delay = Math.max(
+          0,
+          rippleDuration - animationDuration - (Date.now() - timestamp),
+        );
+        const selected = this.selectedIndex();
 
-      let leftInset;
-      let left = x + dropdownOffset.left - maxMargin;
+        let leftInset;
+        let left = x + dropdownOffset.left - maxMargin;
 
-      if (left > minMargin) {
-        leftInset = maxMargin;
-      } else {
-        left = minMargin;
-        leftInset = minMargin;
-      }
-
-      let right = x + containerWidth + maxMargin;
-      let rightInset;
-
-      if (dimensions.width - right > minMargin) {
-        rightInset = maxMargin;
-      } else {
-        right = dimensions.width - minMargin;
-        rightInset = minMargin;
-      }
-
-      const visibleItemCount = this.visibleItemCount();
-      const itemSize = this.itemSize();
-
-      const height = 2 * itemPadding + itemSize * visibleItemCount;
-
-      const top = y + dropdownOffset.top - itemPadding;
-      const bottomEdge =
-        dimensions.height < top + height ? top + height - dimensions.height : 0;
-
-      this.setState({
-        modal: true,
-        width: right - left,
-        top: top - bottomEdge,
-        left,
-        leftInset,
-        rightInset,
-        selected,
-      });
-
-      setTimeout(() => {
-        if (this.mounted) {
-          this.resetScrollOffset();
-
-          Animated.timing(opacity, {
-            duration: animationDuration,
-            toValue: 1,
-            useNativeDriver,
-          }).start(() => {
-            if (this.mounted && Platform.OS === 'ios') {
-              const {flashScrollIndicators} = this.scroll || {};
-
-              if (typeof flashScrollIndicators === 'function') {
-                flashScrollIndicators.call(this.scroll);
-              }
-            }
-          });
+        if (left > minMargin) {
+          leftInset = maxMargin;
+        } else {
+          left = minMargin;
+          leftInset = minMargin;
         }
-      }, delay);
-    });
+
+        let right = x + containerWidth + maxMargin;
+        let rightInset;
+
+        if (dimensions.width - right > minMargin) {
+          rightInset = maxMargin;
+        } else {
+          right = dimensions.width - minMargin;
+          rightInset = minMargin;
+        }
+
+        const visibleItemCount = this.visibleItemCount();
+        const itemSize = this.itemSize();
+
+        const height = 2 * itemPadding + itemSize * visibleItemCount;
+
+        const top = y + dropdownOffset.top - itemPadding;
+        //TODO: Fix width checking
+
+        const bottomEdge =
+          dimensions.height < top + height
+            ? dimensions.height + dropdownOffset.top - (top + containerHeight)
+            : 0;
+
+        this.setState({
+          modal: true,
+          width: right - left,
+          top: bottomEdge ? undefined : top,
+          left,
+          leftInset,
+          rightInset,
+          selected,
+          bottom: bottomEdge ? bottomEdge : undefined,
+        });
+
+        setTimeout(() => {
+          if (this.mounted) {
+            this.resetScrollOffset();
+
+            Animated.timing(opacity, {
+              duration: animationDuration,
+              toValue: 1,
+              useNativeDriver,
+            }).start(() => {
+              if (this.mounted && Platform.OS === 'ios') {
+                const {flashScrollIndicators} = this.scroll || {};
+
+                if (typeof flashScrollIndicators === 'function') {
+                  flashScrollIndicators.call(this.scroll);
+                }
+              }
+            });
+          }
+        }, delay);
+      },
+    );
   };
 
   onClose = (value = this.state.value) => {
@@ -342,7 +350,7 @@ class Dropdown extends PureComponent {
 
   renderBase(props) {
     const {value} = this.state;
-    const {data, labelExtractor, label} = this.props;
+    const {data, labelExtractor, label, theme} = this.props;
 
     const index = this.selectedIndex();
     let title;
@@ -360,17 +368,21 @@ class Dropdown extends PureComponent {
       <Input
         {...props}
         label=""
-        value={this.checkValueLength(title) || label}
-        disabled
+        placeholderLabel={this.checkValueLength(title) || label}
         renderAccessory={this.renderAccessory}
         ref={this.input}
+        placeholderTextColor={title ? theme.colors.darkGrey : theme.colors.gray}
+        rightLabel={
+          <Icon name="ios-arrow-down" size={20} color={theme.colors.gray} />
+        }
       />
     );
   }
 
   renderRipple() {
     const {
-      baseColor,
+      theme,
+      baseColor = theme.colors.gray,
       rippleColor = baseColor,
       rippleOpacity,
       rippleDuration,
@@ -382,7 +394,7 @@ class Dropdown extends PureComponent {
     const style = {
       ...insets,
 
-      height: this.itemSize() - bottom,
+      height: theme.sizes.inputHeight,
       position: 'absolute',
     };
 
@@ -424,9 +436,10 @@ class Dropdown extends PureComponent {
       valueExtractor,
       labelExtractor,
       propsExtractor,
-      textColor,
-      itemColor,
-      baseColor,
+      theme,
+      textColor = theme.colors.darkGrey,
+      itemColor = theme.colors.gray2,
+      baseColor = theme.colors.gray,
       selectedItemColor = textColor,
       disabledItemColor = baseColor,
       fontSize,
@@ -434,7 +447,6 @@ class Dropdown extends PureComponent {
       rippleOpacity,
       rippleDuration,
       shadeOpacity,
-      theme,
     } = this.props;
 
     const styles = getStyles(theme);
@@ -525,7 +537,7 @@ class Dropdown extends PureComponent {
     const styles = getStyles(theme);
     const {data, disabled, itemPadding} = props;
 
-    const {left, top, width, opacity, modal} = this.state;
+    const {left, top, width, opacity, modal, bottom} = this.state;
 
     const itemCount = data.length;
     const visibleItemCount = this.visibleItemCount();
@@ -541,6 +553,7 @@ class Dropdown extends PureComponent {
       height,
       top,
       left,
+      bottom,
       transform: [{translateY}],
     };
 
@@ -643,9 +656,9 @@ Dropdown.defaultProps = {
 
   fontSize: 16,
 
-  textColor: 'rgba(0, 0, 0, .87)',
-  itemColor: 'rgba(0, 0, 0, .54)',
-  baseColor: 'rgba(0, 0, 0, .38)',
+  // textColor: 'rgba(0, 0, 0, .87)',
+  // itemColor: 'rgba(0, 0, 0, .54)',
+  // baseColor: 'rgba(0, 0, 0, .38)',
 
   itemCount: 4,
   itemPadding: 8,

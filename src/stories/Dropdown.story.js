@@ -5,27 +5,53 @@ import Dropdown from '../components/Dropdown';
 import CenterView from '../components/CenterView';
 
 storiesOf('Dropdown', module)
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('default', () => {
     return (
-      <Dropdown
-        data={[
-          {
-            value: 'Banana',
-          },
-          {
-            value: 'Mango',
-          },
-          {
-            value: 'Pear',
-          },
-          {
-            value: 'Sfdg',
-          },
-          {
-            value: 'dsfsdf',
-          },
-        ]}
-      />
+      <CenterView>
+        <Dropdown
+          data={[
+            {
+              value: 'Banana',
+            },
+            {
+              value: 'Mango',
+            },
+            {
+              value: 'Pear',
+            },
+            {
+              value: 'Cocoa',
+            },
+            {
+              value: 'Cherry',
+            },
+          ]}
+        />
+      </CenterView>
+    );
+  })
+  .add('bottom', () => {
+    return (
+      <CenterView bottom>
+        <Dropdown
+          data={[
+            {
+              value: 'Banana',
+            },
+            {
+              value: 'Mango',
+            },
+            {
+              value: 'Pear',
+            },
+            {
+              value: 'Cocoa',
+            },
+            {
+              value: 'Cherry',
+            },
+          ]}
+        />
+      </CenterView>
     );
   });

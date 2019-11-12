@@ -1,13 +1,17 @@
 import {StyleSheet} from 'react-native';
+import {defaultTheme} from '../../constants';
 
-export default StyleSheet.create({
-  container: {
-    paddingVertical: 0,
-    borderRadius: 0,
-    justifyContent: 'center',
-    paddingHorizontal: 10,
-    marginVertical: 0,
-    borderBottomColor: '#ccc',
-    borderBottomWidth: 1,
-  },
-});
+const getStyles = (theme = defaultTheme) =>
+  StyleSheet.create({
+    container: {
+      paddingVertical: 0,
+      borderRadius: 0,
+      justifyContent: 'center',
+      paddingHorizontal: 10,
+      marginVertical: 0,
+      borderBottomColor: theme.colors.gray,
+      borderBottomWidth: 1,
+    },
+  });
+
+export default getStyles;

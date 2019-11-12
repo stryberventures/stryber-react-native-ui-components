@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
+
+import withTheme from '../withTheme';
 import Button from '../Button';
 
-import styles from './styles';
+import getStyles from './styles';
 
-export default class DropdownItem extends PureComponent {
+class DropdownItem extends PureComponent {
   static defaultProps = {
     color: 'transparent',
     disabledColor: 'transparent',
@@ -33,7 +35,8 @@ export default class DropdownItem extends PureComponent {
   }
 
   render() {
-    let {children, style, index, ...props} = this.props;
+    const {children, style, theme, index, ...props} = this.props;
+    const styles = getStyles(theme);
 
     return (
       <Button
@@ -46,3 +49,5 @@ export default class DropdownItem extends PureComponent {
     );
   }
 }
+
+export default withTheme(DropdownItem);

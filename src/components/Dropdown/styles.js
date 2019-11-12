@@ -66,7 +66,7 @@ const getStyles = (theme = defaultTheme) =>
     },
 
     scrollContainer: {
-      paddingVertical: 8,
+      paddingVertical: 5,
     },
   });
 
