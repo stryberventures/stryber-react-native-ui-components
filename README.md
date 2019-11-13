@@ -9,17 +9,21 @@ UI library for React Native
 Run following commands in the terminal:
 
 ```shell script
-npm i
-npm start storybook
+yarn install
+yarn storybook
 ```
 
 ### To run on iOS simulator:
 
 * you must have xCode
+* you must have Cocoapods
 
 Run following command in the terminal:
 
 ```shell script
+cd ios
+pod install
+cd ..
 react-native run-ios
 ```
 
