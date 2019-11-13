@@ -54,4 +54,31 @@ storiesOf('Dropdown', module)
         />
       </CenterView>
     );
+  })
+  .add('width', () => {
+    return (
+      <CenterView>
+        <Dropdown
+          label="Age"
+          containerStyle={{width: 100}}
+          data={[
+            {
+              value: '10+',
+            },
+            {
+              value: '12+',
+            },
+            {
+              value: '16+',
+            },
+            {
+              value: '20+',
+            },
+            {
+              value: '30+',
+            },
+          ]}
+        />
+      </CenterView>
+    );
   });
