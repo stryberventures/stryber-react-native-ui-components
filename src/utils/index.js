@@ -38,7 +38,7 @@ export const isIphoneX = () =>
 
 export const isTablet = () => Platform.isPad;
 
-export const handleOffset = size => {
+export const handleMargin = size => {
   if (typeof size === 'number') {
     return {
       marginTop: size,
@@ -78,6 +78,51 @@ export const handleOffset = size => {
           marginRight: size[1],
           marginBottom: size[2],
           marginLeft: size[3],
+        };
+    }
+  }
+};
+
+export const handlePadding = padding => {
+  if (typeof padding === 'number') {
+    return {
+      paddingTop: padding,
+      paddingRight: padding,
+      paddingBottom: padding,
+      paddingLeft: padding,
+    };
+  }
+
+  if (typeof padding === 'object') {
+    const paddingSize = Object.keys(padding).length;
+    switch (paddingSize) {
+      case 1:
+        return {
+          paddingTop: padding[0],
+          paddingRight: padding[0],
+          paddingBottom: padding[0],
+          paddingLeft: padding[0],
+        };
+      case 2:
+        return {
+          paddingTop: padding[0],
+          paddingRight: padding[1],
+          paddingBottom: padding[0],
+          paddingLeft: padding[1],
+        };
+      case 3:
+        return {
+          paddingTop: padding[0],
+          paddingRight: padding[1],
+          paddingBottom: padding[2],
+          paddingLeft: padding[1],
+        };
+      default:
+        return {
+          paddingTop: padding[0],
+          paddingRight: padding[1],
+          paddingBottom: padding[2],
+          paddingLeft: padding[3],
         };
     }
   }

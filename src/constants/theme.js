@@ -27,8 +27,12 @@ const sizes = {
   inputHeight: 43,
   borderWidth: 1,
   paddingHorizontal: 12,
-  //header
+
+  // header
   header: 50,
+
+  // card
+  cardPadding: 18,
 
   // font sizes
   h1: 26,

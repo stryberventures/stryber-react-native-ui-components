@@ -1,45 +1,63 @@
-import React from 'react';
-import {View, Image, Text, Dimensions} from 'react-native';
+import React, {Component} from 'react';
+import {ImageBackground, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
-import IconButton from '../IconButton';
 
-const {width} = Dimensions.get('window');
+import {Text, Block, Button} from '../index';
+import withTheme from '../withTheme';
 
-const Card = ({image, text, is_favorite, action}) => {
-  const icon = is_favorite ? 'heart' : 'heart-o';
-  return (
-    <View style={styles.container}>
-      <Image source={image} resizeMode={'contain'} style={styles.image} />
-      <Text style={styles.text}>{text}</Text>
-      <IconButton icon={icon} color={'#333'} onPress={action} />
-    </View>
-  );
-};
+class Card extends Component {
+  render() {
+    const {theme, ...props} = this.props;
 
-const styles = {
-  container: {
-    width: width - 40,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-    padding: 10,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  image: {
-    width: width - 100,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+    const cardStyles = [];
+    return (
+      <View
+        style={{
+          borderRadius: theme.sizes.radius,
+          overflow: 'hidden',
+        }}>
+        <ImageBackground
+          resizeMode="cover"
+          style={{height: 350}}
+          source={require('../../static/images/mountain.jpeg')}>
+          <LinearGradient style={{flex: 1}} colors={['transparent', '#000']}>
+            <Block
+              padding={theme.sizes.cardPadding}
+              style={{justifyContent: 'flex-end'}}>
+              <Text white bold size={theme.sizes.h2}>
+                Card Example
+              </Text>
+              <Text
+                style={{marginVertical: 7}}
+                white
+                bold
+                size={theme.sizes.title}>
+                € 50/Month
+              </Text>
+              <Text white style={{marginBottom: 10}} size={theme.sizes.caption}>
+                Subscriptions will automatically renew and your credit card will
+                be charged at the end
+              </Text>
+              <Button border="white" color="transparent">
+                <Text size={theme.sizes.title} white header center bold>
+                  Button text
+                </Text>
+              </Button>
+            </Block>
+          </LinearGradient>
+        </ImageBackground>
+      </View>
+    );
+  }
+}
+
+Card.defaultProps = {
+  card: true,
 };
 
 Card.propTypes = {
-  image: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  is_favorite: PropTypes.bool.isRequired,
-  action: PropTypes.func.isRequired,
+  card: PropTypes.bool,
 };
 
-export default Card;
+export default withTheme(Card);

@@ -20,7 +20,6 @@ class Button extends React.Component {
       rippleSequential,
       rippleInsets,
       theme,
-      style,
       ripple,
     } = this.props;
 
@@ -28,21 +27,8 @@ class Button extends React.Component {
       return null;
     }
 
-    let allStyles;
-    if (style && style.length) {
-      allStyles = style.reduce((obj, styleObj) => {
-        return Object.assign(obj, styleObj);
-      }, {});
-    } else {
-      allStyles = style;
-    }
-
     const rippleStyles = {
       ...rippleInsets,
-
-      // top: allStyles
-      //   ? allStyles.margin || allStyles.marginVertical || allStyles.marginTop
-      //   : theme.sizes.padding / 3,
       top: 0,
       height: theme.sizes.buttonHeight,
       position: 'absolute',
@@ -103,7 +89,7 @@ class Button extends React.Component {
       color && styles[color],
       color && !styles[color] && {backgroundColor: color},
       border && {
-        borderColor: theme.colors.primary,
+        borderColor: typeof border === 'string' ? border : theme.colors.primary,
         borderWidth: theme.sizes.borderWidth,
       },
       style,

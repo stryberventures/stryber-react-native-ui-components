@@ -3,7 +3,7 @@ import {View, Animated, TouchableOpacity} from 'react-native';
 
 import getStyles from './styles';
 import withTheme from '../withTheme';
-import {handleOffset} from '../../utils';
+import {handleMargin, handlePadding} from '../../utils';
 
 class Block extends React.Component {
   render() {
@@ -47,8 +47,8 @@ class Block extends React.Component {
       right && styles.right,
       top && styles.top,
       bottom && styles.bottom,
-      margin && {...handleOffset(margin)},
-      padding && {...handleOffset(padding)},
+      margin && {...handleMargin(margin)},
+      padding && {...handlePadding(padding)},
       card && styles.card,
       shadow && styles.shadow,
       space && {justifyContent: `space-${space}`},
