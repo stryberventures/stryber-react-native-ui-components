@@ -7,6 +7,7 @@ const getStyles = (theme = defaultTheme) =>
     text: {
       fontSize: theme.sizes.font,
       color: theme.colors.black,
+      fontFamily: theme.fonts.fontFamily,
     },
     // variations
     regular: {

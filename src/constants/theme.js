@@ -33,6 +33,7 @@ const sizes = {
 
   // card
   cardPadding: 18,
+  cardWithImgBgMinHeight: 308,
 
   // font sizes
   h1: 26,
@@ -65,6 +66,7 @@ const fonts = {
   caption: {
     fontSize: sizes.caption,
   },
+  fontFamily: 'Open Sans',
 };
 
 export {key, colors, sizes, fonts};

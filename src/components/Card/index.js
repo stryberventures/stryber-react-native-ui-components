@@ -3,50 +3,59 @@ import {ImageBackground, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 
-import {Text, Block, Button} from '../index';
+import {Block} from '../index';
 import withTheme from '../withTheme';
+import getStyles from './styles';
 
 class Card extends Component {
-  render() {
-    const {theme, ...props} = this.props;
+  renderBgImageCard = () => {
+    const {
+      theme,
+      backgroundImage,
+      gradientColors = ['transparent', '#000'],
+      children,
+      gradientStyle,
+      resizeMode = 'cover',
+    } = this.props;
 
-    const cardStyles = [];
+    const gradientStyles = [{flex: 1}, gradientStyle];
     return (
-      <View
-        style={{
-          borderRadius: theme.sizes.radius,
-          overflow: 'hidden',
-        }}>
-        <ImageBackground
-          resizeMode="cover"
-          style={{height: 350}}
-          source={require('../../static/images/mountain.jpeg')}>
-          <LinearGradient style={{flex: 1}} colors={['transparent', '#000']}>
-            <Block
-              padding={theme.sizes.cardPadding}
-              style={{justifyContent: 'flex-end'}}>
-              <Text white bold size={theme.sizes.h2}>
-                Card Example
-              </Text>
-              <Text
-                style={{marginVertical: 7}}
-                white
-                bold
-                size={theme.sizes.title}>
-                € 50/Month
-              </Text>
-              <Text white style={{marginBottom: 10}} size={theme.sizes.caption}>
-                Subscriptions will automatically renew and your credit card will
-                be charged at the end
-              </Text>
-              <Button border="white" color="transparent">
-                <Text size={theme.sizes.title} white header center bold>
-                  Button text
-                </Text>
-              </Button>
-            </Block>
-          </LinearGradient>
-        </ImageBackground>
+      <ImageBackground
+        resizeMode={resizeMode}
+        style={{minHeight: theme.sizes.cardWithImgBgMinHeight}}
+        source={backgroundImage}>
+        <LinearGradient style={gradientStyles} colors={gradientColors}>
+          {children}
+        </LinearGradient>
+      </ImageBackground>
+    );
+  };
+
+  render() {
+    const {
+      theme,
+      backgroundImage,
+      children,
+      shadow,
+      style,
+      ...props
+    } = this.props;
+
+    const styles = getStyles(theme);
+    const cardStyles = [
+      {
+        borderRadius: theme.sizes.radius,
+        overflow: 'hidden',
+        flex: 0,
+      },
+      shadow && {backgroundColor: '#fff'},
+      style,
+    ];
+    return (
+      <View style={shadow && styles.shadow}>
+        <Block style={cardStyles} {...props}>
+          {backgroundImage ? this.renderBgImageCard() : children}
+        </Block>
       </View>
     );
   }
