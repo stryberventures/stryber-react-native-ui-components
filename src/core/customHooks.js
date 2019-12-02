@@ -6,10 +6,11 @@ export const customHooks = {
 
     return [
       values,
-      ({name, text}) => {
+      ({name, value}) => {
+        console.log(value);
         setValues({
           ...values,
-          [name]: text,
+          [name]: value,
         });
       },
     ];

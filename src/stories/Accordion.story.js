@@ -1,8 +1,12 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react-native';
 
-import Accordion from '../components/Accordion';
+import CenterView from '../components/CenterView';
 
-storiesOf('Accordion', module).add('default', () => {
-  return <Accordion />;
-});
+import AccordionPreview from '../components/AccordionPreview';
+
+storiesOf('Accordion', module)
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('default', () => {
+    return <AccordionPreview />;
+  });

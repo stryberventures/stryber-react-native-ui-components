@@ -12,28 +12,28 @@ class Checkbox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: this.props.isChecked || false,
+      checked: this.props.value || false,
       springValue: new Animated.Value(1),
     };
   }
 
   setChecked = () => {
-    const {checked} = this.state;
-    this.setState({checked: !checked});
+    const {onPress, name} = this.props;
+
+    this.setState(
+      prevState => ({checked: !prevState.checked}),
+      () => onPress({name, value: this.state.checked}),
+    );
   };
 
   spring = () => {
     this.setChecked();
     const {springValue} = this.state;
-    const {onPress} = this.props;
     springValue.setValue(0.7);
     Animated.spring(springValue, {
       toValue: 1,
       friction: 3,
     }).start();
-    if (onPress) {
-      onPress();
-    }
   };
 
   renderRadioIcon = () => {
@@ -87,14 +87,17 @@ Checkbox.propTypes = {
   fontFamily: PropTypes.string,
   borderRadius: PropTypes.number,
   fontSize: PropTypes.number,
-  isChecked: PropTypes.bool,
+  value: PropTypes.bool,
+  name: PropTypes.string,
 };
 
 Checkbox.defaultProps = {
   fontSize: 16,
-  isChecked: false,
+  value: false,
   text: '❤️ Stryber',
   textColor: '#757575',
+  name: 'checkbox',
+  onPress: () => {},
 };
 
 export default withTheme(Checkbox);

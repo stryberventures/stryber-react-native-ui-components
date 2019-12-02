@@ -12,10 +12,10 @@ class Card extends Component {
     const {
       theme,
       backgroundImage,
-      gradientColors = ['transparent', '#000'],
+      gradientColors,
       children,
       gradientStyle,
-      resizeMode = 'cover',
+      resizeMode,
     } = this.props;
 
     const gradientStyles = [{flex: 1}, gradientStyle];
@@ -63,10 +63,18 @@ class Card extends Component {
 
 Card.defaultProps = {
   card: true,
+  shadow: false,
+  gradientColors: ['transparent', '#000'],
+  resizeMode: 'cover',
 };
 
 Card.propTypes = {
   card: PropTypes.bool,
+  shadow: PropTypes.bool,
+  gradientStyle: PropTypes.shape({}),
+  gradientColors: PropTypes.array,
+  resizeMode: PropTypes.string,
+  backgroundImage: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
 };
 
 export default withTheme(Card);

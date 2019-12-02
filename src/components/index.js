@@ -11,3 +11,4 @@ export {default as Input} from './Input';
 export {default as Switch} from './Switch';
 export {default as Text} from './Text';
 export {default as ThemeContextProvider} from './ThemeContextProvider';
+export {default as Accordion} from './Accordion';

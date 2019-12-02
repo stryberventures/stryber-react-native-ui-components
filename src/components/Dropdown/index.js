@@ -136,7 +136,6 @@ class Dropdown extends PureComponent {
         const height = 2 * itemPadding + itemSize * visibleItemCount;
 
         const top = y + dropdownOffset.top - itemPadding;
-        //TODO: Fix width checking
 
         const bottomEdge =
           dimensions.height < top + height
@@ -202,16 +201,17 @@ class Dropdown extends PureComponent {
     const {
       data,
       valueExtractor,
-      onChangeText,
+      onChange,
       animationDuration,
       rippleDuration,
+      name,
     } = this.props;
 
     const value = valueExtractor(data[index]);
     const delay = Math.max(0, rippleDuration - animationDuration);
 
-    if (typeof onChangeText === 'function') {
-      onChangeText(value, index, data);
+    if (typeof onChange === 'function') {
+      onChange({value, name});
     }
 
     setTimeout(() => this.onClose(value), delay);
@@ -367,6 +367,7 @@ class Dropdown extends PureComponent {
     return (
       <Input
         {...props}
+        value=""
         label=""
         placeholderLabel={this.checkValueLength(title) || label}
         renderAccessory={this.renderAccessory}
@@ -608,6 +609,7 @@ class Dropdown extends PureComponent {
 export default withTheme(Dropdown);
 
 Dropdown.defaultProps = {
+  name: 'dropdown',
   value: '',
   label: 'Choose option...',
 
@@ -656,10 +658,6 @@ Dropdown.defaultProps = {
 
   fontSize: 16,
 
-  // textColor: 'rgba(0, 0, 0, .87)',
-  // itemColor: 'rgba(0, 0, 0, .54)',
-  // baseColor: 'rgba(0, 0, 0, .38)',
-
   itemCount: 4,
   itemPadding: 8,
 
@@ -668,13 +666,15 @@ Dropdown.defaultProps = {
   onLayout: () => {},
   onFocus: () => {},
   onBlur: () => {},
-  onChangeText: () => {},
+  onChange: () => {},
 
   dropdownPosition: null,
 };
 
 Dropdown.propTypes = {
   ...TouchableWithoutFeedback.propTypes,
+
+  name: PropTypes.string,
 
   disabled: PropTypes.bool,
 
@@ -731,7 +731,7 @@ Dropdown.propTypes = {
   onLayout: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  onChangeText: PropTypes.func,
+  onChange: PropTypes.func,
 
   useNativeDriver: PropTypes.bool,
 };

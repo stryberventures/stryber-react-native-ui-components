@@ -16,8 +16,8 @@ class Switch extends Component {
     this.state = {
       circlePosXStart: this.getStart(),
       circlePosXEnd: endPos,
-      checked: this.props.isChecked || false,
-      animXValue: new Animated.Value(this.props.isChecked ? 1 : 0),
+      checked: this.props.value || false,
+      animXValue: new Animated.Value(this.props.value ? 1 : 0),
     };
   }
 
@@ -28,8 +28,12 @@ class Switch extends Component {
   }
 
   onPress = () => {
-    this.props.onPress();
-    this.setState(prevState => ({checked: !prevState.checked}));
+    const {onPress, name} = this.props;
+
+    this.setState(
+      prevState => ({checked: !prevState.checked}),
+      () => onPress({name, value: this.state.checked}),
+    );
   };
 
   getStart = () => {
@@ -50,23 +54,29 @@ class Switch extends Component {
   };
 
   render() {
-    const {theme} = this.props;
+    const {
+      theme,
+      containerStyle,
+      backgroundColorOff,
+      backgroundColorOn,
+      style,
+    } = this.props;
     const {checked} = this.state;
     return (
       <TouchableOpacity
         onPress={this.onPress}
         activeOpacity={0.5}
-        style={{flexDirection: 'row', alignItems: 'center'}}>
+        style={[{flexDirection: 'row', alignItems: 'center'}, style]}>
         <Animated.View
           style={[
             styles.container,
-            this.props.containerStyle,
+            containerStyle,
             {
               backgroundColor: this.state.animXValue.interpolate({
                 inputRange: [0, 1],
                 outputRange: [
-                  this.props.backgroundColorOff || theme.colors.gray,
-                  this.props.backgroundColorOn || theme.colors.primary,
+                  backgroundColorOff || theme.colors.gray,
+                  backgroundColorOn || theme.colors.primary,
                 ],
               }),
             },
@@ -115,7 +125,7 @@ class Switch extends Component {
 }
 
 Switch.defaultProps = {
-  isChecked: false,
+  value: false,
   onPress: () => {},
   containerStyle: {
     width: 36,
@@ -134,10 +144,12 @@ Switch.defaultProps = {
   circleColorOn: 'white',
   duration: 300,
   text: '❤️ Stryber',
+  name: 'switch',
 };
 
 Switch.propTypes = {
-  isChecked: PropTypes.bool,
+  name: PropTypes.string,
+  value: PropTypes.bool,
   onPress: PropTypes.func,
   containerStyle: PropTypes.any,
   circleStyle: PropTypes.any,

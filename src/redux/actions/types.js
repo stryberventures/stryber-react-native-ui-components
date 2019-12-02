@@ -1,1 +1,0 @@
-export const FAVORITED_CARD = 'FAVORITED_CARD';

@@ -2,11 +2,13 @@ import React from 'react';
 import {Image} from 'react-native';
 import {Card, Block, Text, Button} from '../components';
 import CenterView from '../components/CenterView';
+import {withKnobs, color} from '@storybook/addon-knobs';
 
 import {defaultTheme as theme} from '../constants';
 import {storiesOf} from '@storybook/react-native';
 
 storiesOf('Card', module)
+  .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('top image', () => (
     <Card shadow>
@@ -51,26 +53,31 @@ storiesOf('Card', module)
       </Block>
     </Card>
   ))
-  .add('with background image', () => (
-    <Card backgroundImage={require('../static/images/mountain.jpeg')}>
-      <Block
-        padding={theme.sizes.cardPadding}
-        style={{justifyContent: 'flex-end'}}>
-        <Text white bold size={theme.sizes.h2}>
-          Card Example
-        </Text>
-        <Text style={{marginVertical: 7}} white bold size={theme.sizes.title}>
-          € 50/Month
-        </Text>
-        <Text white style={{marginBottom: 10}} size={theme.sizes.caption}>
-          Subscriptions will automatically renew and your credit card will be
-          charged at the end
-        </Text>
-        <Button border="white" color="transparent">
-          <Text size={theme.sizes.title} white header center bold>
-            Button text
+  .add('with background image', () => {
+    const gradientColor = color('Gradient Color', '#000', 'BackgroundGradient');
+    return (
+      <Card
+        gradientColors={['transparent', gradientColor]}
+        backgroundImage={require('../static/images/mountain.jpeg')}>
+        <Block
+          padding={theme.sizes.cardPadding}
+          style={{justifyContent: 'flex-end'}}>
+          <Text white bold size={theme.sizes.h2}>
+            Card Example
           </Text>
-        </Button>
-      </Block>
-    </Card>
-  ));
+          <Text style={{marginVertical: 7}} white bold size={theme.sizes.title}>
+            € 50/Month
+          </Text>
+          <Text white style={{marginBottom: 10}} size={theme.sizes.caption}>
+            Subscriptions will automatically renew and your credit card will be
+            charged at the end
+          </Text>
+          <Button border="white" color="transparent">
+            <Text size={theme.sizes.title} white header center bold>
+              Button text
+            </Text>
+          </Button>
+        </Block>
+      </Card>
+    );
+  });

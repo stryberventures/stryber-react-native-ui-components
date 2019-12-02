@@ -20,7 +20,7 @@ const isAndroid = Platform.OS === 'android';
 class DatePicker extends Component {
   state = {
     showModal: false,
-    date: undefined,
+    date: this.props.value || undefined,
     showAndroidModal: true,
   };
 
@@ -43,8 +43,9 @@ class DatePicker extends Component {
     this.setState(
       () => ({showModal: false}),
       () => {
-        const {onDateChanged} = this.props;
-        onDateChanged(this.getDateObj());
+        const {onChange, name} = this.props;
+
+        onChange({name, value: this.state.date});
       },
     );
   };
@@ -58,8 +59,9 @@ class DatePicker extends Component {
       }),
       () => {
         if (isAndroid) {
-          const {onDateChanged} = this.props;
-          onDateChanged(this.getDateObj());
+          const {onChange, name} = this.props;
+
+          onChange({name, value: this.state.date});
         }
       },
     );
@@ -80,12 +82,12 @@ class DatePicker extends Component {
     return isAndroid ? (
       showModal && (
         <DateTimePicker
-          value={date || startDate}
           mode="date"
           is24Hour={true}
           display="default"
-          onChange={this.handleDateChange}
           {...props}
+          value={date || startDate}
+          onChange={this.handleDateChange}
         />
       )
     ) : (
@@ -104,12 +106,12 @@ class DatePicker extends Component {
               />
             </View>
             <DateTimePicker
-              value={date || startDate}
               mode="date"
               is24Hour={true}
               display="default"
-              onChange={this.handleDateChange}
               {...props}
+              value={date || startDate}
+              onChange={this.handleDateChange}
             />
           </View>
         </View>
@@ -148,17 +150,19 @@ class DatePicker extends Component {
 DatePicker.defaultProps = {
   startDate: new Date(),
   onError: () => {},
-  onDateChanged: () => {},
+  onChange: () => {},
   maxDate: new Date(32519532187368),
   minDate: new Date(0),
   modalButtonText: 'Done',
+  name: 'datepicker',
 };
 
 DatePicker.propTypes = {
+  name: PropTypes.string,
   renderDate: PropTypes.func,
   startDate: PropTypes.instanceOf(Date),
   onError: PropTypes.func,
-  onDateChanged: PropTypes.func,
+  onChange: PropTypes.func,
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),
   modalButtonText: PropTypes.string,
