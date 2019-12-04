@@ -58,6 +58,8 @@ class Dropdown extends PureComponent {
     this.mounted = false;
   }
 
+  getValue = () => this.state.value;
+
   onPress = event => {
     const {
       data,
@@ -211,7 +213,7 @@ class Dropdown extends PureComponent {
     const delay = Math.max(0, rippleDuration - animationDuration);
 
     if (typeof onChange === 'function') {
-      onChange({value, name});
+      onChange(value, name);
     }
 
     setTimeout(() => this.onClose(value), delay);
@@ -230,15 +232,6 @@ class Dropdown extends PureComponent {
 
     return value;
   }
-
-  validate = () => {
-    if (!this.state.value) {
-      this.input.current.setError('Field is required');
-    } else {
-      this.input.current.setError('');
-    }
-    return !this.state.value;
-  };
 
   selectedIndex() {
     const {value} = this.state;

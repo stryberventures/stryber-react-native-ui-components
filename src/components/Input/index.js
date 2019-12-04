@@ -27,7 +27,6 @@ class Input extends Component {
     toggleSecure: false,
     isBackspace: false,
     value: this.props.value || '',
-    error: this.props.error || '',
     focused: false,
   };
   inputRef = React.createRef();
@@ -153,18 +152,9 @@ class Input extends Component {
     );
   }
 
-  setError(error) {
-    return this.setState({error});
-  }
-
   renderError() {
-    const {error} = this.state;
-    const {theme, errorStyle} = this.props;
+    const {theme, errorStyle, error} = this.props;
     const styles = getStyles({theme});
-
-    if (!error) {
-      return null;
-    }
 
     return (
       <Text light style={[errorStyle, styles.error]}>
@@ -211,8 +201,7 @@ class Input extends Component {
   };
 
   getBlockBackgroundColor = () => {
-    const {theme, disabled} = this.props;
-    const {error} = this.state;
+    const {theme, disabled, error} = this.props;
 
     if (disabled) {
       return theme.colors.gray2;
@@ -233,7 +222,6 @@ class Input extends Component {
       secure,
       style,
       theme,
-      innerRef,
       onFocus,
       onBlur,
       disabled,
@@ -243,9 +231,10 @@ class Input extends Component {
       withLeftBorder,
       icon,
       borderColor,
+      error,
       ...props
     } = this.props;
-    const {toggleSecure, focused, error} = this.state;
+    const {toggleSecure, focused} = this.state;
 
     const styles = getStyles({
       theme,
@@ -261,11 +250,11 @@ class Input extends Component {
 
     const inputStyles = [
       styles.input,
-      error && {borderColor: theme.colors.accent},
       style,
       borderColor && {borderColor: borderColor},
+      error && {borderColor: theme.colors.accent},
     ];
-    const ref = innerRef || this.inputRef;
+    const ref = this.inputRef;
 
     const inputType = email
       ? 'email-address'
@@ -337,11 +326,10 @@ class Input extends Component {
                   keyboardType={inputType}
                   onChangeText={val => {
                     this.setState(prevState => ({
-                      error: '',
                       value: val,
                       isBackspace: prevState.value.length >= val.length,
                     }));
-                    onChange({name, type, text: val});
+                    onChange(val, name);
                   }}
                   ref={ref}
                   editable={editable}
@@ -372,8 +360,7 @@ Input.defaultProps = {
   withLeftBorder: true,
   icon: () => {},
   placeholder: '',
+  error: '',
 };
 
-export default withTheme(
-  forwardRef((props, ref) => <Input innerRef={ref} {...props} />),
-);
+export default withTheme(Input);

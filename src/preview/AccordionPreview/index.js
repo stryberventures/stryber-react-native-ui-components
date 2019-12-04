@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-
-import Accordion from '../Accordion';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Switch from '../Switch';
-import Card from '../Card';
+
+import {Card, Switch, Accordion} from '../../components';
 
 const SECTIONS = [
   {

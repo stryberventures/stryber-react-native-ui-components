@@ -24,6 +24,8 @@ class DatePicker extends Component {
     showAndroidModal: true,
   };
 
+  getValue = () => this.state.date;
+
   handlePressed = () => {
     this.setState(() => ({showModal: true}));
   };
@@ -61,7 +63,7 @@ class DatePicker extends Component {
         if (isAndroid) {
           const {onChange, name} = this.props;
 
-          onChange({name, value: this.state.date});
+          onChange(this.state.date, name);
         }
       },
     );
@@ -121,7 +123,7 @@ class DatePicker extends Component {
 
   render() {
     const {showModal} = this.state;
-    const {style, theme, label} = this.props;
+    const {style, theme, label, error} = this.props;
     const {year, month, day} = this.getDateObj();
     const dateSet = day && month && year;
     const dateStr = dateSet ? `${day}-${month}-${year}` : label;
@@ -132,6 +134,7 @@ class DatePicker extends Component {
         <View pointerEvents="box-only">
           {this.renderModal()}
           <Input
+            error={error}
             rightLabel={<Icon name="calendar" size={20} color={inputColor} />}
             placeholderLabel={dateStr}
             onPress={this.handlePressed}

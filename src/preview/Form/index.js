@@ -2,8 +2,15 @@ import React from 'react';
 import {View} from 'react-native';
 
 import {customHooks} from '../../core';
-import Input from '../Input';
-import {Button, Text, Checkbox, Switch, DatePicker, Dropdown} from '../index';
+import {
+  Button,
+  Text,
+  Checkbox,
+  Switch,
+  DatePicker,
+  Dropdown,
+  Input,
+} from '../../components';
 
 const Form = () => {
   const [values, handleChange] = customHooks.useForm({

@@ -17,12 +17,16 @@ class Checkbox extends Component {
     };
   }
 
+  getValue = () => this.state.checked;
+
   setChecked = () => {
     const {onPress, name} = this.props;
 
     this.setState(
       prevState => ({checked: !prevState.checked}),
-      () => onPress({name, value: this.state.checked}),
+      () => {
+        onPress(this.state.checked, name);
+      },
     );
   };
 

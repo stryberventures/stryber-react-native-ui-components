@@ -43,12 +43,14 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "eslint": "^6.5.1",
+    "formik": "^2.0.6",
     "jest": "^24.9.0",
     "lodash-es": "^4.17.15",
     "metro-react-native-babel-preset": "^0.56.0",
     "moment": "^2.24.0",
     "react-dom": "16.8.6",
-    "react-test-renderer": "16.8.6"
+    "react-test-renderer": "16.8.6",
+    "yup": "^0.27.0"
   },
   "jest": {
     "preset": "react-native",

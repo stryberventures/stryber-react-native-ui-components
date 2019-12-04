@@ -6,7 +6,7 @@ export const customHooks = {
 
     return [
       values,
-      ({name, value}) => {
+      (value, name) => {
         console.log(value);
         setValues({
           ...values,
