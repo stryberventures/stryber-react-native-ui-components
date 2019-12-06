@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import {
   View,
@@ -10,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 
 import withTheme from '../withTheme';
 import DropdownItem from '../DropdownItem';
@@ -31,8 +31,6 @@ class Dropdown extends PureComponent {
     this.blur = () => this.onClose();
     this.focus = this.onPress;
 
-    const {value} = this.props;
-
     this.mounted = false;
     this.focused = false;
 
@@ -40,14 +38,8 @@ class Dropdown extends PureComponent {
       opacity: new Animated.Value(0),
       selected: -1,
       modal: false,
-      value,
+      value: this.props.value || '',
     };
-  }
-
-  componentWillReceiveProps({value}) {
-    if (value !== this.props.value) {
-      this.setState({value});
-    }
   }
 
   componentDidMount() {
@@ -227,12 +219,6 @@ class Dropdown extends PureComponent {
     }
   };
 
-  getValue() {
-    const {value} = this.state;
-
-    return value;
-  }
-
   selectedIndex() {
     const {value} = this.state;
     const {data, valueExtractor} = this.props;
@@ -366,9 +352,9 @@ class Dropdown extends PureComponent {
         renderAccessory={this.renderAccessory}
         ref={this.input}
         placeholderTextColor={title ? theme.colors.darkGrey : theme.colors.gray}
-        rightLabel={
+        rightLabel={() => (
           <Icon name="ios-arrow-down" size={20} color={theme.colors.gray} />
-        }
+        )}
       />
     );
   }
@@ -714,9 +700,11 @@ Dropdown.propTypes = {
 
   fontSize: PropTypes.number,
 
+  /* eslint-disable react/require-default-props */
   textColor: PropTypes.string,
   itemColor: PropTypes.string,
   baseColor: PropTypes.string,
+  /* eslint-enable react/require-default-props */
 
   itemCount: PropTypes.number,
   itemPadding: PropTypes.number,

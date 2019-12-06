@@ -1,6 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View, ViewPropTypes} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import PropTypes from 'prop-types';
 
 import getStyles from './styles';
 import withTheme from '../withTheme';
@@ -78,6 +79,7 @@ class Button extends React.Component {
       children,
       theme,
       border,
+      // eslint-disable-next-line react/prop-types
       Component = gradient ? LinearGradient : View,
       ...props
     } = this.props;
@@ -144,6 +146,51 @@ Button.defaultProps = {
   },
   rippleOpacity: 0.54,
   rippleDuration: 400,
+  style: {},
+  gradient: false,
+  shadow: false,
+  ripple: false,
+};
+
+Button.propTypes = {
+  style: ViewPropTypes.style,
+  opacity: PropTypes.number,
+  gradient: PropTypes.bool,
+  color: PropTypes.string,
+  start: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
+  end: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
+  locations: PropTypes.arrayOf(PropTypes.number),
+  shadow: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  baseColor: PropTypes.string,
+  rippleOpacity: PropTypes.number,
+  rippleDuration: PropTypes.number,
+  rippleCentered: PropTypes.bool,
+  rippleSequential: PropTypes.bool,
+  rippleInsets: PropTypes.shape({
+    top: PropTypes.number,
+    right: PropTypes.number,
+    bottom: PropTypes.number,
+    left: PropTypes.number,
+  }),
+  theme: PropTypes.shape({}).isRequired,
+  ripple: PropTypes.bool,
+  onPress: PropTypes.func,
+  /* eslint-disable react/require-default-props */
+  rippleColor: PropTypes.string,
+  startColor: PropTypes.string,
+  endColor: PropTypes.string,
+  border: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  /* eslint-enable react/require-default-props */
 };
 
 export default withTheme(Button);

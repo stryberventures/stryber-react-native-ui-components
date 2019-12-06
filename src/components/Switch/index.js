@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, TouchableOpacity} from 'react-native';
-
+import {Animated, TouchableOpacity, ViewPropTypes} from 'react-native';
 import PropTypes from 'prop-types';
 
 import withTheme from '../withTheme';
@@ -21,7 +20,7 @@ class Switch extends Component {
     };
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.checked !== this.state.checked) {
       this.runAnimation();
     }
@@ -147,6 +146,12 @@ Switch.defaultProps = {
   duration: 300,
   text: '❤️ Stryber',
   name: 'switch',
+  style: {},
+  buttonStyle: {},
+  buttonContainerStyle: {},
+  rightContainerStyle: {},
+  leftContainerStyle: {},
+  type: 0,
 };
 
 Switch.propTypes = {
@@ -155,19 +160,21 @@ Switch.propTypes = {
   onPress: PropTypes.func,
   containerStyle: PropTypes.any,
   circleStyle: PropTypes.any,
-  backgroundColorOff: PropTypes.string,
-  backgroundColorOn: PropTypes.string,
   circleColorOff: PropTypes.string,
   circleColorOn: PropTypes.string,
   duration: PropTypes.number,
-  type: PropTypes.number,
-
-  buttonStyle: PropTypes.any,
-  buttonContainerStyle: PropTypes.any,
-  rightContainerStyle: PropTypes.any,
-  leftContainerStyle: PropTypes.any,
-
+  type: PropTypes.oneOf([0, 1]), // 0 - Normal switch, 1 - Switch with a text
+  style: ViewPropTypes.style,
+  buttonStyle: ViewPropTypes.style,
+  buttonContainerStyle: ViewPropTypes.style,
+  rightContainerStyle: ViewPropTypes.style,
+  leftContainerStyle: ViewPropTypes.style,
   text: PropTypes.string,
+  theme: PropTypes.shape({}).isRequired,
+  /* eslint-disable react/require-default-props */
+  backgroundColorOff: PropTypes.string,
+  backgroundColorOn: PropTypes.string,
+  /* eslint-enable react/require-default-props */
 };
 
 export default withTheme(Switch);

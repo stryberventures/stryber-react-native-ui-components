@@ -135,7 +135,9 @@ class DatePicker extends Component {
           {this.renderModal()}
           <Input
             error={error}
-            rightLabel={<Icon name="calendar" size={20} color={inputColor} />}
+            rightLabel={() => (
+              <Icon name="calendar" size={20} color={inputColor} />
+            )}
             placeholderLabel={dateStr}
             onPress={this.handlePressed}
             style={{marginVertical: 0}}
@@ -158,11 +160,18 @@ DatePicker.defaultProps = {
   minDate: new Date(0),
   modalButtonText: 'Done',
   name: 'datepicker',
+  modalOverlayStyle: {},
+  modalStyle: {},
+  modalButtonStyle: {},
+  modalBtnContainer: {},
+  style: {},
+  value: undefined,
+  label: '',
+  error: '',
 };
 
 DatePicker.propTypes = {
   name: PropTypes.string,
-  renderDate: PropTypes.func,
   startDate: PropTypes.instanceOf(Date),
   onError: PropTypes.func,
   onChange: PropTypes.func,
@@ -174,6 +183,10 @@ DatePicker.propTypes = {
   modalButtonStyle: ViewPropTypes.style,
   modalBtnContainer: ViewPropTypes.style,
   style: ViewPropTypes.style,
+  value: PropTypes.instanceOf(Date),
+  theme: PropTypes.shape({}).isRequired,
+  label: PropTypes.string,
+  error: PropTypes.string,
 };
 
 export default withTheme(DatePicker);

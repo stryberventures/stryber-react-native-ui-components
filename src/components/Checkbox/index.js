@@ -74,7 +74,7 @@ class Checkbox extends Component {
     return (
       <TouchableOpacity
         style={styles.container}
-        activeOpacity={opacity || 0.8}
+        activeOpacity={opacity}
         onPress={this.spring.bind(this, Easing.bounce)}>
         {this.renderCheckIcon()}
         <Block style={styles.textContainer}>
@@ -85,16 +85,6 @@ class Checkbox extends Component {
   }
 }
 
-Checkbox.propTypes = {
-  text: PropTypes.string,
-  textColor: PropTypes.string,
-  fontFamily: PropTypes.string,
-  borderRadius: PropTypes.number,
-  fontSize: PropTypes.number,
-  value: PropTypes.bool,
-  name: PropTypes.string,
-};
-
 Checkbox.defaultProps = {
   fontSize: 16,
   value: false,
@@ -102,6 +92,22 @@ Checkbox.defaultProps = {
   textColor: '#757575',
   name: 'checkbox',
   onPress: () => {},
+  opacity: 0.8,
+  radio: false,
+};
+
+Checkbox.propTypes = {
+  text: PropTypes.string,
+  textColor: PropTypes.string,
+  fontSize: PropTypes.number,
+  value: PropTypes.bool,
+  name: PropTypes.string,
+  opacity: PropTypes.number,
+  theme: PropTypes.shape({}).isRequired,
+  onPress: PropTypes.func,
+  radio: PropTypes.bool,
+  // eslint-disable-next-line react/require-default-props
+  iconComponent: PropTypes.node,
 };
 
 export default withTheme(Checkbox);

@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {Text as Typography, ViewPropTypes} from 'react-native';
+import PropTypes from 'prop-types';
 
 import withTheme from '../withTheme';
 import Block from '../Block';
@@ -39,6 +41,17 @@ Header.defaultProps = {
   leftIcon: () => {},
   rightIcon: () => {},
   text: '',
+  animated: false,
+};
+
+Header.propTypes = {
+  leftIcon: PropTypes.func,
+  text: PropTypes.string,
+  textStyle: Typography.propTypes.style,
+  style: ViewPropTypes.style,
+  theme: PropTypes.shape({}).isRequired,
+  rightIcon: PropTypes.func,
+  animated: PropTypes.bool,
 };
 
 export default withTheme(Header);

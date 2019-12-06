@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {ViewPropTypes, Text as Typography} from 'react-native';
+import PropTypes from 'prop-types';
 
-import Text from '../Text';
+import {Text} from '../index';
 import withTheme from '../withTheme';
 
 import getStyles from './styles';
@@ -29,5 +31,22 @@ class Badge extends Component {
     );
   }
 }
+
+Badge.defaultProps = {
+  value: '',
+  textStyle: {},
+  style: {},
+  onPress: () => {},
+  color: '',
+};
+
+Badge.propTypes = {
+  theme: PropTypes.shape({}).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  textStyle: Typography.propTypes.style,
+  style: ViewPropTypes.style,
+  onPress: PropTypes.func,
+  color: PropTypes.string,
+};
 
 export default withTheme(Badge);

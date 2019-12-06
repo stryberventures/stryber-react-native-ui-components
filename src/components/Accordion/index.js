@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, TouchableHighlight, Animated, Easing} from 'react-native';
-import {ViewPropTypes} from './config';
+import {
+  View,
+  TouchableHighlight,
+  Animated,
+  Easing,
+  ViewPropTypes,
+} from 'react-native';
 
 const ANIMATED_EASING_PREFIXES = ['easeInOut', 'easeOut', 'easeIn'];
 
@@ -17,7 +22,7 @@ export class Collapsible extends Component {
     };
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.collapsed !== this.props.collapsed) {
       this.setState({measured: false}, () =>
         this._componentDidUpdate(prevProps),
@@ -321,6 +326,17 @@ export default class Accordion extends Component {
   }
 }
 
+Accordion.defaultProps = {
+  underlayColor: 'black',
+  disabled: false,
+  expandFromBottom: false,
+  expandMultiple: false,
+  touchableComponent: TouchableHighlight,
+  renderSectionTitle: () => null,
+  onAnimationEnd: () => null,
+  sectionContainerStyle: {},
+};
+
 Accordion.propTypes = {
   sections: PropTypes.array.isRequired,
   renderHeader: PropTypes.func.isRequired,
@@ -341,15 +357,4 @@ Accordion.propTypes = {
   onAnimationEnd: PropTypes.func,
   sectionContainerStyle: ViewPropTypes.style,
   containerStyle: ViewPropTypes.style,
-};
-
-Accordion.defaultProps = {
-  underlayColor: 'black',
-  disabled: false,
-  expandFromBottom: false,
-  expandMultiple: false,
-  touchableComponent: TouchableHighlight,
-  renderSectionTitle: () => null,
-  onAnimationEnd: () => null,
-  sectionContainerStyle: {},
 };

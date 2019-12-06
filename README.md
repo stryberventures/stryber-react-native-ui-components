@@ -27,6 +27,15 @@ cd ..
 react-native run-ios
 ```
 
+To run iPhone simulator use:
+```
+react-native run-ios
+```
+or (to specify simulator)
+```
+react-native run-ios --simulator=“iPhone 11”
+```
+
 ### To run on Android:
 
 * open Android simulator

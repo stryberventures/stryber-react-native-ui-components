@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {ThemeContext} from '../ThemeContextProvider';
 import {THEME_KEY, defaultTheme} from '../../constants';
 
-export default function withTheme(Component) {
+function withTheme(Component) {
   return forwardRef((props, ref) => {
     const {
       themes = [defaultTheme],
@@ -12,11 +12,13 @@ export default function withTheme(Component) {
       setThemeID = () => {},
     } = useContext(ThemeContext) || {};
 
+    /* eslint-disable no-shadow */
     const getTheme = themeID => themes.find(theme => theme.key === themeID);
     const setTheme = themeID => {
       AsyncStorage.setItem(THEME_KEY, themeID);
       setThemeID(themeID);
     };
+    /* eslint-enable no-shadow */
 
     return (
       <Component
@@ -29,3 +31,5 @@ export default function withTheme(Component) {
     );
   });
 }
+
+export default withTheme;

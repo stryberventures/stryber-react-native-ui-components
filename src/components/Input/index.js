@@ -1,11 +1,14 @@
-import React, {Component, forwardRef} from 'react';
+import React, {Component} from 'react';
 import {
   TextInput,
   Animated,
   Easing,
   TouchableWithoutFeedback,
+  ViewPropTypes,
+  Text as Typography,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PropTypes from 'prop-types';
 
 import withTheme from '../withTheme';
 import Text from '../Text';
@@ -110,7 +113,7 @@ class Input extends Component {
   };
 
   renderToggle() {
-    const {secure, rightLabel, theme} = this.props;
+    const {secure, theme} = this.props;
     const {toggleSecure} = this.state;
     const styles = getStyles({theme});
 
@@ -122,15 +125,11 @@ class Input extends Component {
       <Button
         style={styles.toggle}
         onPress={() => this.setState({toggleSecure: !toggleSecure})}>
-        {rightLabel ? (
-          rightLabel
-        ) : (
-          <Icon
-            color={theme.colors.primary}
-            size={theme.sizes.font * 1.35}
-            name={!toggleSecure ? 'md-eye' : 'md-eye-off'}
-          />
-        )}
+        <Icon
+          color={theme.colors.primary}
+          size={theme.sizes.font * 1.35}
+          name={!toggleSecure ? 'md-eye' : 'md-eye-off'}
+        />
       </Button>
     );
   }
@@ -139,7 +138,7 @@ class Input extends Component {
     const {rightLabel, rightStyle, onRightPress, theme} = this.props;
     const styles = getStyles({theme});
 
-    if (!rightLabel) {
+    if (!rightLabel()) {
       return null;
     }
 
@@ -147,7 +146,7 @@ class Input extends Component {
       <Button
         style={[styles.toggle, rightStyle]}
         onPress={() => onRightPress && onRightPress()}>
-        {rightLabel}
+        {rightLabel()}
       </Button>
     );
   }
@@ -196,8 +195,12 @@ class Input extends Component {
   }
 
   getAdditionalPadding = () => {
-    const {withLeftBorder, icon} = this.props;
-    return withLeftBorder ? 7 : icon ? 45 : 0;
+    const {withLeftBorder, icon, iconBackground} = this.props;
+
+    if (!icon() && withLeftBorder) return 7;
+    else if (icon() && iconBackground) return 45;
+    else if (icon()) return 30;
+    else return 0;
   };
 
   getBlockBackgroundColor = () => {
@@ -232,6 +235,7 @@ class Input extends Component {
       icon,
       borderColor,
       error,
+      iconBackground,
       ...props
     } = this.props;
     const {toggleSecure, focused} = this.state;
@@ -274,13 +278,13 @@ class Input extends Component {
           margin={[theme.sizes.base, 0]}>
           <TouchableWithoutFeedback onPress={() => ref.current.focus()}>
             <Block flex={false} style={inputStyles}>
-              {withLeftBorder && (
+              {!icon() && withLeftBorder && (
                 <Block
                   color={this.getBlockBackgroundColor()}
                   style={styles.leftBorder}
                 />
               )}
-              {!!icon() && (
+              {!!icon() && iconBackground ? (
                 <Block style={styles.leftBlock}>
                   <Block
                     style={styles.additionalLeftBlock}
@@ -292,6 +296,8 @@ class Input extends Component {
                   />
                   {icon()}
                 </Block>
+              ) : (
+                <Block style={styles.leftBlock}>{icon()}</Block>
               )}
               <Block
                 animated
@@ -361,6 +367,52 @@ Input.defaultProps = {
   icon: () => {},
   placeholder: '',
   error: '',
+  iconBackground: true,
+  value: '',
+  name: '',
+  type: '',
+  email: false,
+  phone: false,
+  number: false,
+  secure: false,
+  required: false,
+  disabled: false,
+  borderColor: '',
+  style: {},
+  errorStyle: {},
+  rightLabel: () => {},
+  rightStyle: {},
+  onRightPress: () => {},
+};
+
+Input.propTypes = {
+  iconBackground: PropTypes.bool,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string,
+  type: PropTypes.string,
+  onChange: PropTypes.func,
+  email: PropTypes.bool,
+  phone: PropTypes.bool,
+  number: PropTypes.bool,
+  secure: PropTypes.bool,
+  style: ViewPropTypes.style,
+  theme: PropTypes.shape({sizes: PropTypes.shape({font: PropTypes.number})})
+    .isRequired,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  disabled: PropTypes.bool,
+  placeholderLabel: PropTypes.string,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  withLeftBorder: PropTypes.bool,
+  icon: PropTypes.func,
+  borderColor: PropTypes.string,
+  error: PropTypes.string,
+  errorStyle: Typography.propTypes.style,
+  rightLabel: PropTypes.func,
+  rightStyle: ViewPropTypes.style,
+  onRightPress: PropTypes.func,
+  mask: PropTypes.string,
 };
 
 export default withTheme(Input);

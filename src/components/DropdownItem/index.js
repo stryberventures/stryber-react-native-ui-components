@@ -7,19 +7,6 @@ import Button from '../Button';
 import getStyles from './styles';
 
 class DropdownItem extends PureComponent {
-  static defaultProps = {
-    color: 'transparent',
-    disabledColor: 'transparent',
-    rippleContainerBorderRadius: 0,
-    shadeBorderRadius: 0,
-  };
-
-  static propTypes = {
-    ...Button.propTypes,
-
-    index: PropTypes.number.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -49,5 +36,16 @@ class DropdownItem extends PureComponent {
     );
   }
 }
+
+DropdownItem.defaultProps = {
+  rippleContainerBorderRadius: 0,
+  shadeBorderRadius: 0,
+};
+
+DropdownItem.propTypes = {
+  ...Button.propTypes,
+
+  index: PropTypes.number.isRequired,
+};
 
 export default withTheme(DropdownItem);

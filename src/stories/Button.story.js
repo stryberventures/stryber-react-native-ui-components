@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import {withKnobs, color, text, object, select} from '@storybook/addon-knobs';
 
 import {defaultTheme} from '../constants';
-import Button from '../components/Button';
+import {Button, Block} from '../components';
 import Text from '../components/Text';
 import CenterView from '../components/CenterView';
 import {gradientMarkdown} from '../static/markdown/gradientButton.js';
@@ -105,15 +105,46 @@ storiesOf('Button', module)
       </Text>
     </Button>
   ))
+  .add('mini button', () => (
+    <Block
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+      }}>
+      <Button
+        border
+        color="primary"
+        onPress={action('clicked-mini1')}
+        style={{width: 70, height: 24}}>
+        <Text white caption center>
+          Label
+        </Text>
+      </Button>
+      <Button
+        border
+        color="transparent"
+        onPress={action('clicked-mini2')}
+        style={{width: 70, height: 24}}>
+        <Text primary caption center>
+          Label
+        </Text>
+      </Button>
+      <Button
+        border="#95acbf"
+        color="transparent"
+        onPress={action('clicked-mini3')}
+        style={{width: 70, height: 24}}>
+        <Text color="#95acbf" caption center>
+          Label
+        </Text>
+      </Button>
+    </Block>
+  ))
   .add('used like link', () => (
     <Button onPress={action('clicked-link')}>
-      <Text
-        header
-        grey
-        caption
-        center
-        style={{textDecorationLine: 'underline'}}>
-        Button text
+      <Text header grey caption center bold primary>
+        Button text >>
       </Text>
     </Button>
   ));

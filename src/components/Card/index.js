@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, View} from 'react-native';
+import {ImageBackground, View, ViewPropTypes} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 
@@ -66,15 +66,24 @@ Card.defaultProps = {
   shadow: false,
   gradientColors: ['transparent', '#000'],
   resizeMode: 'cover',
+  gradientStyle: {},
+  style: {},
 };
 
 Card.propTypes = {
   card: PropTypes.bool,
   shadow: PropTypes.bool,
-  gradientStyle: PropTypes.shape({}),
+  gradientStyle: ViewPropTypes.style,
   gradientColors: PropTypes.array,
   resizeMode: PropTypes.string,
+  // eslint-disable-next-line react/require-default-props
   backgroundImage: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
+  theme: PropTypes.shape({}).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  style: ViewPropTypes.style,
 };
 
 export default withTheme(Card);

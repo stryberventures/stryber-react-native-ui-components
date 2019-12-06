@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import PropTypes from 'prop-types';
 
 import Block from '../Block';
 import Text from '../Text';
@@ -114,5 +115,10 @@ class ThemeChooser extends Component {
     );
   }
 }
+
+ThemeChooser.propTypes = {
+  themes: PropTypes.array.isRequired,
+  setTheme: PropTypes.func.isRequired,
+};
 
 export default withTheme(ThemeChooser);

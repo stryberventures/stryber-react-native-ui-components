@@ -35,7 +35,6 @@ const getStyles = ({
     toggle: {
       width: theme.sizes.base * 2,
       height: theme.sizes.base * 2,
-      color: '#000',
       justifyContent: 'center',
       alignItems: 'center',
       marginVertical: 0,
