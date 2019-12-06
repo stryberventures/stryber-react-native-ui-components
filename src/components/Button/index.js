@@ -189,7 +189,7 @@ Button.propTypes = {
   rippleColor: PropTypes.string,
   startColor: PropTypes.string,
   endColor: PropTypes.string,
-  border: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  border: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   /* eslint-enable react/require-default-props */
 };
 
