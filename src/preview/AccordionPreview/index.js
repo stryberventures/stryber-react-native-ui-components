@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {Card, Switch, Accordion} from '../../components';
+import {Card, Switch, Accordion, Collapse, Block, Text} from '../../components';
 
 const SECTIONS = [
   {
@@ -44,6 +44,25 @@ const SELECTORS = [
     title: 'None',
   },
 ];
+
+export const CollapsePreview = () => {
+  const [collapse, toggleCollapse] = React.useState(true);
+
+  return (
+    <View style={{height: 100}}>
+      <Block flex={false} onPress={() => toggleCollapse(!collapse)}>
+        <Text>Toggle content</Text>
+      </Block>
+      <Collapse
+        duration={700}
+        align="bottom"
+        onAnimationEnd={() => console.log('End')}
+        collapsed={collapse}>
+        <Text>Main Content</Text>
+      </Collapse>
+    </View>
+  );
+};
 
 export default class AccordionPreview extends Component {
   state = {

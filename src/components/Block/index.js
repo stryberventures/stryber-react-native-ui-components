@@ -69,7 +69,7 @@ class Block extends React.Component {
     }
 
     return (
-      <Component style={blockStyles} {...props}>
+      <Component onPress={onPress} style={blockStyles} {...props}>
         {children}
       </Component>
     );
