@@ -1,2 +1,6 @@
-export {default as UserIcon} from './UserIcon';
-export {default as Search} from './Search';
+export UserIcon from './UserIcon';
+export Search from './Search';
+export Eye from './Eye';
+export EyeDisabled from './EyeDisabled';
+export Check from './Check';
+export ArrowDown from './ArrowDown';

@@ -7,7 +7,6 @@ import {
   ViewPropTypes,
   Text as Typography,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
 import withTheme from '../withTheme';
@@ -15,6 +14,7 @@ import Text from '../Text';
 import Block from '../Block';
 import Button from '../Button';
 import getStyles from './styles';
+import {Eye, EyeDisabled} from '../Icons';
 
 class Input extends Component {
   state = {
@@ -125,11 +125,7 @@ class Input extends Component {
       <Button
         style={styles.toggle}
         onPress={() => this.setState({toggleSecure: !toggleSecure})}>
-        <Icon
-          color={theme.colors.primary}
-          size={theme.sizes.font * 1.35}
-          name={!toggleSecure ? 'md-eye' : 'md-eye-off'}
-        />
+        {!toggleSecure ? <Eye /> : <EyeDisabled />}
       </Button>
     );
   }

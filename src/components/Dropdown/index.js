@@ -8,7 +8,6 @@ import {
   Dimensions,
   Platform,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 
 import withTheme from '../withTheme';
@@ -16,6 +15,7 @@ import DropdownItem from '../DropdownItem';
 import Ripple from '../Ripple';
 import Input from '../Input';
 import Text from '../Text';
+import {ArrowDown} from '../Icons';
 
 import getStyles from './styles';
 
@@ -349,12 +349,9 @@ class Dropdown extends PureComponent {
         value=""
         label=""
         placeholderLabel={this.checkValueLength(title) || label}
-        renderAccessory={this.renderAccessory}
         ref={this.input}
         placeholderTextColor={title ? theme.colors.darkGrey : theme.colors.gray}
-        rightLabel={() => (
-          <Icon name="ios-arrow-down" size={20} color={theme.colors.gray} />
-        )}
+        rightLabel={() => <ArrowDown />}
       />
     );
   }
@@ -390,20 +387,6 @@ class Dropdown extends PureComponent {
       />
     );
   }
-
-  renderAccessory = () => {
-    const {baseColor: backgroundColor, theme} = this.props;
-    const triangleStyle = {backgroundColor};
-    const styles = getStyles(theme);
-
-    return (
-      <View style={styles.accessory}>
-        <View style={styles.triangleContainer}>
-          <View style={[styles.triangle, triangleStyle]} />
-        </View>
-      </View>
-    );
-  };
 
   renderItem = ({item, index}) => {
     if (item == null) {

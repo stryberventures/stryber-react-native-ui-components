@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Animated, Easing, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
+import {Check} from '../Icons';
 import Text from '../Text';
 import Block from '../Block';
 import withTheme from '../withTheme';
@@ -54,14 +54,7 @@ class Checkbox extends Component {
         style={[styles.checkbox, {transform: [{scale: springValue}]}]}>
         {(this.state.checked && iconComponent) ||
           (this.state.checked && radio && this.renderRadioIcon()) ||
-          (this.state.checked && (
-            <Icon
-              {...this.props}
-              name="md-checkmark"
-              size={theme.sizes.checkboxIcon}
-              color="white"
-            />
-          ))}
+          (this.state.checked && <Check />)}
       </Animated.View>
     );
   };

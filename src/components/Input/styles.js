@@ -105,6 +105,7 @@ const getStyles = ({
       height: '100%',
       justifyContent: 'center',
       flex: 0,
+      marginRight: 10,
     },
   });
 
