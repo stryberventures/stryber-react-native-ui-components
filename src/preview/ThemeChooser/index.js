@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import PropTypes from 'prop-types';
 
-import Block from '../Block';
-import Text from '../Text';
-import Header from '../Header';
-import Button from '../Button';
-import Checkbox from '../Checkbox';
-import Switch from '../Switch';
-import Input from '../Input';
-import {UserIcon} from '../Icons';
-import withTheme from '../withTheme';
+import {
+  Block,
+  Text,
+  Header,
+  Button,
+  Checkbox,
+  Switch,
+  Input,
+  withTheme,
+} from '../../components';
+import {UserIcon} from '../../components/Icons';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -106,9 +108,9 @@ class ThemeChooser extends Component {
               placeholder="Input"
               icon={() => <UserIcon />}
             />
-            <Checkbox text="Checkbox" isChecked />
-            <Checkbox text="Radio" radio isChecked />
-            <Switch text="Switch" isChecked />
+            <Checkbox text="Checkbox" value={true} />
+            <Checkbox text="Radio" radio value={true} />
+            <Switch text="Switch" value={true} />
           </Block>
         </Block>
       </SafeAreaView>

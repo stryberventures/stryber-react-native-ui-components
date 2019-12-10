@@ -9,3 +9,5 @@ android/
 ios/
 storybook/
 .idea
+
+examples/

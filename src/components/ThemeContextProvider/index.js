@@ -1,23 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
 import {merge, cloneDeep} from 'lodash-es';
 import PropTypes from 'prop-types';
 
+import {storage} from '../../core';
 import {THEME_KEY, defaultTheme} from '../../constants';
-
-// Quieting AsyncStorage warnings!
-// Per https://github.com/storybookjs/storybook/issues/6078#issuecomment-510167432
-const ReactNative = require('react-native');
-Object.defineProperty(ReactNative, 'AsyncStorage', {
-  get(): any {
-    return require('react-native').default;
-  },
-});
-
-/**
- * Export AsyncStorage so it's usable elsewhere.
- */
-export const Storage = AsyncStorage;
 
 export const ThemeContext = React.createContext();
 
@@ -30,7 +16,7 @@ const ThemeContextProvider = ({children, themes}) => {
   });
   useEffect(() => {
     (async () => {
-      const storedThemeID = await Storage.getItem(THEME_KEY);
+      const storedThemeID = await storage.loadString(THEME_KEY);
       if (fullThemes.some(({key}) => key === storedThemeID)) {
         setThemeID(storedThemeID);
       } else {
