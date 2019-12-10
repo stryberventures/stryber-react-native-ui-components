@@ -1,6 +1,6 @@
 import React, {useContext, forwardRef} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
 
+import {Storage} from '../ThemeContextProvider';
 import {ThemeContext} from '../ThemeContextProvider';
 import {THEME_KEY, defaultTheme} from '../../constants';
 
@@ -15,7 +15,7 @@ function withTheme(Component) {
     /* eslint-disable no-shadow */
     const getTheme = themeID => themes.find(theme => theme.key === themeID);
     const setTheme = themeID => {
-      AsyncStorage.setItem(THEME_KEY, themeID);
+      Storage.setItem(THEME_KEY, themeID);
       setThemeID(themeID);
     };
     /* eslint-enable no-shadow */

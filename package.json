@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "./src/components/index.js",
   "keywords": [
     "react-native",
@@ -22,12 +22,12 @@
     "storybook": "start-storybook -p 7007"
   },
   "peerDependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-native": "^0.60.5",
-    "jest-static-stubs": "^0.0.1"
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6",
+    "react-native": ">=0.60.5"
   },
   "dependencies": {
+    "jest-static-stubs": "0.0.1",
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/datetimepicker": "^2.1.0",
     "react-native-linear-gradient": "^2.5.6",
@@ -35,9 +35,13 @@
     "react-native-svg": "^9.13.2",
     "react-native-vector-icons": "^6.6.0",
     "rn-fetch-blob": "^0.11.2",
-    "shorthash": "^0.0.2"
+    "shorthash": "^0.0.2",
+    "lodash-es": "^4.17.15"
   },
   "devDependencies": {
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-native": "0.60.5",
     "@babel/core": "^7.6.0",
     "@babel/runtime": "^7.6.0",
     "@react-native-community/eslint-config": "^0.0.5",
@@ -59,7 +63,6 @@
     "eslint": "^6.7.2",
     "formik": "^2.0.6",
     "jest": "^24.9.0",
-    "lodash-es": "^4.17.15",
     "metro-react-native-babel-preset": "^0.56.0",
     "moment": "^2.24.0",
     "react-test-renderer": "16.8.6",
