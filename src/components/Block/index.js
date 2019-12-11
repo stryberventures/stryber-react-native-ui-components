@@ -39,7 +39,6 @@ class Block extends React.Component {
     const blockStyles = [
       styles.block,
       flex && {flex},
-      flex === false && {flex: 0},
       flex === 0 && {flex: 0},
       row && styles.row,
       column && styles.column,
@@ -77,7 +76,7 @@ class Block extends React.Component {
 }
 
 Block.defaultProps = {
-  flex: true,
+  flex: 1,
   row: false,
   column: false,
   center: false,
@@ -100,7 +99,7 @@ Block.defaultProps = {
 };
 
 Block.propTypes = {
-  flex: PropTypes.oneOf([true, false, 1, 0]),
+  flex: PropTypes.oneOf([1, 0]),
   row: PropTypes.bool,
   column: PropTypes.bool,
   center: PropTypes.bool,

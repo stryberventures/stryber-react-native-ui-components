@@ -42,7 +42,7 @@ class Checkbox extends Component {
 
   renderRadioIcon = () => {
     const styles = getStyles(this.props.theme);
-    return <Block style={styles.radioIcon} flex={false} />;
+    return <Block style={styles.radioIcon} flex={0} />;
   };
 
   renderCheckIcon = () => {

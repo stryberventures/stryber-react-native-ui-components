@@ -267,13 +267,10 @@ class Input extends Component {
     const editable = placeholderLabel ? !placeholderLabel : !disabled;
 
     return (
-      <Block flex={false}>
-        <Block
-          flex={false}
-          style={styles.container}
-          margin={[theme.sizes.base, 0]}>
+      <Block flex={0}>
+        <Block flex={0} style={styles.container} margin={[theme.sizes.base, 0]}>
           <TouchableWithoutFeedback onPress={() => ref.current.focus()}>
-            <Block flex={false} style={inputStyles}>
+            <Block flex={0} style={inputStyles}>
               {!icon() && withLeftBorder && (
                 <Block
                   color={this.getBlockBackgroundColor()}

@@ -22,7 +22,7 @@ const getStyles = ({
       overflow: 'hidden',
       paddingHorizontal: theme.sizes.paddingHorizontal,
       paddingLeft: theme.sizes.paddingHorizontal + additionalPaddingLeft,
-      backgroundColor: disabled ? '#f0f0f0' : 'transparent',
+      backgroundColor: disabled ? '#f0f0f0' : '#fff',
       alignItems: 'center',
       flexDirection: 'row',
       paddingRight: disablePaddingRight ? 0 : theme.sizes.paddingHorizontal,

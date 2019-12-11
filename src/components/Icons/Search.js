@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import withTheme from '../withTheme';
 
 const Search = props => {
-  console.log(props);
   return (
     <Svg
       viewBox="0 0 20 20"

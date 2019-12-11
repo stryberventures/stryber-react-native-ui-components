@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Image} from 'react-native';
+import {Image, Platform} from 'react-native';
 import shorthash from 'shorthash';
 import RNFetchBlob from 'rn-fetch-blob';
 
@@ -17,7 +17,7 @@ export default class CacheImage extends React.Component {
     if (exists) {
       this.setState({
         source: {
-          uri: path,
+          uri: Platform.OS === 'android' ? 'file://' + path : '' + path,
         },
       });
       return;
@@ -25,7 +25,10 @@ export default class CacheImage extends React.Component {
     const newImage = await RNFetchBlob.config({path}).fetch('GET', uri);
     this.setState({
       source: {
-        uri: newImage.uri,
+        uri:
+          Platform.OS === 'android'
+            ? 'file://' + newImage.path()
+            : '' + newImage.path(),
       },
     });
   };

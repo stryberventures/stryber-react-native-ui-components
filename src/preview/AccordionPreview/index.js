@@ -50,7 +50,7 @@ export const CollapsePreview = () => {
 
   return (
     <View style={{height: 100}}>
-      <Block flex={false} onPress={() => toggleCollapse(!collapse)}>
+      <Block flex={0} onPress={() => toggleCollapse(!collapse)}>
         <Text>Toggle content</Text>
       </Block>
       <Collapse
