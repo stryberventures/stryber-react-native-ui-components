@@ -8,6 +8,7 @@
     "reactnative",
     "bootstrap"
   ],
+  "description": "UI library for React Native",
   "repository": {
     "type": "git",
     "url": "https://github.com/stryberventures/stryber-react-native-ui-components"
