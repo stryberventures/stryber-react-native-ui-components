@@ -1,35 +1,24 @@
 import React from 'react';
 import {TextInput, Keyboard, I18nManager} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import Animated, {Easing} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import PropTypes from 'prop-types';
 
+import {tabView} from '../../constants';
 import {memoize} from '../../utils';
 import styles from './styles';
 
-const TRUE = 1;
-const FALSE = 0;
-const NOOP = 0;
-const UNSET = -1;
-
-const DIRECTION_LEFT = 1;
-const DIRECTION_RIGHT = -1;
-
-const SWIPE_DISTANCE_MINIMUM = 20;
-
-const SPRING_CONFIG = {
-  stiffness: 1000,
-  damping: 500,
-  mass: 3,
-  overshootClamping: true,
-  restDisplacementThreshold: 0.01,
-  restSpeedThreshold: 0.01,
-};
-
-const TIMING_CONFIG = {
-  duration: 200,
-  easing: Easing.out(Easing.cubic),
-};
+const {
+  TRUE,
+  FALSE,
+  NOOP,
+  UNSET,
+  DIRECTION_LEFT,
+  DIRECTION_RIGHT,
+  SWIPE_DISTANCE_MINIMUM,
+  SPRING_CONFIG,
+  TIMING_CONFIG,
+} = tabView;
 
 const {
   Clock,

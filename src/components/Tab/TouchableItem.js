@@ -8,9 +8,10 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 
+import {tabView} from '../../constants';
 import withTheme from '../withTheme';
 
-const LOLLIPOP = 21;
+const {LOLLIPOP} = tabView;
 
 class TouchableItem extends React.Component {
   render() {
