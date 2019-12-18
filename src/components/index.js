@@ -15,3 +15,7 @@ export Accordion from './Accordion';
 export SearchField from './SearchField';
 export withTheme from './withTheme';
 export Collapse from './Collapse';
+export Tab from './Tab';
+export TabBar from './TabBar';
+export TabView from './TabView';
+export SceneMap from './SceneMap';
