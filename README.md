@@ -116,7 +116,8 @@ And run `react-native link` to link fonts that we use in package.
     "react-native-reanimated": "1.3.0",
     "react-native-svg": "9.13.2",
     "react-native-vector-icons": "6.6.0",
-    "rn-fetch-blob": "0.11.2"
+    "rn-fetch-blob": "0.11.2",
+    "react-native-gesture-handler": "^1.5.2",
 ```
 
 Then run in terminal:
