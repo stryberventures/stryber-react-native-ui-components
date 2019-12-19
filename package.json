@@ -82,6 +82,9 @@
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg)$": "RelativeImageStub",
       ".+\\.(png)$": "jest-static-stubs/png"
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/?!(add.js)"
+    ]
   }
 }

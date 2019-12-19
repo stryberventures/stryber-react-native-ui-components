@@ -12,3 +12,5 @@ ios/
 examples/
 src/storybook
 *.test.js
+src/__snapshots__
+__mocks__/
