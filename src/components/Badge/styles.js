@@ -5,8 +5,8 @@ const getStyles = (theme = defaultTheme) =>
   StyleSheet.create({
     badge: {
       flex: 0,
-      width: theme.sizes.base,
-      height: theme.sizes.base,
+      minWidth: theme.sizes.base,
+      minHeight: theme.sizes.base,
       backgroundColor: theme.colors.accent,
       padding: 2,
     },
