@@ -3,8 +3,8 @@ import {SafeAreaView} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import {storiesOf} from '@storybook/react-native';
-import Header from '../components/Header';
-import AnimatedHeader from '../components/AnimatedHeader';
+import Header from '../../components/Header';
+import AnimatedHeader from '../../components/AnimatedHeader';
 
 storiesOf('Header', module)
   .addDecorator(getStory => <SafeAreaView>{getStory()}</SafeAreaView>)

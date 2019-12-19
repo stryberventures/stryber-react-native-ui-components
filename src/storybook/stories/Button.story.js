@@ -4,11 +4,11 @@ import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {withKnobs, color, text, object, select} from '@storybook/addon-knobs';
 
-import {defaultTheme} from '../constants';
-import {Button, Block} from '../components';
-import Text from '../components/Text';
-import CenterView from '../components/CenterView';
-import {gradientMarkdown} from '../static/markdown/gradientButton.js';
+import {defaultTheme} from '../../constants';
+import {Button, Block} from '../../components';
+import Text from '../../components/Text';
+import CenterView from '../../components/CenterView';
+import {gradientMarkdown} from '../../static/markdown/gradientButton.js';
 
 storiesOf('Button', module)
   .addParameters({

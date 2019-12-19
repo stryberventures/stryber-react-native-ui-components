@@ -1,10 +1,10 @@
 import React from 'react';
 import {Image} from 'react-native';
-import {Card, Block, Text, Button} from '../components';
-import CenterView from '../components/CenterView';
+import {Card, Block, Text, Button} from '../../components';
+import CenterView from '../../components/CenterView';
 import {withKnobs, color} from '@storybook/addon-knobs';
 
-import {defaultTheme as theme} from '../constants';
+import {defaultTheme as theme} from '../../constants';
 import {storiesOf} from '@storybook/react-native';
 
 storiesOf('Card', module)
@@ -13,7 +13,7 @@ storiesOf('Card', module)
   .add('top image', () => (
     <Card shadow>
       <Image
-        source={require('../static/images/mountain.jpeg')}
+        source={require('../../static/images/mountain.jpeg')}
         style={{height: 145}}
         resizeMode="cover"
       />
@@ -58,7 +58,7 @@ storiesOf('Card', module)
     return (
       <Card
         gradientColors={['transparent', gradientColor]}
-        backgroundImage={require('../static/images/mountain.jpeg')}>
+        backgroundImage={require('../../static/images/mountain.jpeg')}>
         <Block
           padding={theme.sizes.cardPadding}
           style={{justifyContent: 'flex-end'}}>

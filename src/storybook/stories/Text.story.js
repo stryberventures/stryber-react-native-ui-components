@@ -3,8 +3,8 @@ import React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, text, select} from '@storybook/addon-knobs';
 
-import CenterView from '../components/CenterView';
-import Text from '../components/Text';
+import CenterView from '../../components/CenterView';
+import Text from '../../components/Text';
 
 storiesOf('Text', module)
   .addDecorator(withKnobs)

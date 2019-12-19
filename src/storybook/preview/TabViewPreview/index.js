@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
-import {UserIcon, Eye, Search, ArrowDown} from '../../components/Icons';
+import {UserIcon, Eye, Search, ArrowDown} from '../../../components/Icons';
 
-import {TabView, SceneMap, TabBar, Button, Text} from '../../components';
+import {TabView, SceneMap, TabBar, Button, Text} from '../../../components';
 
 // eslint-disable-next-line react/prop-types
 const renderScene = ({route, jumpTo}) => {

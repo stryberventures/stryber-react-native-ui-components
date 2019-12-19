@@ -7,10 +7,8 @@ tmp
 
 android/
 ios/
-storybook/
 .idea
 
 examples/
-src/stories
+src/storybook
 *.test.js
-src/preview

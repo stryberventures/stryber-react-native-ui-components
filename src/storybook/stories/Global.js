@@ -1,8 +1,8 @@
 import React from 'react';
 import {addDecorator, addParameters} from '@storybook/react-native';
 import {withBackgrounds} from '@storybook/addon-ondevice-backgrounds';
-import ThemeContextProvider from '../components/ThemeContextProvider';
-import {themes} from '../constants/allThemes';
+import ThemeContextProvider from '../../components/ThemeContextProvider';
+import {themes} from '../../constants/allThemes';
 
 addDecorator(withBackgrounds);
 

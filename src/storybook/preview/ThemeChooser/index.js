@@ -11,8 +11,8 @@ import {
   Switch,
   Input,
   withTheme,
-} from '../../components';
-import {UserIcon} from '../../components/Icons';
+} from '../../../components';
+import {UserIcon} from '../../../components/Icons';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 

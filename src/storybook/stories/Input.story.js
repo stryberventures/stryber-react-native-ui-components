@@ -4,9 +4,9 @@ import {storiesOf} from '@storybook/react-native';
 import {linkTo} from '@storybook/addon-links';
 import {withKnobs, text} from '@storybook/addon-knobs';
 
-import Input from '../components/Input';
-import CenterView from '../components/CenterView';
-import {UserIcon} from '../components/Icons';
+import Input from '../../components/Input';
+import CenterView from '../../components/CenterView';
+import {UserIcon} from '../../components/Icons';
 
 const placeholder = text('Placeholder', 'Input');
 

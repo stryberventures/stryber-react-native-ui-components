@@ -1,8 +1,8 @@
 import React from 'react';
 import {storiesOf} from '@storybook/react-native';
 
-import Dropdown from '../components/Dropdown';
-import CenterView from '../components/CenterView';
+import Dropdown from '../../components/Dropdown';
+import CenterView from '../../components/CenterView';
 
 storiesOf('Dropdown', module)
   .add('default', () => {

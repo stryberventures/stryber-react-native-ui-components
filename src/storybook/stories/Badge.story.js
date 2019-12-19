@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Badge from '../components/Badge';
-import CenterView from '../components/CenterView';
+import Badge from '../../components/Badge';
+import CenterView from '../../components/CenterView';
 
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, color} from '@storybook/addon-knobs';
-import {defaultTheme} from '../constants';
+import {defaultTheme} from '../../constants';
 
 storiesOf('Badge', module)
   .addDecorator(withKnobs)

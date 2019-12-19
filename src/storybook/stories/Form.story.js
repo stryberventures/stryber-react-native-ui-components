@@ -5,7 +5,7 @@ import {storiesOf} from '@storybook/react-native';
 import Form from '../preview/Form';
 import FormikPreview from '../preview/FormikPreview';
 import FormRef from '../preview/FormRef';
-import CenterView from '../components/CenterView';
+import CenterView from '../../components/CenterView';
 
 storiesOf('Form', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)

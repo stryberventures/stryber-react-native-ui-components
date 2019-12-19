@@ -1,7 +1,7 @@
 import React from 'react';
-import {DatePicker} from '../components';
+import {DatePicker} from '../../components';
 
-import CenterView from '../components/CenterView';
+import CenterView from '../../components/CenterView';
 
 import {storiesOf} from '@storybook/react-native';
 

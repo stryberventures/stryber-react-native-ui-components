@@ -11,7 +11,7 @@ import {
   DatePicker,
   Dropdown,
   Input,
-} from '../../components';
+} from '../../../components';
 
 const FormikPreview = () => {
   const dropdownData = [

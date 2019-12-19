@@ -8,7 +8,7 @@ import {
   DatePicker,
   Dropdown,
   Input,
-} from '../../components';
+} from '../../../components';
 
 const FormRef = () => {
   const dropdownData = [
