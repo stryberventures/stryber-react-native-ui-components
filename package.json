@@ -17,10 +17,22 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
-    "start": "react-native start",
+    "start": "npx react-native start",
+    "ios": "npx react-native run-ios",
+    "android": "npx react-native run-ios",
     "test": "jest",
-    "lint": "eslint .",
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write src/**/*.js",
     "storybook": "start-storybook -p 7007 -c ./src/storybook"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.(js)": ["yarn lint:write", "git add"]
   },
   "peerDependencies": {
     "@react-native-community/async-storage": ">=1.6.3",
@@ -63,7 +75,9 @@
     "babel-loader": "^8.0.6",
     "eslint": "^6.7.2",
     "formik": "^2.0.6",
+    "husky": "^3.1.0",
     "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
     "metro-react-native-babel-preset": "^0.56.0",
     "moment": "^2.24.0",
     "react": "16.8.6",
