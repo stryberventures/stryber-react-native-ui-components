@@ -63,6 +63,7 @@ export const CollapsePreview = () => {
       <Collapse
         duration={700}
         align="bottom"
+        /* eslint-disable-next-line no-console */
         onAnimationEnd={() => console.log('End')}
         collapsed={collapse}>
         <Text>Main Content</Text>

@@ -43,6 +43,7 @@ const Form = () => {
     },
   ];
 
+  // eslint-disable-next-line no-console
   const showValues = () => console.log(values);
   return (
     <View>

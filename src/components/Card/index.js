@@ -76,7 +76,6 @@ Card.propTypes = {
   gradientStyle: ViewPropTypes.style,
   gradientColors: PropTypes.array,
   resizeMode: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
   backgroundImage: PropTypes.oneOfType([PropTypes.shape({}), PropTypes.number]),
   theme: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([

@@ -39,7 +39,6 @@ export default class CacheImage extends React.Component {
 }
 
 CacheImage.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   source: PropTypes.shape({
     uri: PropTypes.string.isRequired,
   }),

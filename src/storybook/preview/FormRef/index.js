@@ -40,6 +40,7 @@ const FormRef = () => {
   const dropdownRef = React.createRef();
 
   const showValues = () =>
+    // eslint-disable-next-line no-console
     console.log({
       login: emailRef.current.getValue(),
       password: passwordRef.current.getValue(),

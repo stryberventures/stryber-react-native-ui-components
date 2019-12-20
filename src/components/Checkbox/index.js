@@ -99,7 +99,6 @@ Checkbox.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   onPress: PropTypes.func,
   radio: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
   iconComponent: PropTypes.node,
 };
 

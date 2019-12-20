@@ -683,11 +683,9 @@ Dropdown.propTypes = {
 
   fontSize: PropTypes.number,
 
-  /* eslint-disable react/require-default-props */
   textColor: PropTypes.string,
   itemColor: PropTypes.string,
   baseColor: PropTypes.string,
-  /* eslint-enable react/require-default-props */
 
   itemCount: PropTypes.number,
   itemPadding: PropTypes.number,

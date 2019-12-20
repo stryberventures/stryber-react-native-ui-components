@@ -113,6 +113,5 @@ Accordion.propTypes = {
   onAnimationEnd: PropTypes.func,
   sectionContainerStyle: ViewPropTypes.style,
   containerStyle: ViewPropTypes.style,
-  // eslint-disable-next-line react/require-default-props
   renderFooter: PropTypes.func,
 };

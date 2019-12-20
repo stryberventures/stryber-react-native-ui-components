@@ -15,6 +15,7 @@ export default class Collapse extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.collapsed !== this.props.collapsed) {
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({measured: false}, () => this.updateProps(prevProps));
     } else {
       this.updateProps(prevProps);

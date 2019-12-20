@@ -171,10 +171,8 @@ Switch.propTypes = {
   leftContainerStyle: ViewPropTypes.style,
   text: PropTypes.string,
   theme: PropTypes.shape({}).isRequired,
-  /* eslint-disable react/require-default-props */
   backgroundColorOff: PropTypes.string,
   backgroundColorOn: PropTypes.string,
-  /* eslint-enable react/require-default-props */
 };
 
 export default withTheme(Switch);

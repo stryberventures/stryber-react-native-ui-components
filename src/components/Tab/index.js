@@ -106,7 +106,8 @@ class Tab extends React.Component {
     const renderLabel =
       renderLabelPassed !== undefined
         ? renderLabelPassed
-        : ({route, color}) => {
+        : // eslint-disable-next-line no-shadow
+          ({route, color}) => {
             const labelText = getLabelText({route});
 
             if (typeof labelText === 'string') {

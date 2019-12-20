@@ -14,4 +14,6 @@ CenterView.defaultProps = {
 
 CenterView.propTypes = {
   children: PropTypes.node,
+  middle: PropTypes.bool,
+  bottom: PropTypes.bool,
 };

@@ -4,39 +4,9 @@ const mockAsyncStorage = require('@react-native-community/async-storage/jest/asy
 
 jest.mock('@react-native-community/async-storage', () => mockAsyncStorage);
 
-jest.mock('Linking', () => {
-  return {
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    openURL: jest.fn(),
-    canOpenURL: jest.fn(),
-    getInitialURL: jest.fn(),
-  };
-});
-
-jest.mock('react-native-reanimated', () => {
-  const View = require('react-native').View;
-
-  return {
-    Value: jest.fn(),
-    event: jest.fn(),
-    add: jest.fn(),
-    eq: jest.fn(),
-    set: jest.fn(),
-    cond: jest.fn(),
-    interpolate: jest.fn(),
-    View: View,
-    Extrapolate: {CLAMP: jest.fn()},
-    Transition: {
-      Together: 'Together',
-      Out: 'Out',
-      In: 'In',
-    },
-    Easing: {
-      out: jest.fn(),
-    },
-  };
-});
+jest.mock('react-native-reanimated', () =>
+  require('react-native-reanimated/mock'),
+);
 
 jest.mock('react-native-gesture-handler', () => {});
 
@@ -51,14 +21,11 @@ jest.mock('rn-fetch-blob', () => {
     session: () => {},
     fs: {
       dirs: {
-        MainBundleDir: () => {},
         CacheDir: () => {},
         DocumentDir: () => {},
       },
     },
     wrap: () => {},
-    polyfill: () => {},
-    JSONStream: () => {},
   };
 });
 
@@ -80,6 +47,7 @@ const mockConsoleMethod = realConsoleMethod => {
 };
 
 // Suppress console errors and warnings to avoid polluting output in tests.
+/* eslint-disable no-console */
 console.warn = jest.fn(mockConsoleMethod(console.warn));
 console.error = jest.fn(mockConsoleMethod(console.error));
 

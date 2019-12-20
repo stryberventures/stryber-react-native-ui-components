@@ -587,6 +587,7 @@ export default class Pager extends React.Component {
       addListener: this.addListener,
       removeListener: this.removeListener,
       jumpTo: this.jumpTo,
+      // eslint-disable-next-line no-shadow
       render: children => (
         <PanGestureHandler
           enabled={layout.width !== 0 && swipeEnabled}

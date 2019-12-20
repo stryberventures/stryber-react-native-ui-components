@@ -46,6 +46,7 @@ const FormikPreview = () => {
           date: new Date(),
           picker: 'Pear',
         }}
+        /* eslint-disable-next-line no-console */
         onSubmit={values => console.log(values)}
         validationSchema={yup.object().shape({
           email: yup

@@ -185,12 +185,10 @@ Button.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   ripple: PropTypes.bool,
   onPress: PropTypes.func,
-  /* eslint-disable react/require-default-props */
   rippleColor: PropTypes.string,
   startColor: PropTypes.string,
   endColor: PropTypes.string,
   border: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  /* eslint-enable react/require-default-props */
 };
 
 export default withTheme(Button);
