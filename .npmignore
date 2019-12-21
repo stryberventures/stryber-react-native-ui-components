@@ -14,3 +14,16 @@ src/storybook
 *.test.js
 src/__snapshots__
 __mocks__/
+src/static/images
+src/static/markdown
+.buckconfig
+.editorconfig
+.eslintrc
+.flowconfig
+.gitattributes
+.prettierrc.js
+.watchmanconfig
+app.json
+metro.config.js
+react-native.config.js
+README.md

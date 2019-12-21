@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import {ViewPropTypes, Text as Typography} from 'react-native';
 import PropTypes from 'prop-types';
 
-import {Text} from '../index';
+import Text from '../Text';
 import withTheme from '../withTheme';
-
 import getStyles from './styles';
 import Block from '../Block';
 

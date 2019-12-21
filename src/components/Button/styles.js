@@ -23,8 +23,7 @@ const getStyles = (theme = defaultTheme) =>
     white: {backgroundColor: theme.colors.white},
     gray: {backgroundColor: theme.colors.gray},
     gray2: {backgroundColor: theme.colors.gray2},
-    gray3: {backgroundColor: theme.colors.gray3},
-    gray4: {backgroundColor: theme.colors.gray4},
+    darkGray: {backgroundColor: theme.colors.darkGrey},
   });
 
 export default getStyles;

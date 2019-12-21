@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View} from 'react-native';
 import PropTypes from 'prop-types';
 
-import {Input} from '../index';
+import Input from '../Input';
 import withTheme from '../withTheme';
 import {Search} from '../Icons';
 

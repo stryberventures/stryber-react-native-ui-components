@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, TouchableHighlight, ViewPropTypes} from 'react-native';
 
-import {Collapse} from '../index';
+import Collapse from '../Collapse';
 
 export default class Accordion extends Component {
   toggle(section) {

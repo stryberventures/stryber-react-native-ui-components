@@ -3,7 +3,7 @@ import {ImageBackground, View, ViewPropTypes} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 
-import {Block} from '../index';
+import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 

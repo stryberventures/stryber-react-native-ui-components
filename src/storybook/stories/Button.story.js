@@ -13,66 +13,63 @@ import {gradientMarkdown} from '../../static/markdown/gradientButton.js';
 storiesOf('Button', module)
   .addParameters({
     component: Button,
+    notes: {markdown: gradientMarkdown},
   })
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add(
-    'with gradient',
-    () => {
-      // for Button
-      const gradientColor1 = color(
-        'Gradient First Color',
-        defaultTheme.colors.primary,
-        'Gradient',
-      );
-      const gradientColor2 = color(
-        'Gradient Second Color',
-        defaultTheme.colors.secondary,
-        'Gradient',
-      );
-      const colorPosition1 = object(
-        "Change 1'st color position",
-        {x: 0, y: 0},
-        'Gradient',
-      );
-      const colorPosition2 = object(
-        "Change 2'nd color position",
-        {x: 1, y: 1},
-        'Gradient',
-      );
-      // for Text
-      const textColorsSelect = select(
-        'Colors',
-        {
-          accent: 'accent',
-          primary: 'primary',
-          secondary: 'secondary',
-          tertiary: 'tertiary',
-          black: 'black',
-          white: 'white',
-          gray: 'gray',
-          gray2: 'gray2',
-        },
-        'white',
-        'Text',
-      );
-      const buttonText = text('Button text', 'Hello Button', 'Text');
-      return (
-        <Button
-          startColor={gradientColor1}
-          endColor={gradientColor2}
-          start={colorPosition1}
-          end={colorPosition2}
-          gradient
-          onPress={action('clicked-gradient')}>
-          <Text header bold {...{[textColorsSelect]: true}} center>
-            {buttonText}
-          </Text>
-        </Button>
-      );
-    },
-    {notes: {markdown: gradientMarkdown}},
-  )
+  .add('with gradient', () => {
+    // for Button
+    const gradientColor1 = color(
+      'Gradient First Color',
+      defaultTheme.colors.primary,
+      'Gradient',
+    );
+    const gradientColor2 = color(
+      'Gradient Second Color',
+      defaultTheme.colors.secondary,
+      'Gradient',
+    );
+    const colorPosition1 = object(
+      "Change 1'st color position",
+      {x: 0, y: 0},
+      'Gradient',
+    );
+    const colorPosition2 = object(
+      "Change 2'nd color position",
+      {x: 1, y: 1},
+      'Gradient',
+    );
+    // for Text
+    const textColorsSelect = select(
+      'Colors',
+      {
+        accent: 'accent',
+        primary: 'primary',
+        secondary: 'secondary',
+        tertiary: 'tertiary',
+        black: 'black',
+        white: 'white',
+        gray: 'gray',
+        gray2: 'gray2',
+      },
+      'white',
+      'Text',
+    );
+    const buttonText = text('Button text', 'Hello Button', 'Text');
+    return (
+      <Button
+        startColor={gradientColor1}
+        endColor={gradientColor2}
+        start={colorPosition1}
+        end={colorPosition2}
+        gradient
+        onPress={action('clicked-gradient')}>
+        <Text header bold {...{[textColorsSelect]: true}} center>
+          {buttonText}
+        </Text>
+      </Button>
+    );
+  })
   .add('with shadow', () => (
     <Button shadow color="white" onPress={action('clicked-shadow')}>
       <Text header center semibold>
@@ -145,6 +142,13 @@ storiesOf('Button', module)
     <Button onPress={action('clicked-link')}>
       <Text header grey caption center bold primary>
         Button text >>
+      </Text>
+    </Button>
+  ))
+  .add('disabled', () => (
+    <Button color="gray2" disabled onPress={action('clicked-shadow')}>
+      <Text gray header center bold>
+        Button text
       </Text>
     </Button>
   ));
