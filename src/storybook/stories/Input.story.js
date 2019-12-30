@@ -7,11 +7,15 @@ import {withKnobs, text} from '@storybook/addon-knobs';
 import Input from '../../components/Input';
 import CenterView from '../../components/CenterView';
 import {UserIcon} from '../../components/Icons';
+import {input} from '../../static/markdown';
 
 const placeholder = text('Placeholder', 'Input');
 
 storiesOf('Input', module)
   .addDecorator(withKnobs)
+  .addParameters({
+    notes: {markdown: input},
+  })
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('disabled', () => {
     return (

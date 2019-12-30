@@ -6,10 +6,14 @@ import CenterView from '../../components/CenterView';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, color} from '@storybook/addon-knobs';
 import {defaultTheme} from '../../constants';
+import {badge} from '../../static/markdown';
 
 storiesOf('Badge', module)
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView middle>{getStory()}</CenterView>)
+  .addParameters({
+    notes: {markdown: badge},
+  })
   .add('default', () => {
     const badgeBackground = color(
       'Badge Background Color',
@@ -18,4 +22,4 @@ storiesOf('Badge', module)
     );
     return <Badge color={badgeBackground} />;
   })
-  .add('with number', () => <Badge value={999} />);
+  .add('with number', () => <Badge value={5} />);

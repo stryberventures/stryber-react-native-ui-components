@@ -5,15 +5,13 @@ import {action} from '@storybook/addon-actions';
 import {withKnobs, color, text, object, select} from '@storybook/addon-knobs';
 
 import {defaultTheme} from '../../constants';
-import {Button, Block} from '../../components';
-import Text from '../../components/Text';
+import {Button, Block, Text} from '../../components';
 import CenterView from '../../components/CenterView';
-import {gradientMarkdown} from '../../static/markdown/gradientButton.js';
+import {button} from '../../static/markdown';
 
 storiesOf('Button', module)
   .addParameters({
-    component: Button,
-    notes: {markdown: gradientMarkdown},
+    notes: {markdown: button},
   })
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)

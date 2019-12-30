@@ -15,3 +15,4 @@ import './Accordion.story';
 import './Form.story';
 import './SearchField.story';
 import './TabView.story';
+import './Block.story';

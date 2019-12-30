@@ -154,7 +154,6 @@ class DatePicker extends Component {
 
 DatePicker.defaultProps = {
   startDate: new Date(),
-  onError: () => {},
   onChange: () => {},
   maxDate: new Date(32519532187368),
   minDate: new Date(0),
@@ -173,7 +172,6 @@ DatePicker.defaultProps = {
 DatePicker.propTypes = {
   name: PropTypes.string,
   startDate: PropTypes.instanceOf(Date),
-  onError: PropTypes.func,
   onChange: PropTypes.func,
   minDate: PropTypes.instanceOf(Date),
   maxDate: PropTypes.instanceOf(Date),

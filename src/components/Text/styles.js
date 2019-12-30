@@ -17,7 +17,7 @@ const getStyles = (theme = defaultTheme) =>
       fontWeight: 'bold',
     },
     semibold: {
-      fontWeight: '500',
+      fontWeight: '600',
     },
     medium: {
       fontWeight: '500',

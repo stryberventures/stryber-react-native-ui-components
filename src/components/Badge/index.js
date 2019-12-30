@@ -35,7 +35,6 @@ Badge.defaultProps = {
   value: '',
   textStyle: {},
   style: {},
-  onPress: () => {},
   color: '',
 };
 

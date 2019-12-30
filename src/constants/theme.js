@@ -42,6 +42,7 @@ const sizes = {
   title: 16,
   body: 14,
   caption: 12,
+  small: 10,
 };
 
 const fonts = {
@@ -65,6 +66,9 @@ const fonts = {
   },
   caption: {
     fontSize: sizes.caption,
+  },
+  small: {
+    fontSize: sizes.small,
   },
   fontFamily: 'Open Sans',
 };

@@ -17,11 +17,11 @@ class Header extends Component {
       style,
       theme,
       rightIcon,
-      animated,
+      ...props
     } = this.props;
     const styles = getStyles(theme);
     return (
-      <Block animated={animated} flex={0} style={[styles.header, style]}>
+      <Block flex={0} style={[styles.header, style]} {...props}>
         {leftIcon()}
         <Text
           ellipsizeMode="tail"
@@ -41,7 +41,6 @@ Header.defaultProps = {
   leftIcon: () => {},
   rightIcon: () => {},
   text: '',
-  animated: false,
 };
 
 Header.propTypes = {
@@ -51,7 +50,6 @@ Header.propTypes = {
   style: ViewPropTypes.style,
   theme: PropTypes.shape({}).isRequired,
   rightIcon: PropTypes.func,
-  animated: PropTypes.bool,
 };
 
 export default withTheme(Header);

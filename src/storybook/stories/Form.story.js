@@ -6,9 +6,13 @@ import Form from '../preview/Form';
 import FormikPreview from '../preview/FormikPreview';
 import FormRef from '../preview/FormRef';
 import CenterView from '../../components/CenterView';
+import {form} from '../../static/markdown';
 
 storiesOf('Form', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('with hook', () => <Form />, {notes: 'Use with context and have fun'})
+  .addParameters({
+    notes: {markdown: form},
+  })
+  .add('with hook', () => <Form />)
   .add('with formik', () => <FormikPreview />)
   .add('with refs', () => <FormRef />);

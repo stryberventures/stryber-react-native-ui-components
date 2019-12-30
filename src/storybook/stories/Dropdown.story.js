@@ -3,8 +3,12 @@ import {storiesOf} from '@storybook/react-native';
 
 import Dropdown from '../../components/Dropdown';
 import CenterView from '../../components/CenterView';
+import {dropdown} from '../../static/markdown';
 
 storiesOf('Dropdown', module)
+  .addParameters({
+    notes: {markdown: dropdown},
+  })
   .add('default', () => {
     return (
       <CenterView>

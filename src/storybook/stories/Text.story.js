@@ -5,9 +5,13 @@ import {withKnobs, text, select} from '@storybook/addon-knobs';
 
 import CenterView from '../../components/CenterView';
 import Text from '../../components/Text';
+import {text as textMarkdown} from '../../static/markdown';
 
 storiesOf('Text', module)
   .addDecorator(withKnobs)
+  .addParameters({
+    notes: {markdown: textMarkdown},
+  })
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('all cases', () => {
     const textColorsSelect = select(

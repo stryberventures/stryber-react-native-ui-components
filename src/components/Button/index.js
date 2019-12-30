@@ -13,8 +13,7 @@ class Button extends React.Component {
 
   renderRipple() {
     const {
-      baseColor,
-      rippleColor = baseColor,
+      rippleColor,
       rippleOpacity,
       rippleDuration,
       rippleCentered,
@@ -135,7 +134,7 @@ Button.defaultProps = {
   opacity: 0.8,
   color: 'transparent',
   //Ripple
-  baseColor: 'rgba(0, 0, 0, .38)',
+  rippleColor: 'rgba(0, 0, 0, .38)',
   rippleCentered: false,
   rippleSequential: true,
   rippleInsets: {
@@ -171,7 +170,7 @@ Button.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  baseColor: PropTypes.string,
+  rippleColor: PropTypes.string,
   rippleOpacity: PropTypes.number,
   rippleDuration: PropTypes.number,
   rippleCentered: PropTypes.bool,
@@ -185,7 +184,6 @@ Button.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   ripple: PropTypes.bool,
   onPress: PropTypes.func,
-  rippleColor: PropTypes.string,
   startColor: PropTypes.string,
   endColor: PropTypes.string,
   border: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),

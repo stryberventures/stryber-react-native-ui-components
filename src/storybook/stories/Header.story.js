@@ -5,8 +5,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {storiesOf} from '@storybook/react-native';
 import Header from '../../components/Header';
 import AnimatedHeader from '../../components/AnimatedHeader';
+import {header} from '../../static/markdown/header';
 
 storiesOf('Header', module)
+  .addParameters({
+    notes: {markdown: header},
+  })
   .addDecorator(getStory => <SafeAreaView>{getStory()}</SafeAreaView>)
   .add('default', () => {
     return <Header text="Test" />;

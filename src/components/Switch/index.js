@@ -107,7 +107,6 @@ class Switch extends Component {
                   },
                 ],
               },
-              this.props.buttonStyle,
             ]}>
             <Animated.View style={this.props.buttonContainerStyle} />
           </Animated.View>
@@ -147,10 +146,7 @@ Switch.defaultProps = {
   text: '❤️ Stryber',
   name: 'switch',
   style: {},
-  buttonStyle: {},
   buttonContainerStyle: {},
-  rightContainerStyle: {},
-  leftContainerStyle: {},
   type: 0,
 };
 
@@ -165,10 +161,7 @@ Switch.propTypes = {
   duration: PropTypes.number,
   type: PropTypes.oneOf([0, 1]), // 0 - Normal switch, 1 - Switch with a text
   style: ViewPropTypes.style,
-  buttonStyle: ViewPropTypes.style,
   buttonContainerStyle: ViewPropTypes.style,
-  rightContainerStyle: ViewPropTypes.style,
-  leftContainerStyle: ViewPropTypes.style,
   text: PropTypes.string,
   theme: PropTypes.shape({}).isRequired,
   backgroundColorOff: PropTypes.string,

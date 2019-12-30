@@ -79,7 +79,6 @@ class Checkbox extends Component {
 }
 
 Checkbox.defaultProps = {
-  fontSize: 16,
   value: false,
   text: '❤️ Stryber',
   textColor: '#757575',
@@ -92,7 +91,6 @@ Checkbox.defaultProps = {
 Checkbox.propTypes = {
   text: PropTypes.string,
   textColor: PropTypes.string,
-  fontSize: PropTypes.number,
   value: PropTypes.bool,
   name: PropTypes.string,
   opacity: PropTypes.number,

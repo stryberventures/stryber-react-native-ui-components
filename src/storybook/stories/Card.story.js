@@ -6,10 +6,14 @@ import {withKnobs, color} from '@storybook/addon-knobs';
 
 import {defaultTheme as theme} from '../../constants';
 import {storiesOf} from '@storybook/react-native';
+import {card} from '../../static/markdown';
 
 storiesOf('Card', module)
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .addParameters({
+    notes: {markdown: card},
+  })
   .add('top image', () => (
     <Card shadow>
       <Image

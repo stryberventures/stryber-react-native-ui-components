@@ -213,7 +213,6 @@ class Input extends Component {
   render() {
     const {
       name,
-      type,
       onChange,
       email,
       phone,
@@ -363,7 +362,6 @@ Input.defaultProps = {
   iconBackground: true,
   value: '',
   name: '',
-  type: '',
   email: false,
   phone: false,
   number: false,
@@ -382,7 +380,6 @@ Input.propTypes = {
   iconBackground: PropTypes.bool,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string,
-  type: PropTypes.string,
   onChange: PropTypes.func,
   email: PropTypes.bool,
   phone: PropTypes.bool,
