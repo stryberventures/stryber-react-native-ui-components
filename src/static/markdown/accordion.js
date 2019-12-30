@@ -39,9 +39,6 @@ import {Accordion} from '@stryberventures/stryber-react-native-ui-components';
 | **\`sectionContainerStyle\`**                             | Optional styling for the section container.                                                                    |
 | **\`containerStyle\`**                                    | Optional styling for the Accordion container.                                                                  |
 
-##Demo
-![demo](https://cloud.githubusercontent.com/assets/378279/8047315/0237ca2c-0e44-11e5-9a16-1da052406eb0.gif)
-
 ##Example
 
 \`\`\`js
