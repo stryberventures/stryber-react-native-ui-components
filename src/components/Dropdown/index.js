@@ -205,7 +205,7 @@ class Dropdown extends PureComponent {
     const delay = Math.max(0, rippleDuration - animationDuration);
 
     if (typeof onChange === 'function') {
-      onChange(value, name);
+      onChange(value, name, index);
     }
 
     setTimeout(() => this.onClose(value), delay);
