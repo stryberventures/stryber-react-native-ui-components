@@ -123,7 +123,7 @@ class DatePicker extends Component {
 
   render() {
     const {showModal} = this.state;
-    const {style, theme, label, error} = this.props;
+    const {style, theme, label, error, withLeftBorder} = this.props;
     const {year, month, day} = this.getDateObj();
     const dateSet = day && month && year;
     const dateStr = dateSet ? `${day}-${month}-${year}` : label;
@@ -140,11 +140,12 @@ class DatePicker extends Component {
             )}
             placeholderLabel={dateStr}
             onPress={this.handlePressed}
-            style={{marginVertical: 0}}
+            style={[{marginVertical: 0}, style]}
             placeholderTextColor={
               dateSet && !showModal ? theme.colors.darkGrey : inputColor
             }
             borderColor={inputColor}
+            withLeftBorder={withLeftBorder}
           />
         </View>
       </TouchableWithoutFeedback>
@@ -185,6 +186,7 @@ DatePicker.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   label: PropTypes.string,
   error: PropTypes.string,
+  withLeftBorder: PropTypes.boolean,
 };
 
 export default withTheme(DatePicker);
