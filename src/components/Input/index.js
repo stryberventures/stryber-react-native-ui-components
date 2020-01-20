@@ -231,6 +231,7 @@ class Input extends Component {
       borderColor,
       error,
       iconBackground,
+      maxLength,
       ...props
     } = this.props;
     const {toggleSecure, focused} = this.state;
@@ -306,6 +307,7 @@ class Input extends Component {
                 <TextInput
                   secureTextEntry={isSecure}
                   autoComplete="off"
+                  maxLength={maxLength}
                   autoCapitalize="none"
                   autoCorrect={false}
                   style={styles.textInput}
@@ -403,6 +405,7 @@ Input.propTypes = {
   rightStyle: ViewPropTypes.style,
   onRightPress: PropTypes.func,
   mask: PropTypes.string,
+  maxLength: PropTypes.number,
 };
 
 export default withTheme(Input);
