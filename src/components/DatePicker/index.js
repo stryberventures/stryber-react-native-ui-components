@@ -7,7 +7,7 @@ import {
   ViewPropTypes,
   Button,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {Calendar} from '../Icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import PropTypes from 'prop-types';
 
@@ -136,7 +136,7 @@ class DatePicker extends Component {
           <Input
             error={error}
             rightLabel={() => (
-              <Icon name="calendar" size={20} color={inputColor} />
+              <Calendar name="calendar" size={20} fill={inputColor} />
             )}
             placeholderLabel={dateStr}
             onPress={this.handlePressed}
@@ -186,7 +186,7 @@ DatePicker.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   label: PropTypes.string,
   error: PropTypes.string,
-  withLeftBorder: PropTypes.boolean,
+  withLeftBorder: PropTypes.bool,
 };
 
 export default withTheme(DatePicker);
