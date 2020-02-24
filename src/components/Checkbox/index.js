@@ -68,7 +68,11 @@ class Checkbox extends Component {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={opacity}
-        onPress={this.spring.bind(this, Easing.bounce)}>
+        onPress={
+          this.props.shouldCheckboxChange
+            ? this.spring.bind(this, Easing.bounce)
+            : null
+        }>
         {this.renderCheckIcon()}
         <Block style={styles.textContainer}>
           <Text style={styles.textStyle}>{text}</Text>
@@ -86,6 +90,7 @@ Checkbox.defaultProps = {
   onPress: () => {},
   opacity: 0.8,
   radio: false,
+  shouldCheckboxChange: true,
 };
 
 Checkbox.propTypes = {
@@ -98,6 +103,7 @@ Checkbox.propTypes = {
   onPress: PropTypes.func,
   radio: PropTypes.bool,
   iconComponent: PropTypes.node,
+  shouldCheckboxChange: PropTypes.bool,
 };
 
 export default withTheme(Checkbox);
