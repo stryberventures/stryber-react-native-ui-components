@@ -1,7 +1,8 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "./src/components/index.js",
+  "homepage": "https://matterhorn.stryber.com/native/components",
   "keywords": [
     "react-native",
     "reactjs",
