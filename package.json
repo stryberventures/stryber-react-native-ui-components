@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "./src/components/index.js",
   "keywords": [
     "react-native",
@@ -12,9 +12,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/stryberventures/stryber-react-native-ui-components"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
     "start": "npx react-native start",
