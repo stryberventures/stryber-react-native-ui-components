@@ -3,7 +3,7 @@ import { Image } from "react-native";
 import { Card, Block, Text, Button } from "../../components";
 import CenterView from "../../components/CenterView";
 import { withKnobs, color } from "@storybook/addon-knobs";
-import { defaultTheme as theme } from "../../constants";
+import { defaultTheme as theme } from "../../components/other/constants";
 import { storiesOf } from "@storybook/react-native";
 import { card } from "../../static/markdown";
 storiesOf("Card", module)

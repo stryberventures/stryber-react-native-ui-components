@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {merge, cloneDeep} from 'lodash-es';
-import {storage} from '../../core';
-import {THEME_KEY, defaultTheme} from '../../constants';
+import {storage} from '../other/core';
+import {THEME_KEY, defaultTheme} from '../other/constants';
 export const ThemeContext = React.createContext();
 type ThemeContextProviderProps = {
   themes?: any[];

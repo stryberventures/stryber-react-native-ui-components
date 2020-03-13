@@ -4,9 +4,8 @@ import {
   TouchableOpacity,
   Platform,
   View,
-  ViewPropTypes,
 } from 'react-native';
-import {tabView} from '../../constants';
+import {tabView} from '../other/constants';
 import withTheme from '../withTheme';
 const {LOLLIPOP} = tabView;
 interface ITouchableItemProps extends React.HTMLAttributes<Element> {

@@ -1,7 +1,7 @@
 import React, {useContext, forwardRef} from 'react';
-import {storage} from '../../core';
+import {storage} from '../other/core';
 import {ThemeContext} from '../ThemeContextProvider';
-import {THEME_KEY, defaultTheme} from '../../constants';
+import {THEME_KEY, defaultTheme} from '../other/constants';
 function withTheme(Component) {
   return forwardRef((props, ref) => {
     const {

@@ -2,7 +2,7 @@ import * as React from "react";
 import { storiesOf } from "@storybook/react-native";
 import { action } from "@storybook/addon-actions";
 import { withKnobs, color, text, object, select } from "@storybook/addon-knobs";
-import { defaultTheme } from "../../constants";
+import { defaultTheme } from "../../components/other/constants";
 import { Button, Block, Text } from "../../components";
 import CenterView from "../../components/CenterView";
 import { button } from "../../static/markdown";

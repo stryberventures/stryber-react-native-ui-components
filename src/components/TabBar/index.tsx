@@ -2,15 +2,13 @@ import * as React from 'react';
 import {
   StyleSheet,
   View,
-  ViewPropTypes,
-  Text,
   I18nManager,
   Platform,
 } from 'react-native';
 import Animated from 'react-native-reanimated';
 import Tab from '../Tab';
 import TabBarIndicator from './TabBarIndicator';
-import {memoize} from '../../utils';
+import {memoize} from '../other/utils';
 import styles from './styles';
 interface ITabBarProps extends React.HTMLAttributes<Element> {
   position?: {};

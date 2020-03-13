@@ -2,7 +2,7 @@ import * as React from "react";
 import { addDecorator, addParameters } from "@storybook/react-native";
 import { withBackgrounds } from "@storybook/addon-ondevice-backgrounds";
 import ThemeContextProvider from "../../components/ThemeContextProvider";
-import { themes } from "../../constants/allThemes";
+import { themes } from "../../components/other/constants/allThemes";
 addDecorator(withBackgrounds);
 addDecorator(getStory => (
   <ThemeContextProvider themes={themes}>{getStory()}</ThemeContextProvider>
