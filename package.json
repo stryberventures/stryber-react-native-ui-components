@@ -1,10 +1,10 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "lib/commonjs/index.js",
   "react-native": "lib/module/index.js",
   "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
+  "types": "lib/typescript/src/components/index.d.ts",
   "homepage": "https://matterhorn.stryber.com/native/components",
   "keywords": [
     "react-native",

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, Animated, TouchableOpacity} from 'react-native';
 import getStyles from './styles';
 import withTheme from '../withTheme';
-import {handleMargin, handlePadding} from '../../utils';
+import {handleMargin, handlePadding} from '../other/utils';
 interface IBlockProps extends React.HTMLAttributes<Element> {
   flex?: 1 | 0;
   row?: boolean;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {I18nManager} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import withTheme from '../withTheme';
-import {memoize} from '../../utils';
+import {memoize} from '../other/utils';
 import styles from './styles';
 const {interpolate, multiply, Extrapolate} = Animated;
 interface ITabBarIndicatorProps extends React.HTMLAttributes<Element> {

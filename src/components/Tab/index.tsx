@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import TouchableItem from './TouchableItem';
 import Animated from 'react-native-reanimated';
 import withTheme from '../withTheme';
-import {memoize} from '../../utils';
+import {memoize} from '../other/utils';
 import styles from './styles';
 interface ITabProps extends React.HTMLAttributes<Element> {
   route: {};

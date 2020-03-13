@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src/components/",
     "paths": {
       "@stryberventures/stryber-react-native-ui-components": ["./src/components/index"]
     },
