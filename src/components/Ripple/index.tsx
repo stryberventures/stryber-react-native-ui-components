@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {View, Animated, Easing, TouchableWithoutFeedback} from 'react-native';
 import {styles, radius} from './styles';
-interface IRippleProps extends React.HTMLAttributes<Element> {
+interface IRippleProps {
   rippleColor?: string;
   rippleOpacity?: number;
   rippleDuration?: number;

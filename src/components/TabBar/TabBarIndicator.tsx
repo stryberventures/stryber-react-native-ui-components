@@ -5,14 +5,14 @@ import withTheme from '../withTheme';
 import {memoize} from '../other/utils';
 import styles from './styles';
 const {interpolate, multiply, Extrapolate} = Animated;
-interface ITabBarIndicatorProps extends React.HTMLAttributes<Element> {
+interface ITabBarIndicatorProps {
   position?: {};
   navigationState: {};
   getTabWidth?: (...args: any[]) => any;
   width?: string;
   style?: any;
   layout?: {};
-  theme: {};
+  theme?: any;
 }
 class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
   componentDidMount() {

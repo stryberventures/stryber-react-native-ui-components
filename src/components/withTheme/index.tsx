@@ -1,30 +1,43 @@
-import React, {useContext, forwardRef} from 'react';
+import React, {useContext, forwardRef, ComponentClass} from 'react';
 import {storage} from '../other/core';
 import {ThemeContext} from '../ThemeContextProvider';
 import {THEME_KEY, defaultTheme} from '../other/constants';
-function withTheme(Component) {
-  return forwardRef((props, ref) => {
-    const {
-      themes = [defaultTheme],
-      themeID = 'Default',
-      setThemeID = () => {},
-    } = useContext(ThemeContext) || {};
-    /* eslint-disable no-shadow */
-    const getTheme = themeID => themes.find(theme => theme.key === themeID);
-    const setTheme = themeID => {
-      storage.saveString(THEME_KEY, themeID);
-      setThemeID(themeID);
-    };
-    /* eslint-enable no-shadow */
-    return (
-      <Component
-        {...props}
-        themes={themes}
-        theme={getTheme(themeID)}
-        setTheme={setTheme}
-        ref={ref}
-      />
-    );
-  });
-}
+const withTheme = <ComposedComponentProps extends {}>(
+  Component: ComponentClass<ComposedComponentProps>,
+) => {
+  type ComposedComponentInstance = InstanceType<typeof Component>;
+
+  type WrapperComponentProps = ComposedComponentProps & {
+    themes?: any[];
+    theme?: any;
+    setTheme?: Function;
+  };
+
+  return forwardRef<ComposedComponentInstance, WrapperComponentProps>(
+    (props, ref) => {
+      const {
+        themes = [defaultTheme],
+        themeID = 'Default',
+        setThemeID = () => {},
+      } = useContext(ThemeContext) || {};
+      /* eslint-disable no-shadow */
+      const getTheme = (themeID: string) =>
+        themes.find(theme => theme.key === themeID);
+      const setTheme = (themeID: string) => {
+        storage.saveString(THEME_KEY, themeID);
+        setThemeID(themeID);
+      };
+      /* eslint-enable no-shadow */
+      return (
+        <Component
+          {...props}
+          themes={themes}
+          theme={getTheme(themeID)}
+          setTheme={setTheme}
+          ref={ref}
+        />
+      );
+    },
+  );
+};
 export default withTheme;

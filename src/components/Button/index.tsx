@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {TouchableOpacity, View, ViewPropTypes} from 'react-native';
+import {TouchableOpacity, View, ViewProps} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import getStyles from './styles';
 import withTheme from '../withTheme';
 import Ripple from '../Ripple';
 import Block from '../Block';
-interface IButtonProps extends React.HTMLAttributes<Element> {
+interface IButtonProps extends ViewProps {
   style?: any;
   opacity?: number;
   gradient?: boolean;
@@ -31,7 +31,7 @@ interface IButtonProps extends React.HTMLAttributes<Element> {
     bottom?: number;
     left?: number;
   };
-  theme: {};
+  theme?: any;
   ripple?: boolean;
   onPress?: (...args: any[]) => any;
   startColor?: string;

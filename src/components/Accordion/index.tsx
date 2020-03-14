@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, TouchableHighlight} from 'react-native';
 import Collapse from '../Collapse';
-interface IAccordionProps extends React.HTMLAttributes<Element> {
+interface IAccordionProps {
   sections: any[];
   renderHeader: (...args: any[]) => any;
   renderContent: (...args: any[]) => any;

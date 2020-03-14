@@ -47,7 +47,7 @@ const {
   sub,
   timing,
 } = Animated;
-interface IPagerProps extends React.HTMLAttributes<Element> {
+interface IPagerProps {
   layout?: {
     width?: number;
   };

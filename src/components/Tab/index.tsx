@@ -5,7 +5,7 @@ import Animated from 'react-native-reanimated';
 import withTheme from '../withTheme';
 import {memoize} from '../other/utils';
 import styles from './styles';
-interface ITabProps extends React.HTMLAttributes<Element> {
+interface ITabProps {
   route: {};
   position: {};
   navigationState: {};
@@ -16,7 +16,7 @@ interface ITabProps extends React.HTMLAttributes<Element> {
   getTestID?: (...args: any[]) => any;
   getAccessibilityLabel?: (...args: any[]) => any;
   getAccessible?: (...args: any[]) => any;
-  theme: {};
+  theme?: any;
   activeColor?: string;
   inactiveColor?: string;
   pressColor?: string;

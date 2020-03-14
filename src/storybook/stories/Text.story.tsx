@@ -1,78 +1,78 @@
-import * as React from "react";
-import { storiesOf } from "@storybook/react-native";
-import { withKnobs, text, select } from "@storybook/addon-knobs";
-import CenterView from "../../components/CenterView";
-import Text from "../../components/Text";
-import { text as textMarkdown } from "../../static/markdown";
-storiesOf("Text", module)
+import * as React from 'react';
+import {storiesOf} from '@storybook/react-native';
+import {withKnobs, text, select} from '@storybook/addon-knobs';
+import CenterView from '../../components/CenterView';
+import Text from '../../components/Text';
+import {text as textMarkdown} from '../../static/markdown';
+storiesOf('Text', module)
   .addDecorator(withKnobs)
   .addParameters({
-    notes: { markdown: textMarkdown }
+    notes: {markdown: textMarkdown},
   })
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add("all cases", () => {
+  .add('all cases', () => {
     const textColorsSelect = select(
-      "Colors",
+      'Colors',
       {
-        accent: "accent",
-        primary: "primary",
-        secondary: "secondary",
-        tertiary: "tertiary",
-        black: "black",
-        white: "white",
-        gray: "gray",
-        gray2: "gray2"
+        accent: 'accent',
+        primary: 'primary',
+        secondary: 'secondary',
+        tertiary: 'tertiary',
+        black: 'black',
+        white: 'white',
+        gray: 'gray',
+        gray2: 'gray2',
       },
-      "black",
-      "For text"
+      'black',
+      'For text',
     );
     const textBoldSelect = select(
-      "Bold",
+      'Bold',
       {
-        regular: "regular",
-        bold: "bold",
-        semibold: "semibold",
-        medium: "medium",
-        light: "light"
+        regular: 'regular',
+        bold: 'bold',
+        semibold: 'semibold',
+        medium: 'medium',
+        light: 'light',
       },
-      "regular",
-      "For text"
+      'regular',
+      'For text',
     );
     const textAlignSelect = select(
-      "Align",
+      'Align',
       {
-        center: "center",
-        right: "right",
-        left: "left"
+        center: 'center',
+        right: 'right',
+        left: 'left',
       },
-      "center",
-      "For text"
+      'center',
+      'For text',
     );
     const textFontSizeSelect = select(
-      "Font Size",
+      'Font Size',
       {
-        h1: "h1",
-        h2: "h2",
-        h3: "h3",
-        title: "title",
-        body: "body",
-        caption: "caption",
-        small: "small"
+        h1: 'h1',
+        h2: 'h2',
+        h3: 'h3',
+        title: 'title',
+        body: 'body',
+        caption: 'caption',
+        small: 'small',
       },
-      "body",
-      "For text"
+      'body',
+      'For text',
     );
-    const innerText = text("Text", "Lorem ipsum", "For text");
+    const innerText = text('Text', 'Lorem ipsum', 'For text');
     return (
       <Text
         center
+        bold
         {...{
           [textColorsSelect]: true,
           [textBoldSelect]: true,
           [textAlignSelect]: true,
-          [textFontSizeSelect]: true
-        }}
-      >
+          [textFontSizeSelect]: true,
+        }}>
         {innerText}
       </Text>
     );

@@ -26,7 +26,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   modalBtnContainer?: any;
   style?: any;
   value?: any;
-  theme: {};
+  theme?: any;
   label?: string;
   error?: string;
   withLeftBorder?: boolean;

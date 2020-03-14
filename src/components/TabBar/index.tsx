@@ -10,7 +10,7 @@ import Tab from '../Tab';
 import TabBarIndicator from './TabBarIndicator';
 import {memoize} from '../other/utils';
 import styles from './styles';
-interface ITabBarProps extends React.HTMLAttributes<Element> {
+interface ITabBarProps {
   position?: {};
   navigationState?: {
     routes?: any[];

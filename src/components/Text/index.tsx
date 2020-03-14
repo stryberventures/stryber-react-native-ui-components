@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Text} from 'react-native';
+import {Text, TextProps} from 'react-native';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ITypographyProps extends React.HTMLAttributes<Element> {
+
+interface ITypographyProps extends TextProps {
   h1?: boolean;
   h2?: boolean;
   h3?: boolean;
@@ -34,8 +35,9 @@ interface ITypographyProps extends React.HTMLAttributes<Element> {
   gray?: boolean;
   gray2?: boolean;
   style?: any;
-  theme: {};
+  theme?: any;
   props?: any;
+  children: any;
 }
 class Typography extends Component<ITypographyProps, {}> {
   static defaultProps: any;
@@ -76,7 +78,7 @@ class Typography extends Component<ITypographyProps, {}> {
       theme,
       ...props
     } = this.props;
-    const styles = getStyles(theme);
+    const styles: any = getStyles(theme);
     const textStyles = [
       styles.text,
       h1 && styles.h1,

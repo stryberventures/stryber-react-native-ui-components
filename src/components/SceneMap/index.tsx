@@ -1,5 +1,5 @@
 import * as React from 'react';
-interface ISceneComponentProps extends React.HTMLAttributes<Element> {
+interface ISceneComponentProps {
   component: (...args: any[]) => any;
   rest?: any;
 }

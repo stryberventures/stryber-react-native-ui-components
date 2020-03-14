@@ -5,16 +5,16 @@ import Text from '../Text';
 import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ICheckboxProps extends React.HTMLAttributes<Element> {
+interface ICheckboxProps {
   text?: string;
   textColor?: string;
   value?: boolean;
   name?: string;
   opacity?: number;
-  theme: {};
+  theme?: any;
   onPress?: (...args: any[]) => any;
   radio?: boolean;
-  iconComponent?: React.ReactNode;
+  iconComponent?: any;
   shouldCheckboxChange?: boolean;
 }
 type CheckboxState = {

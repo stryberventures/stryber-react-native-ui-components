@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Animated, TouchableOpacity, ViewPropTypes} from 'react-native';
+import {Animated, TouchableOpacity} from 'react-native';
 import withTheme from '../withTheme';
 import styles from './styles';
 import Text from '../Text';
-interface ISwitchProps extends React.HTMLAttributes<Element> {
+
+interface ISwitchProps {
   name?: string;
   value?: boolean;
   onPress?: (...args: any[]) => any;
@@ -16,7 +17,7 @@ interface ISwitchProps extends React.HTMLAttributes<Element> {
   style?: any;
   buttonContainerStyle?: any;
   text?: string;
-  theme: {};
+  theme?: any;
   backgroundColorOff?: string;
   backgroundColorOn?: string;
   padding?: any;
@@ -31,7 +32,7 @@ type SwitchState = {
 };
 class Switch extends Component<ISwitchProps, SwitchState> {
   static defaultProps: any;
-  constructor(props) {
+  constructor(props: ISwitchProps) {
     super(props);
     const endPos =
       this.props.containerStyle.width -

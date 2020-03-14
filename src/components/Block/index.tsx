@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {View, Animated, TouchableOpacity} from 'react-native';
+import {View, Animated, TouchableOpacity, ViewProps} from 'react-native';
 import getStyles from './styles';
 import withTheme from '../withTheme';
 import {handleMargin, handlePadding} from '../other/utils';
-interface IBlockProps extends React.HTMLAttributes<Element> {
+
+export interface IBlockProps extends ViewProps {
   flex?: 1 | 0;
   row?: boolean;
   column?: boolean;
@@ -22,7 +23,7 @@ interface IBlockProps extends React.HTMLAttributes<Element> {
   animated?: boolean;
   wrap?: boolean;
   style?: any;
-  theme: {};
+  theme?: any;
   onPress?: (...args: any[]) => any;
   Component?: any;
   props?: any;

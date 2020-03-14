@@ -4,14 +4,15 @@ import {
   TouchableOpacity,
   Platform,
   View,
+  TouchableNativeFeedbackProps,
 } from 'react-native';
 import {tabView} from '../other/constants';
 import withTheme from '../withTheme';
 const {LOLLIPOP} = tabView;
-interface ITouchableItemProps extends React.HTMLAttributes<Element> {
+interface ITouchableItemProps extends TouchableNativeFeedbackProps {
   style?: any;
   pressOpacity?: number;
-  theme: {};
+  theme?: any;
   pressColor?: string;
   borderless?: boolean;
   rest?: any;

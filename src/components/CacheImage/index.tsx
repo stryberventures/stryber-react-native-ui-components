@@ -2,13 +2,13 @@ import * as React from 'react';
 import {Image, Platform} from 'react-native';
 import shorthash from 'shorthash';
 import RNFetchBlob from 'rn-fetch-blob';
-interface ICacheImageProps extends React.HTMLAttributes<Element> {
-  source?: {
+interface ICacheImageProps {
+  source: {
     uri: string;
   };
 }
 type CacheImageState = {
-  source?: {uri: string};
+  source?: {uri: string} | null;
 };
 export default class CacheImage extends React.Component<
   ICacheImageProps,

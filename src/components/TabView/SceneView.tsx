@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {View, StyleSheet, ViewPropTypes} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import styles from './styles';
-interface ISceneViewProps extends React.HTMLAttributes<Element> {
+interface ISceneViewProps {
   navigationState?: {
     index?: number;
   };

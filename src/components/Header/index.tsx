@@ -9,7 +9,7 @@ interface IHeaderProps extends React.HTMLAttributes<Element> {
   text?: string;
   textStyle?: any;
   style?: any;
-  theme: {};
+  theme?: any;
   rightIcon?: (...args: any[]) => any;
   props?: any;
 }

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {ViewPropTypes, Text as Typography} from 'react-native';
 import Text from '../Text';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import Block from '../Block';
-interface IBadgeProps extends React.HTMLAttributes<Element> {
-  theme: {};
+import Block, {IBlockProps} from '../Block';
+interface IBadgeProps extends IBlockProps {
+  theme?: any;
   value?: string | number;
   textStyle?: any;
   style?: any;

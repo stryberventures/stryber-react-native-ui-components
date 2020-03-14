@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import {ImageBackground, View, ViewPropTypes} from 'react-native';
+import {ImageBackground, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Block from '../Block';
+import Block, {IBlockProps} from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ICardProps extends React.HTMLAttributes<Element> {
+interface ICardProps extends IBlockProps {
   card?: boolean;
   shadow?: boolean;
   gradientStyle?: any;
   gradientColors?: any[];
   resizeMode?: string;
   backgroundImage?: {} | number;
-  theme: {};
+  theme?: any;
   style?: any;
   props?: any;
 }

@@ -3,8 +3,8 @@ import {View} from 'react-native';
 import Input from '../Input';
 import withTheme from '../withTheme';
 import {Search} from '../Icons';
-interface ISearchFieldProps extends React.HTMLAttributes<Element> {
-  theme: {};
+interface ISearchFieldProps {
+  theme?: any;
   props?: any;
 }
 type SearchFieldState = {

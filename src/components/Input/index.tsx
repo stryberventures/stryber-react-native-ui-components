@@ -11,7 +11,7 @@ import Block from '../Block';
 import Button from '../Button';
 import getStyles from './styles';
 import {Eye, EyeDisabled} from '../Icons';
-interface IInputProps extends React.HTMLAttributes<Element> {
+interface IInputProps {
   iconBackground?: boolean;
   value?: string | number;
   name?: string;
@@ -21,7 +21,7 @@ interface IInputProps extends React.HTMLAttributes<Element> {
   number?: boolean;
   secure?: boolean;
   style?: any;
-  theme: {
+  theme?: {
     sizes?: {
       font?: number;
     };

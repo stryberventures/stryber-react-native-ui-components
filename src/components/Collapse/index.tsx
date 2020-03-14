@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Animated, Easing, ViewPropTypes} from 'react-native';
-interface ICollapseProps extends React.HTMLAttributes<Element> {
+import {Animated, Easing, ViewProps} from 'react-native';
+
+interface ICollapseProps extends ViewProps {
   align?: 'top' | 'center' | 'bottom';
   collapsed?: boolean;
   collapsedHeight?: number;

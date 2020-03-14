@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {View, ViewPropTypes} from 'react-native';
+import {View} from 'react-native';
 import Animated from 'react-native-reanimated';
 import TabBar from '../TabBar';
 import SceneView from './SceneView';
 import Pager from './Pager';
 import styles from './styles';
-interface ITabViewProps extends React.HTMLAttributes<Element> {
+interface ITabViewProps {
   position?: {};
   onSwipeStart?: (...args: any[]) => any;
   onSwipeEnd?: (...args: any[]) => any;
