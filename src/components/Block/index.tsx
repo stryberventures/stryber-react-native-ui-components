@@ -27,6 +27,7 @@ export interface IBlockProps extends ViewProps {
   onPress?: (...args: any[]) => any;
   Component?: any;
   props?: any;
+  children?: any;
 }
 class Block extends React.Component<IBlockProps, {}> {
   static defaultProps: any;

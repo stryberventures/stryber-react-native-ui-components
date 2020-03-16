@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground, View} from 'react-native';
+import {ImageBackground} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Block, {IBlockProps} from '../Block';
 import withTheme from '../withTheme';
@@ -8,9 +8,9 @@ interface ICardProps extends IBlockProps {
   card?: boolean;
   shadow?: boolean;
   gradientStyle?: any;
-  gradientColors?: any[];
-  resizeMode?: string;
-  backgroundImage?: {} | number;
+  gradientColors?: string[];
+  resizeMode?: 'center' | 'cover' | 'contain' | 'stretch' | 'repeat';
+  backgroundImage?: any;
   theme?: any;
   style?: any;
   props?: any;
@@ -32,7 +32,7 @@ class Card extends Component<ICardProps, {}> {
         resizeMode={resizeMode}
         style={{minHeight: theme.sizes.cardWithImgBgMinHeight}}
         source={backgroundImage}>
-        <LinearGradient style={gradientStyles} colors={gradientColors}>
+        <LinearGradient style={gradientStyles} colors={gradientColors!}>
           {children}
         </LinearGradient>
       </ImageBackground>
@@ -58,11 +58,9 @@ class Card extends Component<ICardProps, {}> {
       style,
     ];
     return (
-      <View style={shadow && styles.shadow}>
-        <Block style={cardStyles} {...props}>
-          {backgroundImage ? this.renderBgImageCard() : children}
-        </Block>
-      </View>
+      <Block shadow={!!styles.shadow} style={cardStyles} {...props}>
+        {backgroundImage ? this.renderBgImageCard() : children}
+      </Block>
     );
   }
 }
