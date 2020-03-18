@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ImageBackground} from 'react-native';
+import {ImageBackground, Platform} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Block, {IBlockProps} from '../Block';
 import withTheme from '../withTheme';
@@ -59,7 +59,7 @@ class Card extends Component<ICardProps, {}> {
       shadow && {backgroundColor: '#fff'},
       style,
     ];
-    return (
+    return Platform.OS === 'ios' ? (
       <Block
         flex={0}
         style={{borderRadius: theme.sizes.radius, ...containerStyles}}
@@ -67,6 +67,10 @@ class Card extends Component<ICardProps, {}> {
         <Block style={cardStyles} {...props}>
           {backgroundImage ? this.renderBgImageCard() : children}
         </Block>
+      </Block>
+    ) : (
+      <Block shadow={!!styles.shadow} style={cardStyles} {...props}>
+        {backgroundImage ? this.renderBgImageCard() : children}
       </Block>
     );
   }
