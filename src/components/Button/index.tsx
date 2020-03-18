@@ -39,6 +39,7 @@ interface IButtonProps extends ViewProps {
   border?: boolean | string;
   Component?: any;
   props?: any;
+  children: any;
 }
 class Button extends React.Component<IButtonProps, {}> {
   static defaultProps: any;

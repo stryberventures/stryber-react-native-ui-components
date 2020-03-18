@@ -14,6 +14,7 @@ interface ICardProps extends IBlockProps {
   theme?: any;
   style?: any;
   props?: any;
+  containerStyles?: any;
 }
 class Card extends Component<ICardProps, {}> {
   static defaultProps: any;
@@ -45,6 +46,7 @@ class Card extends Component<ICardProps, {}> {
       children,
       shadow,
       style,
+      containerStyles,
       ...props
     } = this.props;
     const styles = getStyles(theme);
@@ -58,8 +60,13 @@ class Card extends Component<ICardProps, {}> {
       style,
     ];
     return (
-      <Block shadow={!!styles.shadow} style={cardStyles} {...props}>
-        {backgroundImage ? this.renderBgImageCard() : children}
+      <Block
+        flex={0}
+        style={{borderRadius: theme.sizes.radius, ...containerStyles}}
+        shadow={!!styles.shadow}>
+        <Block style={cardStyles} {...props}>
+          {backgroundImage ? this.renderBgImageCard() : children}
+        </Block>
       </Block>
     );
   }
