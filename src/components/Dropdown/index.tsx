@@ -95,7 +95,14 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   mounted: any;
   ripple: any;
   scroll: any;
-  constructor(props) {
+
+  static getDerivedStateFromProps(nextProps: IDropdownProps) {
+    return {
+      value: nextProps.value,
+    };
+  }
+
+  constructor(props: IDropdownProps) {
     super(props);
     this.ripple = React.createRef();
     this.container = React.createRef();

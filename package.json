@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "lib/commonjs/index.js",
   "react-native": "lib/module/index.js",
   "module": "lib/module/index.js",
