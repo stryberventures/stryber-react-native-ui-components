@@ -31,6 +31,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   error?: string;
   withLeftBorder?: boolean;
   props?: any;
+  saveDateOnCancel?: boolean;
 }
 type DatePickerState = {
   date?: any;
@@ -66,10 +67,12 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
     );
   };
   handleDateChange = (e, date) => {
+    const {saveDateOnCancel} = this.props;
     this.setState(
       prevState => ({
-        date,
-        startDate: date,
+        date: !date && saveDateOnCancel && isAndroid ? prevState.date : date,
+        startDate:
+          !date && saveDateOnCancel && isAndroid ? prevState.date : date,
         showModal: isAndroid ? false : prevState.showModal,
       }),
       () => {

@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View } from "react-native";
-import { customHooks } from "../../../components/other/core";
+import * as React from 'react';
+import {View} from 'react-native';
+import {customHooks} from '../../../components/other/core';
 import {
   Button,
   Text,
@@ -8,37 +8,37 @@ import {
   Switch,
   DatePicker,
   Dropdown,
-  Input
-} from "../../../components";
+  Input,
+} from '../../../components';
 const Form = () => {
   const [values, handleChange] = customHooks.useForm({
-    email: "some@Mail",
-    password: "123123",
+    email: 'some@Mail',
+    password: '123123',
     checkbox1: true,
     switch1: true,
     date: new Date(),
-    picker: "Pear"
+    picker: 'Pear',
   });
   const passwordRef = React.createRef();
   const dropdownData = [
     {
-      value: "Banana"
+      value: 'Banana',
     },
     {
-      value: "Mango"
+      value: 'Mango',
     },
     {
-      value: "Pear"
+      value: 'Pear',
     },
     {
-      value: "Cocoa"
+      value: 'Cocoa',
     },
     {
-      value: "Strawberry"
+      value: 'Strawberry',
     },
     {
-      value: "Apple"
-    }
+      value: 'Apple',
+    },
   ];
   // eslint-disable-next-line no-console
   const showValues = () => console.log(values);
@@ -79,6 +79,7 @@ const Form = () => {
         label="Choose date"
         value={values.date}
         onChange={handleChange}
+        saveDateOnCancel
       />
       <Dropdown
         name="picker"
