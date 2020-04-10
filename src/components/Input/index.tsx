@@ -293,7 +293,8 @@ class Input extends Component<IInputProps, InputState> {
           flex={0}
           style={styles.container}
           margin={[theme!.sizes!.base!, 0]}>
-          // @ts-ignore
+          {/*
+  // @ts-ignore */}
           <TouchableWithoutFeedback onPress={() => ref.current.focus()}>
             <Block flex={0} style={inputStyles}>
               {!icon!() && withLeftBorder && (
