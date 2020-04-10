@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Image, Platform} from 'react-native';
+// @ts-ignore
 import shorthash from 'shorthash';
 import RNFetchBlob from 'rn-fetch-blob';
 interface ICacheImageProps {
@@ -41,6 +42,7 @@ export default class CacheImage extends React.Component<
     });
   };
   render() {
+    // @ts-ignore
     return <Image {...this.props} source={this.state.source} />;
   }
 }

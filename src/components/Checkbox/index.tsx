@@ -23,7 +23,7 @@ type CheckboxState = {
 };
 class Checkbox extends Component<ICheckboxProps, CheckboxState> {
   static defaultProps: any;
-  constructor(props) {
+  constructor(props: ICheckboxProps) {
     super(props);
     this.state = {
       checked: this.props.value || false,
@@ -36,7 +36,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     this.setState(
       prevState => ({checked: !prevState.checked}),
       () => {
-        onPress(this.state.checked, name);
+        onPress!(this.state.checked, name);
       },
     );
   };
@@ -73,6 +73,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={opacity}
+        // @ts-ignore
         onPress={
           this.props.shouldCheckboxChange
             ? this.spring.bind(this, Easing.bounce)

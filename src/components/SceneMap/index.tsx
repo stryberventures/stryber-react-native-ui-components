@@ -9,13 +9,14 @@ class SceneComponent extends React.PureComponent<ISceneComponentProps, {}> {
     return React.createElement(component, rest);
   }
 }
-export default function SceneMap(scenes) {
+export default function SceneMap(scenes: any) {
   // eslint-disable-next-line react/prop-types
-  return ({route, jumpTo, position}) => {
+  return ({route, jumpTo, position}: any) => {
     return (
       <SceneComponent
         key={route.key}
         component={scenes[route.key]}
+        // @ts-ignore
         route={route}
         jumpTo={jumpTo}
         position={position}

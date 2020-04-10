@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Text as Typography, ViewPropTypes} from 'react-native';
 import withTheme from '../withTheme';
 import Block from '../Block';
 import Text from '../Text';
@@ -27,15 +26,16 @@ class Header extends Component<IHeaderProps, {}> {
     } = this.props;
     const styles = getStyles(theme);
     return (
+      // @ts-ignore
       <Block flex={0} style={[styles.header, style]} {...props}>
-        {leftIcon()}
+        {leftIcon!()}
         <Text
           ellipsizeMode="tail"
           numberOfLines={1}
           style={[styles.headerText, textStyle]}>
           {text}
         </Text>
-        {rightIcon()}
+        {rightIcon!()}
       </Block>
     );
   }

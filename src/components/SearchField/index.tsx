@@ -15,8 +15,9 @@ class SearchField extends Component<ISearchFieldProps, SearchFieldState> {
   state = {
     value: '',
   };
-  onRequestChange = value => this.setState({value});
+  onRequestChange = (value: any) => this.setState({value});
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {theme, ...props} = this.props;
     return (
       <View>

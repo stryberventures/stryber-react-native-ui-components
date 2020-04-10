@@ -14,7 +14,7 @@ const Search: React.SFC<SearchProps> = props => {
   return (
     <Svg
       viewBox="0 0 20 20"
-      fill={props.theme.colors.gray2}
+      fill={props.theme.colors!.gray2}
       width={props.width}
       height={props.height}
       {...props}>
@@ -28,4 +28,5 @@ Search.defaultProps = {
   width: 20,
   height: 20,
 };
+// @ts-ignore
 export default withTheme(Search);

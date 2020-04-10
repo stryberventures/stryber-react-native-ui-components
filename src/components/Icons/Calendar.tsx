@@ -37,4 +37,5 @@ const Calendar: React.SFC<CalendarProps> = props => (
 Calendar.defaultProps = {
   size: 20,
 };
+// @ts-ignore
 export default withTheme(Calendar);

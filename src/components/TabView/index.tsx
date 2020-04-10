@@ -6,12 +6,10 @@ import SceneView from './SceneView';
 import Pager from './Pager';
 import styles from './styles';
 interface ITabViewProps {
-  position?: {};
+  position?: any;
   onSwipeStart?: (...args: any[]) => any;
   onSwipeEnd?: (...args: any[]) => any;
-  navigationState: {
-    index?: number;
-  };
+  navigationState: any;
   lazy?: boolean;
   lazyPreloadDistance?: number;
   removeClippedSubviews?: boolean;
@@ -48,10 +46,10 @@ export default class TabView extends React.Component<
   };
   jumpToIndex = (index: number) => {
     if (index !== this.props.navigationState.index) {
-      this.props.onIndexChange(index);
+      this!.props!.onIndexChange!(index);
     }
   };
-  handleLayout = e => {
+  handleLayout = (e: any) => {
     const {height, width} = e.nativeEvent.layout;
     if (
       this.state.layout.width === width &&
@@ -93,7 +91,7 @@ export default class TabView extends React.Component<
     const {layout} = this.state;
     return (
       <View onLayout={this.handleLayout} style={[styles.pager, style]}>
-        {renderPager({
+        {renderPager!({
           navigationState,
           layout,
           keyboardDismissMode,
@@ -113,7 +111,7 @@ export default class TabView extends React.Component<
             addListener,
             removeListener,
             jumpTo,
-          }) => {
+          }: any) => {
             // All of the props here must not change between re-renders
             // This is crucial to optimizing the routes with PureComponent
             const sceneRendererProps = {
@@ -129,12 +127,12 @@ export default class TabView extends React.Component<
                   />
                 ) : null}
                 {tabBarPosition === 'top' &&
-                  renderTabBar({
+                  renderTabBar!({
                     ...sceneRendererProps,
                     navigationState,
                   })}
                 {render(
-                  navigationState.routes.map((route, i) => {
+                  navigationState.routes.map((route: any, i: number) => {
                     return (
                       <SceneView
                         {...sceneRendererProps}
@@ -146,10 +144,10 @@ export default class TabView extends React.Component<
                         lazyPreloadDistance={lazyPreloadDistance}
                         navigationState={navigationState}
                         style={sceneContainerStyle}>
-                        {({loading}) =>
+                        {({loading}: any) =>
                           loading
-                            ? renderLazyPlaceholder({route})
-                            : renderScene({
+                            ? renderLazyPlaceholder!({route})
+                            : renderScene!({
                                 ...sceneRendererProps,
                                 route,
                               })
@@ -159,7 +157,7 @@ export default class TabView extends React.Component<
                   }),
                 )}
                 {tabBarPosition === 'bottom' &&
-                  renderTabBar({
+                  renderTabBar!({
                     ...sceneRendererProps,
                     navigationState,
                   })}
@@ -173,7 +171,7 @@ export default class TabView extends React.Component<
 }
 TabView.defaultProps = {
   tabBarPosition: 'top',
-  renderTabBar: props => <TabBar {...props} />,
+  renderTabBar: (props: any) => <TabBar {...props} />,
   renderLazyPlaceholder: () => null,
   keyboardDismissMode: 'auto',
   swipeEnabled: true,
@@ -183,5 +181,5 @@ TabView.defaultProps = {
   springConfig: {},
   timingConfig: {},
   gestureHandlerProps: {},
-  renderPager: props => <Pager {...props} />,
+  renderPager: (props: any) => <Pager {...props} />,
 };

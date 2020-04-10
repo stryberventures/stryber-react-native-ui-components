@@ -11,14 +11,14 @@ Object.defineProperty(ReactNative, 'AsyncStorage', {
  * Export AsyncStorage so it's usable elsewhere.
  */
 export const Storage = AsyncStorage;
-export async function loadString(key) {
+export async function loadString(key: any) {
   try {
     return await Storage.getItem(key);
   } catch {
     return null;
   }
 }
-export async function saveString(key, value) {
+export async function saveString(key: any, value: any) {
   try {
     await Storage.setItem(key, value);
     return true;

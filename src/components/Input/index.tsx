@@ -4,6 +4,7 @@ import {
   Animated,
   Easing,
   TouchableWithoutFeedback,
+  TextInputProps,
 } from 'react-native';
 import withTheme from '../withTheme';
 import Text from '../Text';
@@ -11,9 +12,8 @@ import Block from '../Block';
 import Button from '../Button';
 import getStyles from './styles';
 import {Eye, EyeDisabled} from '../Icons';
-interface IInputProps {
+interface IInputProps extends TextInputProps {
   iconBackground?: boolean;
-  value?: string | number;
   name?: string;
   onChange?: (...args: any[]) => any;
   email?: boolean;
@@ -22,9 +22,8 @@ interface IInputProps {
   secure?: boolean;
   style?: any;
   theme?: {
-    sizes?: {
-      font?: number;
-    };
+    sizes?: any;
+    colors: any;
   };
   onFocus?: (...args: any[]) => any;
   onBlur?: (...args: any[]) => any;
@@ -67,7 +66,7 @@ class Input extends Component<IInputProps, InputState> {
     animated: {
       translateY: new Animated.Value(0),
       placeholder: {
-        fontSize: new Animated.Value(this.props.theme.sizes.font || 14),
+        fontSize: new Animated.Value(this!.props!.theme!.sizes!.font || 14),
         fontColor: new Animated.Value(0.0001),
         positionTop: new Animated.Value(13),
       },
@@ -79,7 +78,7 @@ class Input extends Component<IInputProps, InputState> {
     focused: false,
   };
   inputRef = React.createRef();
-  constructor(props) {
+  constructor(props: IInputProps) {
     super(props);
     if (this.props.value) {
       this.state.movePlaceholder = true;
@@ -88,7 +87,7 @@ class Input extends Component<IInputProps, InputState> {
       this.state.animated.translateY.setValue(1);
     }
   }
-  applyMask = mask => {
+  applyMask = (mask: string) => {
     const {value} = this.state;
     let i = 0;
     const diff = mask.replace(/\D/g, '');
@@ -107,20 +106,21 @@ class Input extends Component<IInputProps, InputState> {
   };
   getValue = () => {
     let value;
-    if (this.props.mask.length && !this.state.isBackspace) {
-      value = this.applyMask(this.props.mask);
+    if (this!.props!.mask!.length && !this.state.isBackspace) {
+      value = this.applyMask(this!.props!.mask!);
     } else {
       value = this.state.value;
     }
     return value;
   };
-  setValue(value) {
+  setValue(value: any) {
     this.setState({value});
   }
   renderLabel = () => {
     const {theme, placeholder, required} = this.props;
     const {movePlaceholder} = this.state;
     const styles = getStyles({
+      // @ts-ignore
       theme,
       additionalPaddingLeft: this.getAdditionalPadding(),
     });
@@ -136,6 +136,7 @@ class Input extends Component<IInputProps, InputState> {
           {top: this.state.animated.placeholder.positionTop},
         ]}>
         <Animated.Text
+          // @ts-ignore
           shouldRasterizeIOS
           renderToHardwareTextureAndroid
           style={[
@@ -151,6 +152,7 @@ class Input extends Component<IInputProps, InputState> {
   renderToggle() {
     const {secure, theme} = this.props;
     const {toggleSecure} = this.state;
+    // @ts-ignore
     const styles = getStyles({theme});
     if (!secure) {
       return null;
@@ -165,20 +167,22 @@ class Input extends Component<IInputProps, InputState> {
   }
   renderRight() {
     const {rightLabel, rightStyle, onRightPress, theme} = this.props;
+    // @ts-ignore
     const styles = getStyles({theme});
-    if (!rightLabel()) {
+    if (!rightLabel!()) {
       return null;
     }
     return (
       <Button
         style={[styles.toggle, rightStyle]}
         onPress={() => onRightPress && onRightPress()}>
-        {rightLabel()}
+        {rightLabel!()}
       </Button>
     );
   }
   renderError() {
     const {theme, errorStyle, error} = this.props;
+    // @ts-ignore
     const styles = getStyles({theme});
     return (
       <Text light style={[errorStyle, styles.error]}>
@@ -216,19 +220,19 @@ class Input extends Component<IInputProps, InputState> {
   }
   getAdditionalPadding = () => {
     const {withLeftBorder, icon, iconBackground} = this.props;
-    if (!icon() && withLeftBorder) return 7;
-    else if (icon() && iconBackground) return 45;
-    else if (icon()) return 30;
+    if (!icon!() && withLeftBorder) return 7;
+    else if (icon!() && iconBackground) return 45;
+    else if (icon!()) return 30;
     else return 0;
   };
   getBlockBackgroundColor = () => {
     const {theme, disabled, error} = this.props;
     if (disabled) {
-      return theme.colors.gray2;
+      return theme!.colors.gray2;
     } else if (error) {
-      return theme.colors.accent;
+      return theme!.colors.accent;
     }
-    return theme.colors.primary;
+    return theme!.colors.primary;
   };
   render() {
     const {
@@ -245,6 +249,7 @@ class Input extends Component<IInputProps, InputState> {
       disabled,
       placeholderLabel,
       placeholder,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       required,
       withLeftBorder,
       icon,
@@ -256,9 +261,11 @@ class Input extends Component<IInputProps, InputState> {
     } = this.props;
     const {toggleSecure, focused} = this.state;
     const styles = getStyles({
+      // @ts-ignore
       theme,
       focused,
       disabled,
+      // @ts-ignore
       error,
       additionalPaddingLeft: this.getAdditionalPadding(),
       disablePaddingRight: secure,
@@ -269,7 +276,7 @@ class Input extends Component<IInputProps, InputState> {
       styles.input,
       style,
       borderColor && {borderColor: borderColor},
-      error && {borderColor: theme.colors.accent},
+      error && {borderColor: theme!.colors.accent},
     ];
     const ref = this.inputRef;
     const inputType = email
@@ -282,16 +289,21 @@ class Input extends Component<IInputProps, InputState> {
     const editable = placeholderLabel ? !placeholderLabel : !disabled;
     return (
       <Block flex={0}>
-        <Block flex={0} style={styles.container} margin={[theme.sizes.base, 0]}>
+        <Block
+          flex={0}
+          style={styles.container}
+          margin={[theme!.sizes!.base!, 0]}>
+          {/*
+  // @ts-ignore */}
           <TouchableWithoutFeedback onPress={() => ref.current.focus()}>
             <Block flex={0} style={inputStyles}>
-              {!icon() && withLeftBorder && (
+              {!icon!() && withLeftBorder && (
                 <Block
                   color={this.getBlockBackgroundColor()}
                   style={styles.leftBorder}
                 />
               )}
-              {!!icon() && iconBackground ? (
+              {!!icon!() && iconBackground ? (
                 <Block style={styles.leftBlock}>
                   <Block
                     style={styles.additionalLeftBlock}
@@ -301,10 +313,10 @@ class Input extends Component<IInputProps, InputState> {
                     style={styles.rotatedBlock}
                     color={this.getBlockBackgroundColor()}
                   />
-                  {icon()}
+                  {icon!()}
                 </Block>
               ) : (
-                <Block style={styles.leftBlock}>{icon()}</Block>
+                <Block style={styles.leftBlock}>{icon!()}</Block>
               )}
               <Block
                 animated
@@ -328,13 +340,13 @@ class Input extends Component<IInputProps, InputState> {
                   onFocus={() => {
                     this.animate();
                     this.setState({focused: true}, () =>
-                      onFocus(this.state.value),
+                      onFocus!(this.state.value),
                     );
                   }}
                   onBlur={() => {
                     this.animate();
                     this.setState({focused: false}, () =>
-                      onBlur(this.state.value),
+                      onBlur!(this.state.value),
                     );
                   }}
                   keyboardType={inputType}
@@ -343,12 +355,13 @@ class Input extends Component<IInputProps, InputState> {
                       value: val,
                       isBackspace: prevState.value.length >= val.length,
                     }));
-                    onChange(val, name);
+                    onChange!(val, name);
                   }}
+                  // @ts-ignore
                   ref={ref}
                   editable={editable}
                   placeholder={placeholder || placeholderLabel}
-                  placeholderTextColor={theme.colors.gray2}
+                  placeholderTextColor={theme!.colors.gray2}
                   {...props}
                   value={this.getValue()}
                 />

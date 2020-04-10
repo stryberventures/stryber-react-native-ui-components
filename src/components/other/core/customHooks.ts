@@ -1,10 +1,10 @@
 import {useState} from 'react';
 export const customHooks = {
-  useForm(initialValues) {
+  useForm(initialValues: any) {
     const [values, setValues] = useState(initialValues);
     return [
       values,
-      (value, name) => {
+      (value: any, name: string) => {
         setValues({
           ...values,
           [name]: value,

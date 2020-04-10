@@ -4,7 +4,6 @@ import {
   TouchableWithoutFeedback,
   Modal,
   View,
-  ViewPropTypes,
   Button,
 } from 'react-native';
 import {Calendar} from '../Icons';
@@ -62,11 +61,11 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       () => ({showModal: false}),
       () => {
         const {onChange, name} = this.props;
-        onChange({name, value: this.state.date});
+        onChange!({name, value: this.state.date});
       },
     );
   };
-  handleDateChange = (e, date) => {
+  handleDateChange = (_: any, date: any) => {
     const {saveDateOnCancel} = this.props;
     this.setState(
       prevState => ({
@@ -78,7 +77,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       () => {
         if (isAndroid) {
           const {onChange, name} = this.props;
-          onChange(this.state.date, name);
+          onChange!(this.state.date, name);
         }
       },
     );
@@ -91,11 +90,13 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       modalStyle,
       modalBtnContainer,
       modalButtonStyle,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       modalButtonText,
       ...props
     } = this.props;
     return isAndroid ? (
       showModal && (
+        // @ts-ignore
         <DateTimePicker
           mode="date"
           is24Hour={true}
@@ -115,11 +116,13 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
           <View style={[styles.modal, modalStyle]}>
             <View style={[styles.modalBtnContainer, modalBtnContainer]}>
               <Button
+                // @ts-ignore
                 style={[modalButtonStyle]}
-                title={modalButtonText}
                 onPress={this.handleModalClose}
               />
             </View>
+            {/*
+  // @ts-ignore */}
             <DateTimePicker
               mode="date"
               is24Hour={true}
@@ -148,7 +151,6 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
             error={error}
             rightLabel={() => <Calendar size={20} fill={inputColor} />}
             placeholderLabel={dateStr}
-            onPress={this.handlePressed}
             style={[{marginVertical: 0}, style]}
             placeholderTextColor={
               dateSet && !showModal ? theme.colors.darkGrey : inputColor

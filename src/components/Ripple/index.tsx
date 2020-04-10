@@ -37,6 +37,7 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
   mounted: any;
   unique: number;
   static defaultProps = {
+    // @ts-ignore
     ...TouchableWithoutFeedback.defaultProps,
     rippleColor: 'rgb(0, 0, 0)',
     rippleOpacity: 0.3,
@@ -47,9 +48,10 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
     rippleSequential: false,
     rippleFades: true,
     disabled: false,
-    onRippleAnimation: (animation, callback) => animation.start(callback),
+    onRippleAnimation: (animation: any, callback: any) =>
+      animation.start(callback),
   };
-  constructor(props) {
+  constructor(props: IRippleProps) {
     super(props);
     this.onLayout = this.onLayout.bind(this);
     this.onPress = this.onPress.bind(this);
@@ -72,7 +74,7 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
   componentWillUnmount() {
     this.mounted = false;
   }
-  onLayout(event) {
+  onLayout(event: any) {
     const {width, height} = event.nativeEvent.layout;
     const {onLayout} = this.props;
     if (typeof onLayout === 'function') {
@@ -80,30 +82,30 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
     }
     this.setState({width, height});
   }
-  onPress(event) {
+  onPress(event: any) {
     const {ripples} = this.state;
     const {onPress, rippleSequential} = this.props;
-    if (!rippleSequential || !ripples.length) {
+    if (!rippleSequential || !ripples!.length) {
       if (typeof onPress === 'function') {
         requestAnimationFrame(() => onPress(event));
       }
       this.startRipple(event);
     }
   }
-  onLongPress(event) {
+  onLongPress(event: any) {
     const {onLongPress} = this.props;
     if (typeof onLongPress === 'function') {
       requestAnimationFrame(() => onLongPress(event));
     }
     this.startRipple(event);
   }
-  onPressIn(event) {
+  onPressIn(event: any) {
     const {onPressIn} = this.props;
     if (typeof onPressIn === 'function') {
       onPressIn(event);
     }
   }
-  onPressOut(event) {
+  onPressOut(event: any) {
     const {onPressOut} = this.props;
     if (typeof onPressOut === 'function') {
       onPressOut(event);
@@ -111,10 +113,10 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
   }
   onAnimationEnd() {
     if (this.mounted) {
-      this.setState(({ripples}) => ({ripples: ripples.slice(1)}));
+      this.setState(({ripples}) => ({ripples: ripples!.slice(1)}));
     }
   }
-  startRipple(eventLocation) {
+  startRipple(eventLocation: any) {
     const {width, height} = this.state;
     const {
       rippleDuration,
@@ -122,16 +124,16 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
       rippleSize,
       onRippleAnimation,
     } = this.props;
-    const w2 = 0.5 * width;
-    const h2 = 0.5 * height;
+    const w2 = 0.5 * width!;
+    const h2 = 0.5 * height!;
     const {locationX, locationY} = rippleCentered
       ? {locationX: w2, locationY: h2}
       : eventLocation;
     const offsetX = Math.abs(w2 - locationX);
     const offsetY = Math.abs(h2 - locationY);
     const R =
-      rippleSize > 0
-        ? 0.5 * rippleSize
+      rippleSize! > 0
+        ? 0.5 * rippleSize!
         : Math.sqrt((w2 + offsetX) ** 2 + (h2 + offsetY) ** 2);
     const ripple = {
       unique: this.unique + 1,
@@ -146,10 +148,11 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
       duration: rippleDuration,
       useNativeDriver: true,
     });
-    onRippleAnimation(animation, this.onAnimationEnd);
-    this.setState(({ripples}) => ({ripples: ripples.concat(ripple)}));
+    onRippleAnimation!(animation, this.onAnimationEnd);
+    // @ts-ignore
+    this.setState(({ripples}) => ({ripples: ripples!.concat(ripple)}));
   }
-  renderRipple({unique, progress, locationX, locationY, R}) {
+  renderRipple({unique, progress, locationX, locationY, R}: any) {
     const {rippleColor, rippleOpacity, rippleFades} = this.props;
     const rippleStyle = {
       top: locationY - radius,
@@ -188,6 +191,7 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
       nativeID,
       accessible,
       accessibilityLabel,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onLayout: __ignored__,
       ...props
     } = this.props;
@@ -216,7 +220,7 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
         <Animated.View {...props} pointerEvents="box-only">
           {children}
           <View style={[styles.container, containerStyle]}>
-            {ripples.map(this.renderRipple)}
+            {ripples!.map(this.renderRipple)}
           </View>
         </Animated.View>
       </TouchableWithoutFeedback>

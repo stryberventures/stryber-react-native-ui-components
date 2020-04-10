@@ -21,7 +21,7 @@ export default class Welcome extends React.Component<IWelcomeProps, {}> {
       lineHeight: 18,
     },
   };
-  showApp = event => {
+  showApp = (event: any) => {
     const {showApp} = this.props;
     event.preventDefault();
     if (showApp) {
@@ -30,6 +30,7 @@ export default class Welcome extends React.Component<IWelcomeProps, {}> {
   };
   render() {
     return (
+      // @ts-ignore
       <View style={this.styles.wrapper}>
         <Text style={this.styles.header}>Welcome to Stryber Style Guide</Text>
         <Text style={this.styles.content}>

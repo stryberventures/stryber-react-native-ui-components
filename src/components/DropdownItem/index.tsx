@@ -11,7 +11,7 @@ interface IDropdownItemProps extends React.HTMLAttributes<Element> {
 }
 class DropdownItem extends PureComponent<IDropdownItemProps, {}> {
   static defaultProps: any;
-  constructor(props) {
+  constructor(props: IDropdownItemProps) {
     super(props);
     this.onPress = this.onPress.bind(this);
   }
@@ -22,9 +22,11 @@ class DropdownItem extends PureComponent<IDropdownItemProps, {}> {
     }
   }
   render() {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {children, style, theme, index, ...props} = this.props;
     const styles = getStyles(theme);
     return (
+      // @ts-ignore
       <Button
         {...props}
         style={[styles.container, style]}
