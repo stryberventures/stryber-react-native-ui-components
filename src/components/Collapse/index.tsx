@@ -27,12 +27,12 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
   state = {
     measuring: false,
     measured: false,
-    height: new Animated.Value(this.props.collapsedHeight),
+    height: new Animated.Value(this.props.collapsedHeight!),
     contentHeight: 0,
     animating: false,
   };
   contentHandle = React.createRef();
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: ICollapseProps, __: CollapseState, _: any) {
     if (prevProps.collapsed !== this.props.collapsed) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({measured: false}, () => this.updateProps(prevProps));
@@ -43,17 +43,17 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
   componentWillUnmount() {
     this.unmounted = true;
   }
-  updateProps(prevProps) {
+  updateProps(prevProps: ICollapseProps) {
     if (prevProps.collapsed !== this.props.collapsed) {
       this.toggle(this.props.collapsed);
     } else if (
       this.props.collapsed &&
       prevProps.collapsedHeight !== this.props.collapsedHeight
     ) {
-      this.state.height.setValue(this.props.collapsedHeight);
+      this.state.height.setValue(this.props.collapsedHeight!);
     }
   }
-  measure(callback) {
+  measure(callback: any) {
     this.setState(
       {
         measuring: true,
@@ -68,9 +68,10 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
               () => callback(this.props.collapsedHeight),
             );
           } else {
+            // @ts-ignore
             this.contentHandle.current
               .getNode()
-              .measure((x, y, width, height) => {
+              .measure((_: number, __: number, ___: number, height: number) => {
                 this.setState(
                   {
                     measuring: false,
@@ -85,7 +86,7 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
       },
     );
   }
-  toggle(collapsed) {
+  toggle(collapsed: any) {
     if (collapsed) {
       this.transitionToHeight(this.props.collapsedHeight);
     } else if (!this.contentHandle) {
@@ -93,12 +94,12 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
         this.transitionToHeight(this.state.contentHeight);
       }
     } else {
-      this.measure(contentHeight => {
+      this.measure((contentHeight: any) => {
         this.transitionToHeight(contentHeight);
       });
     }
   }
-  transitionToHeight(height) {
+  transitionToHeight(height: any) {
     const {duration} = this.props;
     const animations = ['easeInOut', 'easeOut', 'easeIn'];
     let easing = this.props.easing;
@@ -112,12 +113,14 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
             easing.substr(prefix.length, 1).toLowerCase() +
             easing.substr(prefix.length + 1);
           prefix = prefix.substr(4, 1).toLowerCase() + prefix.substr(5);
+          // @ts-ignore
           easing = Easing[prefix](Easing[easing || 'ease']);
           found = true;
           break;
         }
       }
       if (!found) {
+        // @ts-ignore
         easing = Easing[easing];
       }
       if (!easing) {
@@ -131,6 +134,7 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
     this.animation = Animated.timing(this.state.height, {
       toValue: height,
       duration,
+      // @ts-ignore
       easing,
     }).start(() => {
       if (this.unmounted) {
@@ -140,11 +144,11 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
         if (this.unmounted) {
           return;
         }
-        this.props.onAnimationEnd();
+        this.props.onAnimationEnd!();
       });
     });
   }
-  onLayoutChange = event => {
+  onLayoutChange = (event: any) => {
     const contentHeight = event.nativeEvent.layout.height;
     if (
       this.state.animating ||
@@ -165,7 +169,7 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
       overflow: 'hidden',
       height: height,
     };
-    const contentStyle = {};
+    const contentStyle: any = {};
     if (measuring) {
       contentStyle.position = 'absolute';
       contentStyle.opacity = 0;
@@ -193,6 +197,7 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
         style={style}
         pointerEvents={!enablePointerEvents && collapsed ? 'none' : 'auto'}>
         <Animated.View
+          // @ts-ignore
           ref={this.contentHandle}
           style={[this.props.style, contentStyle]}
           onLayout={this.state.animating ? undefined : this.onLayoutChange}>

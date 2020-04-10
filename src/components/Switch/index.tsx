@@ -44,7 +44,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
       animXValue: new Animated.Value(this.props.value ? 1 : 0),
     };
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(_: any, prevState: SwitchState, __: any) {
     if (prevState.checked !== this.state.checked) {
       this.runAnimation();
     }
@@ -54,7 +54,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
     const {onPress, name} = this.props;
     this.setState(
       prevState => ({checked: !prevState.checked}),
-      () => onPress(this.state.checked, name),
+      () => onPress!(this.state.checked, name),
     );
   };
   getStart = () => {

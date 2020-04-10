@@ -73,22 +73,24 @@ class Button extends React.Component<IButtonProps, {}> {
         rippleCentered={rippleCentered}
         rippleSequential={rippleSequential}
         rippleContainerBorderRadius={theme.sizes.radius}
+        // @ts-ignore
         ref={this.ripple}
       />
     );
   }
-  handlePress = event => {
+  handlePress = (event: any) => {
     const {rippleInsets, onPress, ripple} = this.props;
     if (event != null && ripple) {
       /* Adjust event location */
       const eventLocation = {
-        locationY: event.nativeEvent.locationY - rippleInsets.top,
-        locationX: event.nativeEvent.locationX - rippleInsets.left,
+        locationY: event.nativeEvent.locationY - rippleInsets!.top!,
+        locationX: event.nativeEvent.locationX - rippleInsets!.left!,
       };
       /* Start ripple directly from event */
+      // @ts-ignore
       this.ripple.current.startRipple(eventLocation);
     }
-    onPress(event);
+    onPress!(event);
   };
   render() {
     const {
@@ -109,7 +111,7 @@ class Button extends React.Component<IButtonProps, {}> {
       Component = gradient ? LinearGradient : View,
       ...props
     } = this.props;
-    const styles = getStyles(theme);
+    const styles: any = getStyles(theme);
     const buttonStyles = [
       styles.button,
       shadow && styles.shadow,

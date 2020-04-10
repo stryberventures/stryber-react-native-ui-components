@@ -81,7 +81,7 @@ interface IPagerProps {
 }
 export default class Pager extends React.Component<IPagerProps, {}> {
   static defaultProps: any;
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps: IPagerProps, _: any, __: any) {
     const {
       navigationState,
       layout,
@@ -105,12 +105,12 @@ export default class Pager extends React.Component<IPagerProps, {}> {
     // Reset the pending index
     this.pendingIndexValue = undefined;
     // Update our mappings of animated nodes when props change
-    if (prevProps.navigationState.routes.length !== routes.length) {
-      this.routesLength.setValue(routes.length);
+    if (prevProps!.navigationState!.routes!.length !== routes!.length) {
+      this.routesLength.setValue(routes!.length);
     }
-    if (prevProps.layout.width !== layout.width) {
-      this.progress.setValue(-index * layout.width);
-      this.layoutWidth.setValue(layout.width);
+    if (prevProps!.layout!.width !== layout!.width) {
+      this.progress.setValue(-index! * layout!.width!);
+      this.layoutWidth.setValue(layout!.width!);
     }
     if (prevProps.swipeVelocityImpact !== swipeVelocityImpact) {
       this.swipeVelocityImpact.setValue(
@@ -124,35 +124,35 @@ export default class Pager extends React.Component<IPagerProps, {}> {
     }
     if (prevProps.springConfig !== springConfig) {
       this.springConfig.damping.setValue(
-        springConfig.damping !== undefined
-          ? springConfig.damping
+        springConfig!.damping !== undefined
+          ? springConfig!.damping
           : SPRING_CONFIG.damping,
       );
       this.springConfig.mass.setValue(
-        springConfig.mass !== undefined
-          ? springConfig.mass
+        springConfig!.mass !== undefined
+          ? springConfig!.mass
           : SPRING_CONFIG.mass,
       );
       this.springConfig.stiffness.setValue(
-        springConfig.stiffness !== undefined
-          ? springConfig.stiffness
+        springConfig!.stiffness !== undefined
+          ? springConfig!.stiffness
           : SPRING_CONFIG.stiffness,
       );
       this.springConfig.restSpeedThreshold.setValue(
-        springConfig.restSpeedThreshold !== undefined
-          ? springConfig.restSpeedThreshold
+        springConfig!.restSpeedThreshold !== undefined
+          ? springConfig!.restSpeedThreshold
           : SPRING_CONFIG.restSpeedThreshold,
       );
       this.springConfig.restDisplacementThreshold.setValue(
-        springConfig.restDisplacementThreshold !== undefined
-          ? springConfig.restDisplacementThreshold
+        springConfig!.restDisplacementThreshold !== undefined
+          ? springConfig!.restDisplacementThreshold
           : SPRING_CONFIG.restDisplacementThreshold,
       );
     }
     if (prevProps.timingConfig !== timingConfig) {
       this.timingConfig.duration.setValue(
-        timingConfig.duration !== undefined
-          ? timingConfig.duration
+        timingConfig!.duration !== undefined
+          ? timingConfig!.duration
           : TIMING_CONFIG.duration,
       );
     }
@@ -167,8 +167,8 @@ export default class Pager extends React.Component<IPagerProps, {}> {
   // Current progress of the page (translateX value)
   progress = new Value(
     // Initial value is based on the index and page width
-    this.props.navigationState.index *
-      this.props.layout.width *
+    this!.props!.navigationState!.index! *
+      this!.props!.layout!.width! *
       DIRECTION_RIGHT,
   );
   // Initial index of the tabs
@@ -188,8 +188,8 @@ export default class Pager extends React.Component<IPagerProps, {}> {
   indexAtSwipeEnd = new Value(this.props.navigationState.index);
   // Mappings to some prop values
   // We use them in animation calculations, so we need live animated nodes
-  routesLength = new Value(this.props.navigationState.routes.length);
-  layoutWidth = new Value(this.props.layout.width);
+  routesLength = new Value(this!.props!.navigationState!.routes!.length);
+  layoutWidth = new Value(this!.props!.layout!.width);
   // Determines how relevant is a velocity while calculating next position while swiping
   swipeVelocityImpact = new Value(
     this.props.swipeVelocityImpact !== undefined &&
@@ -210,35 +210,35 @@ export default class Pager extends React.Component<IPagerProps, {}> {
   // Animation configuration
   springConfig = {
     damping: new Value(
-      this.props.springConfig.damping !== undefined
-        ? this.props.springConfig.damping
+      this.props.springConfig!.damping !== undefined
+        ? this.props.springConfig!.damping
         : SPRING_CONFIG.damping,
     ),
     mass: new Value(
-      this.props.springConfig.mass !== undefined
-        ? this.props.springConfig.mass
+      this.props.springConfig!.mass !== undefined
+        ? this.props.springConfig!.mass
         : SPRING_CONFIG.mass,
     ),
     stiffness: new Value(
-      this.props.springConfig.stiffness !== undefined
-        ? this.props.springConfig.stiffness
+      this.props.springConfig!.stiffness !== undefined
+        ? this.props.springConfig!.stiffness
         : SPRING_CONFIG.stiffness,
     ),
     restSpeedThreshold: new Value(
-      this.props.springConfig.restSpeedThreshold !== undefined
-        ? this.props.springConfig.restSpeedThreshold
+      this.props.springConfig!.restSpeedThreshold !== undefined
+        ? this.props.springConfig!.restSpeedThreshold
         : SPRING_CONFIG.restSpeedThreshold,
     ),
     restDisplacementThreshold: new Value(
-      this.props.springConfig.restDisplacementThreshold !== undefined
-        ? this.props.springConfig.restDisplacementThreshold
+      this.props.springConfig!.restDisplacementThreshold !== undefined
+        ? this.props.springConfig!.restDisplacementThreshold
         : SPRING_CONFIG.restDisplacementThreshold,
     ),
   };
   timingConfig = {
     duration: new Value(
-      this.props.timingConfig.duration !== undefined
-        ? this.props.timingConfig.duration
+      this.props.timingConfig!.duration !== undefined
+        ? this.props.timingConfig!.duration
         : TIMING_CONFIG.duration,
     ),
   };
@@ -264,47 +264,50 @@ export default class Pager extends React.Component<IPagerProps, {}> {
   previouslyFocusedTextInput = null;
   // Listeners for the entered screen
   enterListeners = [];
-  jumpToIndex = index => {
+  jumpToIndex = (index: any) => {
     // If the index changed, we need to trigger a tab switch
     this.isSwipeGesture.setValue(FALSE);
     this.nextIndex.setValue(index);
   };
-  jumpTo = key => {
+  jumpTo = (key: any) => {
     const {navigationState, keyboardDismissMode, onIndexChange} = this.props;
-    const index = navigationState.routes.findIndex(route => route.key === key);
+    const index = navigationState.routes!.findIndex(route => route.key === key);
     // A tab switch might occur when we're in the middle of a transition
     // In that case, the index might be same as before
     // So we conditionally make the pager to update the position
     if (navigationState.index === index) {
       this.jumpToIndex(index);
     } else {
-      onIndexChange(index);
+      onIndexChange!(index);
       if (keyboardDismissMode === 'auto') {
         Keyboard.dismiss();
       }
     }
   };
-  addListener = (type, listener) => {
+  addListener = (type: any, listener: any) => {
     if (type === 'enter') {
+      // @ts-ignore
       this.enterListeners.push(listener);
     }
   };
-  removeListener = (type, listener) => {
+  removeListener = (type: any, listener: any) => {
     if (type === 'enter') {
+      // @ts-ignore
       const index = this.enterListeners.indexOf(listener);
       if (index > -1) {
         this.enterListeners.splice(index, 1);
       }
     }
   };
-  handleEnteredIndexChange = ([value]) => {
+  handleEnteredIndexChange = ([value]: any) => {
     const index = Math.max(
       0,
-      Math.min(value, this.props.navigationState.routes.length - 1),
+      Math.min(value, this.props.navigationState.routes!.length - 1),
     );
+    // @ts-ignore
     this.enterListeners.forEach(listener => listener(index));
   };
-  transitionTo = index => {
+  transitionTo = (index: any) => {
     const toValue = new Value(0);
     const frameTime = new Value(0);
     const state = {
@@ -331,10 +334,12 @@ export default class Pager extends React.Component<IPagerProps, {}> {
             I18nManager.isRTL
               ? set(
                   this.initialVelocityForSpring,
+                  // @ts-ignore
                   multiply(-1, this.velocityX, this.springVelocityScale),
                 )
               : set(
                   this.initialVelocityForSpring,
+                  // @ts-ignore
                   multiply(this.velocityX, this.springVelocityScale),
                 ),
           ),
@@ -373,6 +378,7 @@ export default class Pager extends React.Component<IPagerProps, {}> {
   ]);
   extrapolatedPosition = add(
     this.gestureX,
+    // @ts-ignore
     multiply(this.velocityX, this.swipeVelocityImpact),
   );
   translateX = block([
@@ -383,7 +389,8 @@ export default class Pager extends React.Component<IPagerProps, {}> {
         // Without this check, the pager can go to an infinite update <-> animate loop for sync updates
         if (value !== this.props.navigationState.index) {
           // If the index changed, and previous animation has finished, update state
-          this.props.onIndexChange(value);
+          this.props.onIndexChange!(value);
+          // @ts-ignore
           this.pendingIndexValue = value;
           // Force componentDidUpdate to fire, whether user does a setState or not
           // This allows us to detect when the user drops the update and revert back
@@ -427,6 +434,7 @@ export default class Pager extends React.Component<IPagerProps, {}> {
               // When a gesture begins, blur the currently focused input
               TextInput.State.blurTextInput(input);
               // Store the id of this input so we can refocus it if gesture was cancelled
+              // @ts-ignore
               this.previouslyFocusedTextInput = input;
             } else if (keyboardDismissMode === 'on-drag') {
               Keyboard.dismiss();
@@ -521,18 +529,19 @@ export default class Pager extends React.Component<IPagerProps, {}> {
     ),
     this.progress,
   ]);
-  getTranslateX = memoize((layoutWidth, routesLength, translateX) =>
-    multiply(
-      // Make sure that the translation doesn't exceed the bounds to prevent overscrolling
-      min(
-        max(
-          multiply(layoutWidth, sub(routesLength, 1), DIRECTION_RIGHT),
-          translateX,
+  getTranslateX = memoize(
+    (layoutWidth: any, routesLength: any, translateX: any) =>
+      multiply(
+        // Make sure that the translation doesn't exceed the bounds to prevent overscrolling
+        min(
+          max(
+            multiply(layoutWidth, sub(routesLength, 1), DIRECTION_RIGHT),
+            translateX,
+          ),
+          0,
         ),
-        0,
+        I18nManager.isRTL ? -1 : 1,
       ),
-      I18nManager.isRTL ? -1 : 1,
-    ),
   );
   render() {
     const {
@@ -548,15 +557,16 @@ export default class Pager extends React.Component<IPagerProps, {}> {
       this.routesLength,
       this.translateX,
     );
+    // @ts-ignore
     return children({
       position: this.position,
       addListener: this.addListener,
       removeListener: this.removeListener,
       jumpTo: this.jumpTo,
       // eslint-disable-next-line no-shadow
-      render: children => (
+      render: (children: any) => (
         <PanGestureHandler
-          enabled={layout.width !== 0 && swipeEnabled}
+          enabled={layout!.width !== 0 && swipeEnabled}
           onGestureEvent={this.handleGestureEvent}
           onHandlerStateChange={this.handleGestureEvent}
           activeOffsetX={[-SWIPE_DISTANCE_MINIMUM, SWIPE_DISTANCE_MINIMUM]}
@@ -566,9 +576,9 @@ export default class Pager extends React.Component<IPagerProps, {}> {
             removeClippedSubviews={removeClippedSubviews}
             style={[
               styles.container,
-              layout.width
+              layout!.width
                 ? {
-                    width: layout.width * navigationState.routes.length,
+                    width: layout!.width * navigationState.routes!.length,
                     transform: [{translateX}],
                   }
                 : null,

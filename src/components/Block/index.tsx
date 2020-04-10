@@ -58,7 +58,7 @@ class Block extends React.Component<IBlockProps, {}> {
       Component = onPress ? TouchableOpacity : View,
       ...props
     } = this.props;
-    const styles = getStyles(theme);
+    const styles: any = getStyles(theme);
     const blockStyles = [
       styles.block,
       flex && {flex},

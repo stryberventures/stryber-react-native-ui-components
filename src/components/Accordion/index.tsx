@@ -51,10 +51,10 @@ export default class Accordion extends Component<IAccordionProps, {}> {
       renderFooter,
       renderSectionTitle,
     } = this.props;
-    const renderCollapsible = (section, key) => (
+    const renderCollapsible = (section: any, key: any) => (
       <Collapse
         collapsed={!activeSections.includes(key)}
-        onAnimationEnd={() => onAnimationEnd(section, key)}>
+        onAnimationEnd={() => onAnimationEnd!(section, key)}>
         {renderContent(section, key, activeSections.includes(key), sections)}
       </Collapse>
     );
@@ -62,10 +62,11 @@ export default class Accordion extends Component<IAccordionProps, {}> {
       <View style={containerStyle}>
         {sections.map((section, key) => (
           <View key={key} style={sectionContainerStyle}>
-            {renderSectionTitle(section, key, activeSections.includes(key))}
+            {renderSectionTitle!(section, key, activeSections.includes(key))}
 
             {expandFromBottom && renderCollapsible(section, key)}
-
+            {/*
+  // @ts-ignore */}
             <Touchable
               onPress={() => this.toggle(key)}
               underlayColor={underlayColor}

@@ -1,14 +1,5 @@
-import {Platform, Dimensions} from 'react-native';
-export const isIphoneX = () =>
-  Platform.OS === 'ios' &&
-  !isTablet() &&
-  !Platform.isTVOS &&
-  (Dimensions.get('window').height === 812 ||
-    Dimensions.get('window').width === 812 ||
-    Dimensions.get('window').height === 896 ||
-    Dimensions.get('window').width === 896);
-export const isTablet = () => Platform.isPad;
-export const handleMargin = size => {
+// @ts-ignore
+export const handleMargin = (size: any) => {
   if (typeof size === 'number') {
     return {
       marginTop: size,
@@ -51,6 +42,8 @@ export const handleMargin = size => {
     }
   }
 };
+
+// @ts-ignore
 export const handlePadding = padding => {
   if (typeof padding === 'number') {
     return {
@@ -94,10 +87,10 @@ export const handlePadding = padding => {
     }
   }
 };
-export function memoize(callback) {
-  let previous;
-  let result;
-  return (...dependencies) => {
+export function memoize(callback: any) {
+  let previous: any;
+  let result: any;
+  return (...dependencies: any) => {
     let hasChanged = false;
     if (previous) {
       if (previous.length !== dependencies.length) {

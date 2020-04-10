@@ -7,11 +7,11 @@ import styles from './styles';
 const {interpolate, multiply, Extrapolate} = Animated;
 interface ITabBarIndicatorProps {
   position?: {};
-  navigationState: {};
+  navigationState: any;
   getTabWidth?: (...args: any[]) => any;
   width?: string;
   style?: any;
-  layout?: {};
+  layout?: any;
   theme?: any;
 }
 class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
@@ -26,9 +26,9 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
     if (
       !this.isIndicatorShown &&
       width === 'auto' &&
-      layout.width &&
+      layout!.width &&
       // We should fade-in the indicator when we have widths for all the tab items
-      navigationState.routes.every((_, i) => getTabWidth(i))
+      navigationState.routes.every((_: any, i: number) => getTabWidth!(i))
     ) {
       this.isIndicatorShown = true;
       Animated.timing(this.opacity, {
@@ -40,10 +40,10 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
   };
   isIndicatorShown = false;
   opacity = new Animated.Value(this.props.width === 'auto' ? 0 : 1);
-  getTranslateX = memoize((position, routes, getTabWidth) => {
-    const inputRange = routes.map((_, i) => i);
+  getTranslateX = memoize((position: any, routes: any, getTabWidth: any) => {
+    const inputRange = routes.map((_: any, i: number) => i);
     // every index contains widths at all previous indices
-    const outputRange = routes.reduce((acc, _, i) => {
+    const outputRange = routes.reduce((acc: any, _: any, i: any) => {
       if (i === 0) return [0];
       return [...acc, acc[i - 1] + getTabWidth(i - 1)];
     }, []);
@@ -54,8 +54,8 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
     });
     return multiply(translateX, I18nManager.isRTL ? -1 : 1);
   });
-  getWidth = memoize((position, routes, getTabWidth) => {
-    const inputRange = routes.map((_, i) => i);
+  getWidth = memoize((position: any, routes: any, getTabWidth: any) => {
+    const inputRange = routes.map((_: any, i: any) => i);
     const outputRange = inputRange.map(getTabWidth);
     return interpolate(position, {
       inputRange,
@@ -80,7 +80,7 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
       width === 'auto'
         ? routes.length > 1
           ? this.getWidth(position, routes, getTabWidth)
-          : getTabWidth(0)
+          : getTabWidth!(0)
         : width;
     return (
       <Animated.View

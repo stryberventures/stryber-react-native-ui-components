@@ -6,7 +6,7 @@ interface ISceneViewProps {
     index?: number;
   };
   index?: number;
-  layout?: {};
+  layout?: any;
   style?: any;
   lazyPreloadDistance?: number;
   lazy?: boolean;
@@ -20,11 +20,14 @@ export default class SceneView extends React.Component<
   ISceneViewProps,
   SceneViewState
 > {
-  static getDerivedStateFromProps(props, state) {
+  static getDerivedStateFromProps(
+    props: ISceneViewProps,
+    state: SceneViewState,
+  ) {
     if (
       state.loading &&
-      Math.abs(props.navigationState.index - props.index) <=
-        props.lazyPreloadDistance
+      Math.abs(props.navigationState!.index! - props.index!) <=
+        props.lazyPreloadDistance!
     ) {
       // Always render the route when it becomes focused
       return {loading: false};
@@ -33,36 +36,40 @@ export default class SceneView extends React.Component<
   }
   state = {
     loading:
-      Math.abs(this.props.navigationState.index - this.props.index) >
-      this.props.lazyPreloadDistance,
+      Math.abs(this.props.navigationState!.index! - this.props.index!) >
+      this.props.lazyPreloadDistance!,
   };
   componentDidMount() {
     if (this.props.lazy) {
       // If lazy mode is enabled, listen to when we enter screens
-      this.props.addListener('enter', this.handleEnter);
+      this.props.addListener!('enter', this.handleEnter);
     } else if (this.state.loading) {
       // If lazy mode is not enabled, render the scene with a delay if not loaded already
       // This improves the initial startup time as the scene is no longer blocking
       setTimeout(() => this.setState({loading: false}), 0);
     }
   }
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(
+    prevProps: ISceneViewProps,
+    prevState: SceneViewState,
+    _: any,
+  ) {
     if (
       this.props.lazy !== prevProps.lazy ||
       this.state.loading !== prevState.loading
     ) {
       // We only need the listener if the tab hasn't loaded yet and lazy is enabled
       if (this.props.lazy && this.state.loading) {
-        this.props.addListener('enter', this.handleEnter);
+        this.props.addListener!('enter', this.handleEnter);
       } else {
-        this.props.removeListener('enter', this.handleEnter);
+        this.props.removeListener!('enter', this.handleEnter);
       }
     }
   }
   componentWillUnmount() {
-    this.props.removeListener('enter', this.handleEnter);
+    this.props.removeListener!('enter', this.handleEnter);
   }
-  handleEnter = value => {
+  handleEnter = (value: any) => {
     const {index} = this.props;
     // If we're entering the current route, we need to load it
     if (value === index && this.state.loading) {
@@ -72,7 +79,7 @@ export default class SceneView extends React.Component<
   render() {
     const {navigationState, index, layout, style} = this.props;
     const {loading} = this.state;
-    const focused = navigationState.index === index;
+    const focused = navigationState!.index === index;
     return (
       <View
         accessibilityElementsHidden={!focused}
@@ -90,6 +97,7 @@ export default class SceneView extends React.Component<
         ]}>
         {// When layout is not available, we must not render unfocused routes
         // so that the focused route can fill the screen
+        // @ts-ignore
         focused || layout.width ? this.props.children({loading}) : null}
       </View>
     );

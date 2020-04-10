@@ -11,12 +11,13 @@ interface IBadgeProps extends IBlockProps {
   onPress?: (...args: any[]) => any;
   color?: string;
 }
+
 class Badge extends Component<IBadgeProps, {}> {
   static defaultProps: any;
   render() {
     const {theme, value, textStyle, style, onPress, color} = this.props;
-    const styles = getStyles(theme);
-    const badgeStyles = [
+    const styles: any = getStyles(theme);
+    const badgeStyles: any = [
       color && styles[color],
       color && !styles[color] && {backgroundColor: color},
       style,

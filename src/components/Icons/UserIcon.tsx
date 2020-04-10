@@ -6,11 +6,7 @@ type UserIconProps = {
   fill?: string;
 };
 const UserIcon: React.SFC<UserIconProps> = props => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={props.width}
-    height={props.height}
-    viewBox="0 0 19 19">
+  <Svg width={props.width} height={props.height} viewBox="0 0 19 19">
     <G fill="none" fill-rule="evenodd" stroke={props.fill} stroke-width="1.02">
       <Path d="M7.145 6.422a2.366 2.366 0 0 0 2.368 2.364 2.366 2.366 0 0 0 2.368-2.364" />
       <Path d="M4.303 6.26a5.206 5.206 0 0 0 5.21 5.2 5.206 5.206 0 0 0 5.21-5.2 5.206 5.206 0 0 0-5.21-5.203 5.206 5.206 0 0 0-5.21 5.202zM15.968 17.944c0-3.56-2.89-6.445-6.455-6.445s-6.456 2.885-6.456 6.445h12.911z" />
