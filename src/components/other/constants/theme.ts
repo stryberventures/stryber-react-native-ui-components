@@ -98,4 +98,19 @@ const fonts = {
   },
   fontFamily: 'Open Sans',
 };
-export {key, colors, sizes, fonts};
+const spaces = {
+  xxs: 4,
+  xs: 8,
+  s: 12,
+  m: 16,
+  xl: 24,
+  xxl2: 32,
+  xxl5: 44,
+  xxl8: 56,
+  xxl12: 72,
+  xxl13: 96,
+  xxl14: 128,
+  xxl15: 256,
+  xxl16: 512,
+};
+export {key, colors, sizes, fonts, spaces};
