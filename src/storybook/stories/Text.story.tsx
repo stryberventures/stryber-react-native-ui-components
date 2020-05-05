@@ -51,11 +51,15 @@ storiesOf('Text', module)
     const textFontSizeSelect = select(
       'Font Size',
       {
+        title: 'title',
         h1: 'h1',
         h2: 'h2',
         h3: 'h3',
-        title: 'title',
+        headline: 'headline',
         body: 'body',
+        button: 'button',
+        subhead: 'subhead',
+        footnote: 'footnote',
         caption: 'caption',
         small: 'small',
       },
