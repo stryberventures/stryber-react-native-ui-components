@@ -168,7 +168,7 @@ Button.defaultProps = {
   locations: [0.1, 0.9],
   opacity: 0.8,
   color: 'transparent',
-  shape: 'rectangle',
+  shape: 'rounded',
   //Ripple
   rippleColor: 'rgba(0, 0, 0, .38)',
   rippleCentered: false,
