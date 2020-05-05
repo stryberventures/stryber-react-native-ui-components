@@ -5,6 +5,7 @@ import getStyles from './styles';
 import withTheme from '../withTheme';
 import Ripple from '../Ripple';
 import Block from '../Block';
+import * as Icons from '../Icons';
 interface IButtonProps extends ViewProps {
   style?: any;
   opacity?: number;
@@ -40,6 +41,9 @@ interface IButtonProps extends ViewProps {
   Component?: any;
   props?: any;
   children: any;
+  shape?: 'rectangle' | 'rounded' | 'round';
+  icon?: keyof typeof Icons;
+  iconProps?: any;
 }
 class Button extends React.Component<IButtonProps, {}> {
   static defaultProps: any;
@@ -109,33 +113,37 @@ class Button extends React.Component<IButtonProps, {}> {
       border,
       // eslint-disable-next-line react/prop-types
       Component = gradient ? LinearGradient : View,
+      shape,
+      icon,
+      iconProps,
       ...props
     } = this.props;
-    const styles: any = getStyles(theme);
+    const IconComponent = icon && Icons[icon];
+    const styles: any = getStyles(theme, {color});
     const buttonStyles = [
       styles.button,
+      shape && styles[shape],
       shadow && styles.shadow,
-      color && styles[color],
-      color && !styles[color] && {backgroundColor: color},
       border && {
         borderColor: typeof border === 'string' ? border : theme.colors.primary,
         borderWidth: theme.sizes.borderWidth,
       },
       style,
     ];
-    let gradientProps = {};
-    if (gradient) {
-      gradientProps = {
-        start: start,
-        end: end,
-        locations: locations,
-        colors: [
-          startColor || styles.primary.backgroundColor,
-          endColor || styles.secondary.backgroundColor,
-        ],
-        style: buttonStyles,
-      };
-    }
+    let childrenWrapperProps = gradient
+      ? {
+          start: start,
+          end: end,
+          locations: locations,
+          colors: [
+            startColor || styles.primary.backgroundColor,
+            endColor || styles.secondary.backgroundColor,
+          ],
+          style: [...buttonStyles, styles.childrenWrapper],
+        }
+      : {
+          style: styles.childrenWrapper,
+        };
     return (
       <TouchableOpacity
         {...props}
@@ -143,7 +151,10 @@ class Button extends React.Component<IButtonProps, {}> {
         onPress={this.handlePress}
         style={buttonStyles}>
         <Block middle pointerEvents="box-only">
-          <Component {...gradientProps}>{children}</Component>
+          <Component {...childrenWrapperProps}>
+            {icon && <IconComponent {...iconProps} />}
+            {children}
+          </Component>
           {this.renderRipple()}
         </Block>
       </TouchableOpacity>
@@ -157,6 +168,7 @@ Button.defaultProps = {
   locations: [0.1, 0.9],
   opacity: 0.8,
   color: 'transparent',
+  shape: 'rectangle',
   //Ripple
   rippleColor: 'rgba(0, 0, 0, .38)',
   rippleCentered: false,

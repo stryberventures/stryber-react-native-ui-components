@@ -48,7 +48,9 @@ const sizes = {
   // global sizes
   base: 16,
   font: 14,
+  smallRadius: 2,
   radius: 8,
+  largeRadius: 50,
   padding: 25,
   checkbox: 22,
   checkboxIcon: 15,

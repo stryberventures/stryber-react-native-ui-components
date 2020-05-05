@@ -1,12 +1,38 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../other/constants';
-const getStyles = (theme = defaultTheme) =>
-  StyleSheet.create({
+
+interface IProps {
+  color?: string;
+}
+
+const getStyles = (theme = defaultTheme, {color}: IProps) => {
+  const buttonBackgroundColor = !color
+    ? undefined
+    : theme.colors.hasOwnProperty(color)
+    ? theme.colors[color as keyof typeof defaultTheme.colors]
+    : color;
+
+  return StyleSheet.create({
     button: {
       borderRadius: theme.sizes.radius,
       height: theme.sizes.buttonHeight,
       justifyContent: 'center',
       marginVertical: theme.sizes.padding / 3,
+      backgroundColor: buttonBackgroundColor,
+    },
+    childrenWrapper: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    rectangle: {
+      borderRadius: 0,
+    },
+    rounded: {
+      borderRadius: theme.sizes.smallRadius,
+    },
+    round: {
+      borderRadius: theme.sizes.largeRadius,
     },
     shadow: {
       shadowColor: theme.colors.black,
@@ -18,14 +44,6 @@ const getStyles = (theme = defaultTheme) =>
       shadowRadius: 3.84,
       elevation: 5,
     },
-    accent: {backgroundColor: theme.colors.accent},
-    primary: {backgroundColor: theme.colors.primary},
-    secondary: {backgroundColor: theme.colors.secondary},
-    tertiary: {backgroundColor: theme.colors.tertiary},
-    black: {backgroundColor: theme.colors.black},
-    white: {backgroundColor: theme.colors.white},
-    gray: {backgroundColor: theme.colors.gray},
-    gray2: {backgroundColor: theme.colors.gray2},
-    darkGray: {backgroundColor: theme.colors.darkGrey},
   });
+};
 export default getStyles;
