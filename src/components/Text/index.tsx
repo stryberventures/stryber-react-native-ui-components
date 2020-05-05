@@ -4,11 +4,15 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 interface ITypographyProps extends TextProps {
+  title?: boolean;
   h1?: boolean;
   h2?: boolean;
   h3?: boolean;
-  title?: boolean;
+  headline?: boolean;
   body?: boolean;
+  button?: boolean;
+  subhead?: boolean;
+  footnote?: boolean;
   caption?: boolean;
   small?: boolean;
   size?: number;
@@ -43,11 +47,15 @@ class Typography extends Component<ITypographyProps, {}> {
   static defaultProps: any;
   render() {
     const {
+      title,
       h1,
       h2,
       h3,
-      title,
+      headline,
       body,
+      button,
+      subhead,
+      footnote,
       caption,
       small,
       size,
@@ -81,11 +89,15 @@ class Typography extends Component<ITypographyProps, {}> {
     const styles: any = getStyles(theme);
     const textStyles = [
       styles.text,
+      title && styles.title,
       h1 && styles.h1,
       h2 && styles.h2,
       h3 && styles.h3,
-      title && styles.title,
+      headline && styles.headline,
       body && styles.body,
+      button && styles.button,
+      subhead && styles.subhead,
+      footnote && styles.footnote,
       caption && styles.caption,
       small && styles.small,
       size && {fontSize: size},
@@ -122,11 +134,15 @@ class Typography extends Component<ITypographyProps, {}> {
   }
 }
 Typography.defaultProps = {
+  title: false,
   h1: false,
   h2: false,
   h3: false,
-  title: false,
+  headline: false,
   body: false,
+  button: false,
+  subhead: false,
+  footnote: false,
   caption: false,
   small: false,
   size: 0,

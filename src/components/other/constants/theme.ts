@@ -44,6 +44,19 @@ const colors = {
   darkGreen: '#0e6f4d',
   lightBlue: '#57aaf2',
 };
+const fontSizes = {
+  title: 34,
+  h1: 28,
+  h2: 22,
+  h3: 20,
+  headline: 18,
+  body: 16,
+  button: 16,
+  subhead: 14,
+  footnote: 12,
+  caption: 12,
+  small: 12,
+};
 const sizes = {
   // global sizes
   base: 16,
@@ -64,39 +77,40 @@ const sizes = {
   // card
   cardPadding: 18,
   cardWithImgBgMinHeight: 308,
-  // font sizes
-  h1: 26,
-  h2: 20,
-  h3: 18,
-  title: 16,
-  body: 14,
-  caption: 12,
-  small: 10,
 };
 const fonts = {
   h1: {
-    fontSize: sizes.h1,
+    fontSize: fontSizes.h1,
   },
   h2: {
-    fontSize: sizes.h2,
+    fontSize: fontSizes.h2,
   },
   h3: {
-    fontSize: sizes.h3,
-  },
-  header: {
-    fontSize: sizes.header,
+    fontSize: fontSizes.h3,
   },
   title: {
-    fontSize: sizes.title,
+    fontSize: fontSizes.title,
+  },
+  headline: {
+    fontSize: fontSizes.headline,
   },
   body: {
-    fontSize: sizes.body,
+    fontSize: fontSizes.body,
+  },
+  button: {
+    fontSize: fontSizes.button,
+  },
+  subhead: {
+    fontSize: fontSizes.subhead,
+  },
+  footnote: {
+    fontSize: fontSizes.footnote,
   },
   caption: {
-    fontSize: sizes.caption,
+    fontSize: fontSizes.caption,
   },
   small: {
-    fontSize: sizes.small,
+    fontSize: fontSizes.small,
   },
   fontFamily: 'Open Sans',
 };
@@ -115,4 +129,4 @@ const spaces = {
   xxl15: 256,
   xxl16: 512,
 };
-export {key, colors, sizes, fonts, spaces};
+export {key, colors, sizes, fontSizes, fonts, spaces};

@@ -38,11 +38,15 @@ const getStyles = (theme = defaultTheme) =>
     gray: {color: theme.colors.gray},
     gray2: {color: theme.colors.gray2},
     // fonts
+    title: theme.fonts.title,
     h1: theme.fonts.h1,
     h2: theme.fonts.h2,
     h3: theme.fonts.h3,
-    title: theme.fonts.title,
+    headline: theme.fonts.headline,
     body: theme.fonts.body,
+    button: theme.fonts.button,
+    subhead: theme.fonts.subhead,
+    footnote: theme.fonts.footnote,
     caption: theme.fonts.caption,
     small: theme.fonts.small,
   });
