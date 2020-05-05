@@ -18,7 +18,10 @@ import {Button, Text} from '@stryberventures/stryber-react-native-ui-components'
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | **\`onPress\`**  | Function that will be executed when user tap on button component                                                           |
 | **\`opacity\`**  | On press opacity                                            |
-| **\`color\`** | Button background color. Default colors: accent, primary, secondary, tertiary, black, white, gray, gray2, darkGray                                            |
+| **\`color\`** | Button background color. Default colors - colors from matterhorn styleguide            |
+| **\`shape\`** | String, set shape of button corners. One of: rectangle, rounded, round           |
+| **\`icon\`** | String, add icon inside button. One of: ArrowDown, Calendar, Check, Eye, EyeDisabled, Search, UserIcon           |
+| **\`iconProps\`** | Object, add properties to the button icon.           |
 | **\`border\`** | Set border to button. Could be boolean(primary color by default) of color string                                             |
 | **\`style\`**  | An object with button styles                                            |
 | **\`gradient\`**      | Boolean, add gradient to button |
