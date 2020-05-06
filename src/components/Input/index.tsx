@@ -5,6 +5,7 @@ import {
   Easing,
   TouchableWithoutFeedback,
   TextInputProps,
+  View,
 } from 'react-native';
 import withTheme from '../withTheme';
 import Text from '../Text';
@@ -12,6 +13,8 @@ import Block from '../Block';
 import Button from '../Button';
 import getStyles from './styles';
 import {Eye, EyeDisabled} from '../Icons';
+import {MIN_NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from './constants';
+
 interface IInputProps extends TextInputProps {
   iconBackground?: boolean;
   name?: string;
@@ -30,6 +33,7 @@ interface IInputProps extends TextInputProps {
   disabled?: boolean;
   placeholderLabel?: string;
   placeholder?: string;
+  labelOnTop?: boolean;
   required?: boolean;
   withLeftBorder?: boolean;
   icon?: (...args: any[]) => any;
@@ -43,6 +47,9 @@ interface IInputProps extends TextInputProps {
   maxLength?: number;
   props?: any;
   length?: any;
+  multiline?: boolean;
+  minNumberOfLines?: number;
+  maxNumberOfLines?: number;
 }
 type InputState = {
   setValue?: any;
@@ -83,7 +90,7 @@ class Input extends Component<IInputProps, InputState> {
     if (this.props.value) {
       this.state.movePlaceholder = true;
       this.state.animated.placeholder.fontSize.setValue(12);
-      this.state.animated.placeholder.positionTop.setValue(3);
+      this.state.animated.placeholder.positionTop.setValue(8);
       this.state.animated.translateY.setValue(1);
     }
   }
@@ -117,16 +124,41 @@ class Input extends Component<IInputProps, InputState> {
     this.setState({value});
   }
   renderLabel = () => {
-    const {theme, placeholder, required} = this.props;
+    const {
+      theme,
+      placeholder,
+      required,
+      error,
+      labelOnTop,
+      disabled,
+    } = this.props;
     const {movePlaceholder} = this.state;
     const styles = getStyles({
       // @ts-ignore
       theme,
       additionalPaddingLeft: this.getAdditionalPadding(),
     });
+
+    if (labelOnTop) {
+      return (
+        <View style={[styles.placeholderOnTop]}>
+          <Text
+            style={[
+              styles.placeholderText,
+              styles.placeholderTextOnTop,
+              error ? styles.placeholderTextError : {},
+              disabled ? styles.placeholderTextOnTopDisabled : {},
+            ]}>
+            {`${placeholder} ${required ? '*' : ''}`}
+          </Text>
+        </View>
+      );
+    }
+
     if (!movePlaceholder) {
       return null;
     }
+
     return (
       <Animated.View
         shouldRasterizeIOS
@@ -143,6 +175,7 @@ class Input extends Component<IInputProps, InputState> {
             styles.placeholderText,
             styles.placeholderAnimatedText,
             {fontSize: this.state.animated.placeholder.fontSize},
+            error ? styles.placeholderAnimatedTextError : {},
           ]}>
           {`${placeholder} ${required ? '*' : ''}`}
         </Animated.Text>
@@ -184,11 +217,8 @@ class Input extends Component<IInputProps, InputState> {
     const {theme, errorStyle, error} = this.props;
     // @ts-ignore
     const styles = getStyles({theme});
-    return (
-      <Text light style={[errorStyle, styles.error]}>
-        {error}
-      </Text>
-    );
+
+    return <Text style={[errorStyle, styles.error]}>{error}</Text>;
   }
   animate() {
     const animatedPlaceholder = !this.state.movePlaceholder
@@ -200,7 +230,7 @@ class Input extends Component<IInputProps, InputState> {
             useNativeDriver: false,
           }),
           Animated.timing(this.state.animated.placeholder.positionTop, {
-            toValue: 3,
+            toValue: 8,
             duration: 100,
             easing: Easing.linear,
             useNativeDriver: false,
@@ -220,7 +250,7 @@ class Input extends Component<IInputProps, InputState> {
   }
   getAdditionalPadding = () => {
     const {withLeftBorder, icon, iconBackground} = this.props;
-    if (!icon!() && withLeftBorder) return 7;
+    if (!icon!() && withLeftBorder) return 11;
     else if (icon!() && iconBackground) return 45;
     else if (icon!()) return 30;
     else return 0;
@@ -228,7 +258,7 @@ class Input extends Component<IInputProps, InputState> {
   getBlockBackgroundColor = () => {
     const {theme, disabled, error} = this.props;
     if (disabled) {
-      return theme!.colors.gray2;
+      return theme!.colors.gray15;
     } else if (error) {
       return theme!.colors.accent;
     }
@@ -257,9 +287,13 @@ class Input extends Component<IInputProps, InputState> {
       error,
       iconBackground,
       maxLength,
+      multiline,
+      minNumberOfLines,
+      maxNumberOfLines,
+      labelOnTop,
       ...props
     } = this.props;
-    const {toggleSecure, focused} = this.state;
+    const {toggleSecure, focused, movePlaceholder} = this.state;
     const styles = getStyles({
       // @ts-ignore
       theme,
@@ -270,6 +304,11 @@ class Input extends Component<IInputProps, InputState> {
       additionalPaddingLeft: this.getAdditionalPadding(),
       disablePaddingRight: secure,
       borderColor,
+      movePlaceholder,
+      multiline,
+      minNumberOfLines,
+      maxNumberOfLines,
+      labelOnTop,
     });
     const isSecure = toggleSecure ? false : secure;
     const inputStyles = [
@@ -277,6 +316,7 @@ class Input extends Component<IInputProps, InputState> {
       style,
       borderColor && {borderColor: borderColor},
       error && {borderColor: theme!.colors.accent},
+      focused && styles.inputFocused,
     ];
     const ref = this.inputRef;
     const inputType = email
@@ -289,6 +329,7 @@ class Input extends Component<IInputProps, InputState> {
     const editable = placeholderLabel ? !placeholderLabel : !disabled;
     return (
       <Block flex={0}>
+        {labelOnTop && this.renderLabel()}
         <Block
           flex={0}
           style={styles.container}
@@ -321,14 +362,18 @@ class Input extends Component<IInputProps, InputState> {
               <Block
                 animated
                 style={{
-                  transform: [
-                    {
-                      translateY: this.state.animated.translateY.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 7],
-                      }),
-                    },
-                  ],
+                  transform: labelOnTop
+                    ? []
+                    : [
+                        {
+                          translateY: this.state.animated.translateY.interpolate(
+                            {
+                              inputRange: [0, 1],
+                              outputRange: [0, 7],
+                            },
+                          ),
+                        },
+                      ],
                 }}>
                 <TextInput
                   secureTextEntry={isSecure}
@@ -337,6 +382,8 @@ class Input extends Component<IInputProps, InputState> {
                   autoCapitalize="none"
                   autoCorrect={false}
                   style={styles.textInput}
+                  multiline={multiline}
+                  numberOfLines={(multiline && minNumberOfLines) || 1}
                   onFocus={() => {
                     this.animate();
                     this.setState({focused: true}, () =>
@@ -361,7 +408,7 @@ class Input extends Component<IInputProps, InputState> {
                   ref={ref}
                   editable={editable}
                   placeholder={placeholder || placeholderLabel}
-                  placeholderTextColor={theme!.colors.gray2}
+                  placeholderTextColor={theme!.colors.gray15}
                   {...props}
                   value={this.getValue()}
                 />
@@ -370,7 +417,7 @@ class Input extends Component<IInputProps, InputState> {
               {this.renderRight()}
             </Block>
           </TouchableWithoutFeedback>
-          {this.renderLabel()}
+          {!labelOnTop && this.renderLabel()}
         </Block>
         {this.renderError()}
       </Block>
@@ -396,6 +443,10 @@ Input.defaultProps = {
   secure: false,
   required: false,
   disabled: false,
+  multiline: false,
+  labelOnTop: false,
+  minNumberOfLines: MIN_NUMBER_OF_LINES,
+  maxNumberOfLines: MAX_NUMBER_OF_LINES,
   borderColor: '',
   style: {},
   errorStyle: {},

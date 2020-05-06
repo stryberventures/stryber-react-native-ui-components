@@ -20,6 +20,8 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   disabled?: boolean;
   value?: string | number;
   label?: string;
+  placeholder?: string;
+  labelOnTop?: boolean;
   hitSlop?: {};
   data?: any[];
   valueExtractor?: (...args: any[]) => any;
@@ -50,6 +52,8 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   fontSize?: number;
   textColor?: string;
   itemColor?: string;
+  itemBgColor?: string;
+  evenItemBgColor?: string;
   baseColor?: string;
   itemCount?: number;
   itemPadding?: number;
@@ -192,7 +196,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         const visibleItemCount = this.visibleItemCount();
         const itemSize = this.itemSize();
         const height = 2 * itemPadding! + itemSize * visibleItemCount;
-        const top = y + dropdownOffset!.top - itemPadding!;
+        const top = y + dropdownOffset!.top + itemSize + itemPadding!;
         const bottomEdge =
           dimensions.height < top + height
             ? dimensions.height + dropdownOffset!.top - (top + containerHeight)
@@ -351,26 +355,28 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return value;
   };
   renderBase(props: any) {
-    const {value} = this.state;
-    const {data, labelExtractor, label, theme} = this.props;
-    const index = this.selectedIndex();
-    let title;
-    if (index >= 0) {
-      title = labelExtractor!(data![index]);
-    }
-    if (title == null) {
-      title = value;
-    }
-    title = title == null || typeof title === 'string' ? title : String(title);
+    const {label, placeholder, labelOnTop} = this.props;
+    const angle = this.state.opacity.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '180deg'],
+    });
+
     return (
       <Input
         {...props}
         value=""
-        label=""
-        placeholderLabel={this.checkValueLength(title) || label}
+        labelOnTop={labelOnTop}
+        placeholderLabel={label}
+        placeholder={placeholder}
         ref={this.input}
-        placeholderTextColor={title ? theme.colors.darkGrey : theme.colors.gray}
-        rightLabel={() => <ArrowDown />}
+        rightLabel={() => (
+          <Animated.View
+            style={{
+              transform: [{rotate: angle}],
+            }}>
+            <ArrowDown />
+          </Animated.View>
+        )}
       />
     );
   }
@@ -413,8 +419,10 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       labelExtractor,
       propsExtractor,
       theme,
-      textColor = theme.colors.darkGrey,
-      itemColor = theme.colors.gray2,
+      textColor = theme.colors.gray70,
+      itemColor = theme.colors.gray70,
+      itemBgColor = theme.colors.white,
+      evenItemBgColor = theme.colors.gray5,
       baseColor = theme.colors.gray,
       selectedItemColor = textColor,
       disabledItemColor = baseColor,
@@ -439,6 +447,11 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     const value = valueExtractor!(item);
     const label = labelExtractor!(item);
     const title = label == null ? value : label;
+    const even = (index + 1) % 2 === 0;
+    let bgColor = even ? evenItemBgColor : itemBgColor;
+    const itemStyle = {
+      backgroundColor: bgColor,
+    };
     let color;
     if (disabled) {
       color = disabledItemColor;
@@ -466,8 +479,10 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       <DropdownItem
         index={index}
         {...props}
-        style={[styles.item, itemTextStyle, containerLastBorder]}>
-        <Text style={[styles.item, itemTextStyle, textStyle]} numberOfLines={1}>
+        style={[styles.item, itemTextStyle, itemStyle, containerLastBorder]}>
+        <Text
+          style={[styles.itemText, itemTextStyle, textStyle]}
+          numberOfLines={1}>
           {title}
         </Text>
       </DropdownItem>
@@ -501,7 +516,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     const itemCount = data!.length;
     const visibleItemCount = this.visibleItemCount();
     const itemSize = this.itemSize();
-    const height = 2 * itemPadding! + itemSize * visibleItemCount;
+    const height = itemSize * visibleItemCount;
     const translateY = -itemPadding!;
     const overlayStyle = {opacity};
     const pickerStyle = {
@@ -542,15 +557,17 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
             <View
               style={[styles.picker, pickerStyle, pickerStyleOverrides]}
               onStartShouldSetResponder={() => true}>
-              <FlatList
-                ref={this.scroll}
-                data={data}
-                style={[styles.scroll]}
-                renderItem={this.renderItem}
-                keyExtractor={this.keyExtractor}
-                scrollEnabled={visibleItemCount < itemCount}
-                contentContainerStyle={styles.scrollContainer}
-              />
+              <View style={styles.scrollWrapper}>
+                <FlatList
+                  ref={this.scroll}
+                  data={data}
+                  style={[styles.scroll]}
+                  renderItem={this.renderItem}
+                  keyExtractor={this.keyExtractor}
+                  scrollEnabled={visibleItemCount < itemCount}
+                  contentContainerStyle={styles.scrollContainer}
+                />
+              </View>
             </View>
           </Animated.View>
         </Modal>
@@ -599,7 +616,7 @@ Dropdown.defaultProps = {
   animationDuration: 225,
   fontSize: 16,
   itemCount: 4,
-  itemPadding: 8,
+  itemPadding: 10,
   useNativeDriver: false,
   onLayout: () => {},
   onFocus: () => {},

@@ -88,4 +88,92 @@ storiesOf("Input", module)
       icon={() => <UserIcon />}
     />
   ))
-  .add("password", () => <Input secure placeholder={placeholder} />);
+  .add("password", () => <Input secure placeholder={placeholder} />)
+  .add("multiline disabled", () => {
+    return (
+      <Input
+        placeholder={placeholder}
+        type="email"
+        label="Email"
+        disabled
+        multiline
+      />
+    );
+  })
+  .add("multiline default", () => {
+    const testRef = React.createRef();
+    return (
+      <Input
+        onFocus={linkTo("Input", "multiline focused")}
+        placeholder={placeholder}
+        type="email"
+        label="Email"
+        ref={testRef}
+        multiline
+      />
+    );
+  })
+  .add("multiline focused", () => (
+    <Input label="Email" multiline placeholder={placeholder} type="email" autoFocus />
+  ))
+  .add("multiline with default value", () => {
+    return (
+      <Input
+        placeholder={placeholder}
+        value="Default value"
+        type="email"
+        label="Email"
+        multiline
+      />
+    );
+  })
+  .add("multiline with error", () => (
+    <Input
+      label="Email"
+      value="Wrong text"
+      error="Error text"
+      placeholder={placeholder}
+      type="email"
+      multiline
+    />
+  ))
+  .add("multiline with mask", () => (
+    <Input
+      label="Card date"
+      number
+      placeholder={placeholder}
+      type="card"
+      mask="XX/XX"
+      maxLength={5}
+      multiline
+    />
+  ))
+  .add("multiline with icon", () => (
+    <Input
+      email
+      withLeftBorder={false}
+      placeholder={placeholder}
+      icon={() => <UserIcon />}
+      multiline
+    />
+  ))
+  .add("multiline with icon disabled", () => (
+    <Input
+      email
+      withLeftBorder={false}
+      disabled
+      placeholder={placeholder}
+      icon={() => <UserIcon />}
+      multiline
+    />
+  ))
+  .add("multiline with icon error", () => (
+    <Input
+      email
+      withLeftBorder={false}
+      error="Error text"
+      placeholder={placeholder}
+      icon={() => <UserIcon />}
+      multiline
+    />
+  ));

@@ -32,13 +32,15 @@ const getStyles = (theme = defaultTheme) =>
     },
     picker: {
       backgroundColor: 'rgba(255, 255, 255, 1.0)',
-      borderRadius: theme.sizes.radius,
+      borderBottomLeftRadius: theme.sizes.radius,
+      borderBottomRightRadius: theme.sizes.radius,
+      borderTopWidth: 0,
       position: 'absolute',
       ...Platform.select({
         ios: {
-          shadowRadius: 2,
+          shadowRadius: 1,
           shadowColor: 'rgba(0, 0, 0, 1.0)',
-          shadowOpacity: 0.54,
+          shadowOpacity: 0.24,
           shadowOffset: {width: 0, height: 2},
         },
         android: {
@@ -48,10 +50,21 @@ const getStyles = (theme = defaultTheme) =>
     },
     scroll: {
       flex: 1,
-      borderRadius: 2,
     },
-    scrollContainer: {
-      paddingVertical: 5,
+    scrollWrapper: {
+      flex: 1,
+      overflow: 'hidden',
+      borderRadius: theme.sizes.radius,
+    },
+    scrollContainer: {},
+    item: {
+      alignItems: 'flex-start',
+      paddingHorizontal: 10,
+      paddingLeft: 28,
+    },
+    itemText: {
+      color: theme.colors.gray70,
+      fontSize: theme.fontSizes.body,
     },
   });
 export default getStyles;
