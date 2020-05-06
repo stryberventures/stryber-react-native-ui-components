@@ -1,24 +1,41 @@
 import {StyleSheet} from 'react-native';
+
 import {defaultTheme} from '../other/constants';
+import {IButtonProps} from './index';
 
-interface IProps {
-  color?: string;
-}
-
-const getStyles = (theme = defaultTheme, {color}: IProps) => {
-  const buttonBackgroundColor = !color
+const getStyles = (theme = defaultTheme, props: IButtonProps) => {
+  const buttonBackgroundColor =
+    props.link || !props.color
+      ? 'transparent'
+      : theme.colors.hasOwnProperty(props.color)
+      ? theme.colors[props.color as keyof typeof defaultTheme.colors]
+      : props.color;
+  const buttonHeight = props.link
     ? undefined
-    : theme.colors.hasOwnProperty(color)
-    ? theme.colors[color as keyof typeof defaultTheme.colors]
-    : color;
+    : props.small
+    ? theme.spaces.xxl5
+    : props.mini
+    ? theme.spaces.xxl2
+    : theme.spaces.xxl8;
+  const buttonWidth = props.link
+    ? undefined
+    : props.small
+    ? theme.sizes.smallButtonWidth
+    : props.mini
+    ? theme.sizes.miniButtonWidth
+    : undefined;
 
   return StyleSheet.create({
     button: {
       borderRadius: theme.sizes.radius,
-      height: theme.sizes.buttonHeight,
       justifyContent: 'center',
       marginVertical: theme.sizes.padding / 3,
       backgroundColor: buttonBackgroundColor,
+      height: buttonHeight,
+      paddingHorizontal: props.link ? theme.spaces.xs : theme.spaces.m,
+      paddingVertical: props.link ? theme.spaces.xxs : undefined,
+      width: buttonWidth,
+      alignSelf: props.link ? 'flex-start' : undefined,
     },
     childrenWrapper: {
       flexDirection: 'row',

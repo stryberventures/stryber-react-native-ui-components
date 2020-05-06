@@ -67,7 +67,8 @@ const sizes = {
   padding: 25,
   checkbox: 22,
   checkboxIcon: 15,
-  buttonHeight: 44,
+  smallButtonWidth: 137,
+  miniButtonWidth: 115,
   // input sizes
   inputHeight: 43,
   borderWidth: 1,
