@@ -117,6 +117,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
             <View style={[styles.modalBtnContainer, modalBtnContainer]}>
               <Button
                 // @ts-ignore
+                title={modalButtonText}
                 style={[modalButtonStyle]}
                 onPress={this.handleModalClose}
               />
