@@ -29,7 +29,7 @@ class Badge extends Component<IBadgeProps, {}> {
         card
         onPress={onPress}
         style={[styles.badge, ...badgeStyles]}>
-        <Text size={theme.sizes.caption - 2} white style={textStyle}>
+        <Text size={theme.fonts.caption.fontSize - 2} white style={textStyle}>
           {value}
         </Text>
       </Block>

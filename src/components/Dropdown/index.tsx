@@ -96,9 +96,17 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   ripple: any;
   scroll: any;
 
-  static getDerivedStateFromProps(nextProps: IDropdownProps) {
+  static getDerivedStateFromProps(
+    nextProps: IDropdownProps,
+    nextState: DropdownState,
+  ) {
+    if (nextProps.value) {
+      return {
+        value: nextProps.value,
+      };
+    }
     return {
-      value: nextProps.value,
+      value: nextState.value,
     };
   }
 
