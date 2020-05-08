@@ -54,7 +54,6 @@ class Block extends React.Component<IBlockProps, {}> {
       children,
       theme,
       onPress,
-      // eslint-disable-next-line react/prop-types
       Component = onPress ? TouchableOpacity : View,
       ...props
     } = this.props;

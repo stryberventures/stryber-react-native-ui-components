@@ -73,11 +73,10 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       <TouchableOpacity
         style={styles.container}
         activeOpacity={opacity}
-        // @ts-ignore
         onPress={
           this.props.shouldCheckboxChange
             ? this.spring.bind(this, Easing.bounce)
-            : null
+            : undefined
         }>
         {this.renderCheckIcon()}
         <Block style={styles.textContainer}>
