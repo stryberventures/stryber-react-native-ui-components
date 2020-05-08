@@ -1,57 +1,57 @@
-import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import React, {Component} from 'react';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import {ArrowDown} from '../../../components/Icons';
 import {
   Card,
   Switch,
   Accordion,
   Collapse,
   Block,
-  Text
-} from "../../../components";
+  Text,
+} from '../../../components';
 const SECTIONS = [
   {
-    columnNames: ["Konto Plus", "10%", "0.1%"],
-    contents: ["Context Field", "Old Value", "New Value"]
+    columnNames: ['Konto Plus', '10%', '0.1%'],
+    contents: ['Context Field', 'Old Value', 'New Value'],
   },
   {
-    columnNames: ["Konto Plus", "10%", "0.1%"],
-    contents: ["Context Field", "Old Value", "New Value"]
+    columnNames: ['Konto Plus', '10%', '0.1%'],
+    contents: ['Context Field', 'Old Value', 'New Value'],
   },
   {
-    columnNames: ["Konto Plus", "10%", "0.1%"],
-    contents: ["Context Field", "Old Value", "New Value"]
+    columnNames: ['Konto Plus', '10%', '0.1%'],
+    contents: ['Context Field', 'Old Value', 'New Value'],
   },
   {
-    columnNames: ["Konto Plus", "10%", "0.1%"],
-    contents: ["Context Field", "Old Value", "New Value"]
+    columnNames: ['Konto Plus', '10%', '0.1%'],
+    contents: ['Context Field', 'Old Value', 'New Value'],
   },
   {
-    columnNames: ["Konto Plus", "10%", "0.1%"],
-    contents: ["Context Field", "Old Value", "New Value"]
+    columnNames: ['Konto Plus', '10%', '0.1%'],
+    contents: ['Context Field', 'Old Value', 'New Value'],
   },
   {
-    columnNames: ["Konto Plus", "10%", "0.1%"],
-    contents: ["Context Field", "Old Value", "New Value"]
-  }
+    columnNames: ['Konto Plus', '10%', '0.1%'],
+    contents: ['Context Field', 'Old Value', 'New Value'],
+  },
 ];
 const SELECTORS = [
   {
-    title: "First",
-    value: 0
+    title: 'First',
+    value: 0,
   },
   {
-    title: "Fifth",
-    value: 4
+    title: 'Fifth',
+    value: 4,
   },
   {
-    title: "None"
-  }
+    title: 'None',
+  },
 ];
 export const CollapsePreview = () => {
   const [collapse, toggleCollapse] = React.useState(true);
   return (
-    <View style={{ height: 100 }}>
+    <View style={{height: 100}}>
       <Block flex={0} onPress={() => toggleCollapse(!collapse)}>
         <Text>Toggle content</Text>
       </Block>
@@ -59,18 +59,17 @@ export const CollapsePreview = () => {
         duration={700}
         align="bottom"
         /* eslint-disable-next-line no-console */
-        onAnimationEnd={() => console.log("End")}
-        collapsed={collapse}
-      >
+        onAnimationEnd={() => console.log('End')}
+        collapsed={collapse}>
         <Text>Main Content</Text>
       </Collapse>
     </View>
   );
 };
 type AccordionPreviewState = {
-  activeSections?: any,
-  openMultiple?: boolean,
-  includes?: (searchElement: any, fromIndex?: number) => boolean
+  activeSections?: any;
+  openMultiple?: boolean;
+  includes?: (searchElement: any, fromIndex?: number) => boolean;
 };
 export default class AccordionPreview extends Component<
   {},
@@ -78,16 +77,15 @@ export default class AccordionPreview extends Component<
 > {
   state = {
     activeSections: [],
-    openMultiple: false
+    openMultiple: false,
   };
   renderHeader = (section, index, isOpen) => {
     return (
       <View
         style={[
           styles.header,
-          index % 2 === 1 ? { backgroundColor: "#eceff1" } : {}
-        ]}
-      >
+          index % 2 === 1 ? {backgroundColor: '#eceff1'} : {},
+        ]}>
         {section.columnNames.map((name, idx) => (
           <Text key={idx} style={styles.headerText}>
             {name}
@@ -95,16 +93,11 @@ export default class AccordionPreview extends Component<
         ))}
         <View
           style={{
-            position: "absolute",
+            position: 'absolute',
             right: 10,
-            top: 10
-          }}
-        >
-          {isOpen ? (
-            <Icon name="ios-arrow-up" size={20} color="#90a4ae" />
-          ) : (
-            <Icon name="ios-arrow-down" size={20} color="#90a4ae" />
-          )}
+            top: 10,
+          }}>
+          <ArrowDown />
         </View>
       </View>
     );
@@ -114,9 +107,8 @@ export default class AccordionPreview extends Component<
       <View
         style={[
           styles.content,
-          index % 2 === 1 ? { backgroundColor: "#eceff1" } : {}
-        ]}
-      >
+          index % 2 === 1 ? {backgroundColor: '#eceff1'} : {},
+        ]}>
         {section.contents.map((content, idx) => (
           <Text key={idx} style={styles.headerText}>
             {content}
@@ -126,23 +118,23 @@ export default class AccordionPreview extends Component<
     );
   };
   updateSections = activeSections => {
-    this.setState({ activeSections });
+    this.setState({activeSections});
   };
   setSections = sections => {
     this.setState({
-      activeSections: sections.includes(undefined) ? [] : sections
+      activeSections: sections.includes(undefined) ? [] : sections,
     });
   };
   render() {
     return (
       <View>
         <Switch
-          style={{ marginBottom: 20, alignSelf: "center" }}
+          style={{marginBottom: 20, alignSelf: 'center'}}
           text="Multiple open"
           isChacked={this.state.openMultiple}
           onPress={() =>
             this.setState(prevState => ({
-              openMultiple: !prevState.openMultiple
+              openMultiple: !prevState.openMultiple,
             }))
           }
         />
@@ -153,15 +145,13 @@ export default class AccordionPreview extends Component<
           {SELECTORS.map(selector => (
             <TouchableOpacity
               key={selector.title}
-              onPress={() => this.setSections([selector.value])}
-            >
+              onPress={() => this.setSections([selector.value])}>
               <Card style={styles.selector}>
                 <Text
                   style={
                     this.state.activeSections.includes(selector.value) &&
                     styles.activeSelector
-                  }
-                >
+                  }>
                   {selector.title}
                 </Text>
               </Card>
@@ -191,67 +181,67 @@ export default class AccordionPreview extends Component<
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5FCFF",
-    paddingTop: 10
+    backgroundColor: '#F5FCFF',
+    paddingTop: 10,
   },
   title: {
-    textAlign: "center",
+    textAlign: 'center',
     fontSize: 22,
-    fontWeight: "300",
-    marginBottom: 20
+    fontWeight: '300',
+    marginBottom: 20,
   },
   header: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 10,
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   headerTitle: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 10,
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingVertical: 20,
     borderBottomWidth: 0.5,
-    borderColor: "#95acbf"
+    borderColor: '#95acbf',
   },
   headerText: {
     fontSize: 14,
-    width: "40%"
+    width: '40%',
   },
   content: {
     padding: 10,
-    flexDirection: "row"
+    flexDirection: 'row',
   },
   active: {
-    backgroundColor: "rgba(255,255,255,1)"
+    backgroundColor: 'rgba(255,255,255,1)',
   },
   inactive: {
-    backgroundColor: "rgba(245,252,255,1)"
+    backgroundColor: 'rgba(245,252,255,1)',
   },
   selectors: {
     marginBottom: 10,
-    flexDirection: "row",
-    justifyContent: "center"
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
   selector: {
-    backgroundColor: "#F5FCFF",
-    padding: 10
+    backgroundColor: '#F5FCFF',
+    padding: 10,
   },
   activeSelector: {
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
   selectTitle: {
     fontSize: 14,
-    fontWeight: "500",
-    padding: 10
+    fontWeight: '500',
+    padding: 10,
   },
   multipleToggle: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginVertical: 30,
-    alignItems: "center"
+    alignItems: 'center',
   },
   multipleToggle__title: {
     fontSize: 16,
-    marginRight: 8
-  }
+    marginRight: 8,
+  },
 });
