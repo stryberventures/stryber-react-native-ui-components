@@ -90,7 +90,6 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       modalStyle,
       modalBtnContainer,
       modalButtonStyle,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       modalButtonText,
       ...props
     } = this.props;

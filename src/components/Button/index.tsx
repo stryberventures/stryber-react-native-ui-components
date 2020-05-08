@@ -113,7 +113,6 @@ class Button extends React.Component<IButtonProps, {}> {
       children,
       theme,
       border,
-      // eslint-disable-next-line react/prop-types
       Component = gradient ? LinearGradient : View,
       shape,
       icon,
