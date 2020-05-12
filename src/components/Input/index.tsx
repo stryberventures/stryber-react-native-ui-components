@@ -127,6 +127,7 @@ class Input extends Component<IInputProps, InputState> {
     const {
       theme,
       placeholder,
+      placeholderLabel,
       required,
       error,
       labelOnTop,
@@ -149,7 +150,7 @@ class Input extends Component<IInputProps, InputState> {
               error ? styles.placeholderTextError : {},
               disabled ? styles.placeholderTextOnTopDisabled : {},
             ]}>
-            {`${placeholder} ${required ? '*' : ''}`}
+            {`${placeholderLabel} ${required ? '*' : ''}`}
           </Text>
         </View>
       );
@@ -251,9 +252,9 @@ class Input extends Component<IInputProps, InputState> {
   getAdditionalPadding = () => {
     const {withLeftBorder, icon, iconBackground} = this.props;
     if (!icon!() && withLeftBorder) return 11;
-    else if (icon!() && iconBackground) return 45;
-    else if (icon!()) return 30;
-    else return 0;
+    else if (icon!() && iconBackground) return 60;
+    else if (icon!()) return 40;
+    else return 10;
   };
   getBlockBackgroundColor = () => {
     const {theme, disabled, error} = this.props;
@@ -354,10 +355,12 @@ class Input extends Component<IInputProps, InputState> {
                     style={styles.rotatedBlock}
                     color={this.getBlockBackgroundColor()}
                   />
-                  {icon!()}
+                  <View style={styles.iconContainer}>{icon!()}</View>
                 </Block>
               ) : (
-                <Block style={styles.leftBlock}>{icon!()}</Block>
+                <Block style={styles.leftBlock}>
+                  <View style={styles.iconContainer}>{icon!()}</View>
+                </Block>
               )}
               <Block
                 animated

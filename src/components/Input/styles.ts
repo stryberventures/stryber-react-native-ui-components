@@ -106,12 +106,12 @@ const getStyles = ({
       paddingVertical: 5,
     },
     leftBlock: {
-      width: 50,
+      width: 65,
       position: 'absolute',
+      zIndex: 1,
       left: 0,
       top: 0,
       bottom: 0,
-      zIndex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       paddingRight: 11.5,
@@ -121,14 +121,13 @@ const getStyles = ({
       width: theme.sizes.inputHeight - 8,
       right: 0,
       top: 4,
-      height: theme.sizes.inputHeight - 8,
+      bottom: 4,
       transform: [
         {rotateZ: '146deg'},
         {rotateX: '-10rad'},
         {rotateY: '-10rad'},
       ],
       borderRadius: theme.sizes.radius,
-      zIndex: -3,
     },
     additionalLeftBlock: {
       position: 'absolute',
@@ -142,6 +141,10 @@ const getStyles = ({
       justifyContent: 'center',
       flex: 0,
       marginRight: 10,
+    },
+    iconContainer: {
+      position: 'relative',
+      zIndex: 2,
     },
   });
 export default getStyles;

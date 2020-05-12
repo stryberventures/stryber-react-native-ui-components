@@ -15,20 +15,25 @@ storiesOf("Dropdown", module)
           placeholder="Choose item..."
           data={[
             {
-              value: "Banana"
+              value: "Banana",
+              label: "Babana",
             },
             {
-              value: "Mango"
+              value: "Mango",
+              label: "Mango",
             },
             {
-              value: "Pear"
+              value: "Pear",
+              label: "Pear",
             },
             {
-              value: "Cocoa"
+              value: "Cocoa",
+              label: "Cocoa",
             },
             {
-              value: "Cherry"
-            }
+              value: "Cherry",
+              label: "Cherry",
+            },
           ]}
         />
       </CenterView>

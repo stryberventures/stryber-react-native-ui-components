@@ -76,6 +76,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   disabledItemColor?: any;
   itemTextStyle?: any;
   rippleColor?: any;
+  withLeftBorder?: boolean;
 }
 type DropdownState = {
   opacity?: any;
@@ -245,6 +246,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       }
       if (this.mounted) {
         this.setState({value, modal: false});
+        this.input.current.setValue(value);
       }
     });
   };
@@ -348,14 +350,14 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     const {valueExtractor} = this.props;
     return `${index}-${valueExtractor!(item)}`;
   };
-  checkValueLength = (value: any) => {
+  cropStringToAccepted = (value: any) => {
     if (value.length > 45) {
       return `${value.slice(0, 42)}...`;
     }
     return value;
   };
   renderBase(props: any) {
-    const {label, placeholder, labelOnTop, theme} = this.props;
+    const {label, placeholder, labelOnTop, theme, withLeftBorder} = this.props;
     const angle = this.state.opacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
@@ -364,8 +366,9 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return (
       <Input
         {...props}
-        value=""
+        value={this.props.value}
         labelOnTop={labelOnTop}
+        withLeftBorder={withLeftBorder}
         borderColor={this.focused ? theme.colors.blue : theme.colors.gray15}
         placeholderLabel={label}
         placeholder={placeholder}
@@ -626,4 +629,5 @@ Dropdown.defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   dropdownPosition: null,
+  withLeftBorder: true,
 };
