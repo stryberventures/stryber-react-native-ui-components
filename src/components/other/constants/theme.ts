@@ -62,7 +62,8 @@ const sizes = {
   base: 16,
   font: 14,
   smallRadius: 2,
-  radius: 8,
+  radius: 4,
+  blockRadius: 8,
   largeRadius: 50,
   padding: 25,
   checkbox: 22,
@@ -76,7 +77,7 @@ const sizes = {
   // header
   header: 50,
   // card
-  cardPadding: 18,
+  cardPadding: 16,
   cardWithImgBgMinHeight: 308,
 };
 const fonts = {
