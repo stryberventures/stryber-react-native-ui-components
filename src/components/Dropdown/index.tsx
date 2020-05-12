@@ -355,7 +355,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return value;
   };
   renderBase(props: any) {
-    const {label, placeholder, labelOnTop} = this.props;
+    const {label, placeholder, labelOnTop, theme} = this.props;
     const angle = this.state.opacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
@@ -366,6 +366,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         {...props}
         value=""
         labelOnTop={labelOnTop}
+        borderColor={this.focused ? theme.colors.blue : theme.colors.gray15}
         placeholderLabel={label}
         placeholder={placeholder}
         ref={this.input}
@@ -374,7 +375,9 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
             style={{
               transform: [{rotate: angle}],
             }}>
-            <ArrowDown />
+            <ArrowDown
+              fill={this.focused ? theme.colors.blue : theme.colors.gray15}
+            />
           </Animated.View>
         )}
       />

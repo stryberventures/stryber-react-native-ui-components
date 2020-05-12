@@ -8,25 +8,6 @@ const getStyles = (theme = defaultTheme) =>
       justifyContent: 'center',
       alignItems: 'center',
     },
-    triangle: {
-      width: 8,
-      height: 8,
-      transform: [
-        {
-          translateY: -4,
-        },
-        {
-          rotate: '45deg',
-        },
-      ],
-    },
-    triangleContainer: {
-      width: 12,
-      height: 6,
-      overflow: 'hidden',
-      alignItems: 'center',
-      backgroundColor: 'transparent',
-    },
     overlay: {
       ...StyleSheet.absoluteFillObject,
     },
