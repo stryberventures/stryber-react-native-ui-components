@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {TouchableOpacity, View, ViewProps} from 'react-native';
+import {TouchableOpacity, View, TouchableOpacityProps} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import getStyles from './styles';
 import withTheme from '../withTheme';
 import Ripple from '../Ripple';
 import Block from '../Block';
 import * as Icons from '../Icons';
-interface IButtonProps extends ViewProps {
+export interface IButtonProps extends TouchableOpacityProps {
   style?: any;
   opacity?: number;
   gradient?: boolean;
@@ -44,6 +44,9 @@ interface IButtonProps extends ViewProps {
   shape?: 'rectangle' | 'rounded' | 'round';
   icon?: keyof typeof Icons;
   iconProps?: any;
+  small?: boolean;
+  mini?: boolean;
+  link?: boolean;
 }
 class Button extends React.Component<IButtonProps, {}> {
   static defaultProps: any;
@@ -101,7 +104,6 @@ class Button extends React.Component<IButtonProps, {}> {
       style,
       opacity,
       gradient,
-      color,
       startColor,
       endColor,
       end,
@@ -111,15 +113,15 @@ class Button extends React.Component<IButtonProps, {}> {
       children,
       theme,
       border,
-      // eslint-disable-next-line react/prop-types
       Component = gradient ? LinearGradient : View,
       shape,
       icon,
       iconProps,
+      link,
       ...props
     } = this.props;
     const IconComponent = icon && Icons[icon];
-    const styles: any = getStyles(theme, {color});
+    const styles: any = getStyles(theme, this.props);
     const buttonStyles = [
       styles.button,
       shape && styles[shape],
@@ -130,7 +132,7 @@ class Button extends React.Component<IButtonProps, {}> {
       },
       style,
     ];
-    let childrenWrapperProps = gradient
+    const childrenWrapperProps = gradient
       ? {
           start: start,
           end: end,
@@ -150,13 +152,17 @@ class Button extends React.Component<IButtonProps, {}> {
         activeOpacity={opacity || 0.8}
         onPress={this.handlePress}
         style={buttonStyles}>
-        <Block middle pointerEvents="box-only">
-          <Component {...childrenWrapperProps}>
-            {icon && <IconComponent {...iconProps} />}
-            {children}
-          </Component>
-          {this.renderRipple()}
-        </Block>
+        {link ? (
+          children
+        ) : (
+          <Block middle pointerEvents="box-only">
+            <Component {...childrenWrapperProps}>
+              {icon && <IconComponent {...iconProps} />}
+              {children}
+            </Component>
+            {this.renderRipple()}
+          </Block>
+        )}
       </TouchableOpacity>
     );
   }

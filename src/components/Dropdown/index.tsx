@@ -101,9 +101,17 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   ripple: any;
   scroll: any;
 
-  static getDerivedStateFromProps(nextProps: IDropdownProps) {
+  static getDerivedStateFromProps(
+    nextProps: IDropdownProps,
+    nextState: DropdownState,
+  ) {
+    if (nextProps.value) {
+      return {
+        value: nextProps.value,
+      };
+    }
     return {
-      value: nextProps.value,
+      value: nextState.value,
     };
   }
 
@@ -136,7 +144,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       data,
       disabled,
       onFocus,
-      itemPadding,
       rippleDuration,
       dropdownOffset,
       dropdownMargins: {min: minMargin, max: maxMargin},
@@ -196,8 +203,8 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         }
         const visibleItemCount = this.visibleItemCount();
         const itemSize = this.itemSize();
-        const height = 2 * itemPadding! + itemSize * visibleItemCount;
-        const top = y + dropdownOffset!.top + itemSize + itemPadding!;
+        const height = itemSize * visibleItemCount;
+        const top = y + dropdownOffset!.top + itemSize;
         const bottomEdge =
           dimensions.height < top + height
             ? dimensions.height + dropdownOffset!.top - (top + containerHeight)
@@ -287,8 +294,8 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return this.focused;
   }
   itemSize() {
-    const {fontSize, itemPadding} = this.props;
-    return Math.ceil(fontSize! * 1.5 + itemPadding! * 2);
+    const {theme} = this.props;
+    return theme.spaces.xxl8;
   }
   visibleItemCount() {
     const {data, itemCount} = this.props;
@@ -376,6 +383,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         rightLabel={() => (
           <Animated.View
             style={{
+              width: 12,
               transform: [{rotate: angle}],
             }}>
             <ArrowDown
@@ -601,7 +609,7 @@ Dropdown.defaultProps = {
   propsExtractor: () => null,
   absoluteRTLLayout: false,
   dropdownOffset: {
-    top: 32,
+    top: 28,
     left: 0,
   },
   dropdownMargins: {

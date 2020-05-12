@@ -52,7 +52,7 @@ class Card extends Component<ICardProps, {}> {
     const styles = getStyles(theme);
     const cardStyles = [
       {
-        borderRadius: theme.sizes.radius,
+        borderRadius: theme.sizes.blockRadius,
         overflow: 'hidden',
         flex: 0,
       },
@@ -62,7 +62,7 @@ class Card extends Component<ICardProps, {}> {
     return Platform.OS === 'ios' ? (
       <Block
         flex={0}
-        style={{borderRadius: theme.sizes.radius, ...containerStyles}}
+        style={{borderRadius: theme.sizes.blockRadius, ...containerStyles}}
         shadow={!!styles.shadow}>
         <Block style={cardStyles} {...props}>
           {backgroundImage ? this.renderBgImageCard() : children}

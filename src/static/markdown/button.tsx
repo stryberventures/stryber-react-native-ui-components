@@ -35,4 +35,7 @@ import {Button, Text} from '@stryberventures/stryber-react-native-ui-components'
 | **\`rippleCentered\`**      | Boolean that specify ripple effect to center |
 | **\`rippleOpacity\`**      | Specify ripple opacity. Default: 0.54 |
 | **\`rippleDuration\`**      | Specify ripple duration. Default: 400 |
+| **\`small\`**      | Boolean, adds styles of small button |
+| **\`mini\`**      | Boolean, adds styles of mini button |
+| **\`link\`**      | Boolean, adds styles of link button |
 `;
