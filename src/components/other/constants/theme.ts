@@ -76,7 +76,7 @@ const sizes = {
   // header
   header: 50,
   // card
-  cardPadding: 18,
+  cardPadding: 16,
   cardWithImgBgMinHeight: 308,
 };
 const fonts = {
