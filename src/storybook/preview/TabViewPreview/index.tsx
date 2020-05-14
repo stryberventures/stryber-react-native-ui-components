@@ -110,6 +110,28 @@ export class TabViewExample extends React.Component<{}, TabViewExampleState> {
     );
   }
 }
+export class SegmentViewExample extends React.Component<{}, TabViewExampleState> {
+  state = {
+    index: 0,
+    routes: [
+      { key: "first", title: "First" },
+      { key: "second", title: "Second" },
+      { key: "third", title: "Third" },
+      { key: 'forth', title: 'Forth' },
+    ]
+  };
+  handleIndexChange = index => this.setState({ index });
+  render() {
+    return (
+      <TabView
+        segmentView
+        navigationState={this.state}
+        renderScene={renderScene}
+        onIndexChange={this.handleIndexChange}
+      />
+    );
+  }
+}
 type TabViewBottomIconExampleState = {
   index?: any
 };
