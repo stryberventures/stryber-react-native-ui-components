@@ -6,7 +6,7 @@ import Input from "../../components/Input";
 import CenterView from "../../components/CenterView";
 import { UserIcon } from "../../components/Icons";
 import { input } from "../../static/markdown";
-const placeholder = text("Placeholder", "Input");
+const placeholder = text("Placeholder", "Input placeholder");
 storiesOf("Input", module)
   .addDecorator(withKnobs)
   .addParameters({
@@ -26,12 +26,13 @@ storiesOf("Input", module)
         placeholder={placeholder}
         type="email"
         label="Email"
+        variant="lined"
         ref={testRef}
       />
     );
   })
   .add("focused", () => (
-    <Input label="Email" placeholder={placeholder} type="email" autoFocus />
+    <Input label="Email" icon={() => <UserIcon />} variant="lined" placeholder={placeholder} type="email" />
   ))
   .add("with default value", () => {
     return (
