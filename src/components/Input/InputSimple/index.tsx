@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {TextInputProps} from 'react-native';
+import {TextInputProps, View} from 'react-native';
 import withTheme from '../../withTheme';
 
 import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
-import Label from '../../Label';
+import Text from '../../Text';
 import InputBase from '../InputBase';
-import {getClasses} from './styles';
+import {getStyles} from './styles';
 
 interface IInputSimpleProps extends TextInputProps {
   name?: string;
@@ -29,8 +29,10 @@ class InputSimple extends Component<IInputSimpleProps> {
 
   render() {
     const {theme, label, disabled, error, ...props} = this.props;
-    const classes = getClasses({
+    const styles = getStyles({
       theme,
+      error: !!error,
+      disabled,
     });
 
     return (
@@ -38,9 +40,9 @@ class InputSimple extends Component<IInputSimpleProps> {
         error={error}
         disabled={disabled!}
         renderPrefix={() => (
-          <Label disabled={disabled} error={!!error} classes={classes.label}>
-            {label}
-          </Label>
+          <View style={styles.labelContainer}>
+            <Text style={styles.labelText}>{label}</Text>
+          </View>
         )}
         {...props}
       />
