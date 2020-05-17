@@ -32,7 +32,7 @@ storiesOf("Input", module)
     );
   })
   .add("focused", () => (
-    <Input label="Email" icon={() => <UserIcon />} variant="lined" placeholder={placeholder} type="email" />
+    <Input label="Email" multiline numberOfLines={5}  variant="lined" placeholder={placeholder} type="email" />
   ))
   .add("with default value", () => {
     return (

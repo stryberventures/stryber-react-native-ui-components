@@ -17,6 +17,8 @@ export const getStyles = ({
   theme = defaultTheme,
   disabled = false,
   error = false,
+  moveLabel = false,
+  multiline = false,
 }) => {
   const leftBlockColor = disabled
     ? theme.colors.gray15
@@ -76,6 +78,7 @@ export const getStyles = ({
       position: 'absolute',
       top: 13,
       left: 20,
+      zIndex: 100,
     },
     labelText: {
       fontSize: 12,
@@ -87,6 +90,9 @@ export const getStyles = ({
     },
     labelAnimatedTextError: {
       color: theme.colors.accent,
+    },
+    textInput: {
+      marginTop: moveLabel ? 15 : multiline ? 12 : 0,
     },
   });
 };

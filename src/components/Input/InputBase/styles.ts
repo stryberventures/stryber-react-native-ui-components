@@ -27,6 +27,7 @@ export const getStyles = ({
       borderColor: theme.colors.gray15,
       borderRadius: theme.sizes.radius,
       backgroundColor: theme.colors.white,
+      overflow: 'hidden',
     },
     inputBoxDisabled: {
       backgroundColor: theme.colors.gray5,

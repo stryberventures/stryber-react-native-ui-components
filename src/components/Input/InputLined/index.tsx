@@ -49,7 +49,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
       label: {
         fontSize: new Animated.Value(this!.props!.theme!.sizes!.font || 14),
         fontColor: new Animated.Value(0.0001),
-        positionTop: new Animated.Value(13),
+        positionTop: new Animated.Value(0),
       },
     },
     moveLabel: false,
@@ -60,7 +60,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
     if (this.props.value) {
       this.state.moveLabel = true;
       this.state.animated.label.fontSize.setValue(12);
-      this.state.animated.label.positionTop.setValue(8);
+      this.state.animated.label.positionTop.setValue(3);
       this.state.animated.translateY.setValue(1);
     }
   }
@@ -75,7 +75,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
             useNativeDriver: false,
           }),
           Animated.timing(this.state.animated.label.positionTop, {
-            toValue: 8,
+            toValue: 3,
             duration: 100,
             easing: Easing.linear,
             useNativeDriver: false,
@@ -135,12 +135,15 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
       icon,
       iconBackground,
       withLeftBorder,
+      multiline,
       ...props
     } = this.props;
     const styles = getStyles({
       theme,
       disabled,
       error: !!error,
+      moveLabel: this.state.moveLabel,
+      multiline,
     });
 
     return (
@@ -148,23 +151,26 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
         {...props}
         error={error}
         disabled={disabled!}
+        multiline={multiline}
         inputWrapperComponent={({children, style}: any) => {
           return (
-            <Block
-              animated
-              style={{
-                ...style,
-                transform: [
-                  {
-                    translateY: this.state.animated.translateY.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [0, 7],
-                    }),
-                  },
-                ],
-              }}>
+            <Block style={style}>
+              <Block
+                animated
+                style={{
+                  transform: [
+                    {
+                      translateY: this.state.animated.translateY.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 7],
+                      }),
+                    },
+                  ],
+                  ...styles.textInput,
+                }}>
+                {children}
+              </Block>
               {this.renderLabel()}
-              {children}
             </Block>
           );
         }}

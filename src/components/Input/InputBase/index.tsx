@@ -165,7 +165,6 @@ class InputBase extends Component<IInputBaseProps, InputBaseState> {
       numberOfLines,
       maxNumberOfLines,
       classes,
-      toggleSecure,
     });
     const isSecure = toggleSecure ? false : secure;
     const InputWrapper = this.inputWrapper;
