@@ -14,14 +14,16 @@ import Ripple from '../Ripple';
 import Input from '../Input';
 import Text from '../Text';
 import {ArrowDown} from '../Icons';
+import Button from '../Button';
 import getStyles from './styles';
+
 interface IDropdownProps extends React.HTMLAttributes<Element> {
   name?: string;
   disabled?: boolean;
   value?: string | number;
   label?: string;
   placeholder?: string;
-  labelOnTop?: boolean;
+  variant?: 'simple' | 'lined';
   hitSlop?: {};
   data?: any[];
   valueExtractor?: (...args: any[]) => any;
@@ -253,7 +255,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       }
       if (this.mounted) {
         this.setState({value, modal: false});
-        this.input.current.setValue(value);
+        this.input.setValue(value);
       }
     });
   };
@@ -364,32 +366,43 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return value;
   };
   renderBase(props: any) {
-    const {label, placeholder, labelOnTop, theme, withLeftBorder} = this.props;
+    const {
+      label,
+      placeholder,
+      variant,
+      theme,
+      withLeftBorder,
+      disabled,
+    } = this.props;
     const angle = this.state.opacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
     });
+    const styles = getStyles(theme);
 
     return (
       <Input
         {...props}
         value={this.props.value}
-        labelOnTop={labelOnTop}
+        disabled={disabled}
+        variant={variant}
         withLeftBorder={withLeftBorder}
-        borderColor={this.focused ? theme.colors.blue : theme.colors.gray15}
-        placeholderLabel={label}
+        focused={this.state.modal}
+        label={label}
         placeholder={placeholder}
-        ref={this.input}
-        rightLabel={() => (
-          <Animated.View
-            style={{
-              width: 12,
-              transform: [{rotate: angle}],
-            }}>
-            <ArrowDown
-              fill={this.focused ? theme.colors.blue : theme.colors.gray15}
-            />
-          </Animated.View>
+        getBaseInput={(ref: any) => (this.input = ref)}
+        renderInputRight={() => (
+          <Button style={styles.arrowButton} onPress={() => {}}>
+            <Animated.View
+              style={{
+                width: 12,
+                transform: [{rotate: angle}],
+              }}>
+              <ArrowDown
+                fill={this.focused ? theme.colors.blue : theme.colors.gray15}
+              />
+            </Animated.View>
+          </Button>
         )}
       />
     );

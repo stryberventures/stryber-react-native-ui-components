@@ -11,6 +11,7 @@ storiesOf("Dropdown", module)
     return (
       <CenterView>
         <Dropdown
+          variant="lined"
           label="Fruit"
           placeholder="Choose item..."
           data={[

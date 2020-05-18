@@ -42,14 +42,16 @@ interface IInputBaseProps extends TextInputProps {
 
   classes?: any;
   error?: string;
+  focused?: boolean;
   renderPrefix?: () => any;
   renderInputLeft?: () => any;
   renderInputRight?: () => any;
   inputWrapperComponent?: React.ComponentType;
-
+  getBaseInput?: (a: any) => any;
   onChange?: (...args: any[]) => any;
+  onSetValue: (...args: any[]) => any;
 }
-type InputBaseState = {
+type IInputBaseState = {
   focused?: boolean;
   value: any;
   isBackspace?: boolean;
@@ -58,8 +60,21 @@ type InputBaseState = {
 const DefaultInputWrapper = ({children, style}: any) => {
   return <Block style={style}>{children}</Block>;
 };
-class InputBase extends Component<IInputBaseProps, InputBaseState> {
+class InputBase extends Component<IInputBaseProps, IInputBaseState> {
   static defaultProps: any;
+  static getDerivedStateFromProps(
+    nextProps: IInputBaseProps,
+    nextState: IInputBaseState,
+  ) {
+    if (nextProps.focused !== nextState.focused) {
+      return {
+        focused: nextProps.focused,
+      };
+    }
+    return {
+      focused: nextState.focused,
+    };
+  }
   inputRef = React.createRef();
   inputWrapper?: React.ComponentType;
 
@@ -73,6 +88,7 @@ class InputBase extends Component<IInputBaseProps, InputBaseState> {
     };
 
     this.inputWrapper = this.props.inputWrapperComponent || DefaultInputWrapper;
+    this.props.getBaseInput!(this);
   }
 
   renderToggle() {
@@ -117,6 +133,10 @@ class InputBase extends Component<IInputBaseProps, InputBaseState> {
       value = this.state.value;
     }
     return value;
+  };
+  setValue = (value: any) => {
+    this.setState({value});
+    this.props.onSetValue(value);
   };
 
   onInputBoxPress = () => {
@@ -168,7 +188,6 @@ class InputBase extends Component<IInputBaseProps, InputBaseState> {
     });
     const isSecure = toggleSecure ? false : secure;
     const InputWrapper = this.inputWrapper;
-
     return (
       <View style={styles.container}>
         {renderPrefix!()}
@@ -224,6 +243,7 @@ InputBase.defaultProps = {
   secure: false,
   numberOfLines: NUMBER_OF_LINES,
   maxNumberOfLines: MAX_NUMBER_OF_LINES,
+  inputRef: () => {},
   renderPrefix: () => {},
   renderPostfix: () => {},
   renderInputLeft: () => {},
@@ -231,5 +251,7 @@ InputBase.defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},
+  getBaseInput: () => {},
+  onSetValue: () => {},
 };
 export default withTheme(InputBase);

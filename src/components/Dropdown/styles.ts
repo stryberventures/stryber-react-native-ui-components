@@ -47,5 +47,6 @@ const getStyles = (theme = defaultTheme) =>
       color: theme.colors.gray70,
       fontSize: theme.fontSizes.body,
     },
+    arrowButton: {},
   });
 export default getStyles;

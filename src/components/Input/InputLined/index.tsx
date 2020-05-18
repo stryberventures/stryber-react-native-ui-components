@@ -94,6 +94,12 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
     this.setState({moveLabel: true});
   }
 
+  onSetInputValue = (value: string) => {
+    if (!this.state.moveLabel && value) {
+      this.animate();
+    }
+  };
+
   renderLabel() {
     const {theme, label, required, disabled, error} = this.props;
     const styles = getStyles({
@@ -203,6 +209,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
           this.animate();
           this.props.onBlur!();
         }}
+        onSetValue={this.onSetInputValue}
       />
     );
   }
