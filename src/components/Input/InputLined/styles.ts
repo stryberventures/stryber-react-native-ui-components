@@ -1,17 +1,5 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import {defaultTheme} from '../../other/constants';
-
-export const getClasses = ({theme = defaultTheme}) => ({
-  label: {
-    container: {
-      marginBottom: theme.spaces.xxs,
-    },
-    text: {
-      fontSize: theme.fontSizes.caption,
-      color: theme.colors.primary,
-    },
-  },
-});
 
 export const getStyles = ({
   theme = defaultTheme,
@@ -28,7 +16,7 @@ export const getStyles = ({
   return StyleSheet.create({
     leftBorder: {
       width: 11,
-      marginLeft: -1, // hack for Android
+      marginLeft: Platform.OS === 'android' ? -1 : 0,
       height: '100%',
       borderTopLeftRadius: theme.sizes.radius,
       borderBottomLeftRadius: theme.sizes.radius,
@@ -36,7 +24,7 @@ export const getStyles = ({
     },
     leftBlock: {
       overflow: 'hidden',
-      marginLeft: -1, // hack for Android
+      marginLeft: Platform.OS === 'android' ? -1 : 0,
       width: 65,
       height: '100%',
       justifyContent: 'center',
