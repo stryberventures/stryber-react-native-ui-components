@@ -151,6 +151,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       dropdownMargins: {min: minMargin, max: maxMargin},
       animationDuration,
       useNativeDriver,
+      theme,
     } = this.props;
     if (disabled) {
       return;
@@ -206,7 +207,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         const visibleItemCount = this.visibleItemCount();
         const itemSize = this.itemSize();
         const height = itemSize * visibleItemCount;
-        const top = y + dropdownOffset!.top + itemSize;
+        const top = y + dropdownOffset!.top + theme.sizes.inputHeight;
         const bottomEdge =
           dimensions.height < top + height
             ? dimensions.height + dropdownOffset!.top - (top + containerHeight)
@@ -538,13 +539,12 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       ...props
     } = this.props;
     const styles = getStyles(theme);
-    const {data, disabled, itemPadding} = props;
+    const {data, disabled} = props;
     const {left, top, width, opacity, modal, bottom} = this.state;
     const itemCount = data!.length;
     const visibleItemCount = this.visibleItemCount();
     const itemSize = this.itemSize();
     const height = itemSize * visibleItemCount;
-    const translateY = -itemPadding!;
     const overlayStyle = {opacity};
     const pickerStyle = {
       width,
@@ -552,7 +552,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       top,
       left,
       bottom,
-      transform: [{translateY}],
     };
     const touchableProps = {
       disabled,
@@ -622,7 +621,7 @@ Dropdown.defaultProps = {
   propsExtractor: () => null,
   absoluteRTLLayout: false,
   dropdownOffset: {
-    top: 28,
+    top: 0,
     left: 0,
   },
   dropdownMargins: {
@@ -642,7 +641,7 @@ Dropdown.defaultProps = {
   rippleDuration: 400,
   animationDuration: 225,
   fontSize: 16,
-  itemCount: 4,
+  itemCount: 3,
   itemPadding: 10,
   useNativeDriver: false,
   onLayout: () => {},
