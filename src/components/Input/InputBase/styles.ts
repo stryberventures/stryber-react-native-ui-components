@@ -41,7 +41,9 @@ export const getStyles = ({
     input: {
       flex: 1,
       paddingTop: multiline ? 10 : 0,
+      paddingBottom: 0,
       margin: 0,
+      paddingLeft: 0,
       borderWidth: 0,
       fontFamily: theme.fonts.fontFamily,
       fontSize: theme.fontSizes.body,

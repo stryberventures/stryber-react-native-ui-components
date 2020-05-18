@@ -28,6 +28,7 @@ export const getStyles = ({
   return StyleSheet.create({
     leftBorder: {
       width: 11,
+      marginLeft: -1, // hack for Android
       height: '100%',
       borderTopLeftRadius: theme.sizes.radius,
       borderBottomLeftRadius: theme.sizes.radius,
@@ -35,6 +36,7 @@ export const getStyles = ({
     },
     leftBlock: {
       overflow: 'hidden',
+      marginLeft: -1, // hack for Android
       width: 65,
       height: '100%',
       justifyContent: 'center',
