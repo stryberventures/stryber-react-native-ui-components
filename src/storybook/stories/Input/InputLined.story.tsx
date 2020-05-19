@@ -29,7 +29,7 @@ storiesOf('Input/Lined', module)
   })
   .add('default', () => (
     <Input
-      onFocus={linkTo('Input', 'focused')}
+      onFocus={linkTo('Input/Lined', 'focused')}
       placeholder={placeholder}
       type="email"
       label="Email"
@@ -77,7 +77,12 @@ storiesOf('Input/Lined', module)
     />
   ))
   .add('password', () => (
-    <Input secure placeholder={placeholder} variant={variant} />
+    <Input
+      secure
+      label="Password"
+      placeholder={placeholder}
+      variant={variant}
+    />
   ))
   .add('with icon', () => (
     <Input

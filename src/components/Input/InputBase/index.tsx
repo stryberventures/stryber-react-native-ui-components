@@ -42,14 +42,12 @@ interface IInputBaseProps extends TextInputProps {
 
   classes?: any;
   error?: string;
-  focused?: boolean;
   renderPrefix?: () => any;
   renderInputLeft?: () => any;
   renderInputRight?: () => any;
   inputWrapperComponent?: React.ComponentType;
   getBaseInput?: (a: any) => any;
   onChange?: (...args: any[]) => any;
-  onSetValue: (...args: any[]) => any;
 }
 type IInputBaseState = {
   focused?: boolean;
@@ -62,19 +60,6 @@ const DefaultInputWrapper = ({children, style}: any) => {
 };
 class InputBase extends Component<IInputBaseProps, IInputBaseState> {
   static defaultProps: any;
-  static getDerivedStateFromProps(
-    nextProps: IInputBaseProps,
-    nextState: IInputBaseState,
-  ) {
-    if (nextProps.focused !== nextState.focused) {
-      return {
-        focused: nextProps.focused,
-      };
-    }
-    return {
-      focused: nextState.focused,
-    };
-  }
   inputRef = React.createRef();
   inputWrapper?: React.ComponentType;
 
@@ -104,9 +89,9 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
         style={styles.toggle}
         onPress={() => this.setState({toggleSecure: !toggleSecure})}>
         {!toggleSecure ? (
-          <Eye fill={theme.colors.primary} />
-        ) : (
           <EyeDisabled fill={theme.colors.gray15} />
+        ) : (
+          <Eye fill={theme.colors.primary} />
         )}
       </Button>
     );
@@ -140,7 +125,6 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
   };
   setValue = (value: any) => {
     this.setState({value});
-    this.props.onSetValue(value);
   };
 
   onInputBoxPress = () => {
@@ -193,11 +177,9 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     const isSecure = toggleSecure ? false : secure;
     const InputWrapper = this.inputWrapper;
     return (
-      <View style={styles.container}>
+      <View style={styles.container} pointerEvents={disabled ? 'none' : 'auto'}>
         {renderPrefix!()}
-        <TouchableWithoutFeedback
-          onPress={this.onInputBoxPress}
-          disabled={disabled}>
+        <TouchableWithoutFeedback onPress={this.onInputBoxPress}>
           <View
             style={[
               styles.inputBox,
@@ -255,6 +237,5 @@ InputBase.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   getBaseInput: () => {},
-  onSetValue: () => {},
 };
 export default withTheme(InputBase);

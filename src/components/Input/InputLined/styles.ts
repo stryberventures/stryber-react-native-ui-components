@@ -6,7 +6,6 @@ export const getStyles = ({
   disabled = false,
   error = false,
   moveLabel = false,
-  multiline = false,
 }) => {
   const leftBlockColor = disabled
     ? theme.colors.gray15
@@ -83,7 +82,7 @@ export const getStyles = ({
       color: theme.colors.accent,
     },
     textInput: {
-      marginTop: moveLabel ? 15 : multiline ? 12 : 0,
+      marginTop: moveLabel ? 3 : 0,
     },
   });
 };

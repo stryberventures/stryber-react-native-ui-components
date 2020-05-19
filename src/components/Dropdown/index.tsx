@@ -173,6 +173,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     if (typeof onFocus === 'function') {
       onFocus();
     }
+    this.input.onFocus();
     const dimensions = Dimensions.get('window');
     this.listContainer.current.measureInWindow(
       (
@@ -253,6 +254,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       if (typeof onBlur === 'function') {
         onBlur();
       }
+      this.input.onBlur();
       if (this.mounted) {
         this.setState({value, modal: false});
         this.input.setValue(value);
@@ -387,7 +389,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         disabled={disabled}
         variant={variant}
         withLeftBorder={withLeftBorder}
-        focused={this.state.modal}
         label={label}
         placeholder={placeholder}
         getBaseInput={(ref: any) => (this.input = ref)}

@@ -21,7 +21,7 @@ storiesOf('Input/Simple', module)
   })
   .add('default', () => (
     <Input
-      onFocus={linkTo('Input', 'focused')}
+      onFocus={linkTo('Input/Simple', 'focused')}
       placeholder={placeholder}
       type="email"
       label="Email"
@@ -58,7 +58,9 @@ storiesOf('Input/Simple', module)
       maxLength={5}
     />
   ))
-  .add('password', () => <Input secure placeholder={placeholder} />)
+  .add('password', () => (
+    <Input secure label="Password" placeholder={placeholder} />
+  ))
   .add('multiline disabled', () => {
     return (
       <Input

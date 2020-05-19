@@ -33,7 +33,7 @@ export const getStyles = ({
       backgroundColor: theme.colors.gray5,
     },
     inputBoxFocused: {
-      borderColor: theme.colors.blue,
+      borderColor: theme.colors.primary,
     },
     inputBoxError: {
       borderColor: theme.colors.accent,

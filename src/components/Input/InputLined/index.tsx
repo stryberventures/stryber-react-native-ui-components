@@ -57,7 +57,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
 
   constructor(props: IInputLinedProps) {
     super(props);
-    if (this.props.value) {
+    if (this.props.value && this.props.label) {
       this.state.moveLabel = true;
       this.state.animated.label.fontSize.setValue(12);
       this.state.animated.label.positionTop.setValue(3);
@@ -65,7 +65,10 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
     }
   }
 
-  animate() {
+  animateLabel() {
+    if (!this.props.label) {
+      return;
+    }
     const animatedLabel = !this.state.moveLabel
       ? [
           Animated.timing(this.state.animated.label.fontSize, {
@@ -93,12 +96,6 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
     ]).start();
     this.setState({moveLabel: true});
   }
-
-  onSetInputValue = (value: string) => {
-    if (!this.state.moveLabel && value) {
-      this.animate();
-    }
-  };
 
   renderLabel() {
     const {theme, label, required, disabled, error} = this.props;
@@ -149,7 +146,6 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
       disabled,
       error: !!error,
       moveLabel: this.state.moveLabel,
-      multiline,
     });
 
     return (
@@ -176,7 +172,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
                 }}>
                 {children}
               </Block>
-              {this.renderLabel()}
+              {!!this.props.label && this.renderLabel()}
             </Block>
           );
         }}
@@ -202,14 +198,13 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
           </>
         )}
         onFocus={() => {
-          this.animate();
+          this.animateLabel();
           this.props.onFocus!();
         }}
         onBlur={() => {
-          this.animate();
+          this.animateLabel();
           this.props.onBlur!();
         }}
-        onSetValue={this.onSetInputValue}
       />
     );
   }
