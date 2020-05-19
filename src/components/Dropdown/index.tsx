@@ -95,7 +95,7 @@ type DropdownState = {
 class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   static defaultProps: any;
   blur: any;
-  container: any;
+  listContainer: any;
   focus: (event: any) => void;
   focused: any;
   input: any;
@@ -120,7 +120,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   constructor(props: IDropdownProps) {
     super(props);
     this.ripple = React.createRef();
-    this.container = React.createRef();
+    this.listContainer = React.createRef();
     this.scroll = React.createRef();
     this.input = React.createRef();
     this.blur = () => this.onClose();
@@ -151,7 +151,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       dropdownMargins: {min: minMargin, max: maxMargin},
       animationDuration,
       useNativeDriver,
-      theme,
     } = this.props;
     if (disabled) {
       return;
@@ -175,7 +174,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       onFocus();
     }
     const dimensions = Dimensions.get('window');
-    this.container.current.measureInWindow(
+    this.listContainer.current.measureInWindow(
       (
         x: number,
         y: number,
@@ -207,7 +206,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         const visibleItemCount = this.visibleItemCount();
         const itemSize = this.itemSize();
         const height = itemSize * visibleItemCount;
-        const top = y + dropdownOffset!.top + theme.sizes.inputHeight;
+        const top = y;
         const bottomEdge =
           dimensions.height < top + height
             ? dimensions.height + dropdownOffset!.top - (top + containerHeight)
@@ -308,7 +307,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return Math.max(this.visibleItemCount() - 2, 0);
   }
   rippleInsets() {
-    const {top = 16, right = 0, bottom = -8, left = 0} =
+    const {top = 0, right = 0, bottom = 0, left = 0} =
       this.props.rippleInsets || {};
     return {
       top,
@@ -393,17 +392,20 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         placeholder={placeholder}
         getBaseInput={(ref: any) => (this.input = ref)}
         renderInputRight={() => (
-          <Button style={styles.arrowButton} onPress={() => {}}>
-            <Animated.View
-              style={{
-                width: 12,
-                transform: [{rotate: angle}],
-              }}>
-              <ArrowDown
-                fill={this.focused ? theme.colors.blue : theme.colors.gray15}
-              />
-            </Animated.View>
-          </Button>
+          <>
+            <Button style={styles.arrowButton} onPress={() => {}}>
+              <Animated.View
+                style={{
+                  width: 12,
+                  transform: [{rotate: angle}],
+                }}>
+                <ArrowDown
+                  fill={this.focused ? theme.colors.blue : theme.colors.gray15}
+                />
+              </Animated.View>
+            </Button>
+            {this.renderRipple()}
+          </>
         )}
       />
     );
@@ -564,39 +566,34 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       accessibilityLabel,
     };
     return (
-      <View
-        onLayout={this.onLayout}
-        ref={this.container}
-        style={containerStyle}>
+      <View onLayout={this.onLayout} style={containerStyle}>
         <TouchableWithoutFeedback {...touchableProps}>
-          <View pointerEvents="box-only">
-            {this.renderBase(props)}
-            {this.renderRipple()}
-          </View>
+          <View pointerEvents="box-only">{this.renderBase(props)}</View>
         </TouchableWithoutFeedback>
-
-        <Modal visible={modal} transparent onRequestClose={this.blur}>
-          <Animated.View
-            style={[styles.overlay, overlayStyle, overlayStyleOverrides]}
-            onStartShouldSetResponder={() => true}
-            onResponderRelease={this.blur}>
-            <View
-              style={[styles.picker, pickerStyle, pickerStyleOverrides]}
-              onStartShouldSetResponder={() => true}>
-              <View style={styles.scrollWrapper}>
-                <FlatList
-                  ref={this.scroll}
-                  data={data}
-                  style={[styles.scroll]}
-                  renderItem={this.renderItem}
-                  keyExtractor={this.keyExtractor}
-                  scrollEnabled={visibleItemCount < itemCount}
-                  contentContainerStyle={styles.scrollContainer}
-                />
+        <View ref={this.listContainer}>
+          <Modal visible={modal} transparent onRequestClose={this.blur}>
+            <Animated.View
+              style={[styles.overlay, overlayStyle, overlayStyleOverrides]}
+              onStartShouldSetResponder={() => true}
+              onResponderRelease={this.blur}>
+              <View
+                style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+                onStartShouldSetResponder={() => true}>
+                <View style={styles.scrollWrapper}>
+                  <FlatList
+                    ref={this.scroll}
+                    data={data}
+                    style={[styles.scroll]}
+                    renderItem={this.renderItem}
+                    keyExtractor={this.keyExtractor}
+                    scrollEnabled={visibleItemCount < itemCount}
+                    contentContainerStyle={styles.scrollContainer}
+                  />
+                </View>
               </View>
-            </View>
-          </Animated.View>
-        </Modal>
+            </Animated.View>
+          </Modal>
+        </View>
       </View>
     );
   }
@@ -631,9 +628,9 @@ Dropdown.defaultProps = {
   rippleCentered: false,
   rippleSequential: true,
   rippleInsets: {
-    top: 16,
+    top: 0,
     right: 0,
-    bottom: -8,
+    bottom: 0,
     left: 0,
   },
   rippleOpacity: 0.54,

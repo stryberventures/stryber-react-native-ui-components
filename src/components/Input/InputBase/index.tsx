@@ -198,7 +198,6 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
         <TouchableWithoutFeedback
           onPress={this.onInputBoxPress}
           disabled={disabled}>
-          {}
           <View
             style={[
               styles.inputBox,
