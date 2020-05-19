@@ -103,7 +103,11 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       <Button
         style={styles.toggle}
         onPress={() => this.setState({toggleSecure: !toggleSecure})}>
-        {!toggleSecure ? <Eye /> : <EyeDisabled />}
+        {!toggleSecure ? (
+          <Eye fill={theme.colors.primary} />
+        ) : (
+          <EyeDisabled fill={theme.colors.gray15} />
+        )}
       </Button>
     );
   }

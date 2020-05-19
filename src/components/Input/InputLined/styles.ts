@@ -37,6 +37,7 @@ export const getStyles = ({
     },
     leftBlockWithNoIconBackground: {
       marginRight: -20,
+      opacity: disabled ? 0.5 : 1,
     },
     additionalLeftBlock: {
       position: 'absolute',

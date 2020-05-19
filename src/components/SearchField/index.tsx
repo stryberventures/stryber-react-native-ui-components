@@ -22,6 +22,7 @@ class SearchField extends Component<ISearchFieldProps, SearchFieldState> {
     return (
       <View>
         <Input
+          variant="lined"
           icon={() => <Search />}
           onChange={this.onRequestChange}
           iconBackground={false}
