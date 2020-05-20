@@ -35,7 +35,7 @@ const getStyles = ({
           ? theme.colors.accent2
           : 'transparent'
         : disabled
-        ? theme.colors.gray15
+        ? checked
           ? theme.colors.gray15
           : 'transparent'
         : checked
@@ -44,7 +44,7 @@ const getStyles = ({
       borderColor: error
         ? checked
           ? theme.colors.accent2
-          : theme.colors.gray15
+          : theme.colors.accent2
         : disabled
         ? checked
           ? theme.colors.gray15

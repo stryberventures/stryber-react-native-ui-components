@@ -153,7 +153,17 @@ class Switch extends Component<ISwitchProps, SwitchState> {
           <Text
             style={{
               ...styles.text,
-              color: checked ? theme.colors.black : theme.colors.gray15,
+              color: error
+                ? checked
+                  ? theme.colors.accent2
+                  : theme.colors.accent2
+                : disabled
+                ? checked
+                  ? theme.colors.gray15
+                  : theme.colors.gray15
+                : checked
+                ? theme.colors.black
+                : theme.colors.gray15,
             }}>
             {this.props.text}
           </Text>
