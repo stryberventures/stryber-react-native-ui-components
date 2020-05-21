@@ -18,6 +18,7 @@ interface ITabProps {
   getAccessible?: (...args: any[]) => any;
   theme?: any;
   blackColor?: string;
+  whiteColor?: string;
   pressColor?: string;
   pressOpacity?: number;
   labelStyle?: {};
@@ -26,6 +27,10 @@ interface ITabProps {
   onPress?: (...args: any[]) => any;
   onLongPress?: (...args: any[]) => any;
   segmentView?: boolean;
+  segmentLineColor?: string;
+  textColor?: string;
+  activeTabBackground?: string;
+  activeTabTextColor?: string;
 }
 class Tab extends React.Component<ITabProps, {}> {
   static defaultProps: any;
@@ -65,6 +70,7 @@ class Tab extends React.Component<ITabProps, {}> {
       getAccessible,
       theme,
       blackColor = theme.colors.black,
+      whiteColor = theme.colors.white,
       pressColor = theme.colors.gray,
       pressOpacity,
       labelStyle,
@@ -73,6 +79,10 @@ class Tab extends React.Component<ITabProps, {}> {
       onPress,
       onLongPress,
       segmentView,
+      segmentLineColor,
+      textColor,
+      activeTabBackground,
+      activeTabTextColor,
     } = this.props;
     const tabIndex = navigationState.routes.indexOf(route);
     const isFocused = navigationState.index === tabIndex;
@@ -122,12 +132,18 @@ class Tab extends React.Component<ITabProps, {}> {
         : // eslint-disable-next-line no-shadow
           ({route, color}: any) => {
             const labelText = getLabelText!({route});
+            const activeSegmentLabelWrapper = {
+              backgroundColor: activeTabBackground || theme.colors.primary,
+            };
+            const segmentLineStyle = {
+              backgroundColor: segmentLineColor || theme.colors.blueGray,
+            };
             if (typeof labelText === 'string') {
               return segmentView ? (
                 <View
                   style={[
                     styles.segmentLabelWrapper,
-                    isFocused && styles.activeSegmentLabelWrapper,
+                    isFocused && activeSegmentLabelWrapper,
                   ]}>
                   <View style={{flex: 1}}>
                     <Animated.Text
@@ -141,7 +157,9 @@ class Tab extends React.Component<ITabProps, {}> {
                       {labelText}
                     </Animated.Text>
                   </View>
-                  {showSegmentBorder && <View style={styles.segmentBorder} />}
+                  {showSegmentBorder && (
+                    <View style={[styles.segmentBorder, segmentLineStyle]} />
+                  )}
                 </View>
               ) : (
                 <Animated.Text
@@ -162,12 +180,15 @@ class Tab extends React.Component<ITabProps, {}> {
       const activeLabel = renderLabel({
         route,
         focused: true,
-        color: blackColor,
+        color:
+          isFocused && segmentView
+            ? activeTabTextColor || whiteColor
+            : textColor || blackColor,
       });
       const inactiveLabel = renderLabel({
         route,
         focused: false,
-        color: blackColor,
+        color: textColor || blackColor,
       });
       label = (
         <View>

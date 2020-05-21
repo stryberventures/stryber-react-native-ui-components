@@ -7,6 +7,7 @@ export default StyleSheet.create({
     margin: 4,
     backgroundColor: 'transparent',
     fontSize: theme.fontSizes.subhead,
+    textAlign: 'center',
   },
   labelWrapper: {
     justifyContent: 'center',
@@ -19,13 +20,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  activeSegmentLabelWrapper: {
-    backgroundColor: theme.colors.white,
-  },
   segmentBorder: {
     width: 1,
     height: '50%',
-    backgroundColor: theme.colors.blueGray,
   },
   icon: {
     margin: 2,
