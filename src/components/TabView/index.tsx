@@ -31,6 +31,10 @@ interface ITabViewProps {
   onIndexChange?: (...args: any[]) => any;
   index?: any;
   segmentView?: boolean;
+  segmentLineColor?: string;
+  textColor?: string;
+  activeTabBackground?: string;
+  activeTabTextColor?: string;
 }
 type TabViewState = {
   layout?: {height: any; width: any};
@@ -89,6 +93,10 @@ export default class TabView extends React.Component<
       springVelocityScale,
       renderPager,
       segmentView,
+      segmentLineColor,
+      textColor,
+      activeTabBackground,
+      activeTabTextColor,
     } = this.props;
     const {layout} = this.state;
     return (
@@ -133,6 +141,10 @@ export default class TabView extends React.Component<
                     ...sceneRendererProps,
                     navigationState,
                     segmentView,
+                    segmentLineColor,
+                    textColor,
+                    activeTabBackground,
+                    activeTabTextColor,
                   })}
                 {render(
                   navigationState.routes.map((route: any, i: number) => {
@@ -164,6 +176,10 @@ export default class TabView extends React.Component<
                     ...sceneRendererProps,
                     navigationState,
                     segmentView,
+                    segmentLineColor,
+                    textColor,
+                    activeTabBackground,
+                    activeTabTextColor,
                   })}
               </React.Fragment>
             );

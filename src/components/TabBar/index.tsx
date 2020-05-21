@@ -35,6 +35,10 @@ interface ITabBarProps {
   indicatorContainerStyle?: any;
   renderIndicator?: (...args: any[]) => any;
   segmentView?: boolean;
+  segmentLineColor?: string;
+  textColor?: string;
+  activeTabBackground?: string;
+  activeTabTextColor?: string;
 }
 type TabBarState = {
   layout?: any;
@@ -243,6 +247,10 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       style,
       indicatorContainerStyle,
       segmentView,
+      segmentLineColor,
+      textColor,
+      activeTabBackground,
+      activeTabTextColor,
     } = this.props;
     const {layout, tabWidths} = this.state;
     // @ts-ignore
@@ -323,6 +331,10 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
             }}>
             {routes.map((route: any) => (
               <Tab
+                segmentLineColor={segmentLineColor}
+                textColor={textColor}
+                activeTabBackground={activeTabBackground}
+                activeTabTextColor={activeTabTextColor}
                 segmentView={segmentView}
                 onLayout={
                   isWidthDynamic
