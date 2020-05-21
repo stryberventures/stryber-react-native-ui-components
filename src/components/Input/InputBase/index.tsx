@@ -216,7 +216,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
             {renderInputRight!()}
           </View>
         </TouchableWithoutFeedback>
-        {error && <Text style={styles.errorText}>{error}</Text>}
+        {!!error && <Text style={styles.errorText}>{error}</Text>}
       </View>
     );
   }
