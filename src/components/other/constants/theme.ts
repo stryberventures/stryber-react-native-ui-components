@@ -66,7 +66,20 @@ const sizes = {
   blockRadius: 8,
   largeRadius: 50,
   padding: 25,
-  checkbox: 22,
+  checkbox: {
+    regular: {
+      box: 24,
+      check: 14,
+    },
+    large: {
+      box: 30,
+      check: 17,
+    },
+  },
+  radioRadius: {
+    regular: 4,
+    large: 5,
+  },
   checkboxIcon: 15,
   smallButtonWidth: 137,
   miniButtonWidth: 115,

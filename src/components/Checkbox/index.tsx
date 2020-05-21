@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Easing, TouchableOpacity} from 'react-native';
+import {Animated, Easing, TouchableOpacity, View} from 'react-native';
 import {Check} from '../Icons';
 import Text from '../Text';
 import Block from '../Block';
@@ -16,6 +16,9 @@ interface ICheckboxProps {
   radio?: boolean;
   iconComponent?: any;
   shouldCheckboxChange?: boolean;
+  error?: string;
+  disabled?: boolean;
+  size?: 'regular' | 'large';
 }
 type CheckboxState = {
   checked?: any;
@@ -50,39 +53,81 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     }).start();
   };
   renderRadioIcon = () => {
-    const styles = getStyles(this.props.theme);
+    const {theme, radio, error, disabled, size} = this.props;
+    const styles = getStyles({
+      theme,
+      radio,
+      error: !!error,
+      disabled,
+      size,
+    });
     return <Block style={styles.radioIcon} flex={0} />;
   };
-  renderCheckIcon = () => {
+  renderControl = () => {
     const {checked, springValue} = this.state;
-    const {iconComponent, theme, radio} = this.props;
-    const styles = getStyles(theme, checked, radio);
+    const {iconComponent, theme, radio, error, disabled, size} = this.props;
+    const checkboxSizes =
+      // @ts-ignore
+      theme.sizes.checkbox[size] || theme.sizes.checkbox.regular;
+    const styles = getStyles({
+      theme,
+      checked,
+      radio,
+      error: !!error,
+      disabled,
+      size,
+    });
     return (
       <Animated.View
         style={[styles.checkbox, {transform: [{scale: springValue}]}]}>
         {(this.state.checked && iconComponent) ||
           (this.state.checked && radio && this.renderRadioIcon()) ||
-          (this.state.checked && <Check />)}
+          (this.state.checked && (
+            <Check width={checkboxSizes.check} height={checkboxSizes.check} />
+          ))}
       </Animated.View>
     );
   };
   render() {
-    const {text, opacity, theme} = this.props;
-    const styles = getStyles(theme, this.state.checked);
+    const {checked} = this.state;
+    const {text, opacity, theme, radio, error, disabled, size} = this.props;
+    const styles = getStyles({
+      theme,
+      radio,
+      error: !!error,
+      disabled,
+      checked,
+      size,
+    });
     return (
-      <TouchableOpacity
-        style={styles.container}
-        activeOpacity={opacity}
-        onPress={
-          this.props.shouldCheckboxChange
-            ? this.spring.bind(this, Easing.bounce)
-            : undefined
-        }>
-        {this.renderCheckIcon()}
-        <Block style={styles.textContainer}>
-          <Text style={styles.textStyle}>{text}</Text>
-        </Block>
-      </TouchableOpacity>
+      <View style={styles.wrapper}>
+        <TouchableOpacity
+          style={styles.container}
+          activeOpacity={opacity}
+          disabled={disabled}
+          onPress={
+            this.props.shouldCheckboxChange
+              ? this.spring.bind(this, Easing.bounce)
+              : undefined
+          }>
+          {this.renderControl()}
+          <Block style={styles.textContainer}>
+            <Text
+              style={[
+                styles.textStyle,
+                disabled ? styles.textStyleDisabled : {},
+                error ? styles.textStyleError : {},
+              ]}>
+              {text}
+            </Text>
+          </Block>
+        </TouchableOpacity>
+        {this.props.error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{this.props.error}</Text>
+          </View>
+        )}
+      </View>
     );
   }
 }
@@ -95,5 +140,6 @@ Checkbox.defaultProps = {
   opacity: 0.8,
   radio: false,
   shouldCheckboxChange: true,
+  size: 'regular',
 };
 export default withTheme(Checkbox);

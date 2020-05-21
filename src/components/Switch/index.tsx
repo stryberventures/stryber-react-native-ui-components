@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {Animated, TouchableOpacity} from 'react-native';
+import {Animated, View, TouchableOpacity} from 'react-native';
 import withTheme from '../withTheme';
-import styles from './styles';
+import {SwitchConfigs} from './constants';
+import {getStyles} from './styles';
 import Text from '../Text';
 
 interface ISwitchProps {
   name?: string;
   value?: boolean;
   onPress?: (...args: any[]) => any;
-  containerStyle?: any;
   circleStyle?: any;
   circleColorOff?: string;
   circleColorOn?: string;
@@ -20,8 +20,9 @@ interface ISwitchProps {
   theme?: any;
   backgroundColorOff?: string;
   backgroundColorOn?: string;
-  padding?: any;
-  width?: any;
+  size?: 'regular' | 'large';
+  error?: string;
+  disabled?: boolean;
 }
 type SwitchState = {
   circlePosXStart?: number;
@@ -30,13 +31,16 @@ type SwitchState = {
   animXValue?: any;
   start?: any;
 };
+
 class Switch extends Component<ISwitchProps, SwitchState> {
   static defaultProps: any;
+  config: any;
   constructor(props: ISwitchProps) {
     super(props);
+    this.config = SwitchConfigs[this.props.size!] || SwitchConfigs.regular;
+
     const endPos =
-      this.props.containerStyle.width -
-      (this.props.circleStyle.width + this.props.containerStyle.padding * 2);
+      this.config.width - (this.config.circleRadius + this.config.padding * 2);
     this.state = {
       circlePosXStart: this.getStart(),
       circlePosXEnd: endPos,
@@ -62,7 +66,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
       ? 0
       : this.props.type === 0
       ? 0
-      : this.props.containerStyle.padding * 2;
+      : this.config.padding * 2;
   };
   runAnimation = () => {
     const animValue = {
@@ -75,88 +79,107 @@ class Switch extends Component<ISwitchProps, SwitchState> {
   render() {
     const {
       theme,
-      containerStyle,
       backgroundColorOff,
       backgroundColorOn,
+      size,
       style,
+      error,
+      disabled,
     } = this.props;
+    const styles = getStyles({
+      theme,
+      size,
+    });
     const {checked} = this.state;
     return (
-      <TouchableOpacity
-        onPress={this.onPress}
-        activeOpacity={0.5}
-        style={[{flexDirection: 'row', alignItems: 'center'}, style]}>
-        <Animated.View
-          style={[
-            styles.container,
-            containerStyle,
-            {
-              backgroundColor: this.state.animXValue.interpolate({
-                inputRange: [0, 1],
-                outputRange: [
-                  backgroundColorOff || theme.colors.gray,
-                  backgroundColorOn || theme.colors.primary,
-                ],
-              }),
-            },
-          ]}>
+      <>
+        <TouchableOpacity
+          onPress={this.onPress}
+          activeOpacity={0.5}
+          disabled={disabled}
+          style={[{flexDirection: 'row', alignItems: 'center'}, style]}>
           <Animated.View
             style={[
-              this.props.circleStyle,
-              {
-                backgroundColor: this.state.animXValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [
-                    this.props.circleColorOff,
-                    this.props.circleColorOn,
-                  ],
-                }),
-              },
-              {
-                transform: [
-                  {
-                    translateX: this.state.animXValue.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [
-                        this.state.circlePosXStart,
-                        this.state.circlePosXEnd,
-                      ],
-                    }),
-                  },
-                ],
-              },
+              styles.container,
+              ...(disabled
+                ? [styles.containerDisabled]
+                : [
+                    {
+                      backgroundColor: this.state.animXValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [
+                          backgroundColorOff || theme.colors.gray15,
+                          (error && styles.containerError.backgroundColor) ||
+                            backgroundColorOn ||
+                            theme.colors.primary,
+                        ],
+                      }),
+                    },
+                  ]),
             ]}>
-            <Animated.View style={this.props.buttonContainerStyle} />
+            <Animated.View
+              style={[
+                styles.circle,
+                ...(disabled
+                  ? [
+                      {
+                        backgroundColor: this.state.animXValue.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [
+                            this.props.circleColorOff,
+                            this.props.circleColorOn,
+                          ],
+                        }),
+                      },
+                    ]
+                  : []),
+                {
+                  transform: [
+                    {
+                      translateX: this.state.animXValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [
+                          this.state.circlePosXStart,
+                          this.state.circlePosXEnd,
+                        ],
+                      }),
+                    },
+                  ],
+                },
+              ]}>
+              <Animated.View style={this.props.buttonContainerStyle} />
+            </Animated.View>
           </Animated.View>
-        </Animated.View>
-        <Text
-          style={{
-            marginLeft: 10,
-            color: checked ? theme.colors.primary : theme.colors.darkGrey,
-            fontSize: theme.sizes.base - 1,
-          }}>
-          {this.props.text}
-        </Text>
-      </TouchableOpacity>
+          <Text
+            style={{
+              ...styles.text,
+              color: error
+                ? checked
+                  ? theme.colors.accent2
+                  : theme.colors.accent2
+                : disabled
+                ? checked
+                  ? theme.colors.gray15
+                  : theme.colors.gray15
+                : checked
+                ? theme.colors.black
+                : theme.colors.gray15,
+            }}>
+            {this.props.text}
+          </Text>
+        </TouchableOpacity>
+        {this.props.error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{this.props.error}</Text>
+          </View>
+        )}
+      </>
     );
   }
 }
 Switch.defaultProps = {
   value: false,
   onPress: () => {},
-  containerStyle: {
-    width: 36,
-    height: 22,
-    borderRadius: 18,
-    backgroundColor: 'rgb(227,227,227)',
-    padding: 3,
-  },
-  circleStyle: {
-    width: 18,
-    height: 18,
-    borderRadius: 15,
-    backgroundColor: 'white',
-  },
   circleColorOff: 'white',
   circleColorOn: 'white',
   duration: 300,
@@ -165,5 +188,7 @@ Switch.defaultProps = {
   style: {},
   buttonContainerStyle: {},
   type: 0,
+  size: 'regular',
+  disabled: false,
 };
 export default withTheme(Switch);
