@@ -5,7 +5,7 @@ import Text from '../Text';
 import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ICheckboxProps {
+export interface ICheckboxProps {
   text?: string;
   textColor?: string;
   value?: boolean;
