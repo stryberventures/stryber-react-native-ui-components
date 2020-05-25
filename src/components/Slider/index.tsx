@@ -3,6 +3,7 @@ import {Animated, View, PanResponder, LayoutChangeEvent} from 'react-native';
 import Text from '../Text';
 import withTheme from '../withTheme';
 import {SliderConfigs} from './constants';
+import SliderLayout from './SliderLayout';
 import {getStyles} from './styles';
 
 interface ISliderProps {
@@ -14,6 +15,7 @@ interface ISliderProps {
   step: number | undefined;
   size: 'regular' | 'large';
   color?: string;
+  layout: string;
   leftLabel?: () => any;
   rightLabel?: () => any;
   onChange: (a: number, b: number) => any;
@@ -150,7 +152,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
     );
   };
 
-  render() {
+  renderRangeBar() {
     const styles = getStyles({
       theme: this.props.theme,
       size: this.props.size,
@@ -167,117 +169,129 @@ class Slider extends Component<ISliderProps, ISliderState> {
 
     return (
       <>
-        <View style={styles.container}>
-          <View style={styles.leftSideContainer}>
-            {typeof this.props.leftLabel === 'function' ? (
-              this.props.leftLabel()
-            ) : (
-              <Text style={styles.labelText}>{this.props.limitDown}</Text>
-            )}
-          </View>
-          <View style={styles.centralContainer}>
-            <View
-              style={styles.rangeBarContainer}
-              onLayout={this.onRangeBarContainerLayout}>
-              <Animated.View
-                style={[
-                  styles.rangeBar,
+        <View
+          style={styles.rangeBarWrapper}
+          onLayout={this.onRangeBarContainerLayout}>
+          <Animated.View
+            style={[
+              styles.rangeBar,
+              {
+                marginRight: this.state.positionUp.interpolate({
+                  inputRange: [0, this.state.width],
+                  outputRange: [this.state.width, 0],
+                  extrapolate: 'clamp',
+                }),
+                marginLeft: this.state.positionDown.interpolate({
+                  inputRange: [0, this.state.width],
+                  outputRange: [0, this.state.width],
+                  extrapolate: 'clamp',
+                }),
+              },
+            ]}
+          />
+        </View>
+        {!!this.props.valueDown && (
+          <Animated.View
+            style={[
+              styles.buttonWrapper,
+              {
+                transform: [
                   {
-                    marginRight: this.state.positionUp.interpolate({
-                      inputRange: [0, this.state.width],
-                      outputRange: [this.state.width, 0],
-                      extrapolate: 'clamp',
-                    }),
-                    marginLeft: this.state.positionDown.interpolate({
-                      inputRange: [0, this.state.width],
-                      outputRange: [0, this.state.width],
+                    translateX: this.state.positionDown.interpolate({
+                      inputRange: [0, translateUpValue, this.state.width],
+                      outputRange: [0, translateUpValue, translateUpValue],
                       extrapolate: 'clamp',
                     }),
                   },
-                ]}
-              />
-            </View>
-            {!!this.props.valueDown && (
-              <Animated.View
-                style={[
-                  styles.buttonWrapper,
-                  {
-                    transform: [
-                      {
-                        translateX: this.state.positionDown.interpolate({
-                          inputRange: [0, translateUpValue, this.state.width],
-                          outputRange: [0, translateUpValue, translateUpValue],
-                          extrapolate: 'clamp',
-                        }),
-                      },
-                    ],
-                  },
-                ]}
-                {...this.downButtonResponder.panHandlers}>
-                <Animated.View
-                  style={[
-                    styles.buttonTooltip,
-                    {opacity: this.state.buttonDownTouched},
-                  ]}>
-                  <Text animated style={styles.buttonTooltipText}>
-                    {values.down}
-                  </Text>
-                </Animated.View>
-                {
-                  <Animated.View
-                    style={[
-                      styles.buttonPulsarWrapper,
-                      {opacity: this.state.buttonDownTouched},
-                    ]}>
-                    <View style={styles.buttonPulsar} />
-                  </Animated.View>
-                }
-                <View style={styles.button} />
-              </Animated.View>
-            )}
+                ],
+              },
+            ]}
+            {...this.downButtonResponder.panHandlers}>
             <Animated.View
               style={[
-                styles.buttonWrapper,
-                {
-                  transform: [
-                    {
-                      translateX: translateUp,
-                    },
-                  ],
-                },
-              ]}
-              {...this.upButtonResponder.panHandlers}>
+                styles.buttonTooltip,
+                {opacity: this.state.buttonDownTouched},
+              ]}>
+              <Text animated style={styles.buttonTooltipText}>
+                {values.down}
+              </Text>
+            </Animated.View>
+            {
               <Animated.View
                 style={[
-                  styles.buttonTooltip,
-                  {opacity: this.state.buttonUpTouched},
+                  styles.buttonPulsarWrapper,
+                  {opacity: this.state.buttonDownTouched},
                 ]}>
-                <Text animated style={styles.buttonTooltipText}>
-                  {values.up}
-                </Text>
-                <View style={styles.tooltipArrow} />
+                <View style={styles.buttonPulsar} />
               </Animated.View>
-              {
-                <Animated.View
-                  style={[
-                    styles.buttonPulsarWrapper,
-                    {opacity: this.state.buttonUpTouched},
-                  ]}>
-                  <View style={styles.buttonPulsar} />
-                </Animated.View>
-              }
-              <View style={styles.button} />
+            }
+            <View style={styles.button} />
+          </Animated.View>
+        )}
+        <Animated.View
+          style={[
+            styles.buttonWrapper,
+            {
+              transform: [
+                {
+                  translateX: translateUp,
+                },
+              ],
+            },
+          ]}
+          {...this.upButtonResponder.panHandlers}>
+          <Animated.View
+            style={[
+              styles.buttonTooltip,
+              {opacity: this.state.buttonUpTouched},
+            ]}>
+            <Text animated style={styles.buttonTooltipText}>
+              {values.up}
+            </Text>
+            <View style={styles.tooltipArrow} />
+          </Animated.View>
+          {
+            <Animated.View
+              style={[
+                styles.buttonPulsarWrapper,
+                {opacity: this.state.buttonUpTouched},
+              ]}>
+              <View style={styles.buttonPulsar} />
             </Animated.View>
-          </View>
-          <View style={styles.rightSideContainer}>
-            {typeof this.props.rightLabel === 'function' ? (
-              this.props.rightLabel()
-            ) : (
-              <Text style={styles.labelText}>{this.props.limitUp}</Text>
-            )}
-          </View>
-        </View>
+          }
+          <View style={styles.button} />
+        </Animated.View>
       </>
+    );
+  }
+
+  render() {
+    const styles = getStyles({
+      theme: this.props.theme,
+      size: this.props.size,
+      color: this.props.color,
+    });
+
+    return (
+      <SliderLayout
+        type={this.props.layout}
+        styles={styles}
+        leftLabel={
+          typeof this.props.leftLabel === 'function' ? (
+            this.props.leftLabel()
+          ) : (
+            <Text style={styles.labelText}>{this.props.limitDown}</Text>
+          )
+        }
+        rightLabel={
+          typeof this.props.rightLabel === 'function' ? (
+            this.props.rightLabel()
+          ) : (
+            <Text style={styles.labelText}>{this.props.limitUp}</Text>
+          )
+        }
+        rangeBar={this.renderRangeBar()}
+      />
     );
   }
 }
@@ -288,6 +302,7 @@ Slider.defaultProps = {
   valueUp: 5,
   valueDown: 0,
   size: 'regular',
+  layout: 'regular',
   onChange: () => {},
 };
 

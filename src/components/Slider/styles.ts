@@ -15,19 +15,34 @@ export const getStyles = ({
       flexDirection: 'row',
       alignItems: 'center',
     },
-    centralContainer: {
+    rangeBarContainer: {
       flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
-      marginHorizontal: theme.spaces.s,
     },
-    leftSideContainer: {},
-    rightSideContainer: {},
+    leftLabelContainer: {
+      marginRight: theme.spaces.s,
+    },
+    rightLabelContainer: {
+      marginLeft: theme.spaces.s,
+    },
+    labelsBottomContainer: {
+      flexDirection: 'row',
+      marginTop: config.buttonRadius - config.barHeight / 2 + theme.spaces.xxs,
+    },
+    leftBottomLabelContainer: {
+      flex: 1,
+      alignItems: 'flex-start',
+    },
+    rightBottomLabelContainer: {
+      flex: 1,
+      alignItems: 'flex-end',
+    },
     labelText: {
       fontSize: theme.fontSizes.headline,
       fontWeight: '700',
     },
-    rangeBarContainer: {
+    rangeBarWrapper: {
       height: config.barHeight,
       width: '100%',
       backgroundColor: theme.colors.gray15,
