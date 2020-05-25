@@ -255,6 +255,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
                 <Text animated style={styles.buttonTooltipText}>
                   {values.up}
                 </Text>
+                <View style={styles.tooltipArrow} />
               </Animated.View>
               {
                 <Animated.View
