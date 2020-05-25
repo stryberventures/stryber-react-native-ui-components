@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, TextProps} from 'react-native';
+import {Animated, Text, TextProps} from 'react-native';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
@@ -38,6 +38,7 @@ interface ITypographyProps extends TextProps {
   white?: boolean;
   gray?: boolean;
   gray2?: boolean;
+  animated?: boolean;
   style?: any;
   theme?: any;
   props?: any;
@@ -82,6 +83,7 @@ class Typography extends Component<ITypographyProps, {}> {
       gray,
       gray2,
       style,
+      animated,
       children,
       theme,
       ...props
@@ -126,10 +128,11 @@ class Typography extends Component<ITypographyProps, {}> {
       gray2 && styles.gray2,
       style,
     ];
+    const TextComponent = (animated ? Animated.Text : Text) as any;
     return (
-      <Text style={textStyles} {...props}>
+      <TextComponent style={textStyles} {...props}>
         {children}
-      </Text>
+      </TextComponent>
     );
   }
 }
@@ -168,6 +171,7 @@ Typography.defaultProps = {
   white: false,
   gray: false,
   gray2: false,
+  animated: false,
   style: {},
 };
 export default withTheme(Typography);
