@@ -15,6 +15,7 @@ export interface IListItem {
   cardText?: string;
   withArrow?: boolean;
   image?: any;
+  fullHeightImage?: boolean;
   icon?: keyof typeof Icons;
   iconProps?: any;
   iconBackground?: string;
@@ -58,7 +59,11 @@ const List: React.FC<IListProps> = props => {
           return <ListItem {...itemProps} />;
         }}
         ListHeaderComponent={
-          <ListHeader titleText={props.titleText} titleLink={props.titleLink} />
+          <ListHeader
+            titleText={props.titleText}
+            titleLink={props.titleLink}
+            onTitleLinkPress={props.onTitleLinkPress}
+          />
         }
         keyExtractor={keyExtractor}
       />

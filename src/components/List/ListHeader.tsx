@@ -8,16 +8,16 @@ import {defaultTheme as theme} from '../other/constants';
 const ListHeader: React.FC<Partial<IListProps>> = props => {
   if (!props.titleText) return null;
 
-  const styles: any = getStyles(theme, props);
+  const styles: any = getStyles(theme);
 
   return (
     <View style={styles.headerWrapper}>
       <Text style={styles.title}>{props.titleText}</Text>
-      <TouchableOpacity
-        style={styles.titleLinkWrapper}
-        onPress={props.onTitleLinkPress}>
-        <Text style={styles.titleLinkWrapper}>{props.titleLink}</Text>
-      </TouchableOpacity>
+      {props.titleLink && (
+        <TouchableOpacity onPress={props.onTitleLinkPress}>
+          <Text style={styles.titleLinkWrapper}>{props.titleLink}</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
