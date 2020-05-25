@@ -15,6 +15,18 @@ export const getStyles = ({
       flexDirection: 'row',
       alignItems: 'center',
     },
+    centralContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginHorizontal: theme.spaces.s,
+    },
+    leftSideContainer: {},
+    rightSideContainer: {},
+    labelText: {
+      fontSize: theme.fontSizes.headline,
+      fontWeight: '700',
+    },
     rangeBarContainer: {
       height: config.barHeight,
       width: '100%',

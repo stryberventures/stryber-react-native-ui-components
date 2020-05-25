@@ -5,8 +5,9 @@ import {slider} from '../../static/markdown';
 import CenterView from '../../components/CenterView';
 import {Animated, View} from 'react-native';
 import {Slider} from '../../components';
+import {UserIcon} from '../../components/Icons';
 
-const TestComponent = () => {
+const TestComponent = (props: any) => {
   const [size, setSize] = React.useState({
     up: 0,
     down: 0,
@@ -14,12 +15,11 @@ const TestComponent = () => {
 
   return (
     <>
-      <View style={{height: 50}}>
+      <View style={{height: 50, opacity: 0}}>
         <Animated.Text>{`${size.up} ${size.down}`}</Animated.Text>
       </View>
       <Slider
-        color="green"
-        size="large"
+        {...props}
         onChange={(up, down) => {
           setSize({up, down});
         }}
@@ -35,4 +35,21 @@ storiesOf('Slider', module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
   .add('default', () => {
     return <TestComponent />;
+  })
+  .add('with icons', () => {
+    return (
+      <TestComponent
+        leftLabel={() => <UserIcon fill="black" />}
+        rightLabel={() => <UserIcon fill="black" />}
+      />
+    );
+  })
+  .add('large size', () => {
+    return <TestComponent size="large" />;
+  })
+  .add('with custom color', () => {
+    return <TestComponent color="green" />;
+  })
+  .add('with down button', () => {
+    return <TestComponent valueDown={1} />;
   });
