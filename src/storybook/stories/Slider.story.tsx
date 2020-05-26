@@ -5,7 +5,7 @@ import {slider} from '../../static/markdown';
 import CenterView from '../../components/CenterView';
 import {Animated, View} from 'react-native';
 import {Slider} from '../../components';
-import {UserIcon} from '../../components/Icons';
+import {Speaker, SpeakerMute} from '../../components/Icons';
 
 const TestComponent = (props: any) => {
   const [size, setSize] = React.useState({
@@ -16,7 +16,8 @@ const TestComponent = (props: any) => {
   return (
     <>
       <View style={{height: 50, opacity: 1}}>
-        <Animated.Text>{`${size.up} ${size.down}`}</Animated.Text>
+        <Animated.Text>{`Up: ${size.up}`}</Animated.Text>
+        <Animated.Text>{`Down: ${size.down}`}</Animated.Text>
       </View>
       <Slider
         {...props}
@@ -36,13 +37,11 @@ storiesOf('Slider', module)
   .add('default', () => {
     return <TestComponent />;
   })
-  .add('with icons', () => {
-    return (
-      <TestComponent
-        leftLabel={() => <UserIcon fill="black" />}
-        rightLabel={() => <UserIcon fill="black" />}
-      />
-    );
+  .add('with step', () => {
+    return <TestComponent smooth={false} valueUp={5} />;
+  })
+  .add('labels in the bottom', () => {
+    return <TestComponent layout="labelBottom" valueUp={5} />;
   })
   .add('large size', () => {
     return <TestComponent size="large" />;
@@ -52,4 +51,13 @@ storiesOf('Slider', module)
   })
   .add('with down button', () => {
     return <TestComponent valueDown={1} valueUp={5} downButtonVisible />;
+  })
+  .add('with icons', () => {
+    return (
+      <TestComponent
+        valueUp={5}
+        leftLabel={() => <SpeakerMute fill="black" />}
+        rightLabel={() => <Speaker fill="black" />}
+      />
+    );
   });

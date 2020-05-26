@@ -28,5 +28,6 @@ import {Slider} from '@stryberventures/stryber-react-native-ui-components';
 | **\`downButtonVisible\`**  | defines posibility to change low value                        |           
 | **\`leftLabel\`**  | renders custom left label                                 |  
 | **\`rightLabel\`**  | renders custom right label                                 | 
+| **\`showTooltip\`**  | disables tooltip above the button                                 | 
 | **\`onChange\`**  | on value change handler                               |
 `;

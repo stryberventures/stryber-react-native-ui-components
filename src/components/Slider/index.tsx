@@ -18,6 +18,7 @@ interface ISliderProps {
   color?: string;
   layout: string;
   downButtonVisible?: boolean;
+  showTooltip?: boolean;
   leftLabel?: () => any;
   rightLabel?: () => any;
   onChange: (a: number, b: number) => any;
@@ -245,24 +246,25 @@ class Slider extends Component<ISliderProps, ISliderState> {
               this.state.topButton === 'down' ? styles.topButton : {},
             ]}
             {...this.downButtonResponder.panHandlers}>
-            <Animated.View
-              style={[
-                styles.buttonTooltip,
-                {opacity: this.state.buttonDownTouched},
-              ]}>
-              <Text animated style={styles.buttonTooltipText}>
-                {values.down}
-              </Text>
-            </Animated.View>
-            {
+            {this.props.showTooltip && (
               <Animated.View
                 style={[
-                  styles.buttonPulsarWrapper,
+                  styles.buttonTooltip,
                   {opacity: this.state.buttonDownTouched},
                 ]}>
-                <View style={styles.buttonPulsar} />
+                <Text animated style={styles.buttonTooltipText}>
+                  {values.down}
+                </Text>
+                <View style={styles.tooltipArrow} />
               </Animated.View>
-            }
+            )}
+            <Animated.View
+              style={[
+                styles.buttonPulsarWrapper,
+                {opacity: this.state.buttonDownTouched},
+              ]}>
+              <View style={styles.buttonPulsar} />
+            </Animated.View>
             <View style={styles.button} />
           </Animated.View>
         )}
@@ -279,25 +281,25 @@ class Slider extends Component<ISliderProps, ISliderState> {
             this.state.topButton === 'up' ? styles.topButton : {},
           ]}
           {...this.upButtonResponder.panHandlers}>
-          <Animated.View
-            style={[
-              styles.buttonTooltip,
-              {opacity: this.state.buttonUpTouched},
-            ]}>
-            <Text animated style={styles.buttonTooltipText}>
-              {values.up}
-            </Text>
-            <View style={styles.tooltipArrow} />
-          </Animated.View>
-          {
+          {this.props.showTooltip && (
             <Animated.View
               style={[
-                styles.buttonPulsarWrapper,
+                styles.buttonTooltip,
                 {opacity: this.state.buttonUpTouched},
               ]}>
-              <View style={styles.buttonPulsar} />
+              <Text animated style={styles.buttonTooltipText}>
+                {values.up}
+              </Text>
+              <View style={styles.tooltipArrow} />
             </Animated.View>
-          }
+          )}
+          <Animated.View
+            style={[
+              styles.buttonPulsarWrapper,
+              {opacity: this.state.buttonUpTouched},
+            ]}>
+            <View style={styles.buttonPulsar} />
+          </Animated.View>
           <View style={styles.button} />
         </Animated.View>
       </>
@@ -342,8 +344,9 @@ Slider.defaultProps = {
   valueDown: 0,
   size: 'regular',
   layout: 'regular',
-  smooth: false,
+  smooth: true,
   downButtonVisible: false,
+  showTooltip: true,
   onChange: () => {},
 };
 
