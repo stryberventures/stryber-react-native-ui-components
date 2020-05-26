@@ -66,6 +66,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
         this.state.positionUp.setOffset(value);
       },
       onPanResponderStart: () => {
+        this.state.positionUp.setValue(0);
         this.state.buttonUpTouched.setValue(1);
       },
       onPanResponderMove: (_, gestureState) => {
@@ -111,6 +112,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
         this.state.positionDown.setOffset(value);
       },
       onPanResponderStart: () => {
+        this.state.positionDown.setValue(0);
         this.state.buttonDownTouched.setValue(1);
       },
       onPanResponderMove: (_, gestureState) => {
