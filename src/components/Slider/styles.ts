@@ -43,6 +43,11 @@ export const getStyles = ({
       fontWeight: '700',
     },
     rangeBarWrapper: {
+      /* Android bug fix for button positioning */
+      borderLeftWidth: 1,
+      borderRightWidth: 1,
+      borderColor: 'transparent',
+
       height: config.barHeight,
       width: '100%',
       backgroundColor: theme.colors.gray15,
