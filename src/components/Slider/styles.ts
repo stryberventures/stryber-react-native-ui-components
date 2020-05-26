@@ -52,7 +52,6 @@ export const getStyles = ({
     rangeBar: {
       height: '100%',
       backgroundColor: primaryColor,
-      marginRight: 50,
     },
     buttonWrapper: {
       position: 'absolute',
@@ -116,8 +115,15 @@ export const getStyles = ({
       height: config.buttonRadius * 2,
       borderRadius: config.buttonRadius,
       backgroundColor: theme.colors.white,
-      borderWidth: 1,
-      borderColor: theme.colors.gray15,
+      //backgroundColor: 'rgba(255, 255, 255, 0.5)',
+      shadowColor: theme.colors.black,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+      elevation: 3,
     },
   });
 };

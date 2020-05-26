@@ -41,7 +41,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
     this.state = {
       positionUp: new Animated.Value(0),
       positionDown: new Animated.Value(0),
-      width: 0,
+      width: 1,
       topButton: 'up',
       buttonUpTouched: new Animated.Value(0),
       buttonDownTouched: new Animated.Value(0),
@@ -188,9 +188,10 @@ class Slider extends Component<ISliderProps, ISliderState> {
   }
 
   onRangeBarContainerLayout = ({nativeEvent}: LayoutChangeEvent) => {
-    const width =
+    const width = Math.round(
       nativeEvent.layout.width -
-      SliderConfigs[this.props.size].buttonRadius * 2;
+        SliderConfigs[this.props.size].buttonRadius * 2,
+    );
     const positionToValueRatio =
       width / (this.props.limitUp - this.props.limitDown);
 
@@ -224,8 +225,8 @@ class Slider extends Component<ISliderProps, ISliderState> {
               {
                 marginLeft: this.state.positionDown,
                 marginRight: this.state.positionUp.interpolate({
-                  inputRange: [0, this.state.width],
-                  outputRange: [this.state.width, 0],
+                  inputRange: [0, 1, this.state.width],
+                  outputRange: [this.state.width, this.state.width - 1, 0],
                   extrapolate: 'clamp',
                 }),
               },
