@@ -51,5 +51,5 @@ storiesOf('Slider', module)
     return <TestComponent color="green" />;
   })
   .add('with down button', () => {
-    return <TestComponent valueDown={1} />;
+    return <TestComponent valueDown={1} valueUp={5} downButtonVisible />;
   });

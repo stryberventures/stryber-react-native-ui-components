@@ -83,9 +83,16 @@ class Slider extends Component<ISliderProps, ISliderState> {
       onPanResponderRelease: () => {
         value = 0;
         this.state.positionUp.flattenOffset();
-        if ((this.state.positionUp as any).__getValue() === this.state.width) {
+        const positionUpValue = (this.state.positionUp as any).__getValue();
+        const buttonWidth = SliderConfigs[this.props.size].buttonRadius * 2;
+        if (positionUpValue >= this.state.width - buttonWidth) {
           this.setState({
             topButton: 'down',
+          });
+        }
+        if (positionUpValue <= buttonWidth) {
+          this.setState({
+            topButton: 'up',
           });
         }
         this.state.buttonUpTouched.setValue(0);
@@ -121,9 +128,16 @@ class Slider extends Component<ISliderProps, ISliderState> {
       onPanResponderRelease: () => {
         value = 0;
         this.state.positionDown.flattenOffset();
-        if ((this.state.positionDown as any).__getValue() === 0) {
+        const positionDownValue = (this.state.positionUp as any).__getValue();
+        const buttonWidth = SliderConfigs[this.props.size].buttonRadius * 2;
+        if (positionDownValue <= buttonWidth) {
           this.setState({
             topButton: 'up',
+          });
+        }
+        if (positionDownValue >= this.state.width - buttonWidth) {
+          this.setState({
+            topButton: 'down',
           });
         }
         this.state.buttonDownTouched.setValue(0);
