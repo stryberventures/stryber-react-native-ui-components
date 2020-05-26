@@ -62,6 +62,9 @@ export const getStyles = ({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    topButton: {
+      zIndex: 1,
+    },
     buttonPulsarWrapper: {
       position: 'absolute',
       left: 0,

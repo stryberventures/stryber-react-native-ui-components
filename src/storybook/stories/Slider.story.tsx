@@ -15,7 +15,7 @@ const TestComponent = (props: any) => {
 
   return (
     <>
-      <View style={{height: 50, opacity: 0}}>
+      <View style={{height: 50, opacity: 1}}>
         <Animated.Text>{`${size.up} ${size.down}`}</Animated.Text>
       </View>
       <Slider

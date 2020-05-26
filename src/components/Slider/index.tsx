@@ -13,9 +13,11 @@ interface ISliderProps {
   limitUp: number;
   limitDown: number;
   step: number | undefined;
+  smooth: boolean;
   size: 'regular' | 'large';
   color?: string;
   layout: string;
+  downButtonVisible?: boolean;
   leftLabel?: () => any;
   rightLabel?: () => any;
   onChange: (a: number, b: number) => any;
@@ -24,6 +26,7 @@ interface ISliderState {
   positionUp: Animated.Value;
   positionDown: Animated.Value;
   width: number;
+  topButton: 'up' | 'down';
   buttonUpTouched: Animated.Value;
   buttonDownTouched: Animated.Value;
 }
@@ -31,15 +34,14 @@ class Slider extends Component<ISliderProps, ISliderState> {
   static defaultProps: any;
   upButtonResponder: any;
   downButtonResponder: any;
-  isUpResponderActive: boolean = false;
-  isDownResponderActive: boolean = false;
   constructor(props: ISliderProps) {
     super(props);
 
     this.state = {
       positionUp: new Animated.Value(0),
       positionDown: new Animated.Value(0),
-      width: 100,
+      width: 0,
+      topButton: 'up',
       buttonUpTouched: new Animated.Value(0),
       buttonDownTouched: new Animated.Value(0),
     };
@@ -49,61 +51,81 @@ class Slider extends Component<ISliderProps, ISliderState> {
   }
 
   onChange() {
-    const valueUp = (this.state.positionUp.interpolate({
-      inputRange: [0, this.state.width],
-      outputRange: [this.props.limitDown, this.props.limitUp],
-      extrapolate: 'clamp',
-    }) as any).__getValue();
-    const valueDown = (this.state.positionDown.interpolate({
-      inputRange: [0, this.state.width],
-      outputRange: [this.props.limitDown, this.props.limitUp],
-      extrapolate: 'clamp',
-    }) as any).__getValue();
-    this.props.onChange(
-      this.getRoundedValue(valueUp),
-      this.getRoundedValue(valueDown),
-    );
+    const values = this.getValues();
+    this.props.onChange(values.up, values.down);
   }
 
   createUpButtonPanResponder() {
+    let value = 0;
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
-        this.state.positionUp.setOffset((this.state.positionUp as any)._value);
+        value = (this.state.positionUp as any)._value;
+        this.state.positionUp.setOffset(value);
       },
       onPanResponderStart: () => {
         this.state.buttonUpTouched.setValue(1);
       },
       onPanResponderMove: (_, gestureState) => {
-        this.state.positionUp.setValue(gestureState.dx);
+        let dx = gestureState.dx;
+        const positionDown = (this.state.positionDown as any).__getValue();
+        const newPosition = value + gestureState.dx;
+
+        if (newPosition >= this.state.width) {
+          dx = this.state.width - value;
+        } else if (newPosition <= positionDown) {
+          dx = positionDown - value;
+        }
+        this.state.positionUp.setValue(this.getRoundedOffset(dx));
         this.onChange();
       },
       onPanResponderRelease: () => {
+        value = 0;
         this.state.positionUp.flattenOffset();
+        if ((this.state.positionUp as any).__getValue() === this.state.width) {
+          this.setState({
+            topButton: 'down',
+          });
+        }
         this.state.buttonUpTouched.setValue(0);
       },
     });
   }
 
   createDownButtonPanResponder() {
+    let value = 0;
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
       onPanResponderGrant: () => {
-        this.state.positionDown.setOffset(
-          (this.state.positionDown as any)._value,
-        );
+        value = (this.state.positionDown as any)._value;
+        this.state.positionDown.setOffset(value);
       },
       onPanResponderStart: () => {
         this.state.buttonDownTouched.setValue(1);
       },
       onPanResponderMove: (_, gestureState) => {
-        this.state.positionDown.setValue(gestureState.dx);
+        let dx = gestureState.dx;
+        const positionUp = (this.state.positionUp as any).__getValue();
+        const newPosition = value + gestureState.dx;
+
+        if (newPosition >= positionUp) {
+          dx = positionUp - value;
+        } else if (newPosition <= 0) {
+          dx = -value;
+        }
+        this.state.positionDown.setValue(this.getRoundedOffset(dx));
         this.onChange();
       },
       onPanResponderRelease: () => {
+        value = 0;
         this.state.positionDown.flattenOffset();
+        if ((this.state.positionDown as any).__getValue() === 0) {
+          this.setState({
+            topButton: 'up',
+          });
+        }
         this.state.buttonDownTouched.setValue(0);
       },
     });
@@ -128,28 +150,44 @@ class Slider extends Component<ISliderProps, ISliderState> {
 
   getRoundedValue(value: number) {
     if (!this.props.step) {
-      return value;
+      return Math.round(value);
     }
-    const countSteps = Math.round(
-      (value - this.props.limitDown) / this.props.step,
-    );
-    return countSteps * this.props.step;
+
+    const stepCount = Math.round(value / this.props.step);
+    return Math.round(stepCount * this.props.step);
+  }
+
+  getRoundedOffset(offset: number) {
+    if (this.props.smooth || !this.props.step) {
+      return offset;
+    }
+    const positionToValueRatio =
+      this.state.width / (this.props.limitUp - this.props.limitDown);
+    const positionStep = positionToValueRatio * this.props.step;
+    const stepLeft = offset / positionStep - Math.floor(offset / positionStep);
+    if (stepLeft >= 0.5 || stepLeft <= -0.5) {
+      return Math.ceil(offset / positionStep) * positionStep;
+    }
+
+    return Math.floor(offset / positionStep) * positionStep;
   }
 
   onRangeBarContainerLayout = ({nativeEvent}: LayoutChangeEvent) => {
     const width =
       nativeEvent.layout.width -
       SliderConfigs[this.props.size].buttonRadius * 2;
+    const positionToValueRatio =
+      width / (this.props.limitUp - this.props.limitDown);
+
+    this.state.positionUp.setValue(
+      (this.props.valueUp - this.props.limitDown) * positionToValueRatio,
+    );
+    this.state.positionDown.setValue(
+      (this.props.valueDown - this.props.limitDown) * positionToValueRatio,
+    );
     this.setState({
       width,
     });
-
-    this.state.positionUp.setValue(
-      this.props.valueUp * (width / this.props.limitUp),
-    );
-    this.state.positionDown.setValue(
-      this.props.valueDown * (width / this.props.limitUp),
-    );
   };
 
   renderRangeBar() {
@@ -158,13 +196,6 @@ class Slider extends Component<ISliderProps, ISliderState> {
       size: this.props.size,
       color: this.props.color,
     });
-    const positionDownValue = (this.state.positionDown as any).__getValue();
-    const translateUp = this.state.positionUp.interpolate({
-      inputRange: [0, positionDownValue, this.state.width],
-      outputRange: [positionDownValue, positionDownValue, this.state.width],
-      extrapolate: 'clamp',
-    });
-    const translateUpValue = (translateUp as any).__getValue();
     const values = this.getValues();
 
     return (
@@ -176,35 +207,28 @@ class Slider extends Component<ISliderProps, ISliderState> {
             style={[
               styles.rangeBar,
               {
+                marginLeft: this.state.positionDown,
                 marginRight: this.state.positionUp.interpolate({
                   inputRange: [0, this.state.width],
                   outputRange: [this.state.width, 0],
-                  extrapolate: 'clamp',
-                }),
-                marginLeft: this.state.positionDown.interpolate({
-                  inputRange: [0, this.state.width],
-                  outputRange: [0, this.state.width],
                   extrapolate: 'clamp',
                 }),
               },
             ]}
           />
         </View>
-        {!!this.props.valueDown && (
+        {this.props.downButtonVisible && (
           <Animated.View
             style={[
               styles.buttonWrapper,
               {
                 transform: [
                   {
-                    translateX: this.state.positionDown.interpolate({
-                      inputRange: [0, translateUpValue, this.state.width],
-                      outputRange: [0, translateUpValue, translateUpValue],
-                      extrapolate: 'clamp',
-                    }),
+                    translateX: this.state.positionDown,
                   },
                 ],
               },
+              this.state.topButton === 'down' ? styles.topButton : {},
             ]}
             {...this.downButtonResponder.panHandlers}>
             <Animated.View
@@ -234,10 +258,11 @@ class Slider extends Component<ISliderProps, ISliderState> {
             {
               transform: [
                 {
-                  translateX: translateUp,
+                  translateX: this.state.positionUp,
                 },
               ],
             },
+            this.state.topButton === 'up' ? styles.topButton : {},
           ]}
           {...this.upButtonResponder.panHandlers}>
           <Animated.View
@@ -296,13 +321,15 @@ class Slider extends Component<ISliderProps, ISliderState> {
   }
 }
 Slider.defaultProps = {
-  limitUp: 10,
+  limitUp: 9,
   limitDown: 0,
   step: 1,
-  valueUp: 5,
+  valueUp: 1,
   valueDown: 0,
   size: 'regular',
   layout: 'regular',
+  smooth: false,
+  downButtonVisible: false,
   onChange: () => {},
 };
 
