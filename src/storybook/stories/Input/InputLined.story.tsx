@@ -95,6 +95,15 @@ storiesOf('Input/Lined', module)
       icon={() => <UserIcon />}
     />
   ))
+  .add('with icon right', () => (
+    <Input
+      type="email"
+      placeholder={placeholder}
+      label="Email"
+      variant={variant}
+      rightIcon={() => <UserIcon fill="blue" />}
+    />
+  ))
   .add('with icon transparent back', () => (
     <Input
       type="email"

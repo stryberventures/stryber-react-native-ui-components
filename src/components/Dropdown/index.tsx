@@ -11,7 +11,7 @@ import {
 import withTheme from '../withTheme';
 import DropdownItem from '../DropdownItem';
 import Ripple from '../Ripple';
-import Input from '../Input';
+import Input, {IInputProps} from '../Input';
 import Text from '../Text';
 import {ArrowDown} from '../Icons';
 import Button from '../Button';
@@ -23,7 +23,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   value?: string | number;
   label?: string;
   placeholder?: string;
-  variant?: 'simple' | 'lined';
+  variant?: IInputProps['variant'];
   hitSlop?: {};
   data?: any[];
   valueExtractor?: (...args: any[]) => any;
@@ -78,7 +78,6 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   disabledItemColor?: any;
   itemTextStyle?: any;
   rippleColor?: any;
-  withLeftBorder?: boolean;
 }
 type DropdownState = {
   opacity?: any;
@@ -368,14 +367,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return value;
   };
   renderBase(props: any) {
-    const {
-      label,
-      placeholder,
-      variant,
-      theme,
-      withLeftBorder,
-      disabled,
-    } = this.props;
+    const {label, placeholder, variant, theme, disabled} = this.props;
     const angle = this.state.opacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
@@ -388,11 +380,10 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         value={this.props.value}
         disabled={disabled}
         variant={variant}
-        withLeftBorder={withLeftBorder}
         label={label}
         placeholder={placeholder}
         getBaseInput={(ref: any) => (this.input = ref)}
-        renderInputRight={() => (
+        rightIcon={() => (
           <>
             <Button style={styles.arrowButton} onPress={() => {}}>
               <Animated.View
@@ -647,5 +638,4 @@ Dropdown.defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   dropdownPosition: null,
-  withLeftBorder: true,
 };

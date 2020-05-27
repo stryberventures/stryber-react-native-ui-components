@@ -64,6 +64,12 @@ export const getStyles = ({
       position: 'relative',
       zIndex: 2,
     },
+    rightIconContainer: {
+      width: 65,
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
     label: {
       position: 'absolute',
       top: 13,

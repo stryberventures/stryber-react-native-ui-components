@@ -11,7 +11,6 @@ import {Input} from '@stryberventures/stryber-react-native-ui-components';
     onChange={handleChange}
     placeholder="Email"
     label="Email"
-    email
   />
 );
 \`\`\`
@@ -26,7 +25,6 @@ import {Input} from '@stryberventures/stryber-react-native-ui-components';
 | **\`secure\`**  | Set input prop secureTextEntry to "true" and add toggle button                                         |
 | **\`required\`**  | Add * to input label                                                                                    |
 | **\`disabled\`**  | Disable input field. Set editable to false                                                           |
-| **\`withLeftBorder\`**  | Add left line to input. By default true                                                          |
 | **\`iconBackground\`**  | Add background to icon if you set icon to input                                                          |
 
 | Prop                                                   | Description                                                                                                    |
@@ -40,10 +38,5 @@ import {Input} from '@stryberventures/stryber-react-native-ui-components';
 | **\`onBlur\`**  | A function that will be executed on input blur                                                                                |
 | **\`icon\`**  | A function that should return icon component                                                           |
 | **\`mask\`**  | Add mask to input. Example: "XX/XX"                                                           |
-| **\`borderColor\`**  | Change input border color                                                          |
 | **\`style\`**  | Use to set input styles                                                          |
-| **\`errorStyle\`**  | Use to set error text styles                                                          |
-| **\`rightLabel\`**  | A function that should return component                                                           |
-| **\`rightStyle\`**  | Use to set rightLabel styles                                                          |
-| **\`onRightPress\`**  | Add onPress function to rightLabel                                                          |
 `;

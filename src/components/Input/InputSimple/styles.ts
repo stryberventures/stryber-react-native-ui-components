@@ -26,4 +26,10 @@ export const getStyles = ({
       justifyContent: 'center',
       alignItems: 'center',
     },
+    rightIconContainer: {
+      width: 65,
+      height: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });

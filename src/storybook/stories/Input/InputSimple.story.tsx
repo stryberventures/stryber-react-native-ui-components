@@ -49,6 +49,14 @@ storiesOf('Input/Simple', module)
       icon={() => <UserIcon fill="black" />}
     />
   ))
+  .add('with icon right', () => (
+    <Input
+      label="Text"
+      placeholder={placeholder}
+      type="number"
+      rightIcon={() => <UserIcon fill="black" />}
+    />
+  ))
   .add('with error', () => (
     <Input
       label="Email"

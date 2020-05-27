@@ -28,8 +28,8 @@ interface IInputLinedProps extends TextInputProps {
 
   // specific props
   icon?: (...args: any[]) => any;
+  rightIcon?: (...args: any[]) => any;
   iconBackground?: boolean;
-  withLeftBorder?: boolean;
 }
 
 interface IInputLibedState {
@@ -137,8 +137,8 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
       error,
       icon,
       iconBackground,
-      withLeftBorder,
       multiline,
+      rightIcon,
       ...props
     } = this.props;
     const styles = getStyles({
@@ -178,7 +178,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
         }}
         renderInputLeft={() => (
           <>
-            {!icon!() && withLeftBorder && <View style={styles.leftBorder} />}
+            {!icon!() && <View style={styles.leftBorder} />}
             {!!icon!() && iconBackground && (
               <View style={[styles.leftBlock, styles.leftBlockWithRotated]}>
                 <View style={styles.additionalLeftBlock} />
@@ -194,6 +194,13 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
                 ]}>
                 <View style={styles.iconContainer}>{icon!()}</View>
               </View>
+            )}
+          </>
+        )}
+        renderInputRight={() => (
+          <>
+            {!!rightIcon && (
+              <View style={styles.rightIconContainer}>{rightIcon!()}</View>
             )}
           </>
         )}
@@ -220,7 +227,6 @@ InputLined.defaultProps = {
   maxLength: 45, // max length for text area ?
   icon: () => {},
   iconBackground: true,
-  withLeftBorder: true,
   onFocus: () => {},
   onBlur: () => {},
 };

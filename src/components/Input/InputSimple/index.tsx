@@ -26,12 +26,21 @@ interface IInputSimpleProps extends TextInputProps {
 
   // specific props
   icon?: (...args: any[]) => any;
+  rightIcon?: (...args: any[]) => any;
 }
 class InputSimple extends Component<IInputSimpleProps> {
   static defaultProps: any;
 
   render() {
-    const {theme, label, disabled, error, icon, ...props} = this.props;
+    const {
+      theme,
+      label,
+      disabled,
+      error,
+      icon,
+      rightIcon,
+      ...props
+    } = this.props;
     const styles = getStyles({
       theme,
       error: !!error,
@@ -50,6 +59,13 @@ class InputSimple extends Component<IInputSimpleProps> {
         )}
         renderInputLeft={() => (
           <>{!!icon && <View style={styles.iconContainer}>{icon!()}</View>}</>
+        )}
+        renderInputRight={() => (
+          <>
+            {!!rightIcon && (
+              <View style={styles.rightIconContainer}>{rightIcon!()}</View>
+            )}
+          </>
         )}
       />
     );
