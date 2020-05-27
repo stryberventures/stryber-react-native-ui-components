@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {View} from 'react-native';
-import Input from '../Input';
+import Input, {IInputProps} from '../Input';
 import withTheme from '../withTheme';
 import {Search} from '../Icons';
-interface ISearchFieldProps {
+
+interface ISearchFieldProps extends IInputProps {
   theme?: any;
   props?: any;
+  iconColor: string;
 }
 type SearchFieldState = {
   value?: any;
@@ -17,16 +19,13 @@ class SearchField extends Component<ISearchFieldProps, SearchFieldState> {
   };
   onRequestChange = (value: any) => this.setState({value});
   render() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {theme, ...props} = this.props;
+    const {theme, iconColor, ...props} = this.props;
     return (
       <View>
         <Input
-          variant="lined"
-          icon={() => <Search fill={theme.colors.primary} />}
-          onChange={this.onRequestChange}
-          iconBackground={false}
           {...props}
+          icon={() => <Search fill={iconColor || theme.colors.primary} />}
+          onChange={this.onRequestChange}
         />
       </View>
     );

@@ -19,4 +19,11 @@ export const getStyles = ({
         ? theme.colors.accent2
         : theme.colors.gray70,
     },
+    iconContainer: {
+      width: 65,
+      height: '100%',
+      marginRight: -20,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   });

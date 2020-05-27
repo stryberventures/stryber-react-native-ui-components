@@ -23,12 +23,15 @@ interface IInputSimpleProps extends TextInputProps {
 
   style?: any;
   theme: any;
+
+  // specific props
+  icon?: (...args: any[]) => any;
 }
 class InputSimple extends Component<IInputSimpleProps> {
   static defaultProps: any;
 
   render() {
-    const {theme, label, disabled, error, ...props} = this.props;
+    const {theme, label, disabled, error, icon, ...props} = this.props;
     const styles = getStyles({
       theme,
       error: !!error,
@@ -37,6 +40,7 @@ class InputSimple extends Component<IInputSimpleProps> {
 
     return (
       <InputBase
+        {...props}
         error={error}
         disabled={disabled!}
         renderPrefix={() => (
@@ -44,7 +48,9 @@ class InputSimple extends Component<IInputSimpleProps> {
             <Text style={styles.labelText}>{label}</Text>
           </View>
         )}
-        {...props}
+        renderInputLeft={() => (
+          <>{!!icon && <View style={styles.iconContainer}>{icon!()}</View>}</>
+        )}
       />
     );
   }

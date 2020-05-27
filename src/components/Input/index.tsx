@@ -3,7 +3,7 @@ import {TextInputProps} from 'react-native';
 import InputSimple from './InputSimple';
 import InputLined from './InputLined';
 
-interface IInputProps extends TextInputProps {
+export interface IInputProps extends TextInputProps {
   variant: 'simple' | 'lined';
 }
 

@@ -6,6 +6,7 @@ import {withKnobs, text} from '@storybook/addon-knobs';
 import Input from '../../../components/Input';
 import CenterView from '../../../components/CenterView/index';
 import {input} from '../../../static/markdown';
+import {UserIcon} from '../../../components/Icons';
 
 const placeholder = text('Placeholder', 'Input placeholder');
 storiesOf('Input/Simple', module)
@@ -40,6 +41,14 @@ storiesOf('Input/Simple', module)
       />
     );
   })
+  .add('with icon', () => (
+    <Input
+      label="Text"
+      placeholder={placeholder}
+      type="number"
+      icon={() => <UserIcon fill="black" />}
+    />
+  ))
   .add('with error', () => (
     <Input
       label="Email"
