@@ -8,7 +8,7 @@ const longText =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
 export const SimpleList = () => {
-  const simpleData = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     rightValue: 'Value',
     withArrow: true,
@@ -16,7 +16,7 @@ export const SimpleList = () => {
   });
   return (
     <List
-      data={simpleData}
+      data={data}
       titleText="SUBHEAD TITLE"
       titleLink="Link"
       onItemPress={item => console.log('item', item)}
@@ -25,7 +25,7 @@ export const SimpleList = () => {
 };
 
 export const SimpleListWithIcons = () => {
-  const simpleDataWithIcons = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     rightValue: 'Value',
     withArrow: true,
@@ -35,50 +35,32 @@ export const SimpleListWithIcons = () => {
       fill: theme.colors.gray50,
     },
   });
-  return (
-    <List
-      data={simpleDataWithIcons}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const SimpleListWithTwoLinesOfText = () => {
-  const simpleDataWithFullHeightImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     secondaryValue: 'second line',
     rightValue: 'Value',
     withArrow: true,
     cardText: longText,
   });
-  return (
-    <List
-      data={simpleDataWithFullHeightImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const SimpleListWithLongText = () => {
-  const simpleDataWithFullHeightImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     longValue: longText,
     withArrow: true,
     cardText: longText,
   });
-  return (
-    <List
-      data={simpleDataWithFullHeightImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithIcons = () => {
-  const simpleDataWithIcons = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     rightValue: 'Value',
     withArrow: true,
@@ -89,17 +71,11 @@ export const ListWithIcons = () => {
     },
     iconBackground: theme.colors.primary,
   });
-  return (
-    <List
-      data={simpleDataWithIcons}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithImages = () => {
-  const simpleDataWithImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     rightValue: 'Value',
     withArrow: true,
@@ -108,17 +84,11 @@ export const ListWithImages = () => {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
     },
   });
-  return (
-    <List
-      data={simpleDataWithImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithImagesAndLongText = () => {
-  const simpleDataWithImages = new Array(10).fill({
+  const data = new Array(10).fill({
     longValue: longText,
     value: 'Option',
     rightValue: 'Value',
@@ -128,17 +98,11 @@ export const ListWithImagesAndLongText = () => {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
     },
   });
-  return (
-    <List
-      data={simpleDataWithImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithFullHeightImages = () => {
-  const simpleDataWithFullHeightImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     rightValue: 'Value',
     withArrow: true,
@@ -148,17 +112,11 @@ export const ListWithFullHeightImages = () => {
       uri: 'https://upload.wikimedia.org/wikipedia/ru/7/74/Dr_Evil.jpg',
     },
   });
-  return (
-    <List
-      data={simpleDataWithFullHeightImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithCheckboxes = () => {
-  const simpleDataWithImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     image: {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
@@ -171,17 +129,11 @@ export const ListWithCheckboxes = () => {
       text: '',
     },
   });
-  return (
-    <List
-      data={simpleDataWithImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithRadioButtons = () => {
-  const simpleDataWithImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     image: {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
@@ -194,17 +146,11 @@ export const ListWithRadioButtons = () => {
       text: '',
     },
   });
-  return (
-    <List
-      data={simpleDataWithImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithSwitchButtons = () => {
-  const simpleDataWithImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     image: {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
@@ -230,17 +176,11 @@ export const ListWithSwitchButtons = () => {
       },
     },
   });
-  return (
-    <List
-      data={simpleDataWithImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithButtons = () => {
-  const simpleDataWithImages = new Array(10).fill({
+  const data = new Array(10).fill({
     value: 'Option',
     image: {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
@@ -254,13 +194,7 @@ export const ListWithButtons = () => {
     },
     buttonChildren: <Text white>button text</Text>,
   });
-  return (
-    <List
-      data={simpleDataWithImages}
-      titleText="SUBHEAD TITLE"
-      titleLink="Link"
-    />
-  );
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
 export const ListWithMultipleControl = () => {
