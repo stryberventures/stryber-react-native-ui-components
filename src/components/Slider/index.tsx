@@ -17,10 +17,10 @@ interface ISliderProps {
   size: 'regular' | 'large';
   color?: string;
   layout: string;
-  downButtonVisible?: boolean;
+  showDownButton?: boolean;
   showTooltip?: boolean;
-  leftLabel?: () => any;
-  rightLabel?: () => any;
+  leftLabel?: (a: number) => any;
+  rightLabel?: (b: number) => any;
   onChange: (a: number, b: number) => any;
 }
 interface ISliderState {
@@ -235,7 +235,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
             ]}
           />
         </View>
-        {this.props.downButtonVisible && (
+        {this.props.showDownButton && (
           <Animated.View
             style={[
               styles.buttonWrapper,
@@ -322,14 +322,14 @@ class Slider extends Component<ISliderProps, ISliderState> {
         styles={styles}
         leftLabel={
           typeof this.props.leftLabel === 'function' ? (
-            this.props.leftLabel()
+            this.props.leftLabel(this.props.limitDown)
           ) : (
             <Text style={styles.labelText}>{this.props.limitDown}</Text>
           )
         }
         rightLabel={
           typeof this.props.rightLabel === 'function' ? (
-            this.props.rightLabel()
+            this.props.rightLabel(this.props.limitUp)
           ) : (
             <Text style={styles.labelText}>{this.props.limitUp}</Text>
           )
@@ -348,7 +348,7 @@ Slider.defaultProps = {
   size: 'regular',
   layout: 'regular',
   smooth: true,
-  downButtonVisible: false,
+  showDownButton: false,
   showTooltip: true,
   onChange: () => {},
 };

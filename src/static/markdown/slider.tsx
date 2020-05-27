@@ -6,28 +6,31 @@ import {Slider} from '@stryberventures/stryber-react-native-ui-components';
 () => (
   <Slider
     valueUp={10}
-    smooth
-    step={1}
+    valueDown={1}
   />
 );
 \`\`\`
 
 ## Properties
 
-| Prop                                                   | Description                                                                                                    |
-| ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| **\`valueUp\`**  | initial up value                                           |
-| **\`valueDown\`**  | initial down value                                     |
-| **\`limitUp\`**  | maximum value                                   |
-| **\`limitDown\`**  | minimum value                                  | 
-| **\`step\`**  | with which step change value, by default 1                                  |
-| **\`smooth\`**  | how buttons should move, with step or smooth                                 | 
-| **\`size\`**  | can be 'regular' or 'large'                                  |
-| **\`color\`**  | color or the bar and pulsar                                  | 
-| **\`layout\`**  | defines labels position 'regular' or 'labelBottom'                                 |
-| **\`downButtonVisible\`**  | defines posibility to change low value                        |           
-| **\`leftLabel\`**  | renders custom left label                                 |  
-| **\`rightLabel\`**  | renders custom right label                                 | 
-| **\`showTooltip\`**  | disables tooltip above the button                                 | 
-| **\`onChange\`**  | on value change handler                               |
+| Prop                    | Description                                         | Default value      |
+| ----------------------------------------------------------------------------- | -------------------|
+| **\`valueUp\`**         | initial up value                                    | 1                  |
+| **\`valueDown\`**       | initial down value                                  | 0                  |
+| **\`limitUp\`**         | maximum value                                       | 9                  |
+| **\`limitDown\`**       | minimum value                                       | 0                  | 
+| **\`step\`**            | with which step change value, by default 1          | 1                  |                                                                                                                                                                       
+| **\`layout\`**          | defines labels position 'regular' or 'labelBottom'  | 'regular'          |
+| **\`size\`**            | can be 'regular' or 'large'                         | 'regular'          |
+| **\`color\`**           | color or the bar and pulsar                         | primary in theme   |
+| **\`leftLabel\`**       | custom left label render handler, receives current valueDown as a parameter  | _        |  
+| **\`rightLabel\`**      | custom right label render handler, receives current valueUp as a parameter   | _        | 
+| **\`onChange\`**        | on value change handler                             | _                  |
+
+
+| Prop (boolean)          | Description                                         | Default value                                                                                      |
+| ------------------------------------------------------------------------------------------------|
+| **\`smooth\`**          | how buttons should move, with step or smooth        | true            |
+| **\`showDownButton\`**  | show up down value button                           | false           |
+| **\`showTooltip\`**     | disables tooltip above the button                   | true            |
 `;

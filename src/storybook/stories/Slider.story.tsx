@@ -37,7 +37,7 @@ storiesOf('Slider', module)
   .add('default', () => {
     return <TestComponent />;
   })
-  .add('with step', () => {
+  .add('smooth off', () => {
     return <TestComponent smooth={false} valueUp={5} />;
   })
   .add('labels in the bottom', () => {
