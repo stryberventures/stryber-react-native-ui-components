@@ -124,7 +124,7 @@ export const ListWithCheckboxes = () => {
     checkBox: true,
     checkboxProps: {
       style: {
-        left: 20,
+        left: 15,
       },
       text: '',
     },
@@ -141,7 +141,7 @@ export const ListWithRadioButtons = () => {
     radioButton: true,
     radioButtonProps: {
       style: {
-        left: 20,
+        left: 15,
       },
       text: '',
     },
@@ -211,7 +211,7 @@ export const ListWithMultipleControl = () => {
       item.checkboxProps = {
         text: '',
         style: {
-          left: 20,
+          left: 15,
         },
       };
     }
@@ -222,7 +222,7 @@ export const ListWithMultipleControl = () => {
       item.radioButtonProps = {
         text: '',
         style: {
-          left: 20,
+          left: 15,
         },
       };
     }

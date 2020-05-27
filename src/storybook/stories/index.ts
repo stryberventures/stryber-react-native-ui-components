@@ -2,7 +2,7 @@ import "./Global";
 import "./Welcome.story";
 import "./Button.story";
 import "./Input.story";
-import "./Checkbox.story";
+import "./Controls";
 import "./Header.story";
 import "./CacheImage.story";
 import "./Badge.story";
