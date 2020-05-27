@@ -36,6 +36,7 @@ import {Text} from '@stryberventures/stryber-react-native-ui-components';
 | **\`white\`**  | Change text color to theme white color                                                          |
 | **\`gray\`**  | Change text color to theme gray color                                                          |
 | **\`gray2\`**  | Change text color to theme gray2 color                                                          |
+| **\`animated\`**  | Uses Animated.Text component                                                          |
 
 | Prop                                                | Description                                                                                                    |
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |

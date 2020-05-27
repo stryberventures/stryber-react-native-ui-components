@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, text, select} from '@storybook/addon-knobs';
