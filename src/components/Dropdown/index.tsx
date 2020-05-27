@@ -97,7 +97,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   listContainer: any;
   focus: (event: any) => void;
   focused: any;
-  input: any;
+  inputRef: any;
   mounted: any;
   ripple: any;
   scroll: any;
@@ -121,7 +121,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     this.ripple = React.createRef();
     this.listContainer = React.createRef();
     this.scroll = React.createRef();
-    this.input = React.createRef();
+    this.inputRef = React.createRef();
     this.blur = () => this.onClose();
     this.focus = this.onPress;
     this.mounted = false;
@@ -172,7 +172,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     if (typeof onFocus === 'function') {
       onFocus();
     }
-    this.input.onFocus();
+    this.inputRef.current.onFocus();
     const dimensions = Dimensions.get('window');
     this.listContainer.current.measureInWindow(
       (
@@ -253,10 +253,10 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       if (typeof onBlur === 'function') {
         onBlur();
       }
-      this.input.onBlur();
+      this.inputRef.current.onBlur();
       if (this.mounted) {
         this.setState({value, modal: false});
-        this.input.setValue(value);
+        this.inputRef.current.setValue(value);
       }
     });
   };
@@ -382,7 +382,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         variant={variant}
         label={label}
         placeholder={placeholder}
-        getBaseInput={(ref: any) => (this.input = ref)}
+        ref={this.inputRef}
         rightIcon={() => (
           <>
             <Button style={styles.arrowButton} onPress={() => {}}>

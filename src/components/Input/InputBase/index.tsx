@@ -46,7 +46,6 @@ interface IInputBaseProps extends TextInputProps {
   renderInputLeft?: () => any;
   renderInputRight?: () => any;
   inputWrapperComponent?: React.ComponentType;
-  getBaseInput?: (a: any) => any;
   onChange?: (...args: any[]) => any;
 }
 type IInputBaseState = {
@@ -73,7 +72,6 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     };
 
     this.inputWrapper = this.props.inputWrapperComponent || DefaultInputWrapper;
-    this.props.getBaseInput!(this);
   }
 
   renderToggle() {
@@ -236,6 +234,5 @@ InputBase.defaultProps = {
   onChange: () => {},
   onFocus: () => {},
   onBlur: () => {},
-  getBaseInput: () => {},
 };
 export default withTheme(InputBase);

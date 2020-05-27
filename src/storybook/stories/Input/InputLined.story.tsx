@@ -87,9 +87,7 @@ storiesOf('Input/Lined', module)
   .add('with icon', () => (
     <Input
       type="email"
-      withLeftBorder={false}
       placeholder={placeholder}
-      disabled
       label="Email"
       variant={variant}
       icon={() => <UserIcon />}
@@ -107,7 +105,6 @@ storiesOf('Input/Lined', module)
   .add('with icon transparent back', () => (
     <Input
       type="email"
-      withLeftBorder={false}
       iconBackground={false}
       placeholder={placeholder}
       label="Email"
@@ -118,7 +115,6 @@ storiesOf('Input/Lined', module)
   .add('with icon disabled', () => (
     <Input
       type="email"
-      withLeftBorder={false}
       disabled
       placeholder={placeholder}
       label="Email"
@@ -129,7 +125,6 @@ storiesOf('Input/Lined', module)
   .add('with icon error', () => (
     <Input
       type="email"
-      withLeftBorder={false}
       error="Error text"
       placeholder={placeholder}
       label="Email"

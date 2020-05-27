@@ -8,6 +8,7 @@ import {getStyles} from './styles';
 
 interface IInputLinedProps extends TextInputProps {
   name?: string;
+  inputBaseRef: React.Ref<any>;
   type?: 'email' | 'phone' | 'number' | 'default';
   label: string;
   error?: string;
@@ -139,6 +140,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
       iconBackground,
       multiline,
       rightIcon,
+      inputBaseRef,
       ...props
     } = this.props;
     const styles = getStyles({
@@ -151,6 +153,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
     return (
       <InputBase
         {...props}
+        ref={inputBaseRef}
         error={error}
         disabled={disabled!}
         multiline={multiline}

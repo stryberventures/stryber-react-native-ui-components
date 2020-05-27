@@ -9,6 +9,7 @@ import {getStyles} from './styles';
 
 interface IInputSimpleProps extends TextInputProps {
   name?: string;
+  inputBaseRef: React.Ref<any>;
   type?: 'email' | 'phone' | 'number' | 'default';
   label: string;
   error?: string;
@@ -39,6 +40,7 @@ class InputSimple extends Component<IInputSimpleProps> {
       error,
       icon,
       rightIcon,
+      inputBaseRef,
       ...props
     } = this.props;
     const styles = getStyles({
@@ -52,6 +54,7 @@ class InputSimple extends Component<IInputSimpleProps> {
         {...props}
         error={error}
         disabled={disabled!}
+        ref={inputBaseRef}
         renderPrefix={() => (
           <View style={styles.labelContainer}>
             <Text style={styles.labelText}>{label}</Text>
