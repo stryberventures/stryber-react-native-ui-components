@@ -1,4 +1,7 @@
 import {StyleSheet} from 'react-native';
+
+import * as theme from '../other/constants/theme';
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -17,6 +20,12 @@ export default StyleSheet.create({
       width: 0,
     },
     zIndex: 1,
+    marginBottom: theme.spaces.xxl2,
+  },
+  segmentView: {
+    backgroundColor: theme.colors.paleBlueGray,
+    borderRadius: theme.spaces.xxs,
+    paddingHorizontal: theme.spaces.xxs,
   },
   tabContent: {
     flexDirection: 'row',
@@ -28,6 +37,14 @@ export default StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  indicatorBottomLine: {
+    width: '100%',
+    height: 2,
+    backgroundColor: theme.colors.black,
+    position: 'absolute',
+    bottom: 0,
+    opacity: 0.05,
   },
   indicator: {
     position: 'absolute',

@@ -1,34 +1,89 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../other/constants';
-const getStyles = (theme = defaultTheme, checked = false, radio = false) =>
-  StyleSheet.create({
+
+const getStyles = ({
+  theme = defaultTheme,
+  checked = false,
+  radio = false,
+  disabled = false,
+  error = false,
+  size = 'regular',
+}) => {
+  const checkboxSizes =
+    // @ts-ignore
+    theme.sizes.checkbox[size] || theme.sizes.checkbox.regular;
+  const radioRadius =
+    // @ts-ignore
+    theme.sizes.radioRadius[size] || theme.sizes.radioRadius.regular;
+  return StyleSheet.create({
+    wrapper: {
+      marginVertical: theme.spaces.xs,
+    },
     container: {
-      margin: 8,
       alignItems: 'center',
       flexDirection: 'row',
     },
     textContainer: {
-      marginLeft: 10,
+      marginLeft: theme.spaces.xs,
     },
     checkbox: {
       borderWidth: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: checked ? theme.colors.primary : 'transparent',
-      width: theme.sizes.checkbox,
-      borderColor: checked ? theme.colors.primary : theme.colors.gray,
-      height: theme.sizes.checkbox,
-      borderRadius: radio ? theme.sizes.checkbox / 2 : 3,
+      backgroundColor: error
+        ? checked
+          ? theme.colors.accent2
+          : 'transparent'
+        : disabled
+        ? checked
+          ? theme.colors.gray15
+          : 'transparent'
+        : checked
+        ? theme.colors.primary
+        : 'transparent',
+      borderColor: error
+        ? checked
+          ? theme.colors.accent2
+          : theme.colors.accent2
+        : disabled
+        ? checked
+          ? theme.colors.gray15
+          : theme.colors.gray15
+        : checked
+        ? theme.colors.primary
+        : theme.colors.gray15,
+      // @ts-ignore
+      height: checkboxSizes.box,
+      // @ts-ignore
+      width: checkboxSizes.box,
+      borderRadius: radio ? checkboxSizes.box / 2 : 3,
+      opacity: disabled ? 0.5 : 1,
     },
     radioIcon: {
-      width: 8,
-      height: 8,
+      width: radioRadius * 2,
+      height: radioRadius * 2,
+      borderRadius: radioRadius,
       backgroundColor: '#fff',
-      borderRadius: 4,
     },
     textStyle: {
-      fontSize: theme.sizes.base,
-      color: checked ? theme.colors.primary : theme.colors.darkGrey,
+      fontSize:
+        size === 'large' ? theme.fontSizes.body : theme.fontSizes.subhead,
+      color: disabled ? theme.colors.gray15 : theme.colors.black,
+    },
+    errorContainer: {
+      marginTop: theme.spaces.m,
+    },
+    errorText: {
+      fontSize: theme.fontSizes.caption,
+      color: theme.colors.accent2,
+    },
+    textStyleDisabled: {
+      color: theme.colors.gray15,
+    },
+    textStyleError: {
+      color: theme.colors.accent2,
     },
   });
+};
+
 export default getStyles;

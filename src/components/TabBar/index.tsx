@@ -34,6 +34,11 @@ interface ITabBarProps {
   style?: any;
   indicatorContainerStyle?: any;
   renderIndicator?: (...args: any[]) => any;
+  segmentView?: boolean;
+  segmentLineColor?: string;
+  textColor?: string;
+  activeTabBackground?: string;
+  activeTabTextColor?: string;
 }
 type TabBarState = {
   layout?: any;
@@ -241,6 +246,11 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       contentContainerStyle,
       style,
       indicatorContainerStyle,
+      segmentView,
+      segmentLineColor,
+      textColor,
+      activeTabBackground,
+      activeTabTextColor,
     } = this.props;
     const {layout, tabWidths} = this.state;
     // @ts-ignore
@@ -255,35 +265,40 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
     return (
       <Animated.View
         onLayout={this.handleLayout}
-        style={[styles.tabBar, style]}>
-        <Animated.View
-          pointerEvents="none"
-          style={[
-            styles.indicatorContainer,
-            scrollEnabled ? {transform: [{translateX}]} : null,
-            tabBarWidth
-              ? {width: tabBarWidth}
-              : scrollEnabled
-              ? {width: tabBarWidthPercent}
-              : null,
-            indicatorContainerStyle,
-          ]}>
-          {this!.props!.renderIndicator!({
-            position,
-            layout,
-            navigationState,
-            jumpTo,
-            width: isWidthDynamic ? 'auto' : `${100 / routes.length}%`,
-            style: indicatorStyle,
-            getTabWidth: this.getMemoizedTabWidthGettter(
-              layout,
-              routes,
-              scrollEnabled,
-              tabWidths,
-              this.getFlattenedTabWidth(tabStyle),
-            ),
-          })}
-        </Animated.View>
+        style={[styles.tabBar, segmentView && styles.segmentView, style]}>
+        {!segmentView && (
+          <>
+            <Animated.View
+              pointerEvents="none"
+              style={[
+                styles.indicatorContainer,
+                scrollEnabled ? {transform: [{translateX}]} : null,
+                tabBarWidth
+                  ? {width: tabBarWidth}
+                  : scrollEnabled
+                  ? {width: tabBarWidthPercent}
+                  : null,
+                indicatorContainerStyle,
+              ]}>
+              {this!.props!.renderIndicator!({
+                position,
+                layout,
+                navigationState,
+                jumpTo,
+                width: isWidthDynamic ? 'auto' : `${100 / routes.length}%`,
+                style: indicatorStyle,
+                getTabWidth: this.getMemoizedTabWidthGettter(
+                  layout,
+                  routes,
+                  scrollEnabled,
+                  tabWidths,
+                  this.getFlattenedTabWidth(tabStyle),
+                ),
+              })}
+              <View style={styles.indicatorBottomLine} />
+            </Animated.View>
+          </>
+        )}
         <View style={styles.scroll}>
           <Animated.ScrollView
             horizontal
@@ -316,6 +331,11 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
             }}>
             {routes.map((route: any) => (
               <Tab
+                segmentLineColor={segmentLineColor}
+                textColor={textColor}
+                activeTabBackground={activeTabBackground}
+                activeTabTextColor={activeTabTextColor}
+                segmentView={segmentView}
                 onLayout={
                   isWidthDynamic
                     ? e => {

@@ -30,6 +30,11 @@ interface ITabViewProps {
   initialLayout?: {};
   onIndexChange?: (...args: any[]) => any;
   index?: any;
+  segmentView?: boolean;
+  segmentLineColor?: string;
+  textColor?: string;
+  activeTabBackground?: string;
+  activeTabTextColor?: string;
 }
 type TabViewState = {
   layout?: {height: any; width: any};
@@ -87,6 +92,11 @@ export default class TabView extends React.Component<
       gestureHandlerProps,
       springVelocityScale,
       renderPager,
+      segmentView,
+      segmentLineColor,
+      textColor,
+      activeTabBackground,
+      activeTabTextColor,
     } = this.props;
     const {layout} = this.state;
     return (
@@ -130,6 +140,11 @@ export default class TabView extends React.Component<
                   renderTabBar!({
                     ...sceneRendererProps,
                     navigationState,
+                    segmentView,
+                    segmentLineColor,
+                    textColor,
+                    activeTabBackground,
+                    activeTabTextColor,
                   })}
                 {render(
                   navigationState.routes.map((route: any, i: number) => {
@@ -160,6 +175,11 @@ export default class TabView extends React.Component<
                   renderTabBar!({
                     ...sceneRendererProps,
                     navigationState,
+                    segmentView,
+                    segmentLineColor,
+                    textColor,
+                    activeTabBackground,
+                    activeTabTextColor,
                   })}
               </React.Fragment>
             );
@@ -182,4 +202,5 @@ TabView.defaultProps = {
   timingConfig: {},
   gestureHandlerProps: {},
   renderPager: (props: any) => <Pager {...props} />,
+  segmentView: false,
 };
