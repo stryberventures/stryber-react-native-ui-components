@@ -25,7 +25,7 @@ import {Slider} from '@stryberventures/stryber-react-native-ui-components';
 | **\`color\`**           | color or the bar and pulsar                         | primary in theme   |
 | **\`leftLabel\`**       | custom left label render handler, receives current valueDown as a parameter  | _        |  
 | **\`rightLabel\`**      | custom right label render handler, receives current valueUp as a parameter   | _        | 
-| **\`onChange\`**        | on value change handler                             | _                  |
+| **\`onChange\`**        | on value change handler, receives valueUp, valueDown as parameters           | _        |
 
 
 | Prop (boolean)          | Description                                         | Default value                                                                                      |
