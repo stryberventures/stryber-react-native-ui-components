@@ -16,3 +16,4 @@ import './Form.story';
 import './SearchField.story';
 import './TabView.story';
 import './Block.story';
+import './Slider.story';
