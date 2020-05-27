@@ -10,10 +10,17 @@ import ListItem from './ListItem';
 
 export interface IListItem {
   value: string;
-  secondValue?: string;
+  valueStyles?: any;
+  secondaryValue?: string;
+  secondaryValueStyles?: any;
+  longValue?: string;
+  longValueStyles?: any;
   rightValue?: string;
+  rightValueStyles?: any;
   cardText?: string;
+  cardTextStyles?: any;
   withArrow?: boolean;
+  arrowStyles?: any;
   image?: any;
   fullHeightImage?: boolean;
   icon?: keyof typeof Icons;
@@ -44,9 +51,13 @@ const List: React.FC<IListProps> = props => {
 
   const createItemProps = (item: any) => {
     const itemProps = {...item};
-    if (props.onItemPress) {
-      itemProps.onItemPress = props.onItemPress;
-    }
+    itemProps.onItemPress = !props.onItemPress
+      ? null
+      : () => {
+          if (props.onItemPress) {
+            props.onItemPress(item);
+          }
+        };
     return itemProps;
   };
 

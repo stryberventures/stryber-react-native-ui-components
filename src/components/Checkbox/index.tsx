@@ -16,6 +16,7 @@ export interface ICheckboxProps {
   radio?: boolean;
   iconComponent?: any;
   shouldCheckboxChange?: boolean;
+  style?: any;
   error?: string;
   disabled?: boolean;
   size?: 'regular' | 'large';
@@ -90,7 +91,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
   };
   render() {
     const {checked} = this.state;
-    const {text, opacity, theme, radio, error, disabled, size} = this.props;
+    const {text, opacity, theme, radio, error, disabled, size, style} = this.props;
     const styles = getStyles({
       theme,
       radio,
@@ -102,7 +103,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     return (
       <View style={styles.wrapper}>
         <TouchableOpacity
-          style={styles.container}
+          style={[styles.container, style]}
           activeOpacity={opacity}
           disabled={disabled}
           onPress={
