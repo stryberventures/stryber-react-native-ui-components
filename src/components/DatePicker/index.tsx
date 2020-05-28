@@ -4,12 +4,13 @@ import {
   TouchableWithoutFeedback,
   Modal,
   View,
-  Button,
+  Button as RNButton,
 } from 'react-native';
 import {Calendar} from '../Icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
-import Input from '../Input';
+import Input, {IInputProps} from '../Input';
+import Button from '../Button';
 import withTheme from '../withTheme';
 const isAndroid = Platform.OS === 'android';
 interface IDatePickerProps extends React.HTMLAttributes<Element> {
@@ -28,7 +29,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   theme?: any;
   label?: string;
   error?: string;
-  withLeftBorder?: boolean;
+  variant?: IInputProps['variant'];
   props?: any;
   saveDateOnCancel?: boolean;
 }
@@ -114,7 +115,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
         <View style={[styles.overlay, modalOverlayStyle]}>
           <View style={[styles.modal, modalStyle]}>
             <View style={[styles.modalBtnContainer, modalBtnContainer]}>
-              <Button
+              <RNButton
                 // @ts-ignore
                 title={modalButtonText}
                 style={[modalButtonStyle]}
@@ -138,7 +139,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   };
   render() {
     const {showModal} = this.state;
-    const {style, theme, label, error, withLeftBorder} = this.props;
+    const {style, theme, label, error, variant} = this.props;
     const {year, month, day} = this.getDateObj();
     const dateSet = day && month && year;
     const dateStr = dateSet ? `${day}-${month}-${year}` : label;
@@ -148,15 +149,18 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
         <View pointerEvents="box-only">
           {this.renderModal()}
           <Input
+            variant={variant}
             error={error}
-            rightLabel={() => <Calendar size={20} fill={inputColor} />}
-            placeholderLabel={dateStr}
+            rightIcon={() => (
+              <Button onPress={() => {}}>
+                <Calendar size={20} fill={inputColor} />
+              </Button>
+            )}
+            placeholder={dateStr}
             style={[{marginVertical: 0}, style]}
             placeholderTextColor={
               dateSet && !showModal ? theme.colors.darkGrey : inputColor
             }
-            borderColor={inputColor}
-            withLeftBorder={withLeftBorder}
           />
         </View>
       </TouchableWithoutFeedback>

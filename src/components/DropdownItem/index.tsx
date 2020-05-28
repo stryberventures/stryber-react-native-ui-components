@@ -24,7 +24,7 @@ class DropdownItem extends PureComponent<IDropdownItemProps, {}> {
   render() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const {children, style, theme, index, ...props} = this.props;
-    const styles = getStyles(theme);
+    const styles = getStyles();
     return (
       // @ts-ignore
       <Button
