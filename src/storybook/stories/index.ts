@@ -19,4 +19,5 @@ import './Block.story';
 import './Slider.story';
 import './ProgressBar.story';
 import './Loader.story';
-import "./List.story";
+import './List.story';
+import './CardList.story';
