@@ -24,4 +24,5 @@ import {Checkbox} from '@stryberventures/stryber-react-native-ui-components';
 | **\`name\`**  | Set checkbox field name that will be returned in onPress function                                           |
 | **\`onPress\`**  | A function that will be executed on tap event and get in params: onPress(value, name)                                            |
 | **\`opacity\`**  | Specify opacity on tap from 0 to 1. Default: 0.8                                            |
+| **\`bgColor\`**  | Defines custom background color                                            |
 `;

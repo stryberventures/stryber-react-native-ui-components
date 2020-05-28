@@ -34,6 +34,15 @@ storiesOf('Controls/Checkbox', module)
     },
   )
   .add(
+    'custom color',
+    () => {
+      return <Checkbox value={true} bgColor="orange" />;
+    },
+    {
+      notes: {markdown: checkbox},
+    },
+  )
+  .add(
     'disabled',
     () => {
       return <Checkbox value={false} disabled />;

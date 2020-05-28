@@ -34,6 +34,15 @@ storiesOf('Controls/RadioButton', module)
     },
   )
   .add(
+    'custom color',
+    () => {
+      return <Checkbox radio value={true} bgColor="orange" />;
+    },
+    {
+      notes: {markdown: checkbox},
+    },
+  )
+  .add(
     'disabled',
     () => {
       return <Checkbox radio value={false} disabled />;
