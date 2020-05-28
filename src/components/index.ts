@@ -19,7 +19,12 @@ import Tab from './Tab';
 import TabBar from './TabBar';
 import TabView from './TabView';
 import SceneMap from './SceneMap';
+<<<<<<< Updated upstream
 import Slider from './Slider';
+=======
+import ProgressBar from './ProgressBar';
+import Loader from './Loader';
+>>>>>>> Stashed changes
 
 export {DatePicker};
 export {Badge};
@@ -42,4 +47,9 @@ export {Tab};
 export {TabBar};
 export {TabView};
 export {SceneMap};
+<<<<<<< Updated upstream
 export {Slider};
+=======
+export {ProgressBar};
+export {Loader};
+>>>>>>> Stashed changes
