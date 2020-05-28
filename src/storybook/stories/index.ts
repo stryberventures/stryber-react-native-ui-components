@@ -1,7 +1,7 @@
 import './Global';
 import './Welcome.story';
 import './Button.story';
-import './Input.story';
+import './Input';
 import './Controls';
 import './Header.story';
 import './CacheImage.story';

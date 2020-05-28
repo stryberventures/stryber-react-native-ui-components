@@ -4,20 +4,24 @@ import withTheme from '../withTheme';
 type ArrowDownProps = {
   width?: number;
   height?: number;
+  fill?: string;
   theme: {
     colors?: {
-      gray?: string;
+      gray15?: string;
     };
   };
 };
 const ArrowDown: React.SFC<ArrowDownProps> = props => (
-  <Svg viewBox="0 0 24 24" fill={props.theme.colors!.gray} {...props}>
-    <Path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+  <Svg
+    viewBox="0 0 12 6"
+    fill={props.fill || props.theme.colors!.gray15}
+    {...props}>
+    <Path d="M6 6l6-6H0z" fillRule="evenodd" />
   </Svg>
 );
 ArrowDown.defaultProps = {
-  width: 30,
-  height: 30,
+  width: 12,
+  height: 6,
 };
 // @ts-ignore
 export default withTheme(ArrowDown);
