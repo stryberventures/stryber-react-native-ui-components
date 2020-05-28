@@ -19,6 +19,7 @@ import Tab from './Tab';
 import TabBar from './TabBar';
 import TabView from './TabView';
 import SceneMap from './SceneMap';
+import List from './List';
 import Slider from './Slider';
 
 export {DatePicker};
@@ -42,4 +43,5 @@ export {Tab};
 export {TabBar};
 export {TabView};
 export {SceneMap};
+export {List};
 export {Slider};

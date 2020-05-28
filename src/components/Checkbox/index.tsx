@@ -5,7 +5,7 @@ import Text from '../Text';
 import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ICheckboxProps {
+export interface ICheckboxProps {
   text?: string;
   value?: boolean;
   name?: string;
@@ -15,6 +15,7 @@ interface ICheckboxProps {
   radio?: boolean;
   iconComponent?: any;
   shouldCheckboxChange?: boolean;
+  style?: any;
   error?: string;
   disabled?: boolean;
   size?: 'regular' | 'large';
@@ -109,6 +110,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       disabled,
       size,
       bgColor,
+      style,
     } = this.props;
     const styles = getStyles({
       theme,
@@ -122,7 +124,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     return (
       <View style={styles.wrapper}>
         <TouchableOpacity
-          style={styles.container}
+          style={[styles.container, style]}
           activeOpacity={opacity}
           disabled={disabled}
           onPress={

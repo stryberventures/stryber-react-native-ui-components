@@ -5,7 +5,7 @@ import {SwitchConfigs} from './constants';
 import {getStyles} from './styles';
 import Text from '../Text';
 
-interface ISwitchProps {
+export interface ISwitchProps {
   name?: string;
   value?: boolean;
   onPress?: (...args: any[]) => any;
