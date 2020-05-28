@@ -30,4 +30,5 @@ import {Switch} from '@stryberventures/stryber-react-native-ui-components';
 | **\`style\`**  | Use to set Switch styles                                            |
 | **\`backgroundColorOff\`**  | A background color when switch is unchecked                                            |
 | **\`backgroundColorOn\`**  | A background color when switch is checked                                                                                 |
+| **\`bgColor\`**  | Defines custom background color                                            |
 `;

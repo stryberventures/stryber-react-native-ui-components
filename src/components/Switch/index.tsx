@@ -23,6 +23,7 @@ interface ISwitchProps {
   size?: 'regular' | 'large';
   error?: string;
   disabled?: boolean;
+  bgColor?: string;
 }
 type SwitchState = {
   circlePosXStart?: number;
@@ -85,12 +86,14 @@ class Switch extends Component<ISwitchProps, SwitchState> {
       style,
       error,
       disabled,
+      bgColor,
     } = this.props;
     const styles = getStyles({
       theme,
       size,
     });
     const {checked} = this.state;
+    const regularBgColor = bgColor || theme.colors.primary;
     return (
       <>
         <TouchableOpacity
@@ -111,7 +114,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
                           backgroundColorOff || theme.colors.gray15,
                           (error && styles.containerError.backgroundColor) ||
                             backgroundColorOn ||
-                            theme.colors.primary,
+                            regularBgColor,
                         ],
                       }),
                     },
