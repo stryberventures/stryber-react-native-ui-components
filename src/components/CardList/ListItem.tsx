@@ -13,20 +13,38 @@ const ListItem: React.FC<IListItem & Partial<IProps>> = props => {
   return (
     <Card shadow style={styles.cardStyle}>
       {props.quiz && props.quizCounter && (
-        <View style={styles.quizWrapper}>
-          <Text style={styles.quizText}>{props.quizCounter}</Text>
+        <View style={styles.leftElementWrapper}>
+          <View style={styles.quizWrapper}>
+            <Text style={styles.quizText}>{props.quizCounter}</Text>
+          </View>
         </View>
       )}
-      {props.radiobuttonLeft && <Checkbox {...props.radiobuttonProps} radio />}
-      {props.checkboxLeft && <Checkbox {...props.checkboxProps} />}
+      {props.radiobuttonLeft && (
+        <View style={styles.leftElementWrapper}>
+          <Checkbox {...props.radiobuttonProps} radio />
+        </View>
+      )}
+      {props.checkboxLeft && (
+        <View style={styles.leftElementWrapper}>
+          <Checkbox {...props.checkboxProps} />
+        </View>
+      )}
       <View style={styles.textWrapper}>
         <Text style={styles.text}>{props.text}</Text>
         {props.secondaryText && (
           <Text style={styles.secondaryText}>{props.secondaryText}</Text>
         )}
       </View>
-      {props.radiobuttonRight && <Checkbox {...props.radiobuttonProps} radio />}
-      {props.checkboxRight && <Checkbox {...props.checkboxProps} />}
+      {props.radiobuttonRight && (
+        <View style={styles.rightElementWrapper}>
+          <Checkbox {...props.radiobuttonProps} radio />
+        </View>
+      )}
+      {props.checkboxRight && (
+        <View style={styles.rightElementWrapper}>
+          <Checkbox {...props.checkboxProps} />
+        </View>
+      )}
     </Card>
   );
 };

@@ -3,9 +3,10 @@ import {StyleSheet} from 'react-native';
 import {IProps} from './index';
 
 const getStyles = (theme: any, props?: Partial<IProps>) => {
-  const cardBackground = props && props.cardBackground
-    ? theme.colors[props.cardBackground] || props.cardBackground
-    : theme.colors.white;
+  const cardBackground =
+    props && props.cardBackground
+      ? theme.colors[props.cardBackground] || props.cardBackground
+      : theme.colors.white;
   const quizBackground =
     props && props.quizBackground
       ? theme.colors[props.quizBackground] || props.quizBackground
@@ -20,8 +21,17 @@ const getStyles = (theme: any, props?: Partial<IProps>) => {
       : theme.colors.black;
 
   return StyleSheet.create({
+    listWrapper: {
+      flexDirection: 'row',
+    },
     cardStyle: {
       backgroundColor: cardBackground,
+      padding: theme.spaces.m,
+      marginBottom: theme.spaces.m,
+      width: '99%',
+      alignSelf: 'center',
+      flexDirection: 'row',
+      alignItems: 'center',
     },
     titleWrapper: {
       marginBottom: 10,
@@ -53,9 +63,17 @@ const getStyles = (theme: any, props?: Partial<IProps>) => {
       fontFamily: theme.fonts.fontFamily,
       color: textColor,
       fontSize: 10,
+      marginTop: 10,
     },
     textWrapper: {
       flexDirection: 'column',
+      flex: 1,
+    },
+    rightElementWrapper: {
+      marginLeft: theme.spaces.xxl8,
+    },
+    leftElementWrapper: {
+      marginRight: theme.spaces.xxl8,
     },
   });
 };

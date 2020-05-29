@@ -6,6 +6,8 @@ import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 export interface ICheckboxProps {
+  activeRadioInner?: string;
+  tickColor?: string;
   text?: string;
   value?: boolean;
   name?: string;
@@ -16,12 +18,12 @@ export interface ICheckboxProps {
   iconComponent?: any;
   shouldCheckboxChange?: boolean;
   style?: any;
-  error?: string;
+  error?: string | boolean;
   disabled?: boolean;
   size?: 'regular' | 'large';
   bgColor?: string;
 }
-type CheckboxState = {
+export type CheckboxState = {
   checked?: any;
   springValue?: any;
 };
@@ -54,7 +56,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     }).start();
   };
   renderRadioIcon = () => {
-    const {theme, radio, error, disabled, size, bgColor} = this.props;
+    const {theme, radio, error, disabled, size, bgColor, activeRadioInner,} = this.props;
     const styles = getStyles({
       theme,
       radio,
@@ -62,6 +64,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       disabled,
       size,
       bgColor,
+      activeRadioInner,
     });
     return <Block style={styles.radioIcon} flex={0} />;
   };
@@ -75,6 +78,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       disabled,
       size,
       bgColor,
+      tickColor,
     } = this.props;
     const checkboxSizes =
       // @ts-ignore
@@ -88,13 +92,18 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       size,
       bgColor,
     });
+
     return (
       <Animated.View
         style={[styles.checkbox, {transform: [{scale: springValue}]}]}>
         {(this.state.checked && iconComponent) ||
           (this.state.checked && radio && this.renderRadioIcon()) ||
           (this.state.checked && (
-            <Check width={checkboxSizes.check} height={checkboxSizes.check} />
+            <Check
+              width={checkboxSizes.check}
+              height={checkboxSizes.check}
+              fill={tickColor || theme.colors.white}
+            />
           ))}
       </Animated.View>
     );

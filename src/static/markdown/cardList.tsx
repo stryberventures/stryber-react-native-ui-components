@@ -3,34 +3,37 @@ export const cardList = `## Slider Usage
 \`\`\`js
 import {CardList} from '@stryberventures/stryber-react-native-ui-components';
 
-() => (
-  <CardList
-    valueUp={10}
-    valueDown={1}
-  />
-);
+() => {
+  const data = [...Array(10)].fill({
+    text: 'Lorem ipsum',
+  });
+  return <CardList data={data} title="title" />;
+};
 \`\`\`
 
 ## Properties
 
-| Prop                    | Description                                         | Default value      |
-| ----------------------------------------------------------------------------- | -------------------|
-| **\`valueUp\`**         | initial up value                                    | 1                  |
-| **\`valueDown\`**       | initial down value                                  | 0                  |
-| **\`limitUp\`**         | maximum value                                       | 9                  |
-| **\`limitDown\`**       | minimum value                                       | 0                  | 
-| **\`step\`**            | with which step change value, by default 1          | 1                  |                                                                                                                                                                       
-| **\`layout\`**          | defines labels position 'regular' or 'labelBottom'  | 'regular'          |
-| **\`size\`**            | can be 'regular' or 'large'                         | 'regular'          |
-| **\`color\`**           | color or the bar and pulsar                         | primary in theme   |
-| **\`leftLabel\`**       | custom left label render handler, receives current valueDown as a parameter  | _        |  
-| **\`rightLabel\`**      | custom right label render handler, receives current valueUp as a parameter   | _        | 
-| **\`onChange\`**        | on value change handler, receives valueUp, valueDown as parameters           | _        |
+| Prop                    | Description                                         |
+| -----------------------------------------------------------------------------|
+| **\`data\`**         |   IListItem array                                |
+| **\`title\`**       | String list title                              |
+| **\`checkboxLeft\`**         | Boolean show or hide sheckboxes on the left side                                       |
+| **\`checkboxRight\`**       | Boolean show or hide sheckboxes on the right side                                      | 
+| **\`radiobuttonLeft\`**            | Boolean show or hide radiobuttons on the left side           |                                                                                                                                                                       
+| **\`radiobuttonRight\`**          | Boolean show or hide radiobuttons on the right side  |
+| **\`quiz\`**            | Boolean enable quize format                          |
+| **\`quizBackground\`**           | String background color of quiz counter                        |
+| **\`quizTextColor\`**       | String color of quiz counter  |  
+| **\`cardBackground\`**      | String card background color    | 
+| **\`textColor\`**        | String text color           |
+| **\`keyExtractor\`**        | Keyextractor function for FlatList           |
 
 
-| Prop (boolean)          | Description                                         | Default value                                                                                      |
+| IListItem         | Description                                         |                                                                                    |
 | ------------------------------------------------------------------------------------------------|
-| **\`smooth\`**          | how buttons should move, with step or smooth        | true            |
-| **\`showDownButton\`**  | show up down value button                           | false           |
-| **\`showTooltip\`**     | disables tooltip above the button                   | true            |
+| **\`text\`**          | String base text        |
+| **\`secondaryText\`**  | String secondary text                            |
+| **\`checkboxProps\`**     | ICheckboxProps                   |
+| **\`radiobuttonProps\`**          | ICheckboxProps        |
+| **\`quizCounter\`**          | String text inside quiz element       |
 `;
