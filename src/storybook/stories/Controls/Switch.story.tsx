@@ -34,6 +34,15 @@ storiesOf('Controls/Switch', module)
     },
   )
   .add(
+    'custom color',
+    () => {
+      return <Switch value={true} bgColor="orange" />;
+    },
+    {
+      notes: {markdown: switchDoc},
+    },
+  )
+  .add(
     'disabled off',
     () => {
       return <Switch value={false} disabled />;

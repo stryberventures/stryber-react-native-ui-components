@@ -1,7 +1,7 @@
 import './Global';
 import './Welcome.story';
 import './Button.story';
-import './Input.story';
+import './Input';
 import './Controls';
 import './Header.story';
 import './CacheImage.story';
@@ -17,5 +17,6 @@ import './SearchField.story';
 import './TabView.story';
 import './Block.story';
 import './Slider.story';
-import './ProgressBar';
-import './Loader';
+import './ProgressBar.story';
+import './Loader.story';
+import "./List.story";

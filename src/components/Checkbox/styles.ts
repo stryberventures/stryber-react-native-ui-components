@@ -8,7 +8,9 @@ const getStyles = ({
   disabled = false,
   error = false,
   size = 'regular',
+  bgColor = '',
 }) => {
+  const regularBgColor = bgColor || theme.colors.primary;
   const checkboxSizes =
     // @ts-ignore
     theme.sizes.checkbox[size] || theme.sizes.checkbox.regular;
@@ -39,7 +41,7 @@ const getStyles = ({
           ? theme.colors.gray15
           : 'transparent'
         : checked
-        ? theme.colors.primary
+        ? regularBgColor
         : 'transparent',
       borderColor: error
         ? checked
@@ -50,7 +52,7 @@ const getStyles = ({
           ? theme.colors.gray15
           : theme.colors.gray15
         : checked
-        ? theme.colors.primary
+        ? regularBgColor
         : theme.colors.gray15,
       // @ts-ignore
       height: checkboxSizes.box,

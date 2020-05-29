@@ -5,9 +5,8 @@ import Text from '../Text';
 import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ICheckboxProps {
+export interface ICheckboxProps {
   text?: string;
-  textColor?: string;
   value?: boolean;
   name?: string;
   opacity?: number;
@@ -16,9 +15,11 @@ interface ICheckboxProps {
   radio?: boolean;
   iconComponent?: any;
   shouldCheckboxChange?: boolean;
+  style?: any;
   error?: string;
   disabled?: boolean;
   size?: 'regular' | 'large';
+  bgColor?: string;
 }
 type CheckboxState = {
   checked?: any;
@@ -53,19 +54,28 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     }).start();
   };
   renderRadioIcon = () => {
-    const {theme, radio, error, disabled, size} = this.props;
+    const {theme, radio, error, disabled, size, bgColor} = this.props;
     const styles = getStyles({
       theme,
       radio,
       error: !!error,
       disabled,
       size,
+      bgColor,
     });
     return <Block style={styles.radioIcon} flex={0} />;
   };
   renderControl = () => {
     const {checked, springValue} = this.state;
-    const {iconComponent, theme, radio, error, disabled, size} = this.props;
+    const {
+      iconComponent,
+      theme,
+      radio,
+      error,
+      disabled,
+      size,
+      bgColor,
+    } = this.props;
     const checkboxSizes =
       // @ts-ignore
       theme.sizes.checkbox[size] || theme.sizes.checkbox.regular;
@@ -76,6 +86,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       error: !!error,
       disabled,
       size,
+      bgColor,
     });
     return (
       <Animated.View
@@ -90,7 +101,17 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
   };
   render() {
     const {checked} = this.state;
-    const {text, opacity, theme, radio, error, disabled, size} = this.props;
+    const {
+      text,
+      opacity,
+      theme,
+      radio,
+      error,
+      disabled,
+      size,
+      bgColor,
+      style,
+    } = this.props;
     const styles = getStyles({
       theme,
       radio,
@@ -98,11 +119,12 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       disabled,
       checked,
       size,
+      bgColor,
     });
     return (
       <View style={styles.wrapper}>
         <TouchableOpacity
-          style={styles.container}
+          style={[styles.container, style]}
           activeOpacity={opacity}
           disabled={disabled}
           onPress={
@@ -134,7 +156,6 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
 Checkbox.defaultProps = {
   value: false,
   text: '❤️ Stryber',
-  textColor: '#757575',
   name: 'checkbox',
   onPress: () => {},
   opacity: 0.8,

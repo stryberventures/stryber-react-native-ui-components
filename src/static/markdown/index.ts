@@ -16,3 +16,5 @@ export { theme } from "./theme";
 export { form } from "./form";
 export { progressBar } from "./progressBar";
 export { loader } from "./loader";
+export { list } from "./list";
+export {slider} from './slider';

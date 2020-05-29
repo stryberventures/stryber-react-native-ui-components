@@ -84,7 +84,7 @@ const sizes = {
   smallButtonWidth: 137,
   miniButtonWidth: 115,
   // input sizes
-  inputHeight: 43,
+  inputHeight: 56,
   borderWidth: 1,
   paddingHorizontal: 12,
   // header
