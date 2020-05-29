@@ -17,4 +17,6 @@ import './SearchField.story';
 import './TabView.story';
 import './Block.story';
 import './Slider.story';
+import './ProgressBar.story';
+import './Loader.story';
 import "./List.story";
