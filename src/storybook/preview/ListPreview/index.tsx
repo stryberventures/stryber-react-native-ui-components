@@ -124,7 +124,7 @@ export const ListWithCheckboxes = () => {
     checkBox: true,
     checkboxProps: {
       style: {
-        left: 15,
+        left: 12.5,
       },
       text: '',
     },
@@ -135,13 +135,14 @@ export const ListWithCheckboxes = () => {
 export const ListWithRadioButtons = () => {
   const data = new Array(10).fill({
     value: 'Option',
+    secondaryValue: 'second line',
     image: {
       uri: 'https://reactnative.dev/img/tiny_logo.png',
     },
     radioButton: true,
     radioButtonProps: {
       style: {
-        left: 15,
+        left: 12.5,
       },
       text: '',
     },
@@ -158,7 +159,7 @@ export const ListWithSwitchButtons = () => {
     switch: true,
     switchProps: {
       style: {
-        left: 15,
+        left: 12.5,
       },
       text: '',
       containerStyle: {
@@ -171,7 +172,7 @@ export const ListWithSwitchButtons = () => {
       circleStyle: {
         width: 28,
         height: 28,
-        borderRadius: 15,
+        borderRadius: 12.5,
         backgroundColor: 'white',
       },
     },
@@ -182,8 +183,31 @@ export const ListWithSwitchButtons = () => {
 export const ListWithButtons = () => {
   const data = new Array(10).fill({
     value: 'Option',
+    secondaryValue: 'second line',
+    icon: 'Eye',
+    iconProps: {
+      fill: theme.colors.white,
+    },
+    iconBackground: theme.colors.primary,
+    button: true,
+    buttonProps: {
+      color: 'primary',
+      style: {
+        height: theme.spaces.xxl5,
+      },
+    },
+    buttonChildren: <Text white>button text</Text>,
+  });
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
+};
+
+export const ListWithButtonsAndImages = () => {
+  const data = new Array(10).fill({
+    value: 'Option',
+    secondaryValue: 'second line',
+    fullHeightImage: true,
     image: {
-      uri: 'https://reactnative.dev/img/tiny_logo.png',
+      uri: 'https://upload.wikimedia.org/wikipedia/ru/7/74/Dr_Evil.jpg',
     },
     button: true,
     buttonProps: {
@@ -211,7 +235,7 @@ export const ListWithMultipleControl = () => {
       item.checkboxProps = {
         text: '',
         style: {
-          left: 15,
+          left: 12.5,
         },
       };
     }
@@ -222,7 +246,7 @@ export const ListWithMultipleControl = () => {
       item.radioButtonProps = {
         text: '',
         style: {
-          left: 15,
+          left: 12.5,
         },
       };
     }
@@ -232,7 +256,7 @@ export const ListWithMultipleControl = () => {
       item.switch = true;
       item.switchProps = {
         style: {
-          left: 15,
+          left: 12.5,
         },
         text: '',
         containerStyle: {
@@ -245,10 +269,18 @@ export const ListWithMultipleControl = () => {
         circleStyle: {
           width: 28,
           height: 28,
-          borderRadius: 15,
+          borderRadius: 12.5,
           backgroundColor: 'white',
         },
       };
+    }
+    if (i === 4) {
+      item.withArrow = false;
+      item.cardText = undefined;
+      item.rightValue = 'Value';
+    }
+    if (i === 5) {
+      item.rightValue = 'Value';
     }
     return item;
   });

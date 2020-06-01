@@ -18,6 +18,7 @@ import {
   ListWithSwitchButtons,
   ListWithButtons,
   ListWithMultipleControl,
+  ListWithButtonsAndImages,
 } from '../preview/ListPreview';
 
 storiesOf('List', module)
@@ -31,13 +32,14 @@ storiesOf('List', module)
   .add('simple list with two lines of text', () => (
     <SimpleListWithTwoLinesOfText />
   ))
-  .add('simple list with a long text', () => <SimpleListWithLongText />)
-  .add('list with icons', () => <ListWithIcons />)
-  .add('list with images', () => <ListWithImages />)
-  .add('list with images and a long text', () => <ListWithImagesAndLongText />)
-  .add('list with full height images', () => <ListWithFullHeightImages />)
-  .add('list with checkboxes', () => <ListWithCheckboxes />)
-  .add('list with radio buttons', () => <ListWithRadioButtons />)
-  .add('list with switch buttons', () => <ListWithSwitchButtons />)
-  .add('list with buttons', () => <ListWithButtons />)
-  .add('simple list with multiple control', () => <ListWithMultipleControl />);
+  .add('Simple list with a long text', () => <SimpleListWithLongText />)
+  .add('List with icons', () => <ListWithIcons />)
+  .add('List with images', () => <ListWithImages />)
+  .add('List with images and a long text', () => <ListWithImagesAndLongText />)
+  .add('List with full height images', () => <ListWithFullHeightImages />)
+  .add('List with checkboxes', () => <ListWithCheckboxes />)
+  .add('List with radio buttons', () => <ListWithRadioButtons />)
+  .add('List with switch buttons', () => <ListWithSwitchButtons />)
+  .add('List with buttons', () => <ListWithButtons />)
+  .add('List with buttons and images', () => <ListWithButtonsAndImages />)
+  .add('Simple list with multiple control', () => <ListWithMultipleControl />);

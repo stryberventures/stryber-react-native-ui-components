@@ -13,6 +13,8 @@ const getStyles = (theme: any, props?: IListItem, cardOpened = false) => {
       justifyContent: 'space-between',
       alignItems: 'center',
       marginBottom: theme.spaces.xxl5,
+      paddingRight: 7.5,
+      paddingLeft: 7.5,
     },
     title: {
       color: theme.colors.black,
