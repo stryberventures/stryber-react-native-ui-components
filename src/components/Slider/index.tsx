@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {Animated, View, PanResponder, LayoutChangeEvent} from 'react-native';
+import {
+  Animated,
+  View,
+  PanResponder,
+  LayoutChangeEvent,
+  ViewStyle,
+} from 'react-native';
 import Text from '../Text';
 import withTheme from '../withTheme';
 import {SliderConfigs} from './constants';
@@ -16,11 +22,12 @@ interface ISliderProps {
   smooth: boolean;
   size: 'regular' | 'large';
   color?: string;
-  layout: string;
+  layout: 'regular' | 'labelBottom' | 'labelHidden';
   showDownButton?: boolean;
   showTooltip?: boolean;
   leftLabel?: (a: number) => any;
   rightLabel?: (b: number) => any;
+  style?: ViewStyle;
   onChange: (a: number, b: number) => any;
 }
 interface ISliderState {
@@ -30,6 +37,8 @@ interface ISliderState {
   topButton: 'up' | 'down';
   buttonUpTouched: Animated.Value;
   buttonDownTouched: Animated.Value;
+  valueUp: number;
+  valueDown: number;
 }
 class Slider extends Component<ISliderProps, ISliderState> {
   static defaultProps: any;
@@ -45,6 +54,8 @@ class Slider extends Component<ISliderProps, ISliderState> {
       topButton: 'up',
       buttonUpTouched: new Animated.Value(0),
       buttonDownTouched: new Animated.Value(0),
+      valueUp: this.props.valueUp,
+      valueDown: this.props.valueDown,
     };
 
     this.upButtonResponder = this.createUpButtonPanResponder();
@@ -52,8 +63,12 @@ class Slider extends Component<ISliderProps, ISliderState> {
   }
 
   onChange() {
-    const values = this.getValues();
-    this.props.onChange(values.up, values.down);
+    const {valueUp, valueDown} = this.getValues();
+    this.setState({
+      valueUp,
+      valueDown,
+    });
+    this.props.onChange(valueUp, valueDown);
   }
 
   createUpButtonPanResponder() {
@@ -160,8 +175,8 @@ class Slider extends Component<ISliderProps, ISliderState> {
       extrapolate: 'clamp',
     }) as any).__getValue();
     return {
-      up: this.getRoundedValue(valueUp),
-      down: this.getRoundedValue(valueDown),
+      valueUp: this.getRoundedValue(valueUp),
+      valueDown: this.getRoundedValue(valueDown),
     };
   }
 
@@ -214,7 +229,6 @@ class Slider extends Component<ISliderProps, ISliderState> {
       size: this.props.size,
       color: this.props.color,
     });
-    const values = this.getValues();
 
     return (
       <>
@@ -255,8 +269,8 @@ class Slider extends Component<ISliderProps, ISliderState> {
                   styles.buttonTooltip,
                   {opacity: this.state.buttonDownTouched},
                 ]}>
-                <Text animated style={styles.buttonTooltipText}>
-                  {values.down}
+                <Text style={styles.buttonTooltipText}>
+                  {this.state.valueDown}
                 </Text>
                 <View style={styles.tooltipArrow} />
               </Animated.View>
@@ -290,9 +304,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
                 styles.buttonTooltip,
                 {opacity: this.state.buttonUpTouched},
               ]}>
-              <Text animated style={styles.buttonTooltipText}>
-                {values.up}
-              </Text>
+              <Text style={styles.buttonTooltipText}>{this.state.valueUp}</Text>
               <View style={styles.tooltipArrow} />
             </Animated.View>
           )}
@@ -319,6 +331,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
     return (
       <SliderLayout
         type={this.props.layout}
+        wrapperStyle={this.props.style}
         styles={styles}
         leftLabel={
           typeof this.props.leftLabel === 'function' ? (

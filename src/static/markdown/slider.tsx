@@ -20,7 +20,7 @@ import {Slider} from '@stryberventures/stryber-react-native-ui-components';
 | **\`limitUp\`**         | maximum value                                       | 9                  |
 | **\`limitDown\`**       | minimum value                                       | 0                  | 
 | **\`step\`**            | with which step change value, by default 1          | 1                  |                                                                                                                                                                       
-| **\`layout\`**          | defines labels position 'regular' or 'labelBottom'  | 'regular'          |
+| **\`layout\`**          | defines labels position 'regular', 'labelBottom' or 'labelHidden'  | 'regular'          |
 | **\`size\`**            | can be 'regular' or 'large'                         | 'regular'          |
 | **\`color\`**           | color or the bar and pulsar                         | primary in theme   |
 | **\`leftLabel\`**       | custom left label render handler, receives current valueDown as a parameter  | _        |  
