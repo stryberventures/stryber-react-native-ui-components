@@ -4,6 +4,9 @@ import {List, Text} from '../../../components';
 import {IListItem} from '../../../components/List';
 import {defaultTheme as theme} from '../../../components/other/constants';
 
+const middleLengthText =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.";
+
 const longText =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
 
@@ -38,6 +41,21 @@ export const SimpleListWithIcons = () => {
   return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
+export const SimpleListWithTwoLinesOfTextAndIcons = () => {
+  const data = new Array(10).fill({
+    value: 'Option',
+    secondaryValue: 'second line',
+    rightValue: 'Value',
+    withArrow: true,
+    cardText: longText,
+    icon: 'Eye',
+    iconProps: {
+      fill: theme.colors.gray50,
+    },
+  });
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
+};
+
 export const SimpleListWithTwoLinesOfText = () => {
   const data = new Array(10).fill({
     value: 'Option',
@@ -52,7 +70,7 @@ export const SimpleListWithTwoLinesOfText = () => {
 export const SimpleListWithLongText = () => {
   const data = new Array(10).fill({
     value: 'Option',
-    longValue: longText,
+    longValue: middleLengthText,
     withArrow: true,
     cardText: longText,
   });
@@ -62,6 +80,22 @@ export const SimpleListWithLongText = () => {
 export const ListWithIcons = () => {
   const data = new Array(10).fill({
     value: 'Option',
+    rightValue: 'Value',
+    withArrow: true,
+    cardText: longText,
+    icon: 'Eye',
+    iconProps: {
+      fill: theme.colors.white,
+    },
+    iconBackground: theme.colors.primary,
+  });
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
+};
+
+export const ListWithTwoLinesOfTextAndIcons = () => {
+  const data = new Array(10).fill({
+    value: 'Option',
+    secondaryValue: 'second line',
     rightValue: 'Value',
     withArrow: true,
     cardText: longText,
@@ -87,9 +121,23 @@ export const ListWithImages = () => {
   return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
 
+export const ListWithTwoLinesOfTextAndImages = () => {
+  const data = new Array(10).fill({
+    value: 'Option',
+    secondaryValue: 'second line',
+    rightValue: 'Value',
+    withArrow: true,
+    cardText: longText,
+    image: {
+      uri: 'https://reactnative.dev/img/tiny_logo.png',
+    },
+  });
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
+};
+
 export const ListWithImagesAndLongText = () => {
   const data = new Array(10).fill({
-    longValue: longText,
+    longValue: middleLengthText,
     value: 'Option',
     rightValue: 'Value',
     withArrow: true,
@@ -202,6 +250,24 @@ export const ListWithButtons = () => {
 };
 
 export const ListWithButtonsAndImages = () => {
+  const data = new Array(10).fill({
+    value: 'Option',
+    image: {
+      uri: 'https://upload.wikimedia.org/wikipedia/ru/7/74/Dr_Evil.jpg',
+    },
+    button: true,
+    buttonProps: {
+      color: 'primary',
+      style: {
+        height: theme.spaces.xxl5,
+      },
+    },
+    buttonChildren: <Text white>button text</Text>,
+  });
+  return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
+};
+
+export const ListWithButtonsAndFullHeightImages = () => {
   const data = new Array(10).fill({
     value: 'Option',
     secondaryValue: 'second line',
