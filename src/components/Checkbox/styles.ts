@@ -1,6 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../other/constants';
 
+import {ICheckboxProps, CheckboxState} from './index';
+
+type StylesType = Partial<ICheckboxProps> & Partial<CheckboxState>;
+
 const getStyles = ({
   theme = defaultTheme,
   checked = false,
@@ -9,7 +13,8 @@ const getStyles = ({
   error = false,
   size = 'regular',
   bgColor = '',
-}) => {
+  activeRadioInner,
+}: StylesType) => {
   const regularBgColor = bgColor || theme.colors.primary;
   const checkboxSizes =
     // @ts-ignore
@@ -65,7 +70,7 @@ const getStyles = ({
       width: radioRadius * 2,
       height: radioRadius * 2,
       borderRadius: radioRadius,
-      backgroundColor: '#fff',
+      backgroundColor: activeRadioInner || '#fff',
     },
     textStyle: {
       fontSize:

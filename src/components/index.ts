@@ -21,8 +21,10 @@ import TabView from './TabView';
 import SceneMap from './SceneMap';
 import List from './List';
 import Slider from './Slider';
+import CardList from './CardList';
 import ProgressBar from './ProgressBar';
 import Loader from './Loader';
+
 export {DatePicker};
 export {Badge};
 export {Block};
@@ -46,5 +48,6 @@ export {TabView};
 export {SceneMap};
 export {List};
 export {Slider};
+export {CardList};
 export {ProgressBar};
 export {Loader};

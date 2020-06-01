@@ -8,6 +8,7 @@ import {ISwitchProps} from '../Switch';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 
+// All properties regarding checkboxes, images etc are placed inside IListItem not inside IListProps because of a requirement to have opportunity creat list with a different type of items.
 export interface IListItem {
   value: string;
   valueStyles?: any;
