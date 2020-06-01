@@ -44,7 +44,7 @@ export const CardListBlueCheckboxesRight = () => {
       text: 'Lorem ipsum',
       checkboxProps: {
         text: '',
-        activeBackground: '#fff',
+        bgColor: '#fff',
         tickColor: '#007aff',
         style: {
           left: 8,
@@ -98,7 +98,7 @@ export const CardListBlueRadioButtonsRight = () => {
       text: 'Lorem ipsum',
       radiobuttonProps: {
         text: '',
-        activeBackground: '#fff',
+        bgColor: '#fff',
         activeRadioInner: '#007aff',
         style: {
           left: 8,
