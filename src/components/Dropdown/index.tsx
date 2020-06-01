@@ -55,7 +55,6 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   textColor?: string;
   itemColor?: string;
   itemBgColor?: string;
-  evenItemBgColor?: string;
   baseColor?: string;
   itemCount?: number;
   itemPadding?: number;
@@ -444,7 +443,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       textColor = theme.colors.gray70,
       itemColor = theme.colors.gray70,
       itemBgColor = theme.colors.white,
-      evenItemBgColor = theme.colors.gray5,
       baseColor = theme.colors.gray,
       selectedItemColor = textColor,
       disabledItemColor = baseColor,
@@ -469,23 +467,23 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     const value = valueExtractor!(item);
     const label = labelExtractor!(item);
     const title = label == null ? value : label;
-    const even = (index + 1) % 2 === 0;
-    let bgColor = even ? evenItemBgColor : itemBgColor;
-    const itemStyle = {
-      backgroundColor: bgColor,
-    };
+    let bgColor = itemBgColor;
     let color;
     if (disabled) {
       color = disabledItemColor;
     } else if (selected! >= 0) {
       if (index === selected) {
         color = selectedItemColor;
+        bgColor = theme.colors.gray5;
       } else {
         color = itemColor;
       }
     } else {
       color = selectedItemColor;
     }
+    const itemStyle = {
+      backgroundColor: bgColor,
+    };
     const textStyle = {color, fontSize};
     props.style = [
       style,
@@ -501,6 +499,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       <DropdownItem
         index={index}
         {...props}
+        underlayColor={theme.colors.gray5}
         style={[styles.item, itemTextStyle, itemStyle, containerLastBorder]}>
         <Text
           style={[styles.itemText, itemTextStyle, textStyle]}
