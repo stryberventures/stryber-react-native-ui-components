@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {TouchableOpacity, View, TouchableOpacityProps} from 'react-native';
+import {TouchableHighlight, View, TouchableHighlightProps} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import getStyles from './styles';
 import withTheme from '../withTheme';
 import Ripple from '../Ripple';
 import Block from '../Block';
 import * as Icons from '../Icons';
-export interface IButtonProps extends TouchableOpacityProps {
+export interface IButtonProps extends TouchableHighlightProps {
   style?: any;
   opacity?: number;
   gradient?: boolean;
@@ -47,6 +47,7 @@ export interface IButtonProps extends TouchableOpacityProps {
   small?: boolean;
   mini?: boolean;
   link?: boolean;
+  underlayColor?: string;
 }
 class Button extends React.Component<IButtonProps, {}> {
   static defaultProps: any;
@@ -112,6 +113,7 @@ class Button extends React.Component<IButtonProps, {}> {
       shadow,
       children,
       theme,
+      underlayColor,
       border,
       Component = gradient ? LinearGradient : View,
       shape,
@@ -147,8 +149,9 @@ class Button extends React.Component<IButtonProps, {}> {
           style: styles.childrenWrapper,
         };
     return (
-      <TouchableOpacity
+      <TouchableHighlight
         {...props}
+        underlayColor={underlayColor || theme.colors.gray15}
         activeOpacity={opacity || 0.8}
         onPress={this.handlePress}
         style={buttonStyles}>
@@ -163,7 +166,7 @@ class Button extends React.Component<IButtonProps, {}> {
             {this.renderRipple()}
           </Block>
         )}
-      </TouchableOpacity>
+      </TouchableHighlight>
     );
   }
 }
