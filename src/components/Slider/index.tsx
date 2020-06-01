@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {Animated, View, PanResponder, LayoutChangeEvent} from 'react-native';
+import {
+  Animated,
+  View,
+  PanResponder,
+  LayoutChangeEvent,
+  ViewStyle,
+} from 'react-native';
 import Text from '../Text';
 import withTheme from '../withTheme';
 import {SliderConfigs} from './constants';
@@ -21,6 +27,7 @@ interface ISliderProps {
   showTooltip?: boolean;
   leftLabel?: (a: number) => any;
   rightLabel?: (b: number) => any;
+  style?: ViewStyle;
   onChange: (a: number, b: number) => any;
 }
 interface ISliderState {
@@ -262,7 +269,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
                   styles.buttonTooltip,
                   {opacity: this.state.buttonDownTouched},
                 ]}>
-                <Text animated style={styles.buttonTooltipText}>
+                <Text style={styles.buttonTooltipText}>
                   {this.state.valueDown}
                 </Text>
                 <View style={styles.tooltipArrow} />
@@ -297,9 +304,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
                 styles.buttonTooltip,
                 {opacity: this.state.buttonUpTouched},
               ]}>
-              <Text animated style={styles.buttonTooltipText}>
-                {this.state.valueUp}
-              </Text>
+              <Text style={styles.buttonTooltipText}>{this.state.valueUp}</Text>
               <View style={styles.tooltipArrow} />
             </Animated.View>
           )}
@@ -326,6 +331,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
     return (
       <SliderLayout
         type={this.props.layout}
+        wrapperStyle={this.props.style}
         styles={styles}
         leftLabel={
           typeof this.props.leftLabel === 'function' ? (
