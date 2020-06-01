@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 import {IProps} from './index';
 
-const getStyles = (theme: any, props?: Partial<IProps>) => {
+const getStyles = (theme: any, props?: Partial<IProps>, isActive?: boolean) => {
   const cardBackground =
     props && props.cardBackground
       ? theme.colors[props.cardBackground] || props.cardBackground
@@ -26,6 +26,8 @@ const getStyles = (theme: any, props?: Partial<IProps>) => {
     },
     cardStyle: {
       backgroundColor: cardBackground,
+      borderWidth: 1,
+      borderColor: isActive ? quizBackground : cardBackground,
       padding: theme.spaces.m,
       marginBottom: theme.spaces.m,
       width: '99%',
