@@ -15,6 +15,14 @@ const SliderLayout = ({
   rightLabel,
   rangeBar,
 }: ISliderLayoutProps) => {
+  if (type === 'labelHidden') {
+    return (
+      <View>
+        <View style={styles.rangeBarContainer}>{rangeBar}</View>
+      </View>
+    );
+  }
+
   if (type === 'labelBottom') {
     return (
       <View>
