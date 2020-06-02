@@ -1,9 +1,9 @@
-// @ts-nocheck
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {linkTo} from '@storybook/addon-links';
 import {withKnobs, text} from '@storybook/addon-knobs';
 import Input from '../../../components/Input';
+// @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {input} from '../../../static/markdown';
 import {UserIcon} from '../../../components/Icons';
@@ -14,7 +14,7 @@ storiesOf('Input/Simple', module)
   .addParameters({
     notes: {markdown: input},
   })
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add('disabled', () => {
     return (
       <Input placeholder={placeholder} type="email" label="Email" disabled />
@@ -90,7 +90,7 @@ storiesOf('Input/Simple', module)
     );
   })
   .add('multiline default', () => {
-    const testRef = React.createRef();
+    const testRef = React.createRef<any>();
     return (
       <Input
         onFocus={linkTo('Input', 'multiline focused')}

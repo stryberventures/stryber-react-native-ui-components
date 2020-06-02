@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import {TextInputProps} from 'react-native';
-import InputSimple from './InputSimple';
-import InputLined from './InputLined';
+import InputSimple, {IInputSimpleProps} from './InputSimple';
+import InputLined, {IInputLinedProps} from './InputLined';
 
-export interface IInputProps extends TextInputProps {
-  variant: 'simple' | 'lined';
+interface IInputPropsComponent extends IInputSimpleProps, IInputLinedProps {
+  variant?: 'simple' | 'lined';
   inputBaseRef: React.Ref<unknown>;
 }
+export type IInputProps = Omit<IInputPropsComponent, 'inputBaseRef' | 'theme'>;
 
-class Input extends Component<IInputProps> {
+class Input extends Component<IInputPropsComponent> {
   static defaultProps: any;
   render() {
     const {variant, inputBaseRef, ...props} = this.props;
@@ -20,6 +20,6 @@ class Input extends Component<IInputProps> {
 Input.defaultProps = {
   variant: 'simple',
 };
-export default React.forwardRef((props, ref) => (
+export default React.forwardRef<Input, IInputProps>((props, ref) => (
   <Input {...props} inputBaseRef={ref} />
 ));

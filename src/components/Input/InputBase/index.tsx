@@ -21,7 +21,7 @@ const keyboardTypes = {
   phone: 'phone-pad' as KeyboardType,
   default: 'default' as KeyboardType,
 };
-interface IInputBaseProps extends TextInputProps {
+export interface IInputBaseProps extends TextInputProps {
   name?: string;
   type?: 'email' | 'phone' | 'number' | 'default';
   mask?: string;
@@ -29,7 +29,7 @@ interface IInputBaseProps extends TextInputProps {
 
   // native input props
   value?: string;
-  disabled: boolean;
+  disabled?: boolean;
   placeholder?: string;
   multiline?: boolean;
   maxLength?: number; // how to be with multiline ?

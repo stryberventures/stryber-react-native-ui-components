@@ -34,7 +34,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
     top: number;
     left: number;
   };
-  dropdownMargins: {
+  dropdownMargins?: {
     min: number;
     max: number;
   };
@@ -146,6 +146,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       onFocus,
       rippleDuration,
       dropdownOffset,
+      // @ts-ignore
       dropdownMargins: {min: minMargin, max: maxMargin},
       animationDuration,
       useNativeDriver,

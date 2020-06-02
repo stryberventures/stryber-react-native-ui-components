@@ -1,13 +1,12 @@
-// @ts-nocheck
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {linkTo} from '@storybook/addon-links';
 import {withKnobs, text} from '@storybook/addon-knobs';
 import Input from '../../../components/Input';
+// @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {UserIcon} from '../../../components/Icons';
 import {input} from '../../../static/markdown';
-
 const placeholder = text('Placeholder', 'Input placeholder');
 const variant = 'lined';
 storiesOf('Input/Lined', module)
@@ -15,7 +14,7 @@ storiesOf('Input/Lined', module)
   .addParameters({
     notes: {markdown: input},
   })
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add('disabled', () => {
     return (
       <Input
@@ -145,7 +144,7 @@ storiesOf('Input/Lined', module)
     );
   })
   .add('multiline default', () => {
-    const testRef = React.createRef();
+    const testRef = React.createRef<any>();
     return (
       <Input
         onFocus={linkTo('Input', 'multiline focused')}
