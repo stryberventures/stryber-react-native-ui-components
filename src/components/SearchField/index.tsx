@@ -7,7 +7,7 @@ import {Search} from '../Icons';
 interface ISearchFieldProps extends IInputProps {
   theme?: any;
   props?: any;
-  iconColor: string;
+  iconColor?: string;
 }
 type SearchFieldState = {
   value?: any;

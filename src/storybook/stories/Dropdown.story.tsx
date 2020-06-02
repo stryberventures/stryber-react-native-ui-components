@@ -1,7 +1,7 @@
-// @ts-nocheck
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import Dropdown from '../../components/Dropdown';
+// @ts-ignore
 import CenterView from '../../components/CenterView';
 import {dropdown} from '../../static/markdown';
 storiesOf('Dropdown', module)

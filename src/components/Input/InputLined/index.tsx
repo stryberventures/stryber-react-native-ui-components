@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
-import {Animated, Easing, TextInputProps, View} from 'react-native';
+import {Animated, Easing, View} from 'react-native';
 import withTheme from '../../withTheme';
 
-import InputBase from '../InputBase';
+import InputBase, {IInputBaseProps} from '../InputBase';
 import Block from '../../Block';
 import {getStyles} from './styles';
 
-interface IInputLinedProps extends TextInputProps {
+export interface IInputLinedProps extends IInputBaseProps {
   name?: string;
   inputBaseRef: React.Ref<any>;
   type?: 'email' | 'phone' | 'number' | 'default';
-  label: string;
+  label?: string;
   error?: string;
   required?: boolean;
 

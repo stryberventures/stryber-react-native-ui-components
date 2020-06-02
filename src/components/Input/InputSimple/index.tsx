@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import {TextInputProps, View} from 'react-native';
+import {View} from 'react-native';
 import withTheme from '../../withTheme';
 
 import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
 import Text from '../../Text';
-import InputBase from '../InputBase';
+import InputBase, {IInputBaseProps} from '../InputBase';
 import {getStyles} from './styles';
 
-interface IInputSimpleProps extends TextInputProps {
+export interface IInputSimpleProps extends IInputBaseProps {
   name?: string;
   inputBaseRef: React.Ref<any>;
   type?: 'email' | 'phone' | 'number' | 'default';
-  label: string;
+  label?: string;
   error?: string;
 
   // native input props
