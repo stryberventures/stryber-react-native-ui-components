@@ -15,6 +15,12 @@ const getStyles = (
       : props.size === 'mini'
       ? theme.fontSizes.caption
       : theme.fontSizes.button;
+  const fontWeight =
+    props.size === 'small'
+      ? theme.fontWeights.regular
+      : props.size === 'mini'
+      ? theme.fontWeights.regular
+      : theme.fontWeights.semibold;
   const buttonHeight =
     props.size === 'small'
       ? theme.spaces.xxl5
@@ -112,7 +118,7 @@ const getStyles = (
     },
     buttonText: {
       fontSize: fontSize,
-      fontWeight: theme.fontWeights.semibold as any,
+      fontWeight: fontWeight as any,
       ...buttonsConfig[buttonType].buttonText,
     },
     touchOverlay: {
