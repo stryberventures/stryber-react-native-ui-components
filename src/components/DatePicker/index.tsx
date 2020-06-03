@@ -10,7 +10,6 @@ import {Calendar} from '../Icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import Input, {IInputProps} from '../Input';
-import Button from '../Button';
 import withTheme from '../withTheme';
 const isAndroid = Platform.OS === 'android';
 interface IDatePickerProps extends React.HTMLAttributes<Element> {
@@ -151,11 +150,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
           <Input
             variant={variant}
             error={error}
-            rightIcon={() => (
-              <Button onPress={() => {}}>
-                <Calendar size={20} fill={inputColor} />
-              </Button>
-            )}
+            rightIcon={() => <Calendar size={20} fill={inputColor} />}
             placeholder={dateStr}
             style={[{marginVertical: 0}, style]}
             placeholderTextColor={

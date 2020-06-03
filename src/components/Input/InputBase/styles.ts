@@ -63,6 +63,9 @@ export const getStyles = ({
       justifyContent: 'center',
       flex: 0,
     },
+    toggle: {
+      paddingHorizontal: theme.spaces.m,
+    },
   };
 
   // @ts-ignore

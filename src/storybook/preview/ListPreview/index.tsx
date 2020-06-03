@@ -22,7 +22,10 @@ export const SimpleList = () => {
       data={data}
       titleText="SUBHEAD TITLE"
       titleLink="Link"
-      onItemPress={item => console.log('item', item)}
+      onItemPress={(item: any) => {
+        // eslint-disable-next-line no-console
+        console.log('item', item);
+      }}
     />
   );
 };
@@ -239,12 +242,9 @@ export const ListWithButtons = () => {
     iconBackground: theme.colors.primary,
     button: true,
     buttonProps: {
-      color: 'primary',
-      style: {
-        height: theme.spaces.xxl5,
-      },
+      size: 'small',
     },
-    buttonChildren: <Text white>button text</Text>,
+    buttonChildren: 'button text',
   });
   return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
@@ -257,12 +257,9 @@ export const ListWithButtonsAndImages = () => {
     },
     button: true,
     buttonProps: {
-      color: 'primary',
-      style: {
-        height: theme.spaces.xxl5,
-      },
+      size: 'small',
     },
-    buttonChildren: <Text white>button text</Text>,
+    buttonChildren: 'button text',
   });
   return <List data={data} titleText="SUBHEAD TITLE" titleLink="Link" />;
 };
@@ -277,10 +274,7 @@ export const ListWithButtonsAndFullHeightImages = () => {
     },
     button: true,
     buttonProps: {
-      color: 'primary',
-      style: {
-        height: theme.spaces.xxl5,
-      },
+      size: 'small',
     },
     buttonChildren: <Text white>button text</Text>,
   });

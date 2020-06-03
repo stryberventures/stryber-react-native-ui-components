@@ -1,26 +1,16 @@
 import * as React from 'react';
-import {TouchableHighlight, View, TouchableHighlightProps} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import getStyles from './styles';
+import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
 import withTheme from '../withTheme';
-import Ripple from '../Ripple';
-import Block from '../Block';
 import * as Icons from '../Icons';
-export interface IButtonProps extends TouchableHighlightProps {
-  style?: any;
-  opacity?: number;
-  gradient?: boolean;
-  color?: string;
-  start?: {
-    x?: number;
-    y?: number;
-  };
-  end?: {
-    x?: number;
-    y?: number;
-  };
-  locations?: number[];
-  shadow?: boolean;
+import Text from '../Text';
+import Ripple from '../Ripple';
+import getStyles from './styles';
+
+export interface IButtonProps extends TouchableOpacityProps {
+  children: React.ReactNode;
+  type?: 'regular' | 'outlined';
+  disabled?: boolean;
+  ripple?: boolean;
   rippleColor?: string;
   rippleOpacity?: number;
   rippleDuration?: number;
@@ -33,25 +23,26 @@ export interface IButtonProps extends TouchableHighlightProps {
     left?: number;
   };
   theme?: any;
-  ripple?: boolean;
-  onPress?: (...args: any[]) => any;
-  startColor?: string;
-  endColor?: string;
-  border?: boolean | string;
-  Component?: any;
-  props?: any;
-  children: any;
+  shadow?: boolean;
+  color?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
-  icon?: keyof typeof Icons;
+  size?: 'regular' | 'small' | 'mini';
+  icon?: keyof typeof Icons | ((...args: any[]) => any);
   iconProps?: any;
-  small?: boolean;
-  mini?: boolean;
-  link?: boolean;
+  props?: any;
+  style?: any;
   underlayColor?: string;
+  onPress?: (...args: any[]) => any;
 }
-class Button extends React.Component<IButtonProps, {}> {
+export interface IButtonState {
+  isTouched: boolean;
+}
+class Button extends React.Component<IButtonProps, IButtonState> {
   static defaultProps: any;
   ripple = React.createRef();
+  state = {
+    isTouched: false,
+  };
   renderRipple() {
     const {
       rippleColor,
@@ -100,85 +91,51 @@ class Button extends React.Component<IButtonProps, {}> {
     }
     onPress!(event);
   };
+  handlePressIn = () => {
+    this.setState({
+      isTouched: true,
+    });
+  };
+  handlePressOut = () => {
+    this.setState({
+      isTouched: false,
+    });
+  };
+
   render() {
-    const {
-      style,
-      opacity,
-      gradient,
-      startColor,
-      endColor,
-      end,
-      start,
-      locations,
-      shadow,
-      children,
-      theme,
-      underlayColor,
-      border,
-      Component = gradient ? LinearGradient : View,
-      shape,
-      icon,
-      iconProps,
-      link,
-      ...props
-    } = this.props;
-    const IconComponent = icon && Icons[icon];
-    const styles: any = getStyles(theme, this.props);
-    const buttonStyles = [
-      styles.button,
-      shape && styles[shape],
-      shadow && styles.shadow,
-      border && {
-        borderColor: typeof border === 'string' ? border : theme.colors.primary,
-        borderWidth: theme.sizes.borderWidth,
-      },
-      style,
-    ];
-    const childrenWrapperProps = gradient
-      ? {
-          start: start,
-          end: end,
-          locations: locations,
-          colors: [
-            startColor || styles.primary.backgroundColor,
-            endColor || styles.secondary.backgroundColor,
-          ],
-          style: [...buttonStyles, styles.childrenWrapper],
-        }
-      : {
-          style: styles.childrenWrapper,
-        };
+    const {style, children, theme, icon, iconProps, ...props} = this.props;
+    const IconComponent =
+      (typeof icon === 'string' && Icons[icon]) ||
+      (typeof icon === 'function' && icon);
+    const styles: any = getStyles(theme, this.props, this.state);
+
     return (
-      <TouchableHighlight
+      <TouchableOpacity
         {...props}
-        underlayColor={underlayColor || theme.colors.gray15}
-        activeOpacity={opacity || 0.8}
+        activeOpacity={1}
         onPress={this.handlePress}
-        style={buttonStyles}>
-        {link ? (
-          children
-        ) : (
-          <Block middle pointerEvents="box-only">
-            <Component {...childrenWrapperProps}>
-              {icon && <IconComponent {...iconProps} />}
-              {children}
-            </Component>
-            {this.renderRipple()}
-          </Block>
-        )}
-      </TouchableHighlight>
+        onPressIn={this.handlePressIn}
+        onPressOut={this.handlePressOut}
+        style={[styles.button, style]}>
+        <View style={styles.content}>
+          {icon && (
+            <View style={styles.leftIconContainer}>
+              <IconComponent fill={styles.icon.color} {...iconProps} />
+            </View>
+          )}
+          <Text style={styles.buttonText}>{children}</Text>
+        </View>
+        {this.renderRipple()}
+        <View style={styles.touchOverlay} />
+      </TouchableOpacity>
     );
   }
 }
 Button.defaultProps = {
-  onPress: () => {},
-  start: {x: 0, y: 0},
-  end: {x: 1, y: 1},
-  locations: [0.1, 0.9],
-  opacity: 0.8,
-  color: 'transparent',
-  shape: 'rounded',
-  //Ripple
+  type: 'regular',
+  disabled: false,
+  size: 'regular',
+  shape: 'rectangle',
   rippleColor: 'rgba(0, 0, 0, .38)',
   rippleCentered: false,
   rippleSequential: true,
@@ -190,8 +147,6 @@ Button.defaultProps = {
   },
   rippleOpacity: 0.54,
   rippleDuration: 400,
-  style: {},
-  gradient: false,
   shadow: false,
   ripple: false,
 };

@@ -14,7 +14,6 @@ import Ripple from '../Ripple';
 import Input, {IInputProps} from '../Input';
 import Text from '../Text';
 import {ArrowDown} from '../Icons';
-import Button from '../Button';
 import getStyles from './styles';
 
 interface IDropdownProps extends React.HTMLAttributes<Element> {
@@ -298,7 +297,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   }
   itemSize() {
     const {theme} = this.props;
-    return theme.spaces.xxl8;
+    return theme.spaces.xxl5;
   }
   visibleItemCount() {
     const {data, itemCount} = this.props;
@@ -385,7 +384,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         ref={this.inputRef}
         rightIcon={() => (
           <>
-            <Button style={styles.arrowButton} onPress={() => {}}>
+            <View style={styles.arrowButton}>
               <Animated.View
                 style={{
                   width: 12,
@@ -395,7 +394,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
                   fill={this.focused ? theme.colors.blue : theme.colors.gray15}
                 />
               </Animated.View>
-            </Button>
+            </View>
             {this.renderRipple()}
           </>
         )}
