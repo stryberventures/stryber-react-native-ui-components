@@ -7,7 +7,10 @@ const getStyles = (
   props: IButtonProps,
   state: IButtonState,
 ) => {
-  const primaryColor = props.color || theme.colors.primary;
+  const propsColorValue =
+    theme.colors[props.color as keyof typeof defaultTheme.colors] ||
+    props.color;
+  const primaryColor = propsColorValue || theme.colors.primary;
   const buttonType = props.type || 'regular';
   const fontSize =
     props.size === 'small'
@@ -113,7 +116,7 @@ const getStyles = (
         alignSelf: 'flex-start' as any,
       },
       buttonText: {
-        color: props.color || theme.colors.link,
+        color: propsColorValue || theme.colors.link,
         ...(state.isTouched
           ? {
               opacity: 0.7,
