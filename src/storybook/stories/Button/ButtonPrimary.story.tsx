@@ -1,8 +1,9 @@
 import * as React from 'react';
+import {ScrollView} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {withKnobs, color, select, boolean} from '@storybook/addon-knobs';
-import {Button} from '../../../components';
+import {Button, Block} from '../../../components';
 // @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {button} from '../../../static/markdown';
@@ -40,9 +41,37 @@ storiesOf('Button/Primary', module)
     </CenterView>
   ))
   .add('shape', () => (
-    <CenterView>
-      <Button shape="rectangle">Shape rectangle</Button>
-      <Button shape="rounded">Shape rounded</Button>
-      <Button shape="round">Shape round</Button>
-    </CenterView>
+    <ScrollView contentContainerStyle={{paddingVertical: 20, flex: 1}}>
+      <Block column bottom style={{flex: 1}}>
+        <Block>
+          <Block row space="between">
+            <Button size="mini" shape="rectangle">
+              Rectangle
+            </Button>
+            <Button size="mini" shape="rounded">
+              Rounded
+            </Button>
+            <Button size="mini" shape="round">
+              Round
+            </Button>
+          </Block>
+          <Block row wrap space="between">
+            <Button size="small" shape="rectangle">
+              Rectangle
+            </Button>
+            <Button size="small" shape="rounded">
+              Rounded
+            </Button>
+            <Button size="small" shape="round">
+              Round
+            </Button>
+          </Block>
+          <Block>
+            <Button shape="rectangle">Rectangle</Button>
+            <Button shape="rounded">Rounded</Button>
+            <Button shape="round">Round</Button>
+          </Block>
+        </Block>
+      </Block>
+    </ScrollView>
   ));
