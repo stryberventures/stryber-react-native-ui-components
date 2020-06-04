@@ -3,7 +3,6 @@ import {View} from 'react-native';
 import {customHooks} from '../../../components/other/core';
 import {
   Button,
-  Text,
   Checkbox,
   Switch,
   DatePicker,
@@ -19,7 +18,7 @@ const Form = () => {
     date: new Date(),
     picker: 'Pear',
   });
-  const passwordRef = React.createRef();
+  const passwordRef = React.createRef<any>();
   const dropdownData = [
     {
       value: 'Banana',
@@ -50,7 +49,7 @@ const Form = () => {
         onChange={handleChange}
         placeholder="Email"
         label="Email"
-        email
+        type="email"
         onSubmitEditing={() => passwordRef.current.focus()}
       />
       <Input
@@ -88,11 +87,7 @@ const Form = () => {
         value={values.picker}
         onChange={handleChange}
       />
-      <Button color="primary" onPress={showValues}>
-        <Text header white center bold>
-          Form Submit
-        </Text>
-      </Button>
+      <Button onPress={showValues}>Form Submit</Button>
     </View>
   );
 };

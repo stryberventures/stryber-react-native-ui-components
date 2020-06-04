@@ -22,14 +22,11 @@ const SecondRoute = props => {
   return (
     <View style={[styles.scene, { backgroundColor: "#673ab7" }]}>
       <Button
-        color="primary"
         style={{ width: "100%" }}
         /* eslint-disable-next-line react/prop-types */
         onPress={() => props.jumpTo("first")}
       >
-        <Text white bold center>
-          Jump to first
-        </Text>
+        Jump to first
       </Button>
     </View>
   );

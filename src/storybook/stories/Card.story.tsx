@@ -35,11 +35,7 @@ storiesOf("Card", module)
           Subscriptions will automatically renew and your credit card will be
           charged at the end
         </Text>
-        <Button border color="transparent">
-          <Text size={theme.sizes.title} primary header center bold>
-            Button text
-          </Text>
-        </Button>
+        <Button type="outlined">Button text</Button>
       </Block>
     </Card>
   ))
@@ -52,11 +48,7 @@ storiesOf("Card", module)
         <Text white style={{ marginBottom: 10 }} size={theme.sizes.caption}>
           Active
         </Text>
-        <Button border="#fff" color="transparent">
-          <Text size={theme.sizes.title} white header center bold>
-            Button text
-          </Text>
-        </Button>
+        <Button type="outlined">Button text</Button>
       </Block>
     </Card>
   ))
@@ -86,11 +78,7 @@ storiesOf("Card", module)
             Subscriptions will automatically renew and your credit card will be
             charged at the end
           </Text>
-          <Button border="white" color="transparent">
-            <Text size={theme.sizes.title} white header center bold>
-              Button text
-            </Text>
-          </Button>
+          <Button type="outlined">Button text</Button>
         </Block>
       </Card>
     );

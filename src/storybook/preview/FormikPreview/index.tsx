@@ -111,10 +111,8 @@ const FormikPreview = () => {
               value={values.picker}
               onChange={handleChange("picker")}
             />
-            <Button color="primary" onPress={handleSubmit}>
-              <Text header white center bold>
-                Form Submit
-              </Text>
+            <Button onPress={handleSubmit}>
+              Form Submit
             </Button>
             <Text>{JSON.stringify(values)}</Text>
           </Fragment>

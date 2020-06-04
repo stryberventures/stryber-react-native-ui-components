@@ -73,10 +73,8 @@ const FormRef = () => {
         label="Pick fast"
         ref={dropdownRef}
       />
-      <Button color="primary" onPress={showValues}>
-        <Text header white center bold>
-          Form Submit
-        </Text>
+      <Button onPress={showValues}>
+        Form Submit
       </Button>
     </View>
   );
