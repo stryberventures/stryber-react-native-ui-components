@@ -10,6 +10,9 @@ const getStyles = (
   const propsColorValue =
     theme.colors[props.color as keyof typeof defaultTheme.colors] ||
     props.color;
+  const propsSecondaryColorValue =
+    theme.colors[props.secondaryColor as keyof typeof defaultTheme.colors] ||
+    props.secondaryColor;
   const primaryColor = propsColorValue || theme.colors.primary;
   const buttonType = props.type || 'regular';
   const fontSize =
@@ -73,12 +76,12 @@ const getStyles = (
           : {}),
       },
       buttonText: {
-        color: '#fff',
+        color: propsSecondaryColorValue || theme.colors.onPrimary,
       },
     },
     outlined: {
       button: {
-        backgroundColor: theme.colors.white,
+        backgroundColor: propsSecondaryColorValue || theme.colors.onPrimary,
         borderWidth: 1,
         borderColor: primaryColor,
         ...(state.isTouched
@@ -97,7 +100,7 @@ const getStyles = (
         color: primaryColor,
         ...(state.isTouched
           ? {
-              color: theme.colors.white,
+              color: propsSecondaryColorValue || theme.colors.onPrimary,
             }
           : {}),
         ...(props.disabled

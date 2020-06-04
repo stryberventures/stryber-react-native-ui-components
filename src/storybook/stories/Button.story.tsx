@@ -10,6 +10,7 @@ import {button} from '../../static/markdown';
 const getKnobProps = () => ({
   size: select('size', ['regular', 'small', 'mini'], 'regular'),
   color: color('color', ''),
+  secondaryColor: color('secondaryColor', ''),
   shadow: boolean('shadow', false),
   shape: select('shape', ['rectangle', 'rounded', 'round'], 'rectangle'),
   disabled: boolean('disabled', false),

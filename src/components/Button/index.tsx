@@ -25,6 +25,7 @@ export interface IButtonProps extends TouchableOpacityProps {
   theme?: any;
   shadow?: boolean;
   color?: string;
+  secondaryColor?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'regular' | 'small' | 'mini';
   icon?: keyof typeof Icons | ((...args: any[]) => any);

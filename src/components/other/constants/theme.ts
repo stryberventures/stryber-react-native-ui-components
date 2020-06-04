@@ -3,6 +3,7 @@ const colors = {
   accent: '#d0021b',
   accent2: '#ea3546',
   primary: '#007aff',
+  onPrimary: '#fff',
   link: '#1d1d1d',
   secondary: '#2BDA8E',
   tertiary: '#FFE358',
