@@ -165,5 +165,6 @@ Button.defaultProps = {
   rippleDuration: 400,
   shadow: false,
   ripple: false,
+  onPress: () => {},
 };
 export default withTheme(Button);
