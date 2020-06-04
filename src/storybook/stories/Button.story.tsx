@@ -12,7 +12,7 @@ const getKnobProps = () => ({
   color: color('color', ''),
   secondaryColor: color('secondaryColor', ''),
   shadow: boolean('shadow', false),
-  shape: select('shape', ['rectangle', 'rounded', 'round'], 'rectangle'),
+  shape: select('shape', ['rectangle', 'rounded', 'round'], 'rounded'),
   disabled: boolean('disabled', false),
   // @ts-ignore
   icon: select('icon', [null, 'Eye'], null),

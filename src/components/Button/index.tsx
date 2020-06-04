@@ -58,6 +58,7 @@ class Button extends React.Component<IButtonProps, IButtonState> {
     if (!ripple) {
       return null;
     }
+    const styles: any = getStyles(theme, this.props, this.state);
     const rippleStyles = {
       ...rippleInsets,
       top: 0,
@@ -72,7 +73,7 @@ class Button extends React.Component<IButtonProps, IButtonState> {
         rippleOpacity={rippleOpacity}
         rippleCentered={rippleCentered}
         rippleSequential={rippleSequential}
-        rippleContainerBorderRadius={theme.sizes.radius}
+        rippleContainerBorderRadius={styles.button.borderRadius}
         // @ts-ignore
         ref={this.ripple}
       />
@@ -150,7 +151,7 @@ Button.defaultProps = {
   type: 'regular',
   disabled: false,
   size: 'regular',
-  shape: 'rectangle',
+  shape: 'rounded',
   rippleColor: 'rgba(0, 0, 0, .38)',
   rippleCentered: false,
   rippleSequential: true,
