@@ -2,10 +2,11 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {withKnobs, color, select, boolean} from '@storybook/addon-knobs';
-import {Button} from '../../../components';
+import {Block, Button} from '../../../components';
 // @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {button} from '../../../static/markdown';
+import {ScrollView} from 'react-native';
 
 const getKnobProps = () => ({
   size: select('size', ['regular', 'small', 'mini'], 'regular'),
@@ -49,15 +50,49 @@ storiesOf('Button/Outlined', module)
     </CenterView>
   ))
   .add('shape', () => (
-    <CenterView>
-      <Button type="outlined" shape="rectangle">
-        Shape rectangle
-      </Button>
-      <Button type="outlined" shape="rounded">
-        Shape rounded
-      </Button>
-      <Button type="outlined" shape="round">
-        Shape round
-      </Button>
-    </CenterView>
+    <ScrollView contentContainerStyle={{paddingVertical: 20, flex: 1}}>
+      <Block column bottom style={{flex: 1}}>
+        <Block>
+          <Block row space="between">
+            <Button type="outlined" size="mini" shape="rectangle">
+              Rectangle
+            </Button>
+            <Button type="outlined" size="mini" shape="rounded">
+              Rounded
+            </Button>
+            <Button type="outlined" size="mini" shape="round">
+              Round
+            </Button>
+          </Block>
+          <Block
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+            }}>
+            <Button type="outlined" size="small" shape="rectangle">
+              Rectangle
+            </Button>
+            <Button type="outlined" size="small" shape="rounded">
+              Rounded
+            </Button>
+            <Button type="outlined" size="small" shape="round">
+              Round
+            </Button>
+          </Block>
+          <Block>
+            <Button type="outlined" shape="rectangle">
+              Rectangle
+            </Button>
+            <Button type="outlined" shape="rounded">
+              Rounded
+            </Button>
+            <Button type="outlined" shape="round">
+              Round
+            </Button>
+          </Block>
+        </Block>
+      </Block>
+    </ScrollView>
   ));

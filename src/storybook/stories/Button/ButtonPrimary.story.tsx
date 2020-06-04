@@ -55,7 +55,13 @@ storiesOf('Button/Primary', module)
               Round
             </Button>
           </Block>
-          <Block row wrap space="between">
+          <Block
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              flexWrap: 'wrap',
+              alignItems: 'center',
+            }}>
             <Button size="small" shape="rectangle">
               Rectangle
             </Button>
