@@ -25,7 +25,7 @@ const getStyles = (
       : theme.fontWeights.semibold;
   const buttonHeight =
     props.type === 'link'
-      ? undefined
+      ? 'auto'
       : props.size === 'small'
       ? theme.spaces.xxl5
       : props.size === 'mini'
@@ -33,12 +33,12 @@ const getStyles = (
       : theme.spaces.xxl8;
   const buttonWidth =
     props.type === 'link'
-      ? undefined
+      ? 'auto'
       : props.size === 'small'
       ? theme.sizes.smallButtonWidth
       : props.size === 'mini'
       ? theme.sizes.miniButtonWidth
-      : undefined;
+      : 'auto';
   const borderRadius =
     props.shape === 'rounded'
       ? theme.sizes.smallRadius
@@ -108,6 +108,7 @@ const getStyles = (
       button: {
         paddingVertical: theme.spaces.xxs,
         paddingHorizontal: theme.spaces.xs,
+        marginVertical: 0,
         backgroundColor: 'transparent',
       },
       buttonText: {

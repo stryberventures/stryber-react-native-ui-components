@@ -103,7 +103,15 @@ class Button extends React.Component<IButtonProps, IButtonState> {
   };
 
   render() {
-    const {style, children, theme, icon, iconProps, ...props} = this.props;
+    const {
+      style,
+      children,
+      theme,
+      icon,
+      iconProps,
+      type,
+      ...props
+    } = this.props;
     const IconComponent =
       (typeof icon === 'string' && Icons[icon]) ||
       (typeof icon === 'function' && icon);
@@ -117,16 +125,22 @@ class Button extends React.Component<IButtonProps, IButtonState> {
         onPressIn={this.handlePressIn}
         onPressOut={this.handlePressOut}
         style={[styles.button, style]}>
-        <View style={styles.content}>
-          {icon && (
-            <View style={styles.leftIconContainer}>
-              <IconComponent fill={styles.icon.color} {...iconProps} />
-            </View>
-          )}
+        {type === 'link' ? (
           <Text style={styles.buttonText}>{children}</Text>
-        </View>
-        {this.renderRipple()}
-        <View style={styles.touchOverlay} />
+        ) : (
+          <>
+            <View style={styles.content}>
+              {icon && (
+                <View style={styles.leftIconContainer}>
+                  <IconComponent fill={styles.icon.color} {...iconProps} />
+                </View>
+              )}
+              <Text style={styles.buttonText}>{children}</Text>
+            </View>
+            {this.renderRipple()}
+            <View style={styles.touchOverlay} />
+          </>
+        )}
       </TouchableOpacity>
     );
   }
