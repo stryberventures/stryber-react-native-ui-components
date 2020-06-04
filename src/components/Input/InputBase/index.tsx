@@ -40,6 +40,7 @@ export interface IInputBaseProps extends TextInputProps {
 
   theme?: any;
 
+  style?: any;
   classes?: any;
   error?: string;
   renderPrefix?: () => any;
@@ -162,6 +163,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       secure,
       classes,
       onChange,
+      style,
       ...props
     } = this.props;
     const {toggleSecure} = this.state;
@@ -175,7 +177,9 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     const isSecure = toggleSecure ? false : secure;
     const InputWrapper = this.inputWrapper;
     return (
-      <View style={styles.container} pointerEvents={disabled ? 'none' : 'auto'}>
+      <View
+        style={[styles.container, style]}
+        pointerEvents={disabled ? 'none' : 'auto'}>
         {renderPrefix!()}
         <TouchableWithoutFeedback onPress={this.onInputBoxPress}>
           <View
