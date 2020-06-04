@@ -110,9 +110,10 @@ const getStyles = (
         paddingHorizontal: theme.spaces.xs,
         marginVertical: 0,
         backgroundColor: 'transparent',
+        alignSelf: 'flex-start' as any,
       },
       buttonText: {
-        color: primaryColor,
+        color: props.color || theme.colors.link,
         ...(state.isTouched
           ? {
               opacity: 0.7,

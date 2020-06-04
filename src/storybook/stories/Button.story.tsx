@@ -48,6 +48,7 @@ storiesOf('Button', module)
   .add('link', () => (
     <CenterView>
       <Button
+        style={{alignSelf: 'center'}}
         type="link"
         {...getKnobLinkProps()}
         onPress={action('clicked-shadow')}>
