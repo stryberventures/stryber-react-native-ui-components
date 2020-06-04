@@ -16,19 +16,25 @@ const getStyles = (
       ? theme.fontSizes.caption
       : theme.fontSizes.button;
   const fontWeight =
-    props.size === 'small'
+    props.type === 'link'
+      ? theme.fontWeights.regular
+      : props.size === 'small'
       ? theme.fontWeights.regular
       : props.size === 'mini'
       ? theme.fontWeights.regular
       : theme.fontWeights.semibold;
   const buttonHeight =
-    props.size === 'small'
+    props.type === 'link'
+      ? undefined
+      : props.size === 'small'
       ? theme.spaces.xxl5
       : props.size === 'mini'
       ? theme.spaces.xxl2
       : theme.spaces.xxl8;
   const buttonWidth =
-    props.size === 'small'
+    props.type === 'link'
+      ? undefined
+      : props.size === 'small'
       ? theme.sizes.smallButtonWidth
       : props.size === 'mini'
       ? theme.sizes.miniButtonWidth
@@ -94,6 +100,21 @@ const getStyles = (
         ...(props.disabled
           ? {
               color: theme.colors.gray15,
+            }
+          : {}),
+      },
+    },
+    link: {
+      button: {
+        paddingVertical: theme.spaces.xxs,
+        paddingHorizontal: theme.spaces.xs,
+        backgroundColor: 'transparent',
+      },
+      buttonText: {
+        color: primaryColor,
+        ...(state.isTouched
+          ? {
+              opacity: 0.7,
             }
           : {}),
       },

@@ -17,6 +17,10 @@ const getKnobProps = () => ({
   icon: select('icon', [null, 'Eye'], null),
   ripple: boolean('ripple', false),
 });
+const getKnobLinkProps = () => ({
+  size: select('size', ['regular', 'small'], 'regular'),
+  color: color('color', ''),
+});
 
 storiesOf('Button', module)
   .addParameters({
@@ -36,6 +40,16 @@ storiesOf('Button', module)
       <Button
         type="outlined"
         {...getKnobProps()}
+        onPress={action('clicked-shadow')}>
+        Button text
+      </Button>
+    </CenterView>
+  ))
+  .add('link', () => (
+    <CenterView>
+      <Button
+        type="link"
+        {...getKnobLinkProps()}
         onPress={action('clicked-shadow')}>
         Button text
       </Button>

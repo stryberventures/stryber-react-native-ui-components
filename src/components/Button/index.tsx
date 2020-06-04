@@ -8,7 +8,7 @@ import getStyles from './styles';
 
 export interface IButtonProps extends TouchableOpacityProps {
   children: React.ReactNode;
-  type?: 'regular' | 'outlined';
+  type?: 'regular' | 'outlined' | 'link';
   disabled?: boolean;
   ripple?: boolean;
   rippleColor?: string;
