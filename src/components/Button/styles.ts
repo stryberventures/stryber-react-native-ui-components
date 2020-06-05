@@ -81,7 +81,7 @@ const getStyles = (
     },
     outlined: {
       button: {
-        backgroundColor: propsSecondaryColorValue || theme.colors.onPrimary,
+        backgroundColor: theme.colors.white,
         borderWidth: 1,
         borderColor: primaryColor,
         ...(state.isTouched
