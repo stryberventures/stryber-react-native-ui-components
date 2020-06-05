@@ -10,19 +10,19 @@ const getStyles = (theme = defaultTheme) =>
     },
     // variations
     regular: {
-      fontWeight: 'normal',
+      fontWeight: theme.fontWeights.regular as any,
     },
     bold: {
-      fontWeight: 'bold',
+      fontWeight: theme.fontWeights.bold as any,
     },
     semibold: {
-      fontWeight: '600',
+      fontWeight: theme.fontWeights.semibold as any,
     },
     medium: {
-      fontWeight: '500',
+      fontWeight: theme.fontWeights.medium as any,
     },
     light: {
-      fontWeight: '200',
+      fontWeight: theme.fontWeights.light as any,
     },
     // position
     center: {textAlign: 'center'},

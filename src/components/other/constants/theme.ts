@@ -3,6 +3,8 @@ const colors = {
   accent: '#d0021b',
   accent2: '#ea3546',
   primary: '#007aff',
+  onPrimary: '#fff',
+  link: '#1d1d1d',
   secondary: '#2BDA8E',
   tertiary: '#FFE358',
   gray: '#cfe2f2',
@@ -56,6 +58,13 @@ const fontSizes = {
   footnote: 12,
   caption: 12,
   small: 12,
+};
+const fontWeights = {
+  regular: 'normal',
+  bold: 'bold',
+  semibold: '600',
+  medium: '500',
+  light: '200',
 };
 const sizes = {
   // global sizes
@@ -144,4 +153,4 @@ const spaces = {
   xxl15: 256,
   xxl16: 512,
 };
-export {key, colors, sizes, fontSizes, fonts, spaces};
+export {key, colors, sizes, fontSizes, fontWeights, fonts, spaces};

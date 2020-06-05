@@ -100,11 +100,7 @@ class ThemeChooser extends Component<IThemeChooserProps, {}> {
                 />
               )}
             />
-            <Button color="primary">
-              <Text header white center bold>
-                Button
-              </Text>
-            </Button>
+            <Button>Button</Button>
             <Input
               email
               withLeftBorder={false}

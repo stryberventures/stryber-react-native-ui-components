@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
   TextInput,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   TextInputProps,
   View,
   KeyboardType,
@@ -11,7 +12,6 @@ import withTheme from '../../withTheme';
 import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
 import {Eye, EyeDisabled} from '../../Icons';
 import Text from '../../Text';
-import Button from '../../Button';
 import Block from '../../Block';
 import {getStyles} from './styles';
 
@@ -84,7 +84,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       return null;
     }
     return (
-      <Button
+      <TouchableOpacity
         style={styles.toggle}
         onPress={() => this.setState({toggleSecure: !toggleSecure})}>
         {!toggleSecure ? (
@@ -92,7 +92,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
         ) : (
           <Eye fill={theme.colors.primary} />
         )}
-      </Button>
+      </TouchableOpacity>
     );
   }
 

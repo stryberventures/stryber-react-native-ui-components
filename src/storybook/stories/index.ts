@@ -1,6 +1,6 @@
 import './Global';
 import './Welcome.story';
-import './Button.story';
+import './Button';
 import './Input';
 import './Controls';
 import './Header.story';
