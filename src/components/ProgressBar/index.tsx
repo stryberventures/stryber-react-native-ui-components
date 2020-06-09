@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet
-} from 'react-native';
+import { View } from 'react-native';
+import ProgressInline from './ProgressInline';
+import ProgressDots from './ProgressDots';
+import ProgressSteps from './ProgressSteps';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 
 export interface IProgressBarProps {
   size: 'small' | 'large';
-  type: 'steps' | 'inline';
+  variant: 'steps' | 'inline' | 'dots';
   value: number;
   totalValue: number;
   title?: string;
@@ -22,48 +21,21 @@ class ProgressBar extends Component<IProgressBarProps> {
 
   render() {
     const {
-      size,
-      value,
-      totalValue,
+      variant,
       infoShowed,
-      theme,
-      type,
+      title,
       ...props
     } = this.props;
-    const styles = getStyles(theme, this.props);
-
-    const getStepsProgress = () => {
-      const steps = [];
-      for (let i=0; i<totalValue-value; i++) {
-        steps.push(<View style={styles.dot} />)
-      }
-      return <View style={styles.stepsBar}>
-        <View style={styles.stepsWrapper}>
-          <View style={styles.stepsProgress} />
-          <View style={styles.dots}>
-            {steps}
-          </View>
-        </View>
-        <Text style={styles.stepsText}>{`${value}/${totalValue}`}</Text>
-      </View>
-    }
-    const getInlineProgress = () => {
-      return <>
-        { 
-          infoShowed && <View style={styles.info}>
-            <Text>{props.title}</Text>
-            <Text>{value}</Text>
-          </View>
-        }
-        <View style={styles.inlineBar}>
-          <View style={[StyleSheet.absoluteFill, styles.inlineProgress]} />
-        </View>
-      </>
-    }
-    
+    const styles = getStyles();
     return (
       <View style={styles.container}>
-        { type === 'inline' ? getInlineProgress() : getStepsProgress() }
+        {
+          variant === 'inline' ? 
+          <ProgressInline title={title} infoShowed={infoShowed} {...props} />
+          : variant === 'steps' 
+            ? <ProgressSteps {...props} />
+            : <ProgressDots {...props} />
+        }
       </View>
     );
   }
@@ -72,7 +44,7 @@ ProgressBar.defaultProps = {
   style: {},
   size: 'small',
   title: 'Title',
-  type: 'inline',
+  variant: 'inline',
   value: 4,
   totalValue: 4,
   infoShowed: false
