@@ -9,20 +9,24 @@ storiesOf("ProgressBar", module)
     'default',
     () => (
       <>
-        <ProgressBar size='small' value={1} totalValue={4} type='inline'/>
+        <ProgressBar size='small' value={1} totalValue={4} variant='inline'/>
       </>
     ),
     { notes: { markdown: progressBar } }
   ).add('large size', () => (
     <>
-      <ProgressBar size='large' value={1} totalValue={4} type='inline' />
+      <ProgressBar size='large' value={1} totalValue={4} variant='inline'/>
     </>
   )).add('with title and value', () => (
     <>
-      <ProgressBar size='small' value={1} totalValue={4} type='inline' title="Title" infoShowed={true}/>
+      <ProgressBar size='small' value={1} totalValue={4} variant='inline' title="Title" infoShowed={true}/>
+    </>
+  )).add('with dots', () => (
+    <>
+      <ProgressBar size='small' value={2} totalValue={4} variant='dots' />
     </>
   )).add('with steps', () => (
     <>
-      <ProgressBar size='small' value={2} totalValue={4} type='steps' />
+      <ProgressBar size='small' value={2} totalValue={4} variant='steps' />
     </>
   ));
