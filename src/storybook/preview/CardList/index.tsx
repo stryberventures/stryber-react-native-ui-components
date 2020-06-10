@@ -175,3 +175,25 @@ export const CardListQuizBlue = () => {
     />
   );
 };
+
+export const CardListQuizWithoutMultiselect = () => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const data = [...Array(10)].map((_, i) => ({
+    text: 'Lorem ipsum',
+    secondaryText: i % 2 === 0 ? longText : undefined,
+    quizCounter: alphabet[i].toUpperCase(),
+  }));
+  return (
+    <CardList multiSelect={false} data={data} quiz title="quiz card list" />
+  );
+};
+
+export const CardListQuizWithDefaultSelection = () => {
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  const data = [...Array(10)].map((_, i) => ({
+    text: 'Lorem ipsum',
+    secondaryText: i % 2 === 0 ? longText : undefined,
+    quizCounter: alphabet[i].toUpperCase(),
+  }));
+  return <CardList defaultIndex={0} data={data} quiz title="quiz card list" />;
+};

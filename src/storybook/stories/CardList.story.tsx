@@ -13,6 +13,8 @@ import {
   CardListRadioButtonsLeft,
   CardListQuiz,
   CardListQuizBlue,
+  CardListQuizWithoutMultiselect,
+  CardListQuizWithDefaultSelection,
 } from '../preview/CardList';
 
 storiesOf('CardList', module)
@@ -37,4 +39,10 @@ storiesOf('CardList', module)
     <CardListRadioButtonsLeft />
   ))
   .add('quiz card list', () => <CardListQuiz />)
-  .add('quiz card list with different colours', () => <CardListQuizBlue />);
+  .add('quiz card list with different colours', () => <CardListQuizBlue />)
+  .add('quiz card list without multiselect', () => (
+    <CardListQuizWithoutMultiselect />
+  ))
+  .add('quiz card list with default selected item', () => (
+    <CardListQuizWithDefaultSelection />
+  ));

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import Card from '../Card';
@@ -7,16 +7,17 @@ import {defaultTheme as theme} from '../other/constants';
 import {IListItem, IProps} from './index';
 import getStyles from './styles';
 
-const ListItem: React.FC<IListItem & Partial<IProps>> = props => {
-  const [isActive, setIsActive] = useState(false);
+export interface IListItemProps extends IListItem, Partial<IProps> {
+  isActive: boolean;
+}
 
-  const styles = getStyles(theme, props, isActive);
+const ListItem: React.FC<IListItemProps> = props => {
+  const styles = getStyles(theme, props);
 
   const toggleQuiz = () => {
     if (props.onQuizPress) {
       props.onQuizPress();
     }
-    setIsActive(state => !state);
   };
 
   return (

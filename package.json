@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "main": "lib/commonjs/index.js",
   "react-native": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -26,7 +26,8 @@
     "lint:write": "eslint --debug src/ --fix",
     "prettier": "prettier --write src/**/*.ts*",
     "storybook": "start-storybook -p 7007 -c ./src/storybook",
-    "prepare": "bob build"
+    "prepare": "bob build",
+    "publish": "npm publish --access public"
   },
   "husky": {
     "hooks": {
