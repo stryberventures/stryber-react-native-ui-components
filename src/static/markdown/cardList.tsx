@@ -27,6 +27,8 @@ import {CardList} from '@stryberventures/stryber-react-native-ui-components';
 | **\`cardBackground\`**      | String card background color    | 
 | **\`textColor\`**        | String text color           |
 | **\`keyExtractor\`**        | Keyextractor function for FlatList           |
+| **\`defaultIndex\`**        | Number index of selected by default element           |
+| **\`multiSelect\`**        | Boolean inables or disables multiselect functionality        |
 
 
 | IListItem         | Description                                         |                                                                                    |

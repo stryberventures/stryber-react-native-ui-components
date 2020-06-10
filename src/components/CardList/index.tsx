@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, View} from 'react-native';
 
 import {ICheckboxProps} from '../Checkbox';
@@ -29,14 +29,29 @@ export interface IProps {
   textColor?: string;
   keyExtractor?: (item: IListItem, index: number) => string;
   onQuizPress?: (item?: IListItem, index?: number) => void;
+  defaultIndex?: number;
+  multiSelect?: boolean;
 }
 
 const CardList: React.FC<IProps> = props => {
-  const keyExtractor = props.keyExtractor || ((_item, index) => `${index}`);
   const styles = getStyles(theme, props);
+
+  const [activeIndexes, setActiveIndexes] = useState(
+    props.defaultIndex ? [props.defaultIndex] : [],
+  );
+
+  const keyExtractor = props.keyExtractor || ((_item, index) => `${index}`);
 
   const renderItem = ({item, index}: {item: IListItem; index: number}) => {
     const onQuizPress = () => {
+      setActiveIndexes(state => {
+        if (props.multiSelect) {
+          return state.includes(index)
+            ? state.filter(element => element !== index)
+            : [...state, index];
+        }
+        return state.includes(index) ? [] : [index];
+      });
       if (props.onQuizPress) {
         props.onQuizPress(item, index);
       }
@@ -44,6 +59,7 @@ const CardList: React.FC<IProps> = props => {
     return (
       <ListItem
         {...item}
+        isActive={activeIndexes.includes(index)}
         onQuizPress={onQuizPress}
         checkboxLeft={props.checkboxLeft}
         checkboxRight={props.checkboxRight}
@@ -55,7 +71,7 @@ const CardList: React.FC<IProps> = props => {
         cardBackground={props.cardBackground}
         textColor={props.textColor}
       />
-    )
+    );
   };
 
   return (
@@ -72,6 +88,7 @@ const CardList: React.FC<IProps> = props => {
 
 CardList.defaultProps = {
   data: [],
+  multiSelect: true,
 };
 
 export default CardList;

@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
 
 import {IProps} from './index';
+import {IListItemProps} from './ListItem';
 
-const getStyles = (theme: any, props?: Partial<IProps>, isActive?: boolean) => {
+const getStyles = (theme: any, props?: IProps | IListItemProps) => {
   const cardBackground =
     props && props.cardBackground
       ? theme.colors[props.cardBackground] || props.cardBackground
@@ -11,6 +12,10 @@ const getStyles = (theme: any, props?: Partial<IProps>, isActive?: boolean) => {
     props && props.quizBackground
       ? theme.colors[props.quizBackground] || props.quizBackground
       : theme.colors.primary;
+  const cardBorderColor =
+    props && 'isActive' in props && props.isActive
+      ? quizBackground
+      : cardBackground;
   const quizBTextColor =
     props && props.quizTextColor
       ? theme.colors[props.quizTextColor] || props.quizTextColor
@@ -27,7 +32,7 @@ const getStyles = (theme: any, props?: Partial<IProps>, isActive?: boolean) => {
     cardStyle: {
       backgroundColor: cardBackground,
       borderWidth: 1,
-      borderColor: isActive ? quizBackground : cardBackground,
+      borderColor: cardBorderColor,
       padding: theme.spaces.m,
       marginBottom: theme.spaces.m,
       width: '99%',
