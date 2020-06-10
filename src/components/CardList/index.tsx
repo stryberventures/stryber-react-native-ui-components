@@ -31,6 +31,7 @@ export interface IProps {
   onQuizPress?: (item?: IListItem, index?: number) => void;
   defaultIndex?: number;
   multiSelect?: boolean;
+  scrollEnabled?: boolean;
 }
 
 const CardList: React.FC<IProps> = props => {
@@ -81,6 +82,7 @@ const CardList: React.FC<IProps> = props => {
         renderItem={renderItem}
         ListHeaderComponent={<ListHeader title={props.title} />}
         keyExtractor={keyExtractor}
+        scrollEnabled={props.scrollEnabled}
       />
     </View>
   );
@@ -89,6 +91,7 @@ const CardList: React.FC<IProps> = props => {
 CardList.defaultProps = {
   data: [],
   multiSelect: true,
+  scrollEnabled: true,
 };
 
 export default CardList;
