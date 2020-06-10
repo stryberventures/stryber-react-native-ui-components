@@ -195,5 +195,5 @@ export const CardListQuizWithDefaultSelection = () => {
     secondaryText: i % 2 === 0 ? longText : undefined,
     quizCounter: alphabet[i].toUpperCase(),
   }));
-  return <CardList defaultIndex={2} data={data} quiz title="quiz card list" />;
+  return <CardList defaultIndex={0} data={data} quiz title="quiz card list" />;
 };

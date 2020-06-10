@@ -37,7 +37,7 @@ const CardList: React.FC<IProps> = props => {
   const styles = getStyles(theme, props);
 
   const [activeIndexes, setActiveIndexes] = useState(
-    props.defaultIndex ? [props.defaultIndex] : [],
+    props.defaultIndex !== undefined ? [props.defaultIndex] : [],
   );
 
   const keyExtractor = props.keyExtractor || ((_item, index) => `${index}`);
