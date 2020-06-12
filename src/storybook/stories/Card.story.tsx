@@ -40,7 +40,7 @@ storiesOf("Card", module)
     </Card>
   ))
   .add("with background", () => (
-    <Card color="primary">
+    <Card cardBackground="primary">
       <Block padding={theme.sizes.cardPadding} style={{ flex: 0 }}>
         <Text bold white size={theme.sizes.h2}>
           Card Example
