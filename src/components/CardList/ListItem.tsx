@@ -22,7 +22,10 @@ const ListItem: React.FC<IListItemProps> = props => {
 
   return (
     <TouchableOpacity onPress={toggleQuiz} disabled={!props.quiz}>
-      <Card shadow style={styles.cardStyle}>
+      <Card
+        cardBackground={props.cardBackground}
+        shadow
+        style={styles.cardStyle}>
         {props.quiz && props.quizCounter && (
           <View style={styles.leftElementWrapper}>
             <View style={styles.quizWrapper}>

@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Block, {IBlockProps} from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-interface ICardProps extends IBlockProps {
+export interface ICardProps extends IBlockProps {
   card?: boolean;
   shadow?: boolean;
   gradientStyle?: any;
@@ -15,6 +15,7 @@ interface ICardProps extends IBlockProps {
   style?: any;
   props?: any;
   containerStyles?: any;
+  cardBackground?: string;
 }
 class Card extends Component<ICardProps, {}> {
   static defaultProps: any;
@@ -47,29 +48,20 @@ class Card extends Component<ICardProps, {}> {
       shadow,
       style,
       containerStyles,
-      ...props
+      ...rest
     } = this.props;
-    const styles = getStyles(theme);
-    const cardStyles = [
-      {
-        borderRadius: theme.sizes.blockRadius,
-        overflow: 'hidden',
-        flex: 0,
-      },
-      shadow && {backgroundColor: '#fff'},
-      style,
-    ];
+    const styles = getStyles(theme, this.props);
     return Platform.OS === 'ios' ? (
       <Block
         flex={0}
         style={{borderRadius: theme.sizes.blockRadius, ...containerStyles}}
         shadow={!!styles.shadow}>
-        <Block style={cardStyles} {...props}>
+        <Block style={styles.cardStyles} {...rest}>
           {backgroundImage ? this.renderBgImageCard() : children}
         </Block>
       </Block>
     ) : (
-      <Block shadow={!!styles.shadow} style={cardStyles} {...props}>
+      <Block shadow={!!styles.shadow} style={styles.cardStyles} {...rest}>
         {backgroundImage ? this.renderBgImageCard() : children}
       </Block>
     );

@@ -4,10 +4,6 @@ import {IProps} from './index';
 import {IListItemProps} from './ListItem';
 
 const getStyles = (theme: any, props?: IProps | IListItemProps) => {
-  const cardBackground =
-    props && props.cardBackground
-      ? theme.colors[props.cardBackground] || props.cardBackground
-      : theme.colors.white;
   const quizBackground =
     props && props.quizBackground
       ? theme.colors[props.quizBackground] || props.quizBackground
@@ -15,7 +11,9 @@ const getStyles = (theme: any, props?: IProps | IListItemProps) => {
   const cardBorderColor =
     props && 'isActive' in props && props.isActive
       ? quizBackground
-      : cardBackground;
+      : props && props.cardBackground
+      ? theme.colors[props.cardBackground] || props.cardBackground
+      : 'transparent';
   const quizBTextColor =
     props && props.quizTextColor
       ? theme.colors[props.quizTextColor] || props.quizTextColor
@@ -30,10 +28,10 @@ const getStyles = (theme: any, props?: IProps | IListItemProps) => {
       flexDirection: 'row',
     },
     cardStyle: {
-      backgroundColor: cardBackground,
       borderWidth: 1,
       borderColor: cardBorderColor,
       padding: theme.spaces.m,
+      marginTop: 2,
       marginBottom: theme.spaces.m,
       width: '99%',
       alignSelf: 'center',

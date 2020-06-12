@@ -8,7 +8,7 @@ import getStyles from './styles';
 export interface ICheckboxProps {
   activeRadioInner?: string;
   tickColor?: string;
-  text?: string;
+  text?: string | React.ReactElement;
   value?: boolean;
   name?: string;
   opacity?: number;
