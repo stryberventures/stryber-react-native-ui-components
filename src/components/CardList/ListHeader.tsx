@@ -2,12 +2,12 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 import {IProps} from './index';
-import getStyles from './styles';
+import {getListHeaderStyles} from './styles';
 import {defaultTheme as theme} from '../other/constants';
 
 const ListHeader: React.FC<Partial<IProps>> = props => {
   if (!props.title) return null;
-  const styles = getStyles(theme);
+  const styles = getListHeaderStyles(theme);
 
   return (
     <View style={styles.titleWrapper}>

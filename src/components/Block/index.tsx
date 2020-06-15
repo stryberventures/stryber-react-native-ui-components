@@ -16,6 +16,7 @@ export interface IBlockProps extends ViewProps {
   bottom?: boolean;
   card?: boolean;
   shadow?: boolean;
+  shadowType?: 'normal' | 'large';
   color?: string;
   space?: string;
   padding?: number | number[];
@@ -57,7 +58,7 @@ class Block extends React.Component<IBlockProps, {}> {
       Component = onPress ? TouchableOpacity : View,
       ...props
     } = this.props;
-    const styles: any = getStyles(theme);
+    const styles: any = getStyles(theme, this.props);
     const blockStyles = [
       styles.block,
       flex && {flex},
@@ -106,6 +107,7 @@ Block.defaultProps = {
   bottom: false,
   card: false,
   shadow: false,
+  shadowType: 'normal',
   color: '',
   space: '',
   animated: false,

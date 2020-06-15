@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import {FlatList, View} from 'react-native';
 
 import {ICheckboxProps} from '../Checkbox';
-import {defaultTheme as theme} from '../other/constants';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
-import getStyles from './styles';
+import {getCardListStyles} from './styles';
 
 export interface IListItem {
   text: string;
@@ -35,7 +34,7 @@ export interface IProps {
 }
 
 const CardList: React.FC<IProps> = props => {
-  const styles = getStyles(theme, props);
+  const styles = getCardListStyles();
 
   const [activeIndexes, setActiveIndexes] = useState(
     props.defaultIndex !== undefined ? [props.defaultIndex] : [],

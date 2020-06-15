@@ -5,14 +5,14 @@ import Card from '../Card';
 import Checkbox from '../Checkbox';
 import {defaultTheme as theme} from '../other/constants';
 import {IListItem, IProps} from './index';
-import getStyles from './styles';
+import {getListItemStyles} from './styles';
 
 export interface IListItemProps extends IListItem, Partial<IProps> {
   isActive: boolean;
 }
 
 const ListItem: React.FC<IListItemProps> = props => {
-  const styles = getStyles(theme, props);
+  const styles = getListItemStyles(theme, props);
 
   const toggleQuiz = () => {
     if (props.onQuizPress) {
@@ -22,10 +22,7 @@ const ListItem: React.FC<IListItemProps> = props => {
 
   return (
     <TouchableOpacity onPress={toggleQuiz} disabled={!props.quiz}>
-      <Card
-        cardBackground={props.cardBackground}
-        shadow
-        style={styles.cardStyle}>
+      <Card background={props.cardBackground} shadow style={styles.cardStyle}>
         {props.quiz && props.quizCounter && (
           <View style={styles.leftElementWrapper}>
             <View style={styles.quizWrapper}>
