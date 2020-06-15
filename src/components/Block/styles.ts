@@ -1,6 +1,9 @@
 import {StyleSheet} from 'react-native';
+
 import {defaultTheme} from '../other/constants';
-const getStyles = (theme = defaultTheme) =>
+import {IBlockProps} from './index';
+
+const getStyles = (theme = defaultTheme, props: IBlockProps) =>
   StyleSheet.create({
     block: {
       flex: 1,
@@ -36,9 +39,9 @@ const getStyles = (theme = defaultTheme) =>
       shadowColor: theme.colors.black,
       shadowOffset: {
         width: 0,
-        height: 2,
+        height: props.shadowTwo ? 5 : 2,
       },
-      shadowOpacity: 0.25,
+      shadowOpacity: props.shadowTwo ? 0.5 : 0.25,
       shadowRadius: 3.84,
       elevation: 5,
     },

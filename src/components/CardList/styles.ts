@@ -1,32 +1,44 @@
 import {StyleSheet} from 'react-native';
 
-import {IProps} from './index';
 import {IListItemProps} from './ListItem';
 
-const getStyles = (theme: any, props?: IProps | IListItemProps) => {
-  const quizBackground =
-    props && props.quizBackground
-      ? theme.colors[props.quizBackground] || props.quizBackground
-      : theme.colors.primary;
-  const cardBorderColor =
-    props && 'isActive' in props && props.isActive
-      ? quizBackground
-      : props && props.cardBackground
-      ? theme.colors[props.cardBackground] || props.cardBackground
-      : 'transparent';
-  const quizBTextColor =
-    props && props.quizTextColor
-      ? theme.colors[props.quizTextColor] || props.quizTextColor
-      : theme.colors.white;
-  const textColor =
-    props && props.textColor
-      ? theme.colors[props.textColor] || props.textColor
-      : theme.colors.black;
-
-  return StyleSheet.create({
+export const getCardListStyles = () =>
+  StyleSheet.create({
     listWrapper: {
       flexDirection: 'row',
     },
+  });
+
+export const getListHeaderStyles = (theme: any) => {
+  return StyleSheet.create({
+    titleWrapper: {
+      marginBottom: 10,
+    },
+    title: {
+      fontFamily: theme.fonts.fontFamily,
+      color: theme.colors.black,
+      fontSize: theme.fontSizes.body,
+    },
+  });
+};
+
+export const getListItemStyles = (theme: any, props: IListItemProps) => {
+  const quizBackground = props.quizBackground
+    ? theme.colors[props.quizBackground] || props.quizBackground
+    : theme.colors.primary;
+  const cardBorderColor = props.isActive
+    ? quizBackground
+    : props.cardBackground
+    ? theme.colors[props.cardBackground] || props.cardBackground
+    : 'transparent';
+  const quizBTextColor = props.quizTextColor
+    ? theme.colors[props.quizTextColor] || props.quizTextColor
+    : theme.colors.white;
+  const textColor = props.textColor
+    ? theme.colors[props.textColor] || props.textColor
+    : theme.colors.black;
+
+  return StyleSheet.create({
     cardStyle: {
       borderWidth: 1,
       borderColor: cardBorderColor,
@@ -37,14 +49,6 @@ const getStyles = (theme: any, props?: IProps | IListItemProps) => {
       alignSelf: 'center',
       flexDirection: 'row',
       alignItems: 'center',
-    },
-    titleWrapper: {
-      marginBottom: 10,
-    },
-    title: {
-      fontFamily: theme.fonts.fontFamily,
-      color: theme.colors.black,
-      fontSize: theme.fontSizes.body,
     },
     quizWrapper: {
       backgroundColor: quizBackground,
@@ -82,4 +86,3 @@ const getStyles = (theme: any, props?: IProps | IListItemProps) => {
     },
   });
 };
-export default getStyles;

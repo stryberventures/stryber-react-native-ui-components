@@ -16,6 +16,7 @@ export interface IBlockProps extends ViewProps {
   bottom?: boolean;
   card?: boolean;
   shadow?: boolean;
+  shadowTwo?: boolean;
   color?: string;
   space?: string;
   padding?: number | number[];
@@ -44,6 +45,7 @@ class Block extends React.Component<IBlockProps, {}> {
       bottom,
       card,
       shadow,
+      shadowTwo,
       color,
       space,
       padding,
@@ -57,7 +59,7 @@ class Block extends React.Component<IBlockProps, {}> {
       Component = onPress ? TouchableOpacity : View,
       ...props
     } = this.props;
-    const styles: any = getStyles(theme);
+    const styles: any = getStyles(theme, this.props);
     const blockStyles = [
       styles.block,
       flex && {flex},
@@ -73,7 +75,7 @@ class Block extends React.Component<IBlockProps, {}> {
       margin && {...handleMargin(margin)},
       padding && {...handlePadding(padding)},
       card && styles.card,
-      shadow && styles.shadow,
+      (shadow || shadowTwo) && styles.shadow,
       space && {justifyContent: `space-${space}`},
       wrap && {flexWrap: 'wrap'},
       color && styles[color],
@@ -106,6 +108,7 @@ Block.defaultProps = {
   bottom: false,
   card: false,
   shadow: false,
+  shadowTwo: false,
   color: '',
   space: '',
   animated: false,
