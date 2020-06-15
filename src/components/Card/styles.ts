@@ -6,7 +6,7 @@ import {ICardProps} from './index';
 const getStyles = (theme: any = defaultTheme, props: ICardProps) => {
   const cardBackground = props.background
     ? theme.colors[props.background] || props.background
-    : props.shadow || props.shadowTwo
+    : props.shadow
     ? theme.colors.white
     : undefined;
 

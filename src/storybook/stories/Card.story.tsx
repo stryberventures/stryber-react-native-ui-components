@@ -26,7 +26,7 @@ storiesOf('Card', module)
     </Card>
   ))
   .add('card with second type of shadow', () => (
-    <Card shadowTwo>
+    <Card shadow shadowType="large">
       <Block padding={theme.sizes.cardPadding} style={{flex: 0}}>
         <Text bold size={theme.sizes.h2}>
           Card Example

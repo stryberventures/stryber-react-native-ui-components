@@ -16,7 +16,7 @@ export interface IBlockProps extends ViewProps {
   bottom?: boolean;
   card?: boolean;
   shadow?: boolean;
-  shadowTwo?: boolean;
+  shadowType?: 'normal' | 'large';
   color?: string;
   space?: string;
   padding?: number | number[];
@@ -45,7 +45,6 @@ class Block extends React.Component<IBlockProps, {}> {
       bottom,
       card,
       shadow,
-      shadowTwo,
       color,
       space,
       padding,
@@ -75,7 +74,7 @@ class Block extends React.Component<IBlockProps, {}> {
       margin && {...handleMargin(margin)},
       padding && {...handlePadding(padding)},
       card && styles.card,
-      (shadow || shadowTwo) && styles.shadow,
+      shadow && styles.shadow,
       space && {justifyContent: `space-${space}`},
       wrap && {flexWrap: 'wrap'},
       color && styles[color],
@@ -108,7 +107,7 @@ Block.defaultProps = {
   bottom: false,
   card: false,
   shadow: false,
-  shadowTwo: false,
+  shadowType: 'normal',
   color: '',
   space: '',
   animated: false,

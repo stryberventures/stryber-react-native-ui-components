@@ -39,9 +39,9 @@ const getStyles = (theme = defaultTheme, props: IBlockProps) =>
       shadowColor: theme.colors.black,
       shadowOffset: {
         width: 0,
-        height: props.shadowTwo ? 5 : 2,
+        height: props.shadowType === 'large' ? 5 : 2,
       },
-      shadowOpacity: props.shadowTwo ? 0.5 : 0.25,
+      shadowOpacity: props.shadowType === 'large' ? 0.5 : 0.25,
       shadowRadius: 3.84,
       elevation: 5,
     },

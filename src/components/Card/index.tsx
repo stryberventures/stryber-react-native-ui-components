@@ -7,7 +7,7 @@ import getStyles from './styles';
 export interface ICardProps extends IBlockProps {
   card?: boolean;
   shadow?: boolean;
-  shadowTwo?: boolean;
+  shadowType?: 'normal' | 'large';
   gradientStyle?: any;
   gradientColors?: string[];
   resizeMode?: 'center' | 'cover' | 'contain' | 'stretch' | 'repeat';
@@ -47,7 +47,7 @@ class Card extends Component<ICardProps, {}> {
       backgroundImage,
       children,
       shadow,
-      shadowTwo,
+      shadowType,
       style,
       containerStyles,
       ...rest
@@ -58,7 +58,7 @@ class Card extends Component<ICardProps, {}> {
         flex={0}
         style={{borderRadius: theme.sizes.blockRadius, ...containerStyles}}
         shadow={shadow}
-        shadowTwo={shadowTwo}>
+        shadowType={shadowType}>
         <Block style={styles.cardStyles} {...rest}>
           {backgroundImage ? this.renderBgImageCard() : children}
         </Block>
@@ -66,7 +66,7 @@ class Card extends Component<ICardProps, {}> {
     ) : (
       <Block
         shadow={shadow}
-        shadowTwo={shadowTwo}
+        shadowType={shadowType}
         style={styles.cardStyles}
         {...rest}>
         {backgroundImage ? this.renderBgImageCard() : children}
@@ -77,7 +77,7 @@ class Card extends Component<ICardProps, {}> {
 Card.defaultProps = {
   card: true,
   shadow: false,
-  shadowTwo: false,
+  shadowType: 'normal',
   gradientColors: ['transparent', '#000'],
   resizeMode: 'cover',
   gradientStyle: {},
