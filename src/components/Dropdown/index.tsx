@@ -87,7 +87,6 @@ type DropdownState = {
   left?: number;
   leftInset?: any;
   rightInset?: any;
-  bottom?: number;
 };
 class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   static defaultProps: any;
@@ -527,7 +526,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     } = this.props;
     const styles = getStyles(theme);
     const {data, disabled} = props;
-    const {left, top, width, opacity, modal, bottom} = this.state;
+    const {left, top, width, opacity, modal} = this.state;
     const itemCount = data!.length;
     const visibleItemCount = this.visibleItemCount();
     const itemSize = this.itemSize();
@@ -538,7 +537,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       height,
       top,
       left,
-      bottom,
     };
     const touchableProps = {
       disabled,
