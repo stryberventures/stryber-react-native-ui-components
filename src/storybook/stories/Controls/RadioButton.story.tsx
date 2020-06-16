@@ -1,11 +1,17 @@
-// @ts-nocheck
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
+import {color} from '@storybook/addon-knobs';
 import Checkbox from '../../../components/Checkbox';
+// @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {checkbox} from '../../../static/markdown';
+
+const getKnobProps = () => ({
+  bgColor: color('bgColor', 'orange'),
+  tickColor: color('tickColor', 'white'),
+});
 storiesOf('Controls/RadioButton', module)
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add(
     'default',
     () => {
@@ -36,7 +42,7 @@ storiesOf('Controls/RadioButton', module)
   .add(
     'custom color',
     () => {
-      return <Checkbox radio value={true} bgColor="orange" />;
+      return <Checkbox radio value={true} {...getKnobProps()} />;
     },
     {
       notes: {markdown: checkbox},

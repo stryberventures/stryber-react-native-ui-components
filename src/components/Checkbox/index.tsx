@@ -53,10 +53,19 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     Animated.spring(springValue, {
       toValue: 1,
       friction: 3,
+      useNativeDriver: true,
     }).start();
   };
   renderRadioIcon = () => {
-    const {theme, radio, error, disabled, size, bgColor, activeRadioInner,} = this.props;
+    const {
+      theme,
+      radio,
+      error,
+      disabled,
+      size,
+      bgColor,
+      activeRadioInner,
+    } = this.props;
     const styles = getStyles({
       theme,
       radio,
