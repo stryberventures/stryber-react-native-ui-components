@@ -77,7 +77,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
   }
 
   renderToggle() {
-    const {secure, theme, color} = this.props;
+    const {secure, theme} = this.props;
     const {toggleSecure} = this.state;
     // @ts-ignore
     const styles = getStyles({theme});
@@ -91,7 +91,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
         {!toggleSecure ? (
           <EyeDisabled fill={theme.colors.gray15} />
         ) : (
-          <Eye fill={color || theme.colors.primary} />
+          <Eye fill={theme.colors.primary} />
         )}
       </TouchableOpacity>
     );
