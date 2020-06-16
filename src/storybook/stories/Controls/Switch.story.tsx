@@ -1,7 +1,7 @@
-// @ts-nocheck
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {color} from '@storybook/addon-knobs';
+// @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import Switch from '../../../components/Switch';
 import {switchDoc} from '../../../static/markdown';
@@ -10,7 +10,7 @@ const getKnobProps = () => ({
   bgColor: color('bgColor', 'orange'),
 });
 storiesOf('Controls/Switch', module)
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add(
     'default',
     () => {
