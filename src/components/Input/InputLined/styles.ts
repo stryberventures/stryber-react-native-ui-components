@@ -80,10 +80,10 @@ export const getStyles = ({
     },
     labelText: {
       fontSize: 12,
-      color: primaryColor,
+      color: theme.colors.primary,
     },
     labelAnimatedText: {
-      color: primaryColor,
+      color: theme.colors.primary,
       fontSize: 12,
     },
     labelAnimatedTextError: {
