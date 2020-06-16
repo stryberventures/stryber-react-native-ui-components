@@ -41,6 +41,17 @@ storiesOf('Input/Simple', module)
       />
     );
   })
+  .add('with custom color', () => {
+    return (
+      <Input
+        placeholder={placeholder}
+        type="email"
+        label="Email"
+        value="Default value"
+        color="orange"
+      />
+    );
+  })
   .add('with icon', () => (
     <Input
       label="Text"

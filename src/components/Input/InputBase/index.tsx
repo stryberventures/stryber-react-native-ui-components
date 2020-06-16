@@ -39,6 +39,7 @@ export interface IInputBaseProps extends TextInputProps {
   onBlur?: (...args: any[]) => any;
 
   theme?: any;
+  color?: string;
 
   style?: any;
   classes?: any;
@@ -76,7 +77,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
   }
 
   renderToggle() {
-    const {secure, theme} = this.props;
+    const {secure, theme, color} = this.props;
     const {toggleSecure} = this.state;
     // @ts-ignore
     const styles = getStyles({theme});
@@ -90,7 +91,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
         {!toggleSecure ? (
           <EyeDisabled fill={theme.colors.gray15} />
         ) : (
-          <Eye fill={theme.colors.primary} />
+          <Eye fill={color || theme.colors.primary} />
         )}
       </TouchableOpacity>
     );
@@ -164,11 +165,13 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       classes,
       onChange,
       style,
+      color,
       ...props
     } = this.props;
     const {toggleSecure} = this.state;
     const styles = getStyles({
       theme,
+      color,
       multiline,
       numberOfLines,
       maxNumberOfLines,

@@ -26,6 +26,7 @@ export interface IInputLinedProps extends IInputBaseProps {
 
   style?: any;
   theme: any;
+  color?: string;
 
   // specific props
   icon?: (...args: any[]) => any;
@@ -99,9 +100,10 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
   }
 
   renderLabel() {
-    const {theme, label, required, disabled, error} = this.props;
+    const {theme, label, required, disabled, error, color} = this.props;
     const styles = getStyles({
       theme,
+      color,
       disabled,
       error: !!error,
     });
@@ -145,6 +147,7 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
     } = this.props;
     const styles = getStyles({
       theme,
+      color: props.color,
       disabled,
       error: !!error,
       moveLabel: this.state.moveLabel,

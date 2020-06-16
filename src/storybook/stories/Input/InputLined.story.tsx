@@ -55,6 +55,18 @@ storiesOf('Input/Lined', module)
       />
     );
   })
+  .add('with custom color', () => {
+    return (
+      <Input
+        placeholder={placeholder}
+        type="email"
+        label="Email"
+        variant={variant}
+        value="Default value"
+        color="orange"
+      />
+    );
+  })
   .add('with error', () => (
     <Input
       label="Email"
