@@ -87,6 +87,7 @@ type DropdownState = {
   left?: number;
   leftInset?: any;
   rightInset?: any;
+  listOnTop?: boolean;
 };
 class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   static defaultProps: any;
@@ -128,6 +129,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       selected: -1,
       modal: false,
       value: this.props.value || '',
+      listOnTop: false,
     };
   }
   componentDidMount() {
@@ -200,10 +202,8 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         const visibleItemCount = this.visibleItemCount();
         const itemSize = this.itemSize();
         const height = itemSize * visibleItemCount;
-        const top =
-          dimensions.height < y + height
-            ? y - height - theme.sizes.inputHeight
-            : y;
+        const listOnTop = dimensions.height < y + height;
+        const top = listOnTop ? y - height - theme.sizes.inputHeight : y;
         this.setState({
           modal: true,
           width: right - left,
@@ -212,6 +212,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
           leftInset,
           rightInset,
           selected,
+          listOnTop,
         });
         setTimeout(() => {
           if (this.mounted) {
@@ -524,7 +525,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       theme,
       ...props
     } = this.props;
-    const styles = getStyles(theme);
+    const styles = getStyles(theme, this.state.listOnTop);
     const {data, disabled} = props;
     const {left, top, width, opacity, modal} = this.state;
     const itemCount = data!.length;

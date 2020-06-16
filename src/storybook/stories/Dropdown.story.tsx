@@ -71,6 +71,14 @@ storiesOf('Dropdown', module)
             {
               value: 'Cherry',
             },
+            {
+              value: 'Cocoa',
+              label: 'Cocoa',
+            },
+            {
+              value: 'Apricot',
+              label: 'Apricot',
+            },
           ]}
         />
       </CenterView>
