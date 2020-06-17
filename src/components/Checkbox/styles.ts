@@ -13,7 +13,7 @@ const getStyles = ({
   error = false,
   size = 'regular',
   bgColor = '',
-  activeRadioInner,
+  tickColor,
 }: StylesType) => {
   const regularBgColor = bgColor || theme.colors.primary;
   const checkboxSizes =
@@ -70,7 +70,7 @@ const getStyles = ({
       width: radioRadius * 2,
       height: radioRadius * 2,
       borderRadius: radioRadius,
-      backgroundColor: activeRadioInner || '#fff',
+      backgroundColor: tickColor || '#fff',
     },
     textStyle: {
       fontSize:

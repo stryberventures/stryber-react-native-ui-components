@@ -99,7 +99,7 @@ export const CardListBlueRadioButtonsRight = () => {
       radiobuttonProps: {
         text: '',
         bgColor: '#fff',
-        activeRadioInner: '#007aff',
+        tickColor: '#007aff',
         style: {
           left: 8,
         },
