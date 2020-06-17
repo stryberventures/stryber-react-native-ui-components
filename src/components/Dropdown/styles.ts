@@ -1,6 +1,6 @@
 import {StyleSheet, Platform} from 'react-native';
 import {defaultTheme} from '../other/constants';
-const getStyles = (theme = defaultTheme) =>
+const getStyles = (theme = defaultTheme, listOnTop = false) =>
   StyleSheet.create({
     accessory: {
       width: 24,
@@ -13,16 +13,27 @@ const getStyles = (theme = defaultTheme) =>
     },
     picker: {
       backgroundColor: 'rgba(255, 255, 255, 1.0)',
-      borderBottomLeftRadius: theme.sizes.radius,
-      borderBottomRightRadius: theme.sizes.radius,
-      borderTopWidth: 0,
+      ...(listOnTop
+        ? {
+            borderTopLeftRadius: theme.sizes.radius,
+            borderTopRightRadius: theme.sizes.radius,
+            borderBottomWidth: 0,
+          }
+        : {
+            borderBottomLeftRadius: theme.sizes.radius,
+            borderBottomRightRadius: theme.sizes.radius,
+            borderTopWidth: 0,
+          }),
       position: 'absolute',
       ...Platform.select({
         ios: {
           shadowRadius: 1,
           shadowColor: 'rgba(0, 0, 0, 1.0)',
           shadowOpacity: 0.24,
-          shadowOffset: {width: 0, height: 2},
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
         },
         android: {
           elevation: 2,

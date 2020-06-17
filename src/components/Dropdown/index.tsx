@@ -87,7 +87,7 @@ type DropdownState = {
   left?: number;
   leftInset?: any;
   rightInset?: any;
-  bottom?: number;
+  listOnTop?: boolean;
 };
 class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
   static defaultProps: any;
@@ -129,6 +129,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       selected: -1,
       modal: false,
       value: this.props.value || '',
+      listOnTop: false,
     };
   }
   componentDidMount() {
@@ -148,7 +149,8 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       // @ts-ignore
       dropdownMargins: {min: minMargin, max: maxMargin},
       animationDuration,
-      useNativeDriver,
+      useNativeDriver = false,
+      theme,
     } = this.props;
     if (disabled) {
       return;
@@ -174,12 +176,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     this.inputRef.current.onFocus();
     const dimensions = Dimensions.get('window');
     this.listContainer.current.measureInWindow(
-      (
-        x: number,
-        y: number,
-        containerWidth: number,
-        containerHeight: number,
-      ) => {
+      (x: number, y: number, containerWidth: number) => {
         const {opacity} = this.state;
         const delay = Math.max(
           0,
@@ -205,20 +202,17 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         const visibleItemCount = this.visibleItemCount();
         const itemSize = this.itemSize();
         const height = itemSize * visibleItemCount;
-        const top = y;
-        const bottomEdge =
-          dimensions.height < top + height
-            ? dimensions.height + dropdownOffset!.top - (top + containerHeight)
-            : 0;
+        const listOnTop = dimensions.height < y + height;
+        const top = listOnTop ? y - height - theme.sizes.inputHeight : y;
         this.setState({
           modal: true,
           width: right - left,
-          top: bottomEdge ? undefined : top,
+          top,
           left,
           leftInset,
           rightInset,
           selected,
-          bottom: bottomEdge ? bottomEdge : undefined,
+          listOnTop,
         });
         setTimeout(() => {
           if (this.mounted) {
@@ -241,7 +235,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     );
   };
   onClose = (value = this.state.value) => {
-    const {onBlur, animationDuration, useNativeDriver} = this.props;
+    const {onBlur, animationDuration, useNativeDriver = false} = this.props;
     const {opacity} = this.state;
     Animated.timing(opacity, {
       duration: animationDuration,
@@ -531,9 +525,9 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       theme,
       ...props
     } = this.props;
-    const styles = getStyles(theme);
+    const styles = getStyles(theme, this.state.listOnTop);
     const {data, disabled} = props;
-    const {left, top, width, opacity, modal, bottom} = this.state;
+    const {left, top, width, opacity, modal} = this.state;
     const itemCount = data!.length;
     const visibleItemCount = this.visibleItemCount();
     const itemSize = this.itemSize();
@@ -544,7 +538,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       height,
       top,
       left,
-      bottom,
     };
     const touchableProps = {
       disabled,
@@ -561,7 +554,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
         <TouchableWithoutFeedback {...touchableProps}>
           <View pointerEvents="box-only">{this.renderBase(props)}</View>
         </TouchableWithoutFeedback>
-        <View ref={this.listContainer}>
+        <View ref={this.listContainer} nativeID="listContainer">
           <Modal visible={modal} transparent onRequestClose={this.blur}>
             <Animated.View
               style={[styles.overlay, overlayStyle, overlayStyleOverrides]}
