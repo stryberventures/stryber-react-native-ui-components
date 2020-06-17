@@ -1,45 +1,23 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
-import {color} from '@storybook/addon-knobs';
+import {color, boolean, select, withKnobs} from '@storybook/addon-knobs';
+import {View} from 'react-native';
 // @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import Switch from '../../../components/Switch';
 import {switchDoc} from '../../../static/markdown';
 
 const getKnobProps = () => ({
-  bgColor: color('bgColor', 'orange'),
+  bgColor: color('bgColor', ''),
+  disabled: boolean('disabled', false),
+  size: select('size', ['regular', 'large'], 'regular'),
+  error: select('error', ['', 'Some error'], ''),
 });
 storiesOf('Controls/Switch', module)
+  .addDecorator(withKnobs)
   .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add(
     'default',
-    () => {
-      return <Switch value={true} />;
-    },
-    {
-      notes: {markdown: switchDoc},
-    },
-  )
-  .add(
-    'large size',
-    () => {
-      return <Switch value={true} size="large" />;
-    },
-    {
-      notes: {markdown: switchDoc},
-    },
-  )
-  .add(
-    'error',
-    () => {
-      return <Switch value={true} error="Some errror" />;
-    },
-    {
-      notes: {markdown: switchDoc},
-    },
-  )
-  .add(
-    'custom color',
     () => {
       return <Switch value={true} {...getKnobProps()} />;
     },
@@ -48,18 +26,18 @@ storiesOf('Controls/Switch', module)
     },
   )
   .add(
-    'disabled off',
+    'sizes',
     () => {
-      return <Switch value={false} disabled />;
-    },
-    {
-      notes: {markdown: switchDoc},
-    },
-  )
-  .add(
-    'disabled on',
-    () => {
-      return <Switch value={true} disabled />;
+      return (
+        <>
+          <View style={{marginBottom: 10}}>
+            <Switch value={true} />
+          </View>
+          <View style={{marginBottom: 10}}>
+            <Switch value={true} size="large" />
+          </View>
+        </>
+      );
     },
     {
       notes: {markdown: switchDoc},

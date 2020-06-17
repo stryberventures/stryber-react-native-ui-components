@@ -6,7 +6,6 @@ import Block from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 export interface ICheckboxProps {
-  activeRadioInner?: string;
   tickColor?: string;
   text?: string | React.ReactElement;
   value?: boolean;
@@ -64,7 +63,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       disabled,
       size,
       bgColor,
-      activeRadioInner,
+      tickColor,
     } = this.props;
     const styles = getStyles({
       theme,
@@ -73,7 +72,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       disabled,
       size,
       bgColor,
-      activeRadioInner,
+      tickColor,
     });
     return <Block style={styles.radioIcon} flex={0} />;
   };
@@ -162,7 +161,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
             </Text>
           </Block>
         </TouchableOpacity>
-        {this.props.error && (
+        {!!this.props.error && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>{this.props.error}</Text>
           </View>

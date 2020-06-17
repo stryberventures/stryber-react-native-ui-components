@@ -171,7 +171,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
             {this.props.text}
           </Text>
         </TouchableOpacity>
-        {this.props.error && (
+        {!!this.props.error && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>{this.props.error}</Text>
           </View>
