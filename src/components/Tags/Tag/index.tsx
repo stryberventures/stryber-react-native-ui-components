@@ -15,9 +15,8 @@ export interface ITagProps extends TouchableOpacityProps {
   size?: 'small' | 'large';
   withCross?: boolean; 
   shadow?: boolean;
-  props?: any;
   style?: any;
-  onChange: (...args: any[]) => any;
+  onTagChange: (...args: any[]) => any;
 }
 export interface ITagState {
   selected: boolean;
@@ -37,9 +36,9 @@ class Tag extends React.Component<ITagProps, ITagState> {
     }
   };
   handleChange = () => {
-    const { onChange } = this.props;
+    const { onTagChange } = this.props;
     this.setState({selected: !this.state.selected}, () => {
-    onChange();
+    onTagChange();
   });
   }
   render() {
@@ -78,6 +77,6 @@ Tag.defaultProps = {
   size: 'small',
   shape: 'rounded',
   shadow: false,
-  onChange: () => {}
+  onTagChange: () => {}
 };
 export default withTheme(Tag);

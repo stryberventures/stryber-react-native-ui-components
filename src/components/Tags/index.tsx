@@ -18,8 +18,8 @@ export interface ITagsProps {
   size?: 'large' | 'small';
   withCross?: boolean; 
   shadow?: boolean;
-  props?: any;
   style?: any;
+  onChange: (selectedTags: number[]) => any;
 }
 export interface ITagsState {
   selectedTags: number[];
@@ -29,15 +29,19 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
   state = {
     selectedTags: [],
   };
-  handleChange(tagId: number) {
+  handleTagChange(tagId: number) {
     if (this.state.selectedTags.includes(tagId)) {
       const filteredArr = this.state.selectedTags.filter(tag => tag === tagId);
-      this.setState({selectedTags: [...filteredArr]});
+      this.handleChange([...filteredArr]);
     } else {
-      this.setState({selectedTags: [...this.state.selectedTags, tagId]});
+      this.handleChange([...this.state.selectedTags, tagId]);
     }
   }
-
+  handleChange(selectedIds: number[]) {
+    this.setState({selectedTags: selectedIds}, () => {
+      this.props.onChange(this.state.selectedTags);
+    });
+  }
   render() {
     const {
       style,
@@ -50,7 +54,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
       <View style={styles.container}>
         {
           tags.map(tag => (
-            <Tag key={tag.id} onChange={() => this.handleChange(tag.id)} {...props}>{tag.label}</Tag>
+            <Tag key={tag.id} onTagChange={() => this.handleTagChange(tag.id)} {...props}>{tag.label}</Tag>
           ))
         }
       </View>
@@ -61,6 +65,7 @@ Tags.defaultProps = {
   tags: [],
   size: 'regular',
   shape: 'rounded',
-  shadow: false
+  shadow: false,
+  onChange: () => {}
 };
 export default withTheme(Tags);
