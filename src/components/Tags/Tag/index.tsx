@@ -64,7 +64,7 @@ class Tag extends React.Component<ITagProps, ITagState> {
               this.state.selected && withCross 
               && (
                   <Close
-                    fill={textColor || theme.colors.white}
+                    fill={theme.colors.white}
                     style={styles.closeButton}
                     onPress={this.handleChange}
                   />
