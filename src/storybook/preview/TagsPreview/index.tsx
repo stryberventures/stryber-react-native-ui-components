@@ -14,24 +14,26 @@ const tagsArr = [
 ];
 interface IProps {
   withCross?: boolean;
-  size: 'large' | 'small'
+  size: 'large' | 'small';
+  color?: string;
+  textColor?: string;
 }
 export default class TagsPreview extends React.Component<IProps> {
   render() {
-    const {size, withCross} = this.props;
+    const {size, withCross, ...props} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <Text bold>Rectangle</Text>
-          <Tags size={size} shape="rectangle" tags={tagsArr} withCross={withCross}/>
+          <Tags size={size} shape="rectangle" tags={tagsArr} {...props}/>
         </View>
         <View style={styles.wrapper}>
           <Text bold>Rounded</Text>
-          <Tags size={size} shape="rounded" tags={tagsArr} withCross={withCross}/>
+          <Tags size={size} shape="rounded" tags={tagsArr} {...props}/>
         </View>
         <View style={styles.wrapper}>
           <Text bold>Round</Text>
-          <Tags size={size} shape="round" tags={tagsArr} withCross={withCross}/>
+          <Tags size={size} shape="round" tags={tagsArr} {...props}/>
         </View>
       </View>
     );

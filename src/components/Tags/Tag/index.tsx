@@ -11,6 +11,7 @@ export interface ITagProps extends TouchableOpacityProps {
   disabled?: boolean;
   theme?: any;
   color?: string;
+  textColor?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'small' | 'large';
   withCross?: boolean; 
@@ -47,6 +48,7 @@ class Tag extends React.Component<ITagProps, ITagState> {
       style,
       children,
       theme,
+      textColor,
       ...props
     } = this.props;
     const styles: any = getStyles(theme, this.props, this.state);
@@ -62,7 +64,7 @@ class Tag extends React.Component<ITagProps, ITagState> {
               this.state.selected && withCross 
               && (
                   <Close
-                    fill={theme.colors.white}
+                    fill={textColor || theme.colors.white}
                     style={styles.closeButton}
                     onPress={this.handleChange}
                   />

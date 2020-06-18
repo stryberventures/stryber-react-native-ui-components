@@ -15,7 +15,9 @@ const getStyles = (
   ? theme.colors.gray50 
   : state.selected 
     ? theme.colors.white
-    : primaryColor;
+    : props.textColor
+      ? props.textColor
+      : primaryColor;
   const tagHeight =
     props.size === 'small'
       ? theme.spaces.xxl2

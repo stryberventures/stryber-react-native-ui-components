@@ -14,6 +14,7 @@ export interface ITagsProps {
   tags: ITagData[];
   theme?: any;
   color?: string;
+  textColor?: string; 
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'large' | 'small';
   withCross?: boolean; 

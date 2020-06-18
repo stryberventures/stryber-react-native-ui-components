@@ -8,10 +8,15 @@ storiesOf("Tags", module)
   .addDecorator(getStory => <CenterView middle>{getStory()}</CenterView>)
   .add(
     'small',
-    () => <TagsPreview size="small"/>,
+    () => <TagsPreview size="small" />,
     { notes: { markdown: tags } }
   ).add(
     'large',
-    () => <TagsPreview size="large"/>).add(
+    () => <TagsPreview size="large"/>
+  ).add(
     'with cross',
-    () => <TagsPreview size="small" withCross/>);
+    () => <TagsPreview size="small" withCross/>
+  ).add(
+    'different color',
+    () => <TagsPreview size="small" withCross color="#4624bf" textColor="#757575"/>
+  );;
