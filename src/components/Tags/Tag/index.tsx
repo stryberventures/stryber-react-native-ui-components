@@ -17,7 +17,7 @@ export interface ITagProps extends TouchableOpacityProps {
   shadow?: boolean;
   props?: any;
   style?: any;
-  onChange?: (...args: any[]) => any;
+  onChange: (...args: any[]) => any;
 }
 export interface ITagState {
   selected: boolean;
@@ -39,7 +39,7 @@ class Tag extends React.Component<ITagProps, ITagState> {
   handleChange = () => {
     const { onChange } = this.props;
     this.setState({selected: !this.state.selected}, () => {
-    onChange!();
+    onChange();
   });
   }
   render() {

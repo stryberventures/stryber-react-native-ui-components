@@ -6,15 +6,15 @@ type CloseProps = {
   height?: number;
   fill?: string;
   theme: {
-    colors?: {
-      gray15?: string;
+    colors: {
+      gray15: string;
     };
   };
 };
 const Close: React.SFC<CloseProps> = props => (
   <Svg
     viewBox="0 0 12 12"
-    fill={props.fill || props.theme.colors!.gray15}
+    fill={props.fill || props.theme.colors.gray15}
     {...props}>
     <G stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <G transform="translate(-76.000000, -409.000000)">
