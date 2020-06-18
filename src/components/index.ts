@@ -24,6 +24,7 @@ import Slider from './Slider';
 import CardList from './CardList';
 import ProgressBar from './ProgressBar';
 import Loader from './Loader';
+import Tags from './Tags';
 
 export {DatePicker};
 export {Badge};
@@ -51,3 +52,4 @@ export {Slider};
 export {CardList};
 export {ProgressBar};
 export {Loader};
+export {Tags};
