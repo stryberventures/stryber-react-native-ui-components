@@ -20,20 +20,19 @@ interface IProps {
 }
 export default class TagsPreview extends React.Component<IProps> {
   render() {
-    const {size, withCross, ...props} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <Text bold>Rectangle</Text>
-          <Tags size={size} shape="rectangle" tags={tagsArr} {...props}/>
+          <Tags shape="rectangle" tags={tagsArr} {...this.props}/>
         </View>
         <View style={styles.wrapper}>
           <Text bold>Rounded</Text>
-          <Tags size={size} shape="rounded" tags={tagsArr} {...props}/>
+          <Tags shape="rounded" tags={tagsArr} {...this.props}/>
         </View>
         <View style={styles.wrapper}>
           <Text bold>Round</Text>
-          <Tags size={size} shape="round" tags={tagsArr} {...props}/>
+          <Tags shape="round" tags={tagsArr} {...this.props}/>
         </View>
       </View>
     );
