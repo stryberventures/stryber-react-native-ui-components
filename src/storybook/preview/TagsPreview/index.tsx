@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {
   Text, Tags
 } from '../../../components';
-import { boolean } from '@storybook/addon-knobs';
 
 const tagsArr = [
   { id: 1, label: 'JavaScript' },
@@ -17,25 +16,32 @@ interface IProps {
   withCross?: boolean;
   size: 'large' | 'small'
 }
-export default class TagsPreview extends React.Component<IProps>{
+export default class TagsPreview extends React.Component<IProps> {
   render() {
     const {size, withCross} = this.props;
     return (
       <View style={styles.container}>
-        <Text bold>Rectangle</Text>
-        <Tags size={size} shape="rectangle" tags={tagsArr} withCross={withCross}/>
-        <Text bold>Rounded</Text>
-        <Tags size={size} shape="rounded" tags={tagsArr} withCross={withCross}/>
-        <Text bold>Round</Text>
-        <Tags size={size} shape="round" tags={tagsArr} withCross={withCross}/>
+        <View style={styles.wrapper}>
+          <Text bold>Rectangle</Text>
+          <Tags size={size} shape="rectangle" tags={tagsArr} withCross={withCross}/>
+        </View>
+        <View style={styles.wrapper}>
+          <Text bold>Rounded</Text>
+          <Tags size={size} shape="rounded" tags={tagsArr} withCross={withCross}/>
+        </View>
+        <View style={styles.wrapper}>
+          <Text bold>Round</Text>
+          <Tags size={size} shape="round" tags={tagsArr} withCross={withCross}/>
+        </View>
       </View>
     );
   }
-}
+};
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-    paddingTop: 10,
-  }
+    flex: 1
+  },
+  wrapper: {
+    marginTop: 20,
+  },
 });
