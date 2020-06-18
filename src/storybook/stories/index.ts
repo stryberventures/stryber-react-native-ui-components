@@ -21,3 +21,4 @@ import './ProgressBar.story';
 import './Loader.story';
 import './List.story';
 import './CardList.story';
+import './Tags.story';

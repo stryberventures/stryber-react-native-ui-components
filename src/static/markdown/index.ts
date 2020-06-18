@@ -19,3 +19,4 @@ export { loader } from "./loader";
 export { list } from "./list";
 export {slider} from './slider';
 export {cardList} from './cardList';
+export {tags} from './tags';
