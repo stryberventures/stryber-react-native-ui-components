@@ -59,6 +59,7 @@ export const getStyles = ({
     errorText: {
       color: theme.colors.accent2,
       marginTop: theme.spaces.m,
+      fontSize: theme.fontSizes.small,
     },
     toggleWrapper: {
       height: '100%',

@@ -7,6 +7,7 @@ import ArrowDown from './ArrowDown';
 import Calendar from './Calendar';
 import Speaker from './Speaker';
 import SpeakerMute from './SpeakerMute';
+import Close from './Close';
 
 export {UserIcon};
 export {Search};
@@ -17,3 +18,4 @@ export {ArrowDown};
 export {Calendar};
 export {Speaker};
 export {SpeakerMute};
+export {Close};
