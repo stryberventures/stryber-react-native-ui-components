@@ -1,12 +1,15 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
-import {linkTo} from '@storybook/addon-links';
-import {withKnobs, text} from '@storybook/addon-knobs';
+import {withKnobs, text, color} from '@storybook/addon-knobs';
 import Input from '../../../components/Input';
 // @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {UserIcon} from '../../../components/Icons';
 import {input} from '../../../static/markdown';
+
+const getKnobProps = () => ({
+  color: color('color', ''),
+});
 const placeholder = text('Placeholder', 'Input placeholder');
 const variant = 'lined';
 storiesOf('Input/Lined', module)
@@ -23,16 +26,17 @@ storiesOf('Input/Lined', module)
         label="Email"
         variant={variant}
         disabled
+        {...getKnobProps()}
       />
     );
   })
   .add('default', () => (
     <Input
-      onFocus={linkTo('Input/Lined', 'focused')}
       placeholder={placeholder}
       type="email"
       label="Email"
       variant={variant}
+      {...getKnobProps()}
     />
   ))
   .add('focused', () => (
@@ -42,6 +46,7 @@ storiesOf('Input/Lined', module)
       type="email"
       variant={variant}
       autoFocus
+      {...getKnobProps()}
     />
   ))
   .add('with default value', () => {
@@ -52,6 +57,7 @@ storiesOf('Input/Lined', module)
         label="Email"
         variant={variant}
         value="Default value"
+        {...getKnobProps()}
       />
     );
   })
@@ -63,6 +69,7 @@ storiesOf('Input/Lined', module)
       variant={variant}
       value="Wrong text"
       error="Error text"
+      {...getKnobProps()}
     />
   ))
   .add('with mask', () => (
@@ -73,6 +80,7 @@ storiesOf('Input/Lined', module)
       variant={variant}
       mask="XX/XX"
       maxLength={5}
+      {...getKnobProps()}
     />
   ))
   .add('password', () => (
@@ -81,6 +89,7 @@ storiesOf('Input/Lined', module)
       label="Password"
       placeholder={placeholder}
       variant={variant}
+      {...getKnobProps()}
     />
   ))
   .add('with icon', () => (
@@ -90,6 +99,7 @@ storiesOf('Input/Lined', module)
       label="Email"
       variant={variant}
       icon={() => <UserIcon />}
+      {...getKnobProps()}
     />
   ))
   .add('with icon right', () => (
@@ -99,6 +109,7 @@ storiesOf('Input/Lined', module)
       label="Email"
       variant={variant}
       rightIcon={() => <UserIcon fill="blue" />}
+      {...getKnobProps()}
     />
   ))
   .add('with icon transparent back', () => (
@@ -109,6 +120,7 @@ storiesOf('Input/Lined', module)
       label="Email"
       variant={variant}
       icon={() => <UserIcon fill="blue" />}
+      {...getKnobProps()}
     />
   ))
   .add('with icon disabled', () => (
@@ -119,6 +131,7 @@ storiesOf('Input/Lined', module)
       label="Email"
       variant={variant}
       icon={() => <UserIcon />}
+      {...getKnobProps()}
     />
   ))
   .add('with icon error', () => (
@@ -129,6 +142,7 @@ storiesOf('Input/Lined', module)
       label="Email"
       variant={variant}
       icon={() => <UserIcon />}
+      {...getKnobProps()}
     />
   ))
   .add('multiline disabled', () => {
@@ -140,6 +154,7 @@ storiesOf('Input/Lined', module)
         variant={variant}
         multiline
         disabled
+        {...getKnobProps()}
       />
     );
   })
@@ -147,13 +162,13 @@ storiesOf('Input/Lined', module)
     const testRef = React.createRef<any>();
     return (
       <Input
-        onFocus={linkTo('Input', 'multiline focused')}
         placeholder={placeholder}
         type="email"
         label="Email"
         ref={testRef}
         variant={variant}
         multiline
+        {...getKnobProps()}
       />
     );
   })
@@ -165,6 +180,7 @@ storiesOf('Input/Lined', module)
       variant={variant}
       multiline
       autoFocus
+      {...getKnobProps()}
     />
   ))
   .add('multiline with default value', () => {
@@ -176,6 +192,7 @@ storiesOf('Input/Lined', module)
         variant={variant}
         multiline
         value="Default value"
+        {...getKnobProps()}
       />
     );
   })
@@ -188,5 +205,6 @@ storiesOf('Input/Lined', module)
       variant={variant}
       multiline
       error="Error text"
+      {...getKnobProps()}
     />
   ));

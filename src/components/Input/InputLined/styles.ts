@@ -6,12 +6,14 @@ export const getStyles = ({
   disabled = false,
   error = false,
   moveLabel = false,
+  color = '',
 }) => {
+  const primaryColor = color || theme.colors.primary;
   const leftBlockColor = disabled
     ? theme.colors.gray15
     : error
     ? theme.colors.accent
-    : theme.colors.primary;
+    : primaryColor;
   return StyleSheet.create({
     leftBorder: {
       width: 11,
@@ -78,10 +80,10 @@ export const getStyles = ({
     },
     labelText: {
       fontSize: 12,
-      color: theme.colors.blue,
+      color: theme.colors.primary,
     },
     labelAnimatedText: {
-      color: theme.colors.blue,
+      color: theme.colors.primary,
       fontSize: 12,
     },
     labelAnimatedTextError: {

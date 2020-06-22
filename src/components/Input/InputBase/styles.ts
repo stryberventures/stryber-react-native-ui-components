@@ -10,7 +10,9 @@ export const getStyles = ({
   numberOfLines = NUMBER_OF_LINES,
   maxNumberOfLines = MAX_NUMBER_OF_LINES,
   classes = {},
+  color = '',
 }) => {
+  const primaryColor = color || theme.colors.primary;
   const ownClasses = {
     container: {},
     inputBox: {
@@ -33,7 +35,7 @@ export const getStyles = ({
       backgroundColor: theme.colors.gray5,
     },
     inputBoxFocused: {
-      borderColor: theme.colors.primary,
+      borderColor: primaryColor,
     },
     inputBoxError: {
       borderColor: theme.colors.accent,
@@ -57,7 +59,7 @@ export const getStyles = ({
     errorText: {
       color: theme.colors.accent2,
       marginTop: theme.spaces.m,
-      fontSize: theme.fontSizes.small
+      fontSize: theme.fontSizes.small,
     },
     toggleWrapper: {
       height: '100%',

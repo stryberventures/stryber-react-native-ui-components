@@ -1,13 +1,15 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
-import {linkTo} from '@storybook/addon-links';
-import {withKnobs, text} from '@storybook/addon-knobs';
+import {withKnobs, text, color} from '@storybook/addon-knobs';
 import Input from '../../../components/Input';
 // @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {input} from '../../../static/markdown';
 import {UserIcon} from '../../../components/Icons';
 
+const getKnobProps = () => ({
+  color: color('color', ''),
+});
 const placeholder = text('Placeholder', 'Input placeholder');
 storiesOf('Input/Simple', module)
   .addDecorator(withKnobs)
@@ -17,19 +19,31 @@ storiesOf('Input/Simple', module)
   .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add('disabled', () => {
     return (
-      <Input placeholder={placeholder} type="email" label="Email" disabled />
+      <Input
+        placeholder={placeholder}
+        type="email"
+        label="Email"
+        disabled
+        {...getKnobProps()}
+      />
     );
   })
   .add('default', () => (
     <Input
-      onFocus={linkTo('Input/Simple', 'focused')}
       placeholder={placeholder}
       type="email"
       label="Email"
+      {...getKnobProps()}
     />
   ))
   .add('focused', () => (
-    <Input label="Email" placeholder={placeholder} type="email" autoFocus />
+    <Input
+      label="Email"
+      placeholder={placeholder}
+      type="email"
+      autoFocus
+      {...getKnobProps()}
+    />
   ))
   .add('with default value', () => {
     return (
@@ -38,6 +52,7 @@ storiesOf('Input/Simple', module)
         type="email"
         label="Email"
         value="Default value"
+        {...getKnobProps()}
       />
     );
   })
@@ -47,6 +62,7 @@ storiesOf('Input/Simple', module)
       placeholder={placeholder}
       type="number"
       icon={() => <UserIcon fill="black" />}
+      {...getKnobProps()}
     />
   ))
   .add('with icon right', () => (
@@ -55,6 +71,7 @@ storiesOf('Input/Simple', module)
       placeholder={placeholder}
       type="number"
       rightIcon={() => <UserIcon fill="black" />}
+      {...getKnobProps()}
     />
   ))
   .add('with error', () => (
@@ -64,6 +81,7 @@ storiesOf('Input/Simple', module)
       type="email"
       value="Wrong text"
       error="Error text"
+      {...getKnobProps()}
     />
   ))
   .add('with mask', () => (
@@ -73,10 +91,16 @@ storiesOf('Input/Simple', module)
       type="number"
       mask="XX/XX"
       maxLength={5}
+      {...getKnobProps()}
     />
   ))
   .add('password', () => (
-    <Input secure label="Password" placeholder={placeholder} />
+    <Input
+      secure
+      label="Password"
+      placeholder={placeholder}
+      {...getKnobProps()}
+    />
   ))
   .add('multiline disabled', () => {
     return (
@@ -86,6 +110,7 @@ storiesOf('Input/Simple', module)
         label="Email"
         multiline
         disabled
+        {...getKnobProps()}
       />
     );
   })
@@ -93,12 +118,12 @@ storiesOf('Input/Simple', module)
     const testRef = React.createRef<any>();
     return (
       <Input
-        onFocus={linkTo('Input', 'multiline focused')}
         placeholder={placeholder}
         type="email"
         label="Email"
         ref={testRef}
         multiline
+        {...getKnobProps()}
       />
     );
   })
@@ -109,6 +134,7 @@ storiesOf('Input/Simple', module)
       type="email"
       multiline
       autoFocus
+      {...getKnobProps()}
     />
   ))
   .add('multiline with default value', () => {
@@ -119,6 +145,7 @@ storiesOf('Input/Simple', module)
         label="Email"
         multiline
         value="Default value"
+        {...getKnobProps()}
       />
     );
   })
@@ -130,5 +157,6 @@ storiesOf('Input/Simple', module)
       type="email"
       multiline
       error="Error text"
+      {...getKnobProps()}
     />
   ));

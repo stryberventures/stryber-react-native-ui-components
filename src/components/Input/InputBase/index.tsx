@@ -39,6 +39,7 @@ export interface IInputBaseProps extends TextInputProps {
   onBlur?: (...args: any[]) => any;
 
   theme?: any;
+  color?: string;
 
   style?: any;
   classes?: any;
@@ -164,11 +165,13 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       classes,
       onChange,
       style,
+      color,
       ...props
     } = this.props;
     const {toggleSecure} = this.state;
     const styles = getStyles({
       theme,
+      color,
       multiline,
       numberOfLines,
       maxNumberOfLines,
