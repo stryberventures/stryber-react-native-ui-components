@@ -4,7 +4,7 @@ import withTheme from '../withTheme';
 type SearchProps = {
   width?: number;
   height?: number;
-  theme: {
+  theme?: {
     colors: {
       gray2: string;
     };
@@ -14,7 +14,7 @@ const Search: React.SFC<SearchProps> = props => {
   return (
     <Svg
       viewBox="0 0 20 20"
-      fill={props.theme.colors.gray2}
+      fill={props.theme?.colors.gray2}
       width={props.width}
       height={props.height}
       {...props}>
