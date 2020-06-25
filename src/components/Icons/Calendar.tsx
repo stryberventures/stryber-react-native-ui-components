@@ -3,7 +3,7 @@ import Svg, {Path, Defs, G, Mask, Rect, Use} from 'react-native-svg';
 import withTheme from '../withTheme';
 type CalendarProps = {
   size?: number;
-  theme: {
+  theme?: {
     colors?: {
       gray?: string;
     };

@@ -14,6 +14,7 @@ import withTheme from '../withTheme';
 const isAndroid = Platform.OS === 'android';
 interface IDatePickerProps extends React.HTMLAttributes<Element> {
   name?: string;
+  mode?: 'date' | 'datetime';
   startDate?: any;
   onChange?: (...args: any[]) => any;
   minDate?: any;
@@ -47,15 +48,18 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   handlePressed = () => {
     this.setState(() => ({showModal: true}));
   };
-  getDateObj = () => {
+  getDateTimeObj = () => {
     const {date} = this.state;
     return {
       date,
       year: date ? date.getFullYear() : '',
       day: date ? `${date.getDate()}`.padStart(2, '0') : '',
       month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : '',
+      hours: date ? `${date.getHours() }` : '',
+      minutes: date ? `${date.getMinutes()}` : ''
     };
   };
+
   handleModalClose = () => {
     this.setState(
       () => ({showModal: false}),
@@ -91,13 +95,14 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       modalBtnContainer,
       modalButtonStyle,
       modalButtonText,
+      mode,
       ...props
     } = this.props;
     return isAndroid ? (
       showModal && (
         // @ts-ignore
         <DateTimePicker
-          mode="date"
+          mode={mode}
           is24Hour={true}
           display="default"
           {...props}
@@ -124,7 +129,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
             {/*
   // @ts-ignore */}
             <DateTimePicker
-              mode="date"
+              mode={mode}
               is24Hour={true}
               display="default"
               {...props}
@@ -138,10 +143,12 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   };
   render() {
     const {showModal} = this.state;
-    const {style, theme, label, error, variant} = this.props;
-    const {year, month, day} = this.getDateObj();
+    const {style, theme, label, error, variant, mode} = this.props;
+    const {year, month, day, hours, minutes} = this.getDateTimeObj();
     const dateSet = day && month && year;
-    const dateStr = dateSet ? `${day}-${month}-${year}` : label;
+    const dateStr = dateSet
+      ? `${day}-${month}-${year} ${mode === 'datetime' ? `${hours}:${minutes}`: ''}`
+      : label;
     const inputColor = showModal ? theme.colors.primary : theme.colors.gray;
     return (
       <TouchableWithoutFeedback style={style} onPress={this.handlePressed}>
@@ -177,5 +184,6 @@ DatePicker.defaultProps = {
   value: undefined,
   label: '',
   error: '',
+  mode: 'date',
 };
 export default withTheme(DatePicker);

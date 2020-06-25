@@ -10,5 +10,8 @@ storiesOf('DatePicker', module)
   })
   .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add('default', () => {
-    return <DatePicker label="Choose date" />;
+    return <DatePicker label="Choose date" mode="date"/>;
+  })
+  .add('datetime mode', () => {
+    return <DatePicker label="Choose date" mode="datetime"/>;
   });
