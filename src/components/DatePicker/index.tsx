@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 import {
-  Platform,
   TouchableWithoutFeedback,
   Modal,
   View,
   Button as RNButton,
 } from 'react-native';
 import {Calendar} from '../Icons';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from 'react-native-date-picker';
 import styles from './styles';
 import Input, {IInputProps} from '../Input';
 import withTheme from '../withTheme';
-const isAndroid = Platform.OS === 'android';
+
 interface IDatePickerProps extends React.HTMLAttributes<Element> {
   name?: string;
-  mode?: 'date' | 'datetime';
+  mode?: 'date' | 'datetime' | 'time';
   startDate?: any;
   onChange?: (...args: any[]) => any;
   minDate?: any;
@@ -42,7 +41,6 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   state = {
     showModal: false,
     date: this.props.value || undefined,
-    showAndroidModal: true,
   };
   getValue = () => this.state.date;
   handlePressed = () => {
@@ -56,7 +54,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       day: date ? `${date.getDate()}`.padStart(2, '0') : '',
       month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : '',
       hours: date ? `${date.getHours() }` : '',
-      minutes: date ? `${date.getMinutes()}` : ''
+      minutes: date ? `${date.getMinutes()}`.padStart(2, '0') : ''
     };
   };
 
@@ -69,21 +67,13 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       },
     );
   };
-  handleDateChange = (_: any, date: any) => {
-    const {saveDateOnCancel} = this.props;
+  handleDateChange = (date: any) => {
     this.setState(
       prevState => ({
-        date: !date && saveDateOnCancel && isAndroid ? prevState.date : date,
-        startDate:
-          !date && saveDateOnCancel && isAndroid ? prevState.date : date,
-        showModal: isAndroid ? false : prevState.showModal,
-      }),
-      () => {
-        if (isAndroid) {
-          const {onChange, name} = this.props;
-          onChange!(this.state.date, name);
-        }
-      },
+        date: date,
+        startDate: date,
+        showModal: prevState.showModal,
+      })
     );
   };
   renderModal = () => {
@@ -96,22 +86,11 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       modalButtonStyle,
       modalButtonText,
       mode,
+      minDate,
+      maxDate,
       ...props
     } = this.props;
-    return isAndroid ? (
-      showModal && (
-        // @ts-ignore
-        <DateTimePicker
-          mode={mode}
-          is24Hour={true}
-          display="default"
-          {...props}
-          value={date || startDate}
-          onChange={this.handleDateChange}
-        />
-      )
-    ) : (
-      <Modal
+    return <Modal
         animationType="slide"
         transparent
         visible={showModal}
@@ -126,20 +105,18 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
                 onPress={this.handleModalClose}
               />
             </View>
-            {/*
-  // @ts-ignore */}
+            {/*//@ts-ignore */}
             <DateTimePicker
+              style={styles.datePicker}
               mode={mode}
-              is24Hour={true}
-              display="default"
-              {...props}
-              value={date || startDate}
-              onChange={this.handleDateChange}
+              date={date || startDate}
+              onDateChange={this.handleDateChange}
+              minimumDate={minDate}
+              maximumDate={maxDate}
             />
           </View>
         </View>
       </Modal>
-    );
   };
   render() {
     const {showModal} = this.state;
@@ -172,8 +149,6 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
 DatePicker.defaultProps = {
   startDate: new Date(),
   onChange: () => {},
-  maxDate: new Date(32519532187368),
-  minDate: new Date(0),
   modalButtonText: 'Done',
   name: 'datepicker',
   modalOverlayStyle: {},
@@ -182,8 +157,6 @@ DatePicker.defaultProps = {
   modalBtnContainer: {},
   style: {},
   value: undefined,
-  label: '',
-  error: '',
   mode: 'date',
 };
 export default withTheme(DatePicker);

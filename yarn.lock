@@ -10362,6 +10362,11 @@ mkdirp@^0.5.3:
   dependencies:
     minimist "^1.2.5"
 
+moment@^2.22.1:
+  version "2.27.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
+  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
+
 moment@^2.25.3:
   version "2.25.3"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.25.3.tgz#252ff41319cf41e47761a1a88cab30edfe9808c0"
@@ -11837,6 +11842,13 @@ react-native-color-picker@^0.4.0:
   dependencies:
     prop-types "^15.5.10"
     tinycolor2 "^1.4.1"
+
+react-native-date-picker@^2.7.12:
+  version "2.7.12"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-2.7.12.tgz#f3004243aa1c41330d94342994dfcf9858f96870"
+  integrity sha512-CmhUVmktkkDdvzyopaHwiH/1ZUham9x/HTBFGCyWayV8apgX7pLqQiZmtG9Wk7DUL/zwHUugoMnXww96K4MjyA==
+  dependencies:
+    moment "^2.22.1"
 
 react-native-gesture-handler@^1.5.2:
   version "1.5.2"
