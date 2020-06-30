@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Tag from './Tag';
 import withTheme from '../withTheme';
@@ -20,6 +20,7 @@ export interface ITagsProps {
   withCross?: boolean; 
   shadow?: boolean;
   style?: any;
+  error?: string;
   onChange: (selectedTags: number[]) => any;
 }
 export interface ITagsState {
@@ -50,7 +51,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
       tags,
       ...props
     } = this.props;
-    const styles: any = getStyles();
+    const styles: any = getStyles(theme);
     return (
       <View style={styles.container}>
         {
@@ -58,6 +59,11 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
             <Tag key={tag.id} onTagChange={() => this.handleTagChange(tag.id)} {...props}>{tag.label}</Tag>
           ))
         }
+        {!!this.props.error && (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{this.props.error}</Text>
+          </View>
+        )}
       </View>
     );
   }

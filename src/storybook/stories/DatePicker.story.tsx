@@ -13,5 +13,5 @@ storiesOf('DatePicker', module)
     return <DatePicker label="Choose date" mode="date"/>;
   })
   .add('datetime mode', () => {
-    return <DatePicker label="Choose date" mode="datetime"/>;
+    return <DatePicker label="Choose date" mode="datetime" />;
   });

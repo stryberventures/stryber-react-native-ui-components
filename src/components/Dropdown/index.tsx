@@ -249,7 +249,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       this.inputRef.current.onBlur();
       if (this.mounted) {
         this.setState({value, modal: false});
-        this.inputRef.current.setValue(value);
+        this.inputRef.current.setValue(value.toString());
       }
     });
   };
@@ -585,8 +585,6 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
 export default withTheme(Dropdown);
 Dropdown.defaultProps = {
   name: 'dropdown',
-  value: '',
-  label: 'Choose option...',
   hitSlop: {
     top: 6,
     right: 4,

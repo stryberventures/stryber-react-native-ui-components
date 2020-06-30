@@ -6,7 +6,12 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
-  modal: {backgroundColor: '#fff', height: 260, width: '100%'},
+  modal: {
+    backgroundColor: '#fff',
+    height: 260,
+    width: '100%',
+    justifyContent: 'center'
+  },
   modalBtnContainer: {
     width: '100%',
     alignItems: 'center',
@@ -21,7 +26,9 @@ export default StyleSheet.create({
     borderRadius: 2,
     height: 50,
   },
-  placeholderText: {},
+  datePicker: {
+    alignSelf: 'center'
+  },
   text: {
     width: '100%',
   },
