@@ -370,7 +370,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return (
       <Input
         {...props}
-        value={this.props.value}
+        value={String(this.props.value)}
         disabled={disabled}
         variant={variant}
         label={label}
