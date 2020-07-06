@@ -24,15 +24,15 @@ export default class TagsPreview extends React.Component<IProps> {
       <View style={styles.container}>
         <View style={styles.wrapper}>
           <Text bold>Rectangle</Text>
-          <Tags shape="rectangle" tags={tagsArr} {...this.props}/>
+          <Tags shape="rectangle" tags={tagsArr} {...this.props} />
         </View>
         <View style={styles.wrapper}>
           <Text bold>Rounded</Text>
-          <Tags shape="rounded" tags={tagsArr} {...this.props}/>
+          <Tags shape="rounded" tags={tagsArr} {...this.props} />
         </View>
         <View style={styles.wrapper}>
           <Text bold>Round</Text>
-          <Tags shape="round" tags={tagsArr} {...this.props}/>
+          <Tags shape="round" tags={tagsArr} {...this.props} />
         </View>
       </View>
     );

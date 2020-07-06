@@ -33,7 +33,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
   };
   handleTagChange(tagId: number) {
     if (this.state.selectedTags.includes(tagId)) {
-      const filteredArr = this.state.selectedTags.filter(tag => tag === tagId);
+      const filteredArr = this.state.selectedTags.filter(tag => tag !== tagId);
       this.handleChange([...filteredArr]);
     } else {
       this.handleChange([...this.state.selectedTags, tagId]);
