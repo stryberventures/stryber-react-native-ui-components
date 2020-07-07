@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "main": "lib/commonjs/index.js",
   "react-native": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -97,6 +97,7 @@
     "react-native-svg": "^9.13.2",
     "react-native-vector-icons": "^6.6.0",
     "react-test-renderer": "16.11.0",
+    "react-native-date-picker": "^2.7.12",
     "rn-fetch-blob": "^0.11.2",
     "typescript": "^3.8.3",
     "yup": "^0.28.5"
