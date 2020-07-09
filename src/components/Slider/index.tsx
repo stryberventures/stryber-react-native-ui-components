@@ -6,6 +6,7 @@ import {
   LayoutChangeEvent,
   ViewStyle,
 } from 'react-native';
+
 import Text from '../Text';
 import withTheme from '../withTheme';
 import {SliderConfigs} from './constants';
@@ -76,6 +77,7 @@ class Slider extends Component<ISliderProps, ISliderState> {
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
+      onPanResponderTerminationRequest: () => false,
       onPanResponderGrant: () => {
         value = (this.state.positionUp as any)._value;
         this.state.positionUp.setOffset(value);

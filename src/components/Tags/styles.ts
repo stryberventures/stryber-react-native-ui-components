@@ -8,7 +8,7 @@ const getStyles = (theme=defaultTheme) => {
       flexWrap: 'wrap'
     },
     errorContainer: {
-      marginTop: theme.spaces.m,
+      marginTop: theme.spaces.xxs,
     },
     errorText: {
       fontSize: theme.fontSizes.caption,
