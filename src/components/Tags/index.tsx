@@ -53,18 +53,20 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
     } = this.props;
     const styles: any = getStyles(theme);
     return (
-      <View style={styles.container}>
-        {
-          tags.map(tag => (
-            <Tag key={tag.id} onTagChange={() => this.handleTagChange(tag.id)} {...props}>{tag.label}</Tag>
-          ))
-        }
+      <>
+        <View style={styles.container}>
+          {
+            tags.map(tag => (
+              <Tag key={tag.id} onTagChange={() => this.handleTagChange(tag.id)} {...props}>{tag.label}</Tag>
+            ))
+          }
+        </View>
         {!!this.props.error && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>{this.props.error}</Text>
           </View>
         )}
-      </View>
+      </>
     );
   }
 }
