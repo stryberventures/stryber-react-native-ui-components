@@ -31,6 +31,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   variant?: IInputProps['variant'];
   props?: any;
   saveDateOnCancel?: boolean;
+  showModal?: boolean;
 }
 type DatePickerState = {
   date?: any;
@@ -39,7 +40,7 @@ type DatePickerState = {
 class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   static defaultProps: any;
   state = {
-    showModal: false,
+    showModal: this.props.showModal || false,
     date: this.props.value || undefined,
   };
   getValue = () => this.state.date;
@@ -132,6 +133,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
         <View pointerEvents="box-only">
           {this.renderModal()}
           <Input
+
             variant={variant}
             error={error}
             rightIcon={() => <Calendar size={20} fill={inputColor} />}
