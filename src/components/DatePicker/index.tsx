@@ -23,7 +23,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   modalStyle?: any;
   modalButtonStyle?: any;
   modalBtnContainer?: any;
-  style?: any;
+  style?: any
   value?: any;
   theme?: any;
   label?: string;
