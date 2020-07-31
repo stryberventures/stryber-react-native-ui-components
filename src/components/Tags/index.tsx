@@ -6,7 +6,7 @@ import withTheme from '../withTheme';
 import getStyles from './styles';
 
 export interface ITagData {
-  id: number;
+  id: string | number;
   label: string;
 }
 
@@ -21,17 +21,17 @@ export interface ITagsProps {
   shadow?: boolean;
   style?: any;
   error?: string;
-  onChange: (selectedTags: number[]) => any;
+  onChange?: (selectedTags: string[] | number[]) => void;
 }
 export interface ITagsState {
-  selectedTags: number[];
+  selectedTags: string[] | number[];
 }
 class Tags extends React.Component<ITagsProps, ITagsState> {
   static defaultProps: any;
   state = {
     selectedTags: [],
   };
-  handleTagChange(tagId: number) {
+  handleTagChange(tagId) {
     if (this.state.selectedTags.includes(tagId)) {
       const filteredArr = this.state.selectedTags.filter(tag => tag !== tagId);
       this.handleChange([...filteredArr]);
@@ -39,9 +39,9 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
       this.handleChange([...this.state.selectedTags, tagId]);
     }
   }
-  handleChange(selectedIds: number[]) {
+  handleChange(selectedIds: string[] | number[]) {
     this.setState({selectedTags: selectedIds}, () => {
-      this.props.onChange(this.state.selectedTags);
+      this.props.onChange!(this.state.selectedTags);
     });
   }
   render() {
