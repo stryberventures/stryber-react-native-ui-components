@@ -21,7 +21,7 @@ export interface ITagsProps {
   shadow?: boolean;
   style?: any;
   error?: string;
-  onChange?: (selectedTags: string[] | number[]) => void;
+  onChange?: (selectedTags: string[] | number[]) => any;
 }
 export interface ITagsState {
   selectedTags: string[] | number[];
