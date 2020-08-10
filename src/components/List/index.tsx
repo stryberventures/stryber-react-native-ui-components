@@ -12,6 +12,7 @@ import ListItem from './ListItem';
 export interface IListItem {
   value: string;
   valueStyles?: any;
+  borderColor?: string;
   secondaryValue?: string;
   secondaryValueStyles?: any;
   longValue?: string;

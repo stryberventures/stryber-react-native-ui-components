@@ -46,7 +46,7 @@ const getStyles = (theme: any, props?: IListItem, cardOpened = false) => {
       justifyContent: 'space-between',
       alignItems: 'center',
       borderBottomWidth: cardOpened ? 0 : 1,
-      borderColor: theme.colors.gray50,
+      borderColor: props?.borderColor ? props.borderColor : theme.colors.gray50,
       paddingRight: theme.spaces.m,
       paddingVertical: listIsSimple ? theme.spaces.s : theme.spaces.xl,
       paddingLeft: fullHeightImage ? theme.spaces.m : undefined,
