@@ -51,6 +51,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   rippleDuration?: number;
   animationDuration?: number;
   fontSize?: number;
+  color?: string;
   textColor?: string;
   itemColor?: string;
   itemBgColor?: string;
@@ -76,6 +77,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   disabledItemColor?: any;
   itemTextStyle?: any;
   rippleColor?: any;
+  error?: string;
 }
 type DropdownState = {
   opacity?: any;
@@ -360,7 +362,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return value;
   };
   renderBase(props: any) {
-    const {label, placeholder, variant, theme, disabled} = this.props;
+    const {label, placeholder, variant, theme, disabled, color} = this.props;
     const angle = this.state.opacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
@@ -385,7 +387,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
                   transform: [{rotate: angle}],
                 }}>
                 <ArrowDown
-                  fill={this.focused ? theme.colors.blue : theme.colors.gray15}
+                  fill={this.focused ? (color ? color : theme.colors.primary) : theme.colors.gray15}
                 />
               </Animated.View>
             </View>
