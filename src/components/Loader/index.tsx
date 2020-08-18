@@ -57,7 +57,7 @@ class Loader extends Component<ILoaderProps> {
     const interpolated = this.state.dotAnimations.map((dot: Animated.Value) => {
       return dot.interpolate({
         inputRange: [0, 1],
-        outputRange: [theme.colors.gray, theme.colors.blue]
+        outputRange: [theme.colors.gray, theme.colors.primary]
       })
     })
     const styles = getStyles(theme, this.props);
