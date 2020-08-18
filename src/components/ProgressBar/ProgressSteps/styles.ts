@@ -21,7 +21,7 @@ const getStyles = (theme = defaultTheme, props: IProgressStepsProps) => {
       marginRight: 8
     },
     stepsProgress: {
-      backgroundColor: theme.colors.blue,
+      backgroundColor: theme.colors.primary,
       height: stepsHeight,
       marginRight: 8,
       width: stepsHeight * props.value + 8 * (props.value - 1),
