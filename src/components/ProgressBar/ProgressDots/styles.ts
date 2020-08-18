@@ -19,7 +19,7 @@ const getStyles = (theme = defaultTheme, props: IProgressDotsProps) => {
       borderRadius: dotSize
     },
     current: {
-      backgroundColor: theme.colors.blue
+      backgroundColor: theme.colors.primary
     }
   });
 }

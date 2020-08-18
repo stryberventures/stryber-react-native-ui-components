@@ -19,7 +19,7 @@ const getStyles = (theme = defaultTheme, props: IProgressInlineProps) => {
       borderRadius: inlineHeight
     },
     inlineProgress: {
-      backgroundColor: theme.colors.blue,
+      backgroundColor: theme.colors.primary,
       borderRadius: inlineHeight,
       width: `${props.value / props.totalValue*100}%`
     }
