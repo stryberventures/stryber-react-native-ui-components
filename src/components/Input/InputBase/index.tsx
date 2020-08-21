@@ -63,6 +63,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
   static defaultProps: any;
   inputRef = React.createRef();
   inputWrapper?: React.ComponentType;
+  controlled = true;
 
   constructor(props: IInputBaseProps) {
     super(props);
@@ -114,7 +115,12 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     i = maskedValue.indexOf('X') >= 0 ? maskedValue.indexOf('X') : mask.length;
     return maskedValue.slice(0, i);
   };
+
   getValue = () => {
+    if (this.controlled) {
+      return this.props.value;
+    }
+
     let value;
     if (this!.props!.mask!.length && !this.state.isBackspace) {
       value = this.applyDigitMask(this!.props!.mask!);
@@ -123,6 +129,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     }
     return value;
   };
+
   setValue = (value: any) => {
     this.setState({value});
   };
@@ -209,6 +216,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 onChangeText={val => {
+                  this.controlled = false;
                   this.setState(prevState => ({
                     value: val,
                     isBackspace: prevState.value.length >= val.length,

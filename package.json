@@ -100,7 +100,8 @@
     "react-native-date-picker": "^2.7.12",
     "rn-fetch-blob": "^0.11.2",
     "typescript": "^3.8.3",
-    "yup": "^0.28.5"
+    "yup": "^0.28.5",
+    "@react-native-community/toolbar-android": "0.1.0-rc.2"
   },
   "jest": {
     "preset": "react-native",
