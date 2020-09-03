@@ -219,7 +219,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
                   this.controlled = false;
                   this.setState(prevState => ({
                     value: val,
-                    isBackspace: prevState.value.length >= val.length,
+                    isBackspace: prevState.value?.length >= val.length,
                   }));
                   onChange!(val, name);
                 }}
