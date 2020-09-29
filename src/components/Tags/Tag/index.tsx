@@ -2,7 +2,7 @@ import * as React from 'react';
 import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
 
 import Text from '../../Text';
-import { Close } from '../../Icons';
+import {Close} from '../../Icons';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
@@ -14,10 +14,11 @@ export interface ITagProps extends TouchableOpacityProps {
   textColor?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'small' | 'large';
-  withCross?: boolean; 
+  withCross?: boolean;
   shadow?: boolean;
   style?: any;
   onTagChange: (...args: any[]) => any;
+  preselected?: boolean;
 }
 export interface ITagState {
   selected: boolean;
@@ -25,32 +26,24 @@ export interface ITagState {
 class Tag extends React.Component<ITagProps, ITagState> {
   static defaultProps: any;
   state = {
-    selected: false,
+    selected: this.props.preselected || false,
   };
-  
+
   handlePress = () => {
-    if(!this.props.withCross){
+    if (!this.props.withCross) {
       this.handleChange();
-    }
-    else if(!this.state.selected) {
+    } else if (!this.state.selected) {
       this.handleChange();
     }
   };
   handleChange = () => {
-    const { onTagChange } = this.props;
+    const {onTagChange} = this.props;
     this.setState({selected: !this.state.selected}, () => {
-    onTagChange();
-  });
-  }
+      onTagChange();
+    });
+  };
   render() {
-    const {
-      withCross,
-      style,
-      children,
-      theme,
-      textColor,
-      ...props
-    } = this.props;
+    const {withCross, style, children, theme, textColor, ...props} = this.props;
     const styles: any = getStyles(theme, this.props, this.state);
     return (
       <TouchableOpacity
@@ -58,18 +51,16 @@ class Tag extends React.Component<ITagProps, ITagState> {
         activeOpacity={1}
         onPress={this.handlePress}
         style={[styles.tag, style]}>
-          <View style={styles.content}>
-            <Text style={styles.tagText}>{children}</Text>
-            {
-              this.state.selected && withCross 
-              && (
-                  <Close
-                    fill={theme.colors.white}
-                    style={styles.closeButton}
-                    onPress={this.handleChange}
-                  />
-            )}
-          </View>
+        <View style={styles.content}>
+          <Text style={styles.tagText}>{children}</Text>
+          {this.state.selected && withCross && (
+            <Close
+              fill={theme.colors.white}
+              style={styles.closeButton}
+              onPress={this.handleChange}
+            />
+          )}
+        </View>
       </TouchableOpacity>
     );
   }
@@ -79,6 +70,7 @@ Tag.defaultProps = {
   size: 'small',
   shape: 'rounded',
   shadow: false,
-  onTagChange: () => {}
+  onTagChange: () => {},
+  preselected: false,
 };
 export default withTheme(Tag);
