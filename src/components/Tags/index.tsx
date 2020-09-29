@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import {View, Text} from 'react-native';
 
 import Tag from './Tag';
 import withTheme from '../withTheme';
@@ -8,16 +8,17 @@ import getStyles from './styles';
 export interface ITagData {
   id: string | number;
   label: string;
+  preselected?: boolean;
 }
 
 export interface ITagsProps {
   tags: ITagData[];
   theme?: any;
   color?: string;
-  textColor?: string; 
+  textColor?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'large' | 'small';
-  withCross?: boolean; 
+  withCross?: boolean;
   shadow?: boolean;
   style?: any;
   error?: string;
@@ -45,21 +46,20 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
     });
   }
   render() {
-    const {
-      style,
-      theme,
-      tags,
-      ...props
-    } = this.props;
+    const {style, theme, tags, ...props} = this.props;
     const styles: any = getStyles(theme);
     return (
       <>
         <View style={styles.container}>
-          {
-            tags.map(tag => (
-              <Tag key={tag.id} onTagChange={() => this.handleTagChange(tag.id)} {...props}>{tag.label}</Tag>
-            ))
-          }
+          {tags.map(tag => (
+            <Tag
+              preselected={!!tag.preselected}
+              key={tag.id}
+              onTagChange={() => this.handleTagChange(tag.id)}
+              {...props}>
+              {tag.label}
+            </Tag>
+          ))}
         </View>
         {!!this.props.error && (
           <View style={styles.errorContainer}>
@@ -75,6 +75,6 @@ Tags.defaultProps = {
   size: 'regular',
   shape: 'rounded',
   shadow: false,
-  onChange: () => {}
+  onChange: () => {},
 };
 export default withTheme(Tags);
