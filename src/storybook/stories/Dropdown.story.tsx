@@ -48,6 +48,46 @@ storiesOf('Dropdown', module)
       </CenterView>
     );
   })
+  .add('with default value', () => {
+    return (
+      <CenterView>
+        <Dropdown
+          label="Fruit"
+          defaultValue="Mango"
+          data={[
+            {
+              value: 'Banana',
+              label: 'Babana',
+            },
+            {
+              value: 'Mango',
+              label: 'Mango',
+            },
+            {
+              value: 'Pear',
+              label: 'Pear',
+            },
+            {
+              value: 'Cocoa',
+              label: 'Cocoa',
+            },
+            {
+              value: 'Cherry',
+              label: 'Cherry',
+            },
+            {
+              value: 'Cocoa',
+              label: 'Cocoa',
+            },
+            {
+              value: 'Apricot',
+              label: 'Apricot',
+            },
+          ]}
+        />
+      </CenterView>
+    );
+  })
   .add('lined', () => {
     return (
       <CenterView>

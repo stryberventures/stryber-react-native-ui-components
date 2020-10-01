@@ -26,6 +26,7 @@ export interface IInputBaseProps extends TextInputProps {
   type?: 'email' | 'phone' | 'number' | 'default';
   mask?: string;
   secure?: boolean;
+  defaultValue?: string;
 
   // native input props
   value?: string;
@@ -118,7 +119,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
 
   getValue = () => {
     if (this.controlled) {
-      return this.props.value;
+      return this.props.value || this.props.defaultValue;
     }
 
     let value;

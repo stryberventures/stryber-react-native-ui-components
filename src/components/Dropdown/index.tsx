@@ -22,6 +22,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   value?: string | number;
   label?: string;
   placeholder?: string;
+  defaultValue?: string;
   variant?: IInputProps['variant'];
   hitSlop?: {};
   data?: any[];
@@ -372,7 +373,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return (
       <Input
         {...props}
-        value={String(this.props.value)}
+        value={String(this.state.value)}
         disabled={disabled}
         variant={variant}
         label={label}
