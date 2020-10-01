@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "main": "lib/commonjs/index.js",
   "react-native": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -43,7 +43,7 @@
   "peerDependencies": {
     "@react-native-community/async-storage": ">=1.6.3",
     "@react-native-community/datetimepicker": ">=2.1.0",
-    "react-native-date-picker": "^2.7.12",
+    "react-native-date-picker": "^3.0.0",
     "react": ">=16.8.6",
     "react-native": ">=0.60.5",
     "react-native-gesture-handler": ">=1.5.2",
@@ -97,7 +97,7 @@
     "react-native-svg": "^9.13.2",
     "react-native-vector-icons": "^6.6.0",
     "react-test-renderer": "16.11.0",
-    "react-native-date-picker": "^2.7.12",
+    "react-native-date-picker": "^3.0.0",
     "rn-fetch-blob": "^0.11.2",
     "typescript": "^3.8.3",
     "yup": "^0.28.5",

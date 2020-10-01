@@ -11848,10 +11848,10 @@ react-native-color-picker@^0.4.0:
     prop-types "^15.5.10"
     tinycolor2 "^1.4.1"
 
-react-native-date-picker@^2.7.12:
-  version "2.7.12"
-  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-2.7.12.tgz#f3004243aa1c41330d94342994dfcf9858f96870"
-  integrity sha512-CmhUVmktkkDdvzyopaHwiH/1ZUham9x/HTBFGCyWayV8apgX7pLqQiZmtG9Wk7DUL/zwHUugoMnXww96K4MjyA==
+react-native-date-picker@^3.0.0:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-3.2.3.tgz#e08b58495d9f061d60865c564ce159caba486b75"
+  integrity sha512-fs+axioK1KjqtVDkI/FWfm4MzwOCL42DV6FNS6f2TEDHsm9IHlD6Y1YyzhEnDnP5HGKZqhDltXycIJ9ieD32NA==
   dependencies:
     moment "^2.22.1"
 
