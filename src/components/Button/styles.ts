@@ -76,6 +76,7 @@ const getStyles = (
           : {}),
       },
       buttonText: {
+        textAlign: 'center',
         color: propsSecondaryColorValue || theme.colors.onPrimary,
       },
     },
@@ -97,6 +98,7 @@ const getStyles = (
           : {}),
       },
       buttonText: {
+        textAlign: 'center',
         color: primaryColor,
         ...(state.isTouched
           ? {
