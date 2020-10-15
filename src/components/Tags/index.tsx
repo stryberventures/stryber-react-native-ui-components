@@ -22,17 +22,21 @@ export interface ITagsProps {
   shadow?: boolean;
   style?: any;
   error?: string;
-  onChange?: (selectedTags: string[] | number[]) => any;
+  onChange?: (selectedTags: (string | number)[]) => any;
 }
 export interface ITagsState {
-  selectedTags: string[] | number[];
+  selectedTags: (string | number)[];
 }
+
+const createDefaultTags = (tags: ITagData[]): (string | number)[] =>
+  tags.filter(tag => tag.preselected).map(tag => tag.id);
+
 class Tags extends React.Component<ITagsProps, ITagsState> {
   static defaultProps: any;
   state = {
-    selectedTags: [],
+    selectedTags: createDefaultTags(this.props.tags),
   };
-  handleTagChange(tagId) {
+  handleTagChange(tagId: string | number) {
     if (this.state.selectedTags.includes(tagId)) {
       const filteredArr = this.state.selectedTags.filter(tag => tag !== tagId);
       this.handleChange([...filteredArr]);
@@ -40,7 +44,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
       this.handleChange([...this.state.selectedTags, tagId]);
     }
   }
-  handleChange(selectedIds: string[] | number[]) {
+  handleChange(selectedIds: (string | number)[]) {
     this.setState({selectedTags: selectedIds}, () => {
       this.props.onChange!(this.state.selectedTags);
     });
