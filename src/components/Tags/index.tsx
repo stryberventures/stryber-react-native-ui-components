@@ -36,6 +36,28 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
   state = {
     selectedTags: createDefaultTags(this.props.tags),
   };
+  componentDidUpdate(prevProps: ITagsProps) {
+    if (prevProps.tags.length < this.props.tags.length) {
+      const newTags = this.props.tags
+        .filter(
+          tag =>
+            !prevProps.tags.find(oldTag => oldTag.id === tag.id) &&
+            tag.preselected,
+        )
+        .map(tag => tag.id);
+      this.setState(state => ({
+        selectedTags: [...state.selectedTags, ...newTags],
+      }));
+    } else if (prevProps.tags.length > this.props.tags.length) {
+      const newTags = this.state.selectedTags.filter(tagId =>
+        this.props.tags.some(tag => tag.id === tagId),
+      );
+      this.setState({
+        selectedTags: newTags,
+      });
+    }
+  }
+
   handleTagChange(tagId: string | number) {
     if (this.state.selectedTags.includes(tagId)) {
       const filteredArr = this.state.selectedTags.filter(tag => tag !== tagId);
