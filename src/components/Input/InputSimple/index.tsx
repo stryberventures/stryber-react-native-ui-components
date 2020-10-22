@@ -23,6 +23,7 @@ export interface IInputSimpleProps extends IInputBaseProps {
   maxNumberOfLines?: number;
 
   style?: any;
+  inputBoxStyle?: any;
   theme: any;
 
   // specific props

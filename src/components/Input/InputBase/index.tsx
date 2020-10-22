@@ -43,6 +43,7 @@ export interface IInputBaseProps extends TextInputProps {
   color?: string;
 
   style?: any;
+  inputBoxStyle?: any;
   classes?: any;
   error?: string;
   renderPrefix?: () => any;
@@ -173,6 +174,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       classes,
       onChange,
       style,
+      inputBoxStyle,
       color,
       ...props
     } = this.props;
@@ -196,6 +198,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
           <View
             style={[
               styles.inputBox,
+              inputBoxStyle,
               disabled ? styles.inputBoxDisabled : {},
               this.state.focused ? styles.inputBoxFocused : {},
               error ? styles.inputBoxError : {},
@@ -237,6 +240,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
 }
 InputBase.defaultProps = {
   value: '',
+  inputBoxStyle: {},
   type: 'default',
   mask: '',
   secure: false,
