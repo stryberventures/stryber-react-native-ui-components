@@ -45,7 +45,7 @@ export default class TagsPreview extends React.Component<IProps> {
       resetFunctionality,
       ...tagsProps
     } = this.props;
-    const onRef = resetFunctionality ? ref => (this.child = ref) : undefined;
+    const tagsRef = React.createRef();
     const tagsArr = preselectedTemplate
       ? tagsArrWithPreselectedValues
       : partiallyDisabledTemplate
@@ -55,11 +55,14 @@ export default class TagsPreview extends React.Component<IProps> {
       <View style={styles.container}>
         {resetFunctionality ? (
           <View style={styles.wrapper}>
-            <Button title="reset tags" onPress={() => this.child.resetTags()} />
+            <Button
+              title="reset tags"
+              onPress={() => tagsRef.current.resetTags()}
+            />
             <Tags
+              ref={tagsRef}
               shape="rectangle"
               tags={tagsArr}
-              onRef={onRef}
               {...tagsProps}
             />
           </View>

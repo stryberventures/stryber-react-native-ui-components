@@ -24,7 +24,6 @@ export interface ITagsProps {
   style?: any;
   error?: string;
   onChange?: (selectedTags: (string | number)[]) => any;
-  onRef?: (arg: any) => void;
   disabledColor?: string;
   selectedColor?: string;
 }
@@ -42,12 +41,6 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
     selectedTags: createDefaultTags(this.props.tags),
     resetTags: false,
   };
-
-  componentDidMount() {
-    if (this.props.onRef) {
-      this.props.onRef(this);
-    }
-  }
 
   componentDidUpdate(prevProps: ITagsProps) {
     if (prevProps.tags.length < this.props.tags.length) {
