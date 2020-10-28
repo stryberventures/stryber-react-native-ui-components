@@ -14,4 +14,7 @@ storiesOf('Tags', module)
   ))
   .add('different color', () => (
     <TagsPreview size="small" withCross color="#4624bf" textColor="#757575" />
+  ))
+  .add('with reset functionality', () => (
+    <TagsPreview size="large" resetFunctionality />
   ));

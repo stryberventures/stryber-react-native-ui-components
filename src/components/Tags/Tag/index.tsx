@@ -19,6 +19,7 @@ export interface ITagProps extends TouchableOpacityProps {
   style?: any;
   onTagChange: (...args: any[]) => any;
   preselected?: boolean;
+  resetTag?: boolean;
 }
 export interface ITagState {
   selected: boolean;
@@ -28,6 +29,14 @@ class Tag extends React.Component<ITagProps, ITagState> {
   state = {
     selected: this.props.preselected || false,
   };
+
+  componentDidUpdate(prevProps: Readonly<ITagProps>) {
+    if (prevProps.resetTag !== this.props.resetTag && this.props.resetTag) {
+      this.setState({
+        selected: false,
+      });
+    }
+  }
 
   handlePress = () => {
     if (!this.props.withCross) {

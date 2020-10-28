@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Button, StyleSheet} from 'react-native';
 import {Text, Tags} from '../../../components';
 
 const tagsArrWithoutPreselectedValues = [
@@ -24,27 +24,43 @@ interface IProps {
   color?: string;
   textColor?: string;
   preselectedTemplate?: boolean;
+  resetFunctionality?: boolean;
 }
 export default class TagsPreview extends React.Component<IProps> {
   render() {
-    const {preselectedTemplate, ...tagsProps} = this.props;
+    const {preselectedTemplate, resetFunctionality, ...tagsProps} = this.props;
+    const onRef = resetFunctionality ? ref => (this.child = ref) : undefined;
     const tagsArr = preselectedTemplate
       ? tagsArrWithPreselectedValues
       : tagsArrWithoutPreselectedValues;
     return (
       <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <Text bold>Rectangle</Text>
-          <Tags shape="rectangle" tags={tagsArr} {...tagsProps} />
-        </View>
-        <View style={styles.wrapper}>
-          <Text bold>Rounded</Text>
-          <Tags shape="rounded" tags={tagsArr} {...tagsProps} />
-        </View>
-        <View style={styles.wrapper}>
-          <Text bold>Round</Text>
-          <Tags shape="round" tags={tagsArr} {...tagsProps} />
-        </View>
+        {resetFunctionality ? (
+          <View style={styles.wrapper}>
+            <Button title="reset tags" onPress={() => this.child.resetTags()} />
+            <Tags
+              shape="rectangle"
+              tags={tagsArr}
+              onRef={onRef}
+              {...tagsProps}
+            />
+          </View>
+        ) : (
+          <>
+            <View style={styles.wrapper}>
+              <Text bold>Rectangle</Text>
+              <Tags shape="rectangle" tags={tagsArr} {...tagsProps} />
+            </View>
+            <View style={styles.wrapper}>
+              <Text bold>Rounded</Text>
+              <Tags shape="rounded" tags={tagsArr} {...tagsProps} />
+            </View>
+            <View style={styles.wrapper}>
+              <Text bold>Round</Text>
+              <Tags shape="round" tags={tagsArr} {...tagsProps} />
+            </View>
+          </>
+        )}
       </View>
     );
   }

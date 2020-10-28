@@ -23,9 +23,11 @@ export interface ITagsProps {
   style?: any;
   error?: string;
   onChange?: (selectedTags: (string | number)[]) => any;
+  onRef?: (arg: any) => void;
 }
 export interface ITagsState {
   selectedTags: (string | number)[];
+  resetTags: boolean;
 }
 
 const createDefaultTags = (tags: ITagData[]): (string | number)[] =>
@@ -35,7 +37,15 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
   static defaultProps: any;
   state = {
     selectedTags: createDefaultTags(this.props.tags),
+    resetTags: false,
   };
+
+  componentDidMount() {
+    if (this.props.onRef) {
+      this.props.onRef(this);
+    }
+  }
+
   componentDidUpdate(prevProps: ITagsProps) {
     if (prevProps.tags.length < this.props.tags.length) {
       const newTags = this.props.tags
@@ -58,6 +68,20 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
     }
   }
 
+  resetTags = () => {
+    this.setState(
+      {
+        selectedTags: [],
+        resetTags: true,
+      },
+      () => {
+        this.setState({
+          resetTags: false,
+        });
+      },
+    );
+  };
+
   handleTagChange(tagId: string | number) {
     if (this.state.selectedTags.includes(tagId)) {
       const filteredArr = this.state.selectedTags.filter(tag => tag !== tagId);
@@ -66,11 +90,13 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
       this.handleChange([...this.state.selectedTags, tagId]);
     }
   }
+
   handleChange(selectedIds: (string | number)[]) {
     this.setState({selectedTags: selectedIds}, () => {
       this.props.onChange!(this.state.selectedTags);
     });
   }
+
   render() {
     const {style, theme, tags, ...props} = this.props;
     const styles: any = getStyles(theme);
@@ -79,6 +105,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
         <View style={styles.container}>
           {tags.map(tag => (
             <Tag
+              resetTag={this.state.resetTags}
               preselected={!!tag.preselected}
               key={tag.id}
               onTagChange={() => this.handleTagChange(tag.id)}
@@ -102,5 +129,6 @@ Tags.defaultProps = {
   shape: 'rounded',
   shadow: false,
   onChange: () => {},
+  onRef: () => {},
 };
 export default withTheme(Tags);
