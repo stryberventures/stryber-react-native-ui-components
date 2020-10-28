@@ -71,6 +71,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
     }
   }
 
+  // this method will be used by parent component through ref
   resetTags = () => {
     this.setState(
       {
