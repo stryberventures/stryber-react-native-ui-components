@@ -17,4 +17,7 @@ storiesOf('Tags', module)
   ))
   .add('with reset functionality', () => (
     <TagsPreview size="large" resetFunctionality />
+  ))
+  .add('with disabled tags', () => (
+    <TagsPreview partiallyDisabledTemplate size="small" />
   ));

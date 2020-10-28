@@ -18,20 +18,36 @@ const tagsArrWithPreselectedValues = [
   {id: 6, label: 'React Native', preselected: true},
   {id: 7, label: 'Vue'},
 ];
+const tagsArrWithPartiallyDisabledValues = [
+  {id: 1, label: 'JavaScript'},
+  {id: 2, label: 'React', disabled: true},
+  {id: 4, label: 'HTML'},
+  {id: 5, label: 'CSS'},
+  {id: 6, label: 'React Native', disabled: true},
+  {id: 7, label: 'Vue'},
+];
 interface IProps {
   withCross?: boolean;
   size: 'large' | 'small';
   color?: string;
   textColor?: string;
   preselectedTemplate?: boolean;
+  partiallyDisabledTemplate?: boolean;
   resetFunctionality?: boolean;
 }
 export default class TagsPreview extends React.Component<IProps> {
   render() {
-    const {preselectedTemplate, resetFunctionality, ...tagsProps} = this.props;
+    const {
+      preselectedTemplate,
+      partiallyDisabledTemplate,
+      resetFunctionality,
+      ...tagsProps
+    } = this.props;
     const onRef = resetFunctionality ? ref => (this.child = ref) : undefined;
     const tagsArr = preselectedTemplate
       ? tagsArrWithPreselectedValues
+      : partiallyDisabledTemplate
+      ? tagsArrWithPartiallyDisabledValues
       : tagsArrWithoutPreselectedValues;
     return (
       <View style={styles.container}>

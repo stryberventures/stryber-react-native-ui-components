@@ -9,6 +9,7 @@ export interface ITagData {
   id: string | number;
   label: string;
   preselected?: boolean;
+  disabled?: boolean;
 }
 
 export interface ITagsProps {
@@ -107,6 +108,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
             <Tag
               resetTag={this.state.resetTags}
               preselected={!!tag.preselected}
+              disabled={!!tag.disabled}
               key={tag.id}
               onTagChange={() => this.handleTagChange(tag.id)}
               {...props}>
