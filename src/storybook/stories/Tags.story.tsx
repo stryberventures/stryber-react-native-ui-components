@@ -14,4 +14,18 @@ storiesOf('Tags', module)
   ))
   .add('different color', () => (
     <TagsPreview size="small" withCross color="#4624bf" textColor="#757575" />
+  ))
+  .add('with reset functionality', () => (
+    <TagsPreview size="large" resetFunctionality />
+  ))
+  .add('with disabled tags', () => (
+    <TagsPreview partiallyDisabledTemplate size="small" />
+  ))
+  .add('with disabled tags and custom colors', () => (
+    <TagsPreview
+      partiallyDisabledTemplate
+      size="small"
+      disabledColor="#979797"
+      selectedColor="#FC775B"
+    />
   ));

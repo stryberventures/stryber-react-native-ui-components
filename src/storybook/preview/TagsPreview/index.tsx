@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, Button, StyleSheet} from 'react-native';
 import {Text, Tags} from '../../../components';
 
 const tagsArrWithoutPreselectedValues = [
@@ -18,33 +18,70 @@ const tagsArrWithPreselectedValues = [
   {id: 6, label: 'React Native', preselected: true},
   {id: 7, label: 'Vue'},
 ];
+const tagsArrWithPartiallyDisabledValues = [
+  {id: 1, label: 'JavaScript'},
+  {id: 2, label: 'React', disabled: true},
+  {id: 4, label: 'HTML'},
+  {id: 5, label: 'CSS'},
+  {id: 6, label: 'React Native', disabled: true},
+  {id: 7, label: 'Vue'},
+];
 interface IProps {
   withCross?: boolean;
   size: 'large' | 'small';
   color?: string;
   textColor?: string;
   preselectedTemplate?: boolean;
+  partiallyDisabledTemplate?: boolean;
+  resetFunctionality?: boolean;
+  disabledColor?: string;
+  selectedColor?: string;
 }
 export default class TagsPreview extends React.Component<IProps> {
   render() {
-    const {preselectedTemplate, ...tagsProps} = this.props;
+    const {
+      preselectedTemplate,
+      partiallyDisabledTemplate,
+      resetFunctionality,
+      ...tagsProps
+    } = this.props;
+    const tagsRef = React.createRef();
     const tagsArr = preselectedTemplate
       ? tagsArrWithPreselectedValues
+      : partiallyDisabledTemplate
+      ? tagsArrWithPartiallyDisabledValues
       : tagsArrWithoutPreselectedValues;
     return (
       <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <Text bold>Rectangle</Text>
-          <Tags shape="rectangle" tags={tagsArr} {...tagsProps} />
-        </View>
-        <View style={styles.wrapper}>
-          <Text bold>Rounded</Text>
-          <Tags shape="rounded" tags={tagsArr} {...tagsProps} />
-        </View>
-        <View style={styles.wrapper}>
-          <Text bold>Round</Text>
-          <Tags shape="round" tags={tagsArr} {...tagsProps} />
-        </View>
+        {resetFunctionality ? (
+          <View style={styles.wrapper}>
+            <Button
+              title="reset tags"
+              onPress={() => tagsRef.current.resetTags()}
+            />
+            <Tags
+              ref={tagsRef}
+              shape="rectangle"
+              tags={tagsArr}
+              {...tagsProps}
+            />
+          </View>
+        ) : (
+          <>
+            <View style={styles.wrapper}>
+              <Text bold>Rectangle</Text>
+              <Tags shape="rectangle" tags={tagsArr} {...tagsProps} />
+            </View>
+            <View style={styles.wrapper}>
+              <Text bold>Rounded</Text>
+              <Tags shape="rounded" tags={tagsArr} {...tagsProps} />
+            </View>
+            <View style={styles.wrapper}>
+              <Text bold>Round</Text>
+              <Tags shape="round" tags={tagsArr} {...tagsProps} />
+            </View>
+          </>
+        )}
       </View>
     );
   }
