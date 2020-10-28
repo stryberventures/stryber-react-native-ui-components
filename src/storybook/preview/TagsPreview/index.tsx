@@ -34,6 +34,8 @@ interface IProps {
   preselectedTemplate?: boolean;
   partiallyDisabledTemplate?: boolean;
   resetFunctionality?: boolean;
+  disabledColor?: string;
+  selectedColor?: string;
 }
 export default class TagsPreview extends React.Component<IProps> {
   render() {

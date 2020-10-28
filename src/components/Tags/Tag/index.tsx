@@ -12,6 +12,8 @@ export interface ITagProps extends TouchableOpacityProps {
   theme?: any;
   color?: string;
   textColor?: string;
+  disabledColor?: string;
+  selectedColor?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'small' | 'large';
   withCross?: boolean;

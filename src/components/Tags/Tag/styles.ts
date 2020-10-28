@@ -5,23 +5,21 @@ import {ITagProps, ITagState} from './index';
 const getStyles = (
   theme = defaultTheme,
   props: ITagProps,
-  state: ITagState
+  state: ITagState,
 ) => {
   const propsColorValue =
     theme.colors[props.color as keyof typeof defaultTheme.colors] ||
     props.color;
   const primaryColor = propsColorValue || theme.colors.primary;
-  const textColor = props.disabled 
-  ? theme.colors.gray50 
-  : state.selected 
-    ? theme.colors.white
+  const textColor = props.disabled
+    ? props.disabledColor || theme.colors.gray50
+    : state.selected
+    ? props.selectedColor || theme.colors.white
     : props.textColor
-      ? props.textColor
-      : primaryColor;
+    ? props.textColor
+    : primaryColor;
   const tagHeight =
-    props.size === 'small'
-      ? theme.spaces.xxl2
-      : theme.spaces.xxl5;
+    props.size === 'small' ? theme.spaces.xxl2 : theme.spaces.xxl5;
   const borderRadius =
     props.shape === 'rounded'
       ? theme.sizes.radius
@@ -29,34 +27,45 @@ const getStyles = (
       ? theme.sizes.largeRadius
       : 0;
   const shadow = props.shadow
-      ? {
-          shadowColor: theme.colors.black,
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 5,
-        }
-      : {};
-  const paddingHorizontal = props.size === 'small'
-  ? theme.spaces.m
-  : theme.spaces.xl;
+    ? {
+        shadowColor: theme.colors.black,
+        shadowOffset: {
+          width: 0,
+          height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+      }
+    : {};
+  const paddingHorizontal =
+    props.size === 'small' ? theme.spaces.m : theme.spaces.xl;
   const tagConfig = props.disabled
-    ? {
-        backgroundColor: theme.colors.gray15,
-        opacity: 0.7,
-      }
+    ? props.disabledColor
+      ? {
+          borderWidth: 1,
+          backgroundColor: 'transparent',
+          borderColor: props.disabledColor,
+        }
+      : {
+          backgroundColor: theme.colors.gray15,
+          opacity: 0.7,
+        }
     : state.selected
-    ? {
-        backgroundColor: primaryColor,
-      }
+    ? props.selectedColor
+      ? {
+          borderWidth: 1,
+          backgroundColor: 'transparent',
+          borderColor: props.selectedColor,
+        }
+      : {
+          backgroundColor: primaryColor,
+        }
     : {
-      borderWidth: 1,
-      backgroundColor: 'transparent',
-      borderColor: primaryColor,
-    };
+        borderWidth: 1,
+        backgroundColor: 'transparent',
+        borderColor: primaryColor,
+      };
   return StyleSheet.create({
     tag: {
       height: tagHeight,
@@ -67,7 +76,7 @@ const getStyles = (
       marginRight: theme.spaces.s,
       borderRadius: borderRadius,
       ...shadow,
-      ...tagConfig
+      ...tagConfig,
     },
     content: {
       flexDirection: 'row',
@@ -79,10 +88,10 @@ const getStyles = (
       color: textColor,
     },
     closeButton: {
-      height:  theme.spaces.s,
+      height: theme.spaces.s,
       width: theme.spaces.s,
-      marginLeft: theme.spaces.s
-    }
+      marginLeft: theme.spaces.s,
+    },
   });
 };
 export default getStyles;

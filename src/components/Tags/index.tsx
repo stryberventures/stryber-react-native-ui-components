@@ -25,6 +25,8 @@ export interface ITagsProps {
   error?: string;
   onChange?: (selectedTags: (string | number)[]) => any;
   onRef?: (arg: any) => void;
+  disabledColor?: string;
+  selectedColor?: string;
 }
 export interface ITagsState {
   selectedTags: (string | number)[];
