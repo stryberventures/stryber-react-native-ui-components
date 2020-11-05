@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Image, Platform} from 'react-native';
+import {Image, Platform, ImageProps} from 'react-native';
 // @ts-ignore
 import shorthash from 'shorthash';
 import RNFetchBlob from 'rn-fetch-blob';
-interface ICacheImageProps {
+interface ICacheImageProps extends ImageProps {
   source: {
     uri: string;
   };
