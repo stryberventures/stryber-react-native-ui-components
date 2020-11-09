@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Image} from 'react-native';
 import {Card, Block, Text, Button} from '../../components';
 import CenterView from '../../components/CenterView';
-import {withKnobs, color} from '@storybook/addon-knobs';
+import {withKnobs} from '@storybook/addon-knobs';
 import {defaultTheme as theme} from '../../components/other/constants';
 import {storiesOf} from '@storybook/react-native';
 import {card} from '../../static/markdown';
@@ -55,8 +55,12 @@ storiesOf('Card', module)
     <Card shadow>
       <Image
         source={require('../../static/images/mountain.jpeg')}
-        style={{height: 145}}
-        resizeMode="cover"
+        style={{
+          width: '100%',
+          height: 200,
+          borderTopLeftRadius: 5,
+          borderTopRightRadius: 5,
+        }}
       />
       <Block padding={theme.sizes.cardPadding} style={{flex: 0}}>
         <Text bold size={theme.sizes.h2}>
@@ -73,27 +77,22 @@ storiesOf('Card', module)
       </Block>
     </Card>
   ))
-  .add('with background image', () => {
-    const gradientColor = color('Gradient Color', '#000', 'BackgroundGradient');
-    return (
-      <Card
-        gradientColors={['transparent', gradientColor]}
-        backgroundImage={require('../../static/images/mountain.jpeg')}>
-        <Block
-          padding={theme.sizes.cardPadding}
-          style={{justifyContent: 'flex-end'}}>
-          <Text white bold size={theme.sizes.h2}>
-            Card Example
-          </Text>
-          <Text style={{marginVertical: 7}} white bold size={theme.sizes.title}>
-            € 50/Month
-          </Text>
-          <Text white style={{marginBottom: 10}} size={theme.sizes.caption}>
-            Subscriptions will automatically renew and your credit card will be
-            charged at the end
-          </Text>
-          <Button type="outlined">Button text</Button>
-        </Block>
-      </Card>
-    );
-  });
+  .add('with background image', () => (
+    <Card shadow backgroundImage={require('../../static/images/mountain.jpeg')}>
+      <Block
+        padding={theme.sizes.cardPadding}
+        style={{justifyContent: 'flex-end'}}>
+        <Text white bold size={theme.sizes.h2}>
+          Card Example
+        </Text>
+        <Text style={{marginVertical: 7}} white bold size={theme.sizes.title}>
+          € 50/Month
+        </Text>
+        <Text white style={{marginBottom: 10}} size={theme.sizes.caption}>
+          Subscriptions will automatically renew and your credit card will be
+          charged at the end
+        </Text>
+        <Button type="outlined">Button text</Button>
+      </Block>
+    </Card>
+  ));
