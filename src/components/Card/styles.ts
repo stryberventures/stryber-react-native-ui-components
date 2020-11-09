@@ -24,9 +24,11 @@ const getStyles = (theme: any = defaultTheme, props: ICardProps) => {
     cardStyles: {
       ...props.style,
       borderRadius: theme.sizes.blockRadius,
-      overflow: 'hidden',
       flex: 0,
       backgroundColor: cardBackground,
+    },
+    imageBgStyles: {
+      borderRadius: theme.sizes.blockRadius,
     },
   });
 };

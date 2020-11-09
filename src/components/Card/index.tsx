@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {ImageBackground, Platform} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Block, {IBlockProps} from '../Block';
 import withTheme from '../withTheme';
 import getStyles from './styles';
@@ -8,8 +7,7 @@ export interface ICardProps extends IBlockProps {
   card?: boolean;
   shadow?: boolean;
   shadowType?: 'normal' | 'large';
-  gradientStyle?: any;
-  gradientColors?: string[];
+  bgImageStyles?: any;
   resizeMode?: 'center' | 'cover' | 'contain' | 'stretch' | 'repeat';
   backgroundImage?: any;
   theme?: any;
@@ -24,20 +22,18 @@ class Card extends Component<ICardProps, {}> {
     const {
       theme,
       backgroundImage,
-      gradientColors,
+      bgImageStyles,
       children,
-      gradientStyle,
       resizeMode,
     } = this.props;
-    const gradientStyles = [{flex: 1}, gradientStyle];
+    const styles = getStyles(theme, this.props);
     return (
       <ImageBackground
         resizeMode={resizeMode}
+        imageStyle={[styles.imageBgStyles, bgImageStyles]}
         style={{minHeight: theme.sizes.cardWithImgBgMinHeight}}
         source={backgroundImage}>
-        <LinearGradient style={gradientStyles} colors={gradientColors!}>
-          {children}
-        </LinearGradient>
+        {children}
       </ImageBackground>
     );
   };
@@ -48,6 +44,7 @@ class Card extends Component<ICardProps, {}> {
       children,
       shadow,
       shadowType,
+      // eslint-disable-next-line
       style,
       containerStyles,
       ...rest
@@ -78,9 +75,7 @@ Card.defaultProps = {
   card: true,
   shadow: false,
   shadowType: 'normal',
-  gradientColors: ['transparent', '#000'],
   resizeMode: 'cover',
-  gradientStyle: {},
   style: {},
 };
 export default withTheme(Card);
