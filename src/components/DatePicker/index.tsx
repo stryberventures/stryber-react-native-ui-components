@@ -32,6 +32,8 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   props?: any;
   saveDateOnCancel?: boolean;
   showModal?: boolean;
+  placeholderTextColor?: string;
+  textColor?: string;
 }
 type DatePickerState = {
   date?: any;
@@ -121,26 +123,29 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   };
   render() {
     const {showModal} = this.state;
-    const {style, theme, label, error, variant, mode} = this.props;
+    const {style, theme, label, error, variant,
+      mode, placeholderTextColor, textColor} = this.props;
     const {year, month, day, hours, minutes} = this.getDateTimeObj();
     const dateSet = day && month && year;
     const dateStr = dateSet
       ? `${day}-${month}-${year} ${mode === 'datetime' ? `${hours}:${minutes}`: ''}`
       : label;
-    const inputColor = showModal ? theme.colors.primary : theme.colors.gray;
+    const placeholderColor = showModal 
+    ? theme.colors.primary 
+    : placeholderTextColor ? placeholderTextColor : theme.colors.gray;
+    const inputColor = textColor ? textColor : theme.colors.darkGrey;
     return (
       <TouchableWithoutFeedback style={style} onPress={this.handlePressed}>
         <View pointerEvents="box-only">
           {this.renderModal()}
           <Input
-
             variant={variant}
             error={error}
-            rightIcon={() => <Calendar size={20} fill={inputColor} />}
+            rightIcon={() => <Calendar size={20} fill={placeholderColor} />}
             placeholder={dateStr}
             style={[{marginVertical: 0}, style]}
             placeholderTextColor={
-              dateSet && !showModal ? theme.colors.darkGrey : inputColor
+              dateSet && !showModal ? inputColor : placeholderColor
             }
           />
         </View>
