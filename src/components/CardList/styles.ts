@@ -42,7 +42,8 @@ export const getListItemStyles = (theme: any, props: IListItemProps) => {
     cardStyle: {
       borderWidth: 1,
       borderColor: cardBorderColor,
-      padding: theme.spaces.m,
+      paddingVertical: theme.spaces.m,
+      paddingHorizontal: theme.spaces.xs,
       marginTop: 2,
       marginBottom: theme.spaces.m,
       width: '99%',
@@ -82,7 +83,7 @@ export const getListItemStyles = (theme: any, props: IListItemProps) => {
       marginLeft: theme.spaces.xxl8,
     },
     leftElementWrapper: {
-      marginRight: theme.spaces.xxl8,
+      marginRight: theme.spaces.m,
     },
   });
 };
