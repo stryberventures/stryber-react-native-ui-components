@@ -33,6 +33,7 @@ export interface IButtonProps extends TouchableOpacityProps {
   props?: any;
   style?: any;
   underlayColor?: string;
+  textStyle?: any; 
   onPress?: (...args: any[]) => any;
 }
 export interface IButtonState {
@@ -112,6 +113,7 @@ class Button extends React.Component<IButtonProps, IButtonState> {
       icon,
       iconProps,
       type,
+      textStyle,
       ...props
     } = this.props;
     const IconComponent =
@@ -128,7 +130,7 @@ class Button extends React.Component<IButtonProps, IButtonState> {
         onPressOut={this.handlePressOut}
         style={[styles.button, style]}>
         {type === 'link' ? (
-          <Text style={styles.buttonText}>{children}</Text>
+          <Text style={[styles.buttonText, textStyle]}>{children}</Text>
         ) : (
           <>
             <View style={styles.content}>
@@ -137,7 +139,7 @@ class Button extends React.Component<IButtonProps, IButtonState> {
                   <IconComponent fill={styles.icon.color} {...iconProps} />
                 </View>
               )}
-              <Text style={styles.buttonText}>{children}</Text>
+              <Text style={[styles.buttonText, textStyle]}>{children}</Text>
             </View>
             {this.renderRipple()}
             <View style={styles.touchOverlay} />
