@@ -34,6 +34,8 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   showModal?: boolean;
   placeholderTextColor?: string;
   textColor?: string;
+  inputStyle?: any;
+  iconSize?: number;
 }
 type DatePickerState = {
   date?: any;
@@ -124,7 +126,8 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   render() {
     const {showModal} = this.state;
     const {style, theme, label, error, variant,
-      mode, placeholderTextColor, textColor} = this.props;
+      mode, placeholderTextColor, textColor, inputStyle,
+      iconSize} = this.props;
     const {year, month, day, hours, minutes} = this.getDateTimeObj();
     const dateSet = day && month && year;
     const dateStr = dateSet
@@ -139,9 +142,10 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
         <View pointerEvents="box-only">
           {this.renderModal()}
           <Input
+            inputStyle={inputStyle}
             variant={variant}
             error={error}
-            rightIcon={() => <Calendar size={20} fill={placeholderColor} />}
+            rightIcon={() => <Calendar size={iconSize} fill={placeholderColor} />}
             placeholder={dateStr}
             style={[{marginVertical: 0}, style]}
             placeholderTextColor={
@@ -165,5 +169,6 @@ DatePicker.defaultProps = {
   style: {},
   value: undefined,
   mode: 'date',
+  iconSize: 20
 };
 export default withTheme(DatePicker);

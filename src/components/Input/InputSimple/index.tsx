@@ -21,7 +21,7 @@ export interface IInputSimpleProps extends IInputBaseProps {
   maxLength?: number; // how to be with multiline ?
   numberOfLines?: number;
   maxNumberOfLines?: number;
-
+  inputStyle?: any;
   style?: any;
   inputBoxStyle?: any;
   theme: any;
