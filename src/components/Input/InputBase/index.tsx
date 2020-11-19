@@ -41,7 +41,7 @@ export interface IInputBaseProps extends TextInputProps {
 
   theme?: any;
   color?: string;
-
+  inputStyle?: any;
   style?: any;
   inputBoxStyle?: any;
   classes?: any;
@@ -176,6 +176,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       style,
       inputBoxStyle,
       color,
+      inputStyle,
       ...props
     } = this.props;
     const {toggleSecure} = this.state;
@@ -215,7 +216,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
                 secureTextEntry={isSecure}
                 multiline={multiline}
                 numberOfLines={numberOfLines}
-                style={styles.input}
+                style={[styles.input, inputStyle]}
                 keyboardType={keyboardTypes[type!]}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
