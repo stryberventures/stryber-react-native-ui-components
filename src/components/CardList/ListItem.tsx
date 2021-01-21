@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity } from 'react-native';
 
 import Card from '../Card';
 import Checkbox from '../Checkbox';
@@ -21,8 +21,11 @@ const ListItem: React.FC<IListItemProps> = props => {
   };
 
   return (
-    <TouchableOpacity onPress={toggleQuiz} disabled={!props.quiz}>
-      <Card background={props.cardBackground} shadow style={styles.cardStyle}>
+    <TouchableOpacity
+      style={styles.cardWraper}
+      onPress={toggleQuiz} 
+      disabled={!props.quiz}>
+      <Card style={styles.cardStyle}>
         {props.quiz && props.quizCounter && (
           <View style={styles.leftElementWrapper}>
             <View style={styles.quizWrapper}>

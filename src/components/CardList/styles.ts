@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 
 import {IListItemProps} from './ListItem';
 
@@ -26,6 +26,9 @@ export const getListItemStyles = (theme: any, props: IListItemProps) => {
   const quizBackground = props.quizBackground
     ? theme.colors[props.quizBackground] || props.quizBackground
     : theme.colors.primary;
+  const cardBackground = props.cardBackground
+    ? theme.colors[props.cardBackground] || props.cardBackground
+    : theme.colors.white;
   const cardBorderColor = props.isActive
     ? quizBackground
     : props.cardBackground
@@ -39,15 +42,27 @@ export const getListItemStyles = (theme: any, props: IListItemProps) => {
     : theme.colors.black;
 
   return StyleSheet.create({
-    cardStyle: {
-      borderWidth: 1,
-      borderColor: cardBorderColor,
+    cardWraper: {
+      alignSelf: 'center',
+      backgroundColor: cardBackground,
+      marginBottom: 15,
+      marginTop: 2,
       paddingVertical: theme.spaces.m,
       paddingHorizontal: theme.spaces.xs,
-      marginTop: 2,
-      marginBottom: theme.spaces.m,
-      width: '99%',
-      alignSelf: 'center',
+      width: '98%',
+      borderWidth: 1,
+      borderColor: cardBorderColor,
+      borderRadius: theme.sizes.radius,
+      shadowColor: theme.colors.black,
+      shadowOffset: {
+        width: 0,
+        height: 4,
+      },
+      shadowOpacity: Platform.OS === 'ios' ? 0.25 : 0.5,
+      shadowRadius: 3.84,
+      elevation: 5
+    },
+    cardStyle: {
       flexDirection: 'row',
       alignItems: 'center',
     },
