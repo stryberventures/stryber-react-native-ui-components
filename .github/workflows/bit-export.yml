@@ -1,0 +1,40 @@
+name: Bit export
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  bit-export:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    env:
+      BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2.3.1
+
+      - name: Install Dependencies
+        run: npm install
+      - name: Install bit-bin
+        run: sudo npm install bit-bin@14.8.8 -g --unsafe-perm
+      - name: bit config
+        run: |
+          bit config set analytics_reporting false
+          bit config set anonymous_reporting false
+          bit config set user.token $BIT_TOKEN
+          bit config
+      - name: bit import
+        run: |
+          bit -v && bit import
+      - name: bit export
+        run: |
+          bit status
+          bit tag -a
+          bit export
+      - name: Commit changes
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git commit -am "Automated commit"
+          git push
