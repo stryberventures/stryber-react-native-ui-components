@@ -128,10 +128,59 @@
       "compiler": {
         "bit.envs/compilers/react-native-typescript@0.0.5": {
           "rawConfig": {
+            "compilerPath": "typescript/bin/tsc",
+            "compilerArguments": [
+              "--declaration"
+            ],
+            "compiledFileTypes": [
+              ".ts",
+              ".tsx"
+            ],
+            "configFileName": "tsconfig.json",
             "tsconfig": {
               "compilerOptions": {
-                "isolatedModules": false
-              }
+                "rootDir": "./",
+                "outDir": "dist",
+                "target": "esnext",
+                "module": "commonjs",
+                "moduleResolution": "node",
+                "lib": [
+                  "es6"
+                ],
+                "allowJs": true,
+                "jsx": "react",
+                "esModuleInterop": true,
+                "resolveJsonModule": true,
+                "experimentalDecorators": true,
+                "sourceMap": true,
+                "declaration": true,
+                "isolatedModules": false,
+                "allowSyntheticDefaultImports": true,
+                "inlineSourceMap": false,
+                "inlineSources": true,
+                "removeComments": false,
+                "typeRoots": [
+                  "./node_modules/@types"
+                ],
+                "importHelpers": false
+              },
+              "include": [
+                "./**/*"
+              ],
+              "exclude": [
+                "node_modules",
+                ".dependencies",
+                "dist"
+              ]
+            },
+            "development": true,
+            "copyPolicy": {
+              "ignorePatterns": [
+                "package.json",
+                "package-lock.json",
+                "tsconfig.json"
+              ],
+              "disable": false
             }
           }
         }
