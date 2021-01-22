@@ -23,7 +23,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   modalStyle?: any;
   modalButtonStyle?: any;
   modalBtnContainer?: any;
-  style?: any
+  style?: any;
   value?: any;
   theme?: any;
   label?: string;
@@ -56,10 +56,13 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
     return {
       date,
       year: date ? date.getFullYear() : '',
+      // @ts-ignore
       day: date ? `${date.getDate()}`.padStart(2, '0') : '',
+      // @ts-ignore
       month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : '',
-      hours: date ? `${date.getHours() }` : '',
-      minutes: date ? `${date.getMinutes()}`.padStart(2, '0') : ''
+      hours: date ? `${date.getHours()}` : '',
+      // @ts-ignore
+      minutes: date ? `${date.getMinutes()}`.padStart(2, '0') : '',
     };
   };
 
@@ -73,13 +76,11 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
     );
   };
   handleDateChange = (date: any) => {
-    this.setState(
-      prevState => ({
-        date: date,
-        startDate: date,
-        showModal: prevState.showModal,
-      })
-    );
+    this.setState(prevState => ({
+      date: date,
+      startDate: date,
+      showModal: prevState.showModal,
+    }));
   };
   renderModal = () => {
     const {showModal, date} = this.state;
@@ -95,7 +96,8 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       maxDate,
       ...props
     } = this.props;
-    return <Modal
+    return (
+      <Modal
         animationType="slide"
         transparent
         visible={showModal}
@@ -106,6 +108,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
               <RNButton
                 // @ts-ignore
                 title={modalButtonText}
+                // @ts-ignore
                 style={[modalButtonStyle]}
                 onPress={this.handleModalClose}
               />
@@ -122,20 +125,34 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
           </View>
         </View>
       </Modal>
+    );
   };
   render() {
     const {showModal} = this.state;
-    const {style, theme, label, error, variant,
-      mode, placeholderTextColor, textColor, inputStyle,
-      iconSize} = this.props;
+    const {
+      style,
+      theme,
+      label,
+      error,
+      variant,
+      mode,
+      placeholderTextColor,
+      textColor,
+      inputStyle,
+      iconSize,
+    } = this.props;
     const {year, month, day, hours, minutes} = this.getDateTimeObj();
     const dateSet = day && month && year;
     const dateStr = dateSet
-      ? `${day}-${month}-${year} ${mode === 'datetime' ? `${hours}:${minutes}`: ''}`
+      ? `${day}-${month}-${year} ${
+          mode === 'datetime' ? `${hours}:${minutes}` : ''
+        }`
       : label;
-    const placeholderColor = showModal 
-    ? theme.colors.primary 
-    : placeholderTextColor ? placeholderTextColor : theme.colors.gray;
+    const placeholderColor = showModal
+      ? theme.colors.primary
+      : placeholderTextColor
+      ? placeholderTextColor
+      : theme.colors.gray;
     const inputColor = textColor ? textColor : theme.colors.darkGrey;
     return (
       <TouchableWithoutFeedback style={style} onPress={this.handlePressed}>
@@ -145,7 +162,9 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
             inputStyle={inputStyle}
             variant={variant}
             error={error}
-            rightIcon={() => <Calendar size={iconSize} fill={placeholderColor} />}
+            rightIcon={() => (
+              <Calendar size={iconSize} fill={placeholderColor} />
+            )}
             placeholder={dateStr}
             style={[{marginVertical: 0}, style]}
             placeholderTextColor={
@@ -169,6 +188,6 @@ DatePicker.defaultProps = {
   style: {},
   value: undefined,
   mode: 'date',
-  iconSize: 20
+  iconSize: 20,
 };
 export default withTheme(DatePicker);

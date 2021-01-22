@@ -1,4 +1,3 @@
-import {Easing} from 'react-native-reanimated';
 export const LOLLIPOP = 21;
 export const TRUE = 1;
 export const FALSE = 0;
@@ -14,8 +13,4 @@ export const SPRING_CONFIG = {
   overshootClamping: true,
   restDisplacementThreshold: 0.01,
   restSpeedThreshold: 0.01,
-};
-export const TIMING_CONFIG = {
-  duration: 200,
-  easing: Easing.out(Easing.cubic),
 };

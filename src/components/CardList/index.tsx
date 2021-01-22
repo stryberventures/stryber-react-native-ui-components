@@ -46,10 +46,12 @@ const CardList: React.FC<IProps> = props => {
     const onQuizPress = () => {
       setActiveIndexes(state => {
         if (props.multiSelect) {
+          // @ts-ignore
           return state.includes(index)
             ? state.filter(element => element !== index)
             : [...state, index];
         }
+        // @ts-ignore
         return state.includes(index) ? [] : [index];
       });
       if (props.onQuizPress) {
@@ -59,6 +61,7 @@ const CardList: React.FC<IProps> = props => {
     return (
       <ListItem
         {...item}
+        // @ts-ignore
         isActive={activeIndexes.includes(index)}
         onQuizPress={onQuizPress}
         checkboxLeft={props.checkboxLeft}

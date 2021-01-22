@@ -19,3 +19,16 @@ export {Calendar};
 export {Speaker};
 export {SpeakerMute};
 export {Close};
+
+export default {
+  UserIcon,
+  Search,
+  Eye,
+  EyeDisabled,
+  Check,
+  ArrowDown,
+  Calendar,
+  Speaker,
+  SpeakerMute,
+  Close,
+};

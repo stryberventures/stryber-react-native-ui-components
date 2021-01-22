@@ -122,5 +122,22 @@
       "module",
       "typescript"
     ]
+  },
+  "bit": {
+    "env": {
+      "compiler": {
+        "bit.envs/compilers/react-native-typescript@0.0.5": {
+          "rawConfig": {
+            "tsconfig": {
+              "compilerOptions": {
+                "isolatedModules": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "componentsDefaultDirectory": "src/components/{name}",
+    "packageManager": "yarn"
   }
 }

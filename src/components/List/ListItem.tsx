@@ -10,7 +10,7 @@ import {
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Switch from '../Switch';
-import * as Icons from '../Icons';
+import Icons from '../Icons';
 import {IListItem} from './index';
 import getStyles from './styles';
 import {defaultTheme as theme} from '../other/constants';
@@ -28,6 +28,7 @@ const ListItem: React.FC<IProps> = props => {
 
   const styles: any = getStyles(theme, props, cardOpened);
 
+  // @ts-ignore
   const IconComponent = props.icon && Icons[props.icon];
   const showSimpleIcon = props.icon && !props.iconBackground;
   const showIconWithBackground = props.icon && props.iconBackground;

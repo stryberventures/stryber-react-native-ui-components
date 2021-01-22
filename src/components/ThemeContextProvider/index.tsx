@@ -11,7 +11,7 @@ type ThemeContextProviderProps = {
   themes?: any[];
 };
 
-const ThemeContextProvider: React.SFC<ThemeContextProviderProps> = ({
+const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({
   children,
   themes,
 }) => {

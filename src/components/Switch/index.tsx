@@ -75,6 +75,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
       toValue: this.state.checked ? 1 : 0,
       duration: this.props.duration,
     };
+    // @ts-ignore
     Animated.timing(this.state.animXValue, animValue).start();
   };
   render() {
