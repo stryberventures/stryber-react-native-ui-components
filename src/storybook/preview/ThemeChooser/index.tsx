@@ -11,7 +11,6 @@ import {
   withTheme
 } from "../../../components";
 import { UserIcon } from "../../../components/Icons";
-import Icon from "react-native-vector-icons/Ionicons";
 interface IThemeChooserProps extends React.HTMLAttributes<Element> {
   themes: any[];
   setTheme: (...args: any[]) => any;
@@ -68,38 +67,7 @@ class ThemeChooser extends Component<IThemeChooserProps, {}> {
               justifyContent: "space-around"
             }}
           >
-            <Header
-              text="Header"
-              leftIcon={() => (
-                <Icon
-                  style={{
-                    height: 24,
-                    width: 44,
-                    position: "absolute",
-                    left: 10,
-                    fontSize: 24
-                  }}
-                  color="#fff"
-                  name="ios-arrow-back"
-                  onPress={() => {}}
-                />
-              )}
-              rightIcon={() => (
-                <Icon
-                  style={{
-                    height: 24,
-                    width: 44,
-                    position: "absolute",
-                    right: 10,
-                    fontSize: 24,
-                    textAlign: "right"
-                  }}
-                  color="#fff"
-                  name="ios-search"
-                  onPress={() => {}}
-                />
-              )}
-            />
+            <Header text="Header" />
             <Button>Button</Button>
             <Input
               email

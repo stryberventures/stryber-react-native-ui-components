@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
 
-import * as Icons from '../Icons';
 import {ICheckboxProps} from '../Checkbox';
 import {IButtonProps} from '../Button';
 import {ISwitchProps} from '../Switch';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
+import Icons from '../Icons';
 
 // All properties regarding checkboxes, images etc are placed inside IListItem not inside IListProps because of a requirement to have opportunity creat list with a different type of items.
 export interface IListItem {

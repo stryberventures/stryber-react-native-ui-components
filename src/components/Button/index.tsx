@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
 import withTheme from '../withTheme';
-import * as Icons from '../Icons';
+import Icons from '../Icons';
 import Text from '../Text';
 import Ripple from '../Ripple';
 import getStyles from './styles';
@@ -33,7 +33,7 @@ export interface IButtonProps extends TouchableOpacityProps {
   props?: any;
   style?: any;
   underlayColor?: string;
-  textStyle?: any; 
+  textStyle?: any;
   onPress?: (...args: any[]) => any;
 }
 export interface IButtonState {

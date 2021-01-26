@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {ImageBackground, Platform} from 'react-native';
-import Block, {IBlockProps} from '../Block';
+import Block, {IBlockProps} from '../Block/index';
 import withTheme from '../withTheme';
 import getStyles from './styles';
+
 export interface ICardProps extends IBlockProps {
   card?: boolean;
   shadow?: boolean;

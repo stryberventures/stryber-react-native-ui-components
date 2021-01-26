@@ -24,6 +24,7 @@ class SearchField extends Component<ISearchFieldProps, SearchFieldState> {
       <View>
         <Input
           {...props}
+          // @ts-ignore
           icon={() => <Search fill={iconColor || theme.colors.primary} />}
           onChange={this.onRequestChange}
         />

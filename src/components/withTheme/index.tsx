@@ -15,8 +15,11 @@ const withTheme = <ComposedComponentProps extends {}>(
 
   return forwardRef<React.ReactNode, WrapperComponentProps>((props, ref) => {
     const {
+      // @ts-ignore
       themes = [defaultTheme],
+      // @ts-ignore
       themeID = 'Default',
+      // @ts-ignore
       setThemeID = () => {},
     } = useContext(ThemeContext) || {};
     /* eslint-disable no-shadow */
@@ -24,6 +27,7 @@ const withTheme = <ComposedComponentProps extends {}>(
       themes.find(theme => theme.key === themeID);
     const setTheme = (themeID: string) => {
       storage.saveString(THEME_KEY, themeID);
+      // @ts-ignore
       setThemeID(themeID);
     };
     /* eslint-enable no-shadow */

@@ -3,6 +3,7 @@ import Text from '../Text';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Block, {IBlockProps} from '../Block';
+
 interface IBadgeProps extends IBlockProps {
   theme?: any;
   value?: string | number;

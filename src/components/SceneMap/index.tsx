@@ -1,8 +1,10 @@
 import * as React from 'react';
+
 interface ISceneComponentProps {
   component: (...args: any[]) => any;
   rest?: any;
 }
+
 class SceneComponent extends React.PureComponent<ISceneComponentProps, {}> {
   render() {
     const {component, ...rest} = this.props;

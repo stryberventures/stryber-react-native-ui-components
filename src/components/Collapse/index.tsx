@@ -70,6 +70,7 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
           } else {
             // @ts-ignore
             this.contentHandle.current
+              // @ts-ignore
               .getNode()
               .measure((_: number, __: number, ___: number, height: number) => {
                 this.setState(
@@ -194,6 +195,7 @@ export default class Collapse extends Component<ICollapseProps, CollapseState> {
     }
     return (
       <Animated.View
+        // @ts-ignore
         style={style}
         pointerEvents={!enablePointerEvents && collapsed ? 'none' : 'auto'}>
         <Animated.View

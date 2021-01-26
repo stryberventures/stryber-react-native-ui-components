@@ -1,10 +1,16 @@
 import * as React from 'react';
 import {TextInput, Keyboard, I18nManager} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import Animated from 'react-native-reanimated';
+import Animated, {Easing} from 'react-native-reanimated';
 import {tabView} from '../other/constants';
 import {memoize} from '../other/utils';
 import styles from './styles';
+
+export const TIMING_CONFIG = {
+  duration: 200,
+  easing: Easing.out(Easing.cubic),
+};
+
 const {
   TRUE,
   FALSE,
@@ -14,7 +20,6 @@ const {
   DIRECTION_RIGHT,
   SWIPE_DISTANCE_MINIMUM,
   SPRING_CONFIG,
-  TIMING_CONFIG,
 } = tabView;
 const {
   Clock,
@@ -432,6 +437,7 @@ export default class Pager extends React.Component<IPagerProps, {}> {
             if (keyboardDismissMode === 'auto') {
               const input = TextInput.State.currentlyFocusedField();
               // When a gesture begins, blur the currently focused input
+              // @ts-ignore
               TextInput.State.blurTextInput(input);
               // Store the id of this input so we can refocus it if gesture was cancelled
               // @ts-ignore

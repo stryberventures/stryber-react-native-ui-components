@@ -368,6 +368,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                 renderBadge={renderBadge}
                 renderIcon={renderIcon}
                 renderLabel={renderLabel}
+                // @ts-ignore
                 activeColor={activeColor}
                 inactiveColor={inactiveColor}
                 pressColor={pressColor}

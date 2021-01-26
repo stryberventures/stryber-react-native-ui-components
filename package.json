@@ -42,7 +42,6 @@
   },
   "peerDependencies": {
     "@react-native-community/async-storage": ">=1.6.3",
-    "@react-native-community/datetimepicker": ">=2.1.0",
     "react": ">=16.8.6",
     "react-native": ">=0.60.5",
     "react-native-date-picker": "^3.0.0",
@@ -62,7 +61,6 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/bob": "^0.10.0",
-    "@react-native-community/datetimepicker": "^2.1.0",
     "@react-native-community/eslint-config": "^0.0.5",
     "@react-native-community/toolbar-android": "0.1.0-rc.2",
     "@storybook/addon-actions": "^5.3.18",
@@ -122,5 +120,71 @@
       "module",
       "typescript"
     ]
+  },
+  "bit": {
+    "env": {
+      "compiler": {
+        "bit.envs/compilers/react-native-typescript@0.0.5": {
+          "rawConfig": {
+            "compilerPath": "typescript/bin/tsc",
+            "compilerArguments": [
+              "--declaration"
+            ],
+            "compiledFileTypes": [
+              ".ts",
+              ".tsx"
+            ],
+            "configFileName": "tsconfig.json",
+            "tsconfig": {
+              "compilerOptions": {
+                "rootDir": "./",
+                "outDir": "dist",
+                "target": "esnext",
+                "module": "commonjs",
+                "moduleResolution": "node",
+                "lib": [
+                  "es6"
+                ],
+                "allowJs": true,
+                "jsx": "react",
+                "esModuleInterop": true,
+                "resolveJsonModule": true,
+                "experimentalDecorators": true,
+                "sourceMap": true,
+                "declaration": true,
+                "isolatedModules": false,
+                "allowSyntheticDefaultImports": true,
+                "inlineSourceMap": false,
+                "inlineSources": true,
+                "removeComments": false,
+                "typeRoots": [
+                  "./node_modules/@types"
+                ],
+                "importHelpers": false
+              },
+              "include": [
+                "./**/*"
+              ],
+              "exclude": [
+                "node_modules",
+                ".dependencies",
+                "dist"
+              ]
+            },
+            "development": true,
+            "copyPolicy": {
+              "ignorePatterns": [
+                "package.json",
+                "package-lock.json",
+                "tsconfig.json"
+              ],
+              "disable": false
+            }
+          }
+        }
+      }
+    },
+    "componentsDefaultDirectory": "src/components/{name}",
+    "packageManager": "yarn"
   }
 }

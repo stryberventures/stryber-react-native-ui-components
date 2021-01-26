@@ -25,6 +25,7 @@ export default class Accordion extends Component<IAccordionProps, {}> {
     if (!this.props.disabled) {
       const {activeSections, expandMultiple, onChange} = this.props;
       let updatedSections = [];
+      // @ts-ignore
       if (activeSections.includes(section)) {
         updatedSections = activeSections.filter(a => a !== section);
       } else if (expandMultiple) {
@@ -53,16 +54,28 @@ export default class Accordion extends Component<IAccordionProps, {}> {
     } = this.props;
     const renderCollapsible = (section: any, key: any) => (
       <Collapse
+        // @ts-ignore
         collapsed={!activeSections.includes(key)}
         onAnimationEnd={() => onAnimationEnd!(section, key)}>
-        {renderContent(section, key, activeSections.includes(key), sections)}
+        {renderContent(
+          section,
+          key,
+          // @ts-ignore
+          activeSections.includes(key),
+          sections,
+        )}
       </Collapse>
     );
     return (
       <View style={containerStyle}>
         {sections.map((section, key) => (
           <View key={key} style={sectionContainerStyle}>
-            {renderSectionTitle!(section, key, activeSections.includes(key))}
+            {renderSectionTitle!(
+              section,
+              key,
+              // @ts-ignore
+              activeSections.includes(key),
+            )}
 
             {expandFromBottom && renderCollapsible(section, key)}
             {/*
@@ -74,6 +87,7 @@ export default class Accordion extends Component<IAccordionProps, {}> {
               {renderHeader(
                 section,
                 key,
+                // @ts-ignore
                 activeSections.includes(key),
                 sections,
               )}
@@ -85,6 +99,7 @@ export default class Accordion extends Component<IAccordionProps, {}> {
               renderFooter(
                 section,
                 key,
+                // @ts-ignore
                 activeSections.includes(key),
                 sections,
               )}
