@@ -99,7 +99,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "stryber.matterhorn-native/card-list@0.0.2": {
+    "stryber.matterhorn-native/card-list@0.0.3": {
         "files": [
             {
                 "relativePath": "src/components/CardList/ListHeader.tsx",
