@@ -42,7 +42,6 @@
   },
   "peerDependencies": {
     "@react-native-community/async-storage": ">=1.6.3",
-    "@react-native-community/datetimepicker": ">=2.1.0",
     "react": ">=16.8.6",
     "react-native": ">=0.60.5",
     "react-native-date-picker": "^3.0.0",
@@ -62,7 +61,6 @@
     "@babel/runtime": "^7.6.2",
     "@react-native-community/async-storage": "^1.6.3",
     "@react-native-community/bob": "^0.10.0",
-    "@react-native-community/datetimepicker": "^2.1.0",
     "@react-native-community/eslint-config": "^0.0.5",
     "@react-native-community/toolbar-android": "0.1.0-rc.2",
     "@storybook/addon-actions": "^5.3.18",
