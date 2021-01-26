@@ -185,6 +185,7 @@
       }
     },
     "componentsDefaultDirectory": "src/components/{name}",
-    "packageManager": "yarn"
+    "packageManager": "yarn",
+    "defaultScope": "stryber.matterhorn-native"
   }
 }
