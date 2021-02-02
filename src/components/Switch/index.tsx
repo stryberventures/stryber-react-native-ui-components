@@ -24,6 +24,7 @@ export interface ISwitchProps {
   error?: string;
   disabled?: boolean;
   bgColor?: string;
+  textPosition?: 'right' | 'left';
 }
 type SwitchState = {
   circlePosXStart?: number;
@@ -88,13 +89,33 @@ class Switch extends Component<ISwitchProps, SwitchState> {
       error,
       disabled,
       bgColor,
+      textPosition
     } = this.props;
     const styles = getStyles({
       theme,
       size,
+      textPosition
     });
     const {checked} = this.state;
     const regularBgColor = bgColor || theme.colors.primary;
+    const SwitchText = () =>  (<Text
+      style={{
+        ...styles.text,
+        color: error
+          ? checked
+            ? theme.colors.accent2
+            : theme.colors.accent2
+          : disabled
+          ? checked
+            ? theme.colors.gray15
+            : theme.colors.gray15
+          : checked
+          ? theme.colors.black
+          : theme.colors.gray15,
+      }}>
+      {this.props.text}
+    </Text>);
+
     return (
       <>
         <TouchableOpacity
@@ -102,6 +123,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
           activeOpacity={0.5}
           disabled={disabled}
           style={[{flexDirection: 'row', alignItems: 'center'}, style]}>
+          {textPosition === 'left' && <SwitchText />}
           <Animated.View
             style={[
               styles.container,
@@ -154,23 +176,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
               <Animated.View style={this.props.buttonContainerStyle} />
             </Animated.View>
           </Animated.View>
-          <Text
-            style={{
-              ...styles.text,
-              color: error
-                ? checked
-                  ? theme.colors.accent2
-                  : theme.colors.accent2
-                : disabled
-                ? checked
-                  ? theme.colors.gray15
-                  : theme.colors.gray15
-                : checked
-                ? theme.colors.black
-                : theme.colors.gray15,
-            }}>
-            {this.props.text}
-          </Text>
+          {textPosition === 'right' && <SwitchText />}
         </TouchableOpacity>
         {!!this.props.error && (
           <View style={styles.errorContainer}>
@@ -193,6 +199,7 @@ Switch.defaultProps = {
   buttonContainerStyle: {},
   type: 0,
   size: 'regular',
+  textPosition: 'right',
   disabled: false,
 };
 export default withTheme(Switch);
