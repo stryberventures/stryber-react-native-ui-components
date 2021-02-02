@@ -227,7 +227,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "stryber.matterhorn-native/date-picker@0.0.2": {
+    "stryber.matterhorn-native/date-picker@0.0.3": {
         "files": [
             {
                 "relativePath": "src/components/DatePicker/index.tsx",
@@ -410,7 +410,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "stryber.matterhorn-native/list@0.0.1": {
+    "stryber.matterhorn-native/list@0.0.2": {
         "files": [
             {
                 "relativePath": "src/components/List/ListHeader.tsx",
@@ -576,7 +576,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "stryber.matterhorn-native/switch@0.0.2": {
+    "stryber.matterhorn-native/switch@0.0.3": {
         "files": [
             {
                 "relativePath": "src/components/Switch/constants.ts",
