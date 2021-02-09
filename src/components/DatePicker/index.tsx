@@ -32,6 +32,7 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   props?: any;
   saveDateOnCancel?: boolean;
   showModal?: boolean;
+  modalMode?: boolean;
   placeholderTextColor?: string;
   textColor?: string;
   inputStyle?: any;
@@ -50,8 +51,11 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
     date: this.props.value || undefined,
   };
   getValue = () => this.state.date;
-  handlePressed = () => {
+  showModal = () => {
     this.setState(() => ({showModal: true}));
+  };
+  handlePressed = () => {
+    this.showModal();
   };
   getDateTimeObj = () => {
     const {date} = this.state;
@@ -143,7 +147,8 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       inputStyle,
       iconSize,
       inputBoxStyle,
-      icon
+      modalMode,
+      icon,
     } = this.props;
     const {year, month, day, hours, minutes} = this.getDateTimeObj();
     const dateSet = day && month && year;
@@ -152,7 +157,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       time: `${hours}:${minutes}`,
       datetime: `${day}-${month}-${year} ${hours}:${minutes}`
     };
-    const dateStr = dateSet 
+    const dateStr = dateSet
       ? valueFormat[mode]
       : label;
     const placeholderColor = showModal
@@ -161,6 +166,11 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       ? placeholderTextColor
       : theme.colors.gray;
     const inputColor = textColor ? textColor : theme.colors.darkGrey;
+
+    if (modalMode) {
+      return this.renderModal();
+    }
+
     return (
       <TouchableWithoutFeedback style={style} onPress={this.handlePressed}>
         <View pointerEvents="box-only">
@@ -195,6 +205,7 @@ DatePicker.defaultProps = {
   style: {},
   value: undefined,
   mode: 'date',
-  iconSize: 20
+  iconSize: 20,
+  modalMode: false,
 };
 export default withTheme(DatePicker);
