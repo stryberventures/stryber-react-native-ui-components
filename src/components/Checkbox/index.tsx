@@ -22,6 +22,7 @@ export interface ICheckboxProps {
   size?: 'regular' | 'large';
   bgColor?: string;
   textClickable?: boolean;
+  testID?: any;
 }
 export type CheckboxState = {
   checked?: any;
@@ -92,6 +93,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
       bgColor,
       tickColor,
       textClickable,
+      testID,
     } = this.props;
     const checkboxSizes =
       // @ts-ignore
@@ -107,7 +109,7 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     });
 
     return (
-      <TouchableOpacity disabled={textClickable} onPress={this.onPress}>
+      <TouchableOpacity testID={testID} disabled={textClickable} onPress={this.onPress}>
         <Animated.View
           style={[styles.checkbox, {transform: [{scale: springValue}]}]}>
           {(this.state.checked && iconComponent) ||
