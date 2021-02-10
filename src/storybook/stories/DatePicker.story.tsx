@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 import {DatePicker, Button} from '../../components';
 // @ts-ignore
 import CenterView from '../../components/CenterView';
 import {storiesOf} from '@storybook/react-native';
 import {datePicker} from '../../static/markdown';
-import { ArrowDown } from '../../components/Icons';
+import {ArrowDown} from '../../components/Icons';
 
 storiesOf('DatePicker', module)
   .addParameters({
@@ -19,7 +19,13 @@ storiesOf('DatePicker', module)
     return <DatePicker label="Choose date" mode="datetime" iconSize={18} />;
   })
   .add('time mode', () => {
-    return <DatePicker mode="time" icon={() => <ArrowDown  fill={'#444'} />} style={{width: 135}}/>;
+    return (
+      <DatePicker
+        mode="time"
+        icon={() => <ArrowDown fill={'#444'} />}
+        style={{width: 135}}
+      />
+    );
   })
   .add('modalMode', () => {
     const TestComponent = () => {
@@ -29,14 +35,27 @@ storiesOf('DatePicker', module)
           datePickerRef.current.showModal();
         }
       };
-      const onChange = (data) => {
+      const onDateSelected = (data) => {
         setTimeout(() => {
           Alert.alert('', `${data.name}: ${data.value}`);
         }, 0);
       };
+      const onClose = () => {
+        setTimeout(() => {
+          Alert.alert('', 'Picker closed');
+        }, 0);
+      };
+
       return (
         <>
-          <DatePicker ref={datePickerRef} modalMode onChange={onChange} />
+          <DatePicker
+            ref={datePickerRef}
+            modalMode
+            onDateSelected={onDateSelected}
+            onClose={onClose}
+            modalButtonSelectText="Select"
+            modalButtonCloseText="Close"
+          />
           <Button onPress={onPress}>Open date picker</Button>
         </>
       );
