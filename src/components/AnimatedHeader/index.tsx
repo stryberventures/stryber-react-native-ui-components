@@ -26,7 +26,7 @@ const AnimatedHeader = () => {
       />
       <Animated.ScrollView
         bounces={false}
-        scrollEventThrottle={16}
+        scrollEventThrottle={15}
         style={{
           paddingTop: HEADER_HEIGHT,
         }}
