@@ -227,7 +227,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "stryber.matterhorn-native/date-picker@0.0.4": {
+    "stryber.matterhorn-native/date-picker@0.0.5": {
         "files": [
             {
                 "relativePath": "src/components/DatePicker/index.tsx",
