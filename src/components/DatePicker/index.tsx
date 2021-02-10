@@ -47,9 +47,10 @@ type DatePickerState = {
 class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   static defaultProps: any;
   state = {
-    showModal: this.props.showModal || false,
-    date: this.props.startDate || undefined,
+    showModal: this.props.showModal,
+    date: this.props.startDate,
   };
+  startDate = this.props.startDate;
   getValue = () => this.state.date;
   showModal = () => {
     this.setState(() => ({showModal: true}));
@@ -76,13 +77,17 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       () => ({showModal: false}),
       () => {
         const {onDateSelected, name} = this.props;
+        this.startDate = this.state.date;
         onDateSelected!({name, value: this.state.date});
       },
     );
   };
   handleModalClose = () => {
     this.setState(
-      () => ({showModal: false}),
+      () => ({
+        showModal: false,
+        date: this.startDate,
+      }),
       () => {
         const {onClose} = this.props;
         onClose!();
@@ -92,14 +97,12 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   handleDateChange = (date: any) => {
     this.setState(prevState => ({
       date: date,
-      startDate: date,
       showModal: prevState.showModal,
     }));
   };
   renderModal = () => {
     const {showModal, date} = this.state;
     const {
-      startDate,
       modalOverlayStyle,
       modalStyle,
       modalBtnContainer,
@@ -138,7 +141,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
             <DateTimePicker
               style={styles.datePicker}
               mode={mode}
-              date={date || startDate}
+              date={date}
               onDateChange={this.handleDateChange}
               minimumDate={minDate}
               maximumDate={maxDate}
@@ -223,5 +226,6 @@ DatePicker.defaultProps = {
   mode: 'date',
   iconSize: 20,
   modalMode: false,
+  showModal: false,
 };
 export default withTheme(DatePicker);
