@@ -1,16 +1,14 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 export default StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,.3)',
-    alignItems: 'center',
     justifyContent: 'flex-end',
   },
   modal: {
     backgroundColor: '#fff',
     height: 260,
     width: '100%',
-    justifyContent: 'center'
   },
   modalBtnContainer: {
     width: '100%',
@@ -18,18 +16,17 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: 15,
-    marginTop: 15,
-  },
-  container: {
-    borderBottomWidth: 1,
-    justifyContent: 'center',
-    borderRadius: 2,
-    height: 50,
+    marginTop: Platform.OS === 'ios' ? 7 : 15,
+    marginBottom: Platform.OS === 'ios' ? 0 : 15,
   },
   datePicker: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: Platform.OS === 'ios' ? -10 : 0,
   },
   text: {
     width: '100%',
+  },
+  buttonDone: {
+    marginLeft: Platform.OS === 'ios' ? 0 : 15,
   },
 });

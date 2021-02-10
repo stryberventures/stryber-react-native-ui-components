@@ -15,16 +15,16 @@ interface IDatePickerProps extends React.HTMLAttributes<Element> {
   name?: string;
   mode?: 'date' | 'datetime' | 'time';
   startDate?: any;
-  onChange?: (...args: any[]) => any;
+  onDateSelected?: (...args: any[]) => any;
+  onClose?: () => void;
   minDate?: any;
   maxDate?: any;
-  modalButtonText?: string;
+  modalButtonSelectText?: string;
+  modalButtonCloseText?: string;
   modalOverlayStyle?: any;
   modalStyle?: any;
-  modalButtonStyle?: any;
   modalBtnContainer?: any;
   style?: any;
-  value?: any;
   theme?: any;
   label?: string;
   error?: string;
@@ -48,7 +48,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
   static defaultProps: any;
   state = {
     showModal: this.props.showModal || false,
-    date: this.props.value || undefined,
+    date: this.props.startDate || undefined,
   };
   getValue = () => this.state.date;
   showModal = () => {
@@ -71,13 +71,21 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       minutes: date ? `${date.getMinutes()}`.padStart(2, '0') : '',
     };
   };
-
+  handleModalSetDate = () => {
+    this.setState(
+      () => ({showModal: false}),
+      () => {
+        const {onDateSelected, name} = this.props;
+        onDateSelected!({name, value: this.state.date});
+      },
+    );
+  };
   handleModalClose = () => {
     this.setState(
       () => ({showModal: false}),
       () => {
-        const {onChange, name} = this.props;
-        onChange!({name, value: this.state.date});
+        const {onClose} = this.props;
+        onClose!();
       },
     );
   };
@@ -95,8 +103,8 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       modalOverlayStyle,
       modalStyle,
       modalBtnContainer,
-      modalButtonStyle,
-      modalButtonText,
+      modalButtonSelectText,
+      modalButtonCloseText,
       mode,
       minDate,
       maxDate,
@@ -111,13 +119,20 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
         <View style={[styles.overlay, modalOverlayStyle]}>
           <View style={[styles.modal, modalStyle]}>
             <View style={[styles.modalBtnContainer, modalBtnContainer]}>
-              <RNButton
-                // @ts-ignore
-                title={modalButtonText}
-                // @ts-ignore
-                style={[modalButtonStyle]}
-                onPress={this.handleModalClose}
-              />
+              <View style={[modalBtnContainer]}>
+                <RNButton
+                  // @ts-ignore
+                  title={modalButtonCloseText}
+                  onPress={this.handleModalClose}
+                />
+              </View>
+              <View style={[modalBtnContainer, styles.buttonDone]}>
+                <RNButton
+                  // @ts-ignore
+                  title={modalButtonSelectText}
+                  onPress={this.handleModalSetDate}
+                />
+              </View>
             </View>
             {/*//@ts-ignore */}
             <DateTimePicker
@@ -155,11 +170,9 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
     const valueFormat = {
       date: `${day}-${month}-${year}`,
       time: `${hours}:${minutes}`,
-      datetime: `${day}-${month}-${year} ${hours}:${minutes}`
+      datetime: `${day}-${month}-${year} ${hours}:${minutes}`,
     };
-    const dateStr = dateSet
-      ? valueFormat[mode]
-      : label;
+    const dateStr = dateSet ? valueFormat[mode] : label;
     const placeholderColor = showModal
       ? theme.colors.primary
       : placeholderTextColor
@@ -179,8 +192,11 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
             inputStyle={inputStyle}
             variant={variant}
             error={error}
-            rightIcon={icon ? icon
-              : () => (<Calendar size={iconSize} fill={placeholderColor} />)}
+            rightIcon={
+              icon
+                ? icon
+                : () => <Calendar size={iconSize} fill={placeholderColor} />
+            }
             placeholder={dateStr}
             style={[{marginVertical: 0}, style]}
             inputBoxStyle={inputBoxStyle}
@@ -195,15 +211,15 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
 }
 DatePicker.defaultProps = {
   startDate: new Date(),
-  onChange: () => {},
-  modalButtonText: 'Done',
+  onDateSelected: () => {},
+  onClose: () => {},
+  modalButtonSelectText: 'Done',
+  modalButtonCloseText: 'Cancel',
   name: 'datepicker',
   modalOverlayStyle: {},
   modalStyle: {},
-  modalButtonStyle: {},
   modalBtnContainer: {},
   style: {},
-  value: undefined,
   mode: 'date',
   iconSize: 20,
   modalMode: false,
