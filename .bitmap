@@ -19,7 +19,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "stryber.matterhorn-native/animated-header@0.0.2": {
+    "stryber.matterhorn-native/animated-header@0.0.3": {
         "files": [
             {
                 "relativePath": "src/components/AnimatedHeader/index.tsx",
