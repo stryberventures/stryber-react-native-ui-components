@@ -153,4 +153,5 @@ const spaces = {
   xxl15: 256,
   xxl16: 512,
 };
+
 export {key, colors, sizes, fontSizes, fontWeights, fonts, spaces};
