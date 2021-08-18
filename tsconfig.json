@@ -22,5 +22,11 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext"
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "src/storybook",
+    "src/static",
+    "src/storybook.test.ts",
+  ]
 }

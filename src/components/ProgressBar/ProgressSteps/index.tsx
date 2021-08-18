@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
@@ -10,7 +10,7 @@ export interface IProgressStepsProps {
   theme?: any;
 }
 class ProgressSteps extends Component<IProgressStepsProps> {
-  static defaultProps: any;  
+  static defaultProps: any;
 
   render() {
   const {
@@ -18,6 +18,7 @@ class ProgressSteps extends Component<IProgressStepsProps> {
     value,
     totalValue,
     theme,
+    // @ts-ignore
     ...props
   } = this.props;
   const styles = getStyles(theme, this.props);

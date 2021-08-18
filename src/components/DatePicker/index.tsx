@@ -111,6 +111,7 @@ class DatePicker extends Component<IDatePickerProps, DatePickerState> {
       mode,
       minDate,
       maxDate,
+      // @ts-ignore
       ...props
     } = this.props;
     return (

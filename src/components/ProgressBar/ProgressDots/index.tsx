@@ -10,7 +10,7 @@ export interface IProgressDotsProps {
   theme?: any;
 }
 class ProgressDots extends Component<IProgressDotsProps> {
-  static defaultProps: any;  
+  static defaultProps: any;
 
   render() {
   const {
@@ -18,6 +18,7 @@ class ProgressDots extends Component<IProgressDotsProps> {
     value,
     totalValue,
     theme,
+    // @ts-ignore
     ...props
   } = this.props;
   const styles = getStyles(theme, this.props);
