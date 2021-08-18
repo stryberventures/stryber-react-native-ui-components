@@ -2,6 +2,9 @@ import React, {useContext, forwardRef, ComponentClass} from 'react';
 import {storage} from '../other/core';
 import {ThemeContext} from '../ThemeContextProvider';
 import {THEME_KEY, defaultTheme} from '../other/constants';
+
+export type ThemeType = typeof defaultTheme;
+
 const withTheme = <ComposedComponentProps extends {}>(
   Component:
     | React.FC<ComposedComponentProps>
@@ -9,7 +12,7 @@ const withTheme = <ComposedComponentProps extends {}>(
 ) => {
   type WrapperComponentProps = ComposedComponentProps & {
     themes?: any[];
-    theme?: any;
+    theme?: ThemeType;
     setTheme?: Function;
   };
 
