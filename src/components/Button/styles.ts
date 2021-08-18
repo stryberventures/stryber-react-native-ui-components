@@ -3,7 +3,7 @@ import {defaultTheme} from '../other/constants';
 import {IButtonProps, IButtonState} from './index';
 
 const getStyles = (
-  theme = defaultTheme,
+  theme: any = defaultTheme,
   props: IButtonProps,
   state: IButtonState,
 ) => {

@@ -136,7 +136,9 @@ class Button extends React.Component<IButtonProps, IButtonState> {
             <View style={styles.content}>
               {icon && (
                 <View style={styles.leftIconContainer}>
-                  <IconComponent fill={styles.icon.color} {...iconProps} />
+                  {IconComponent && (
+                    <IconComponent fill={styles.icon.color} {...iconProps} />
+                  )}
                 </View>
               )}
               <Text style={[styles.buttonText, textStyle]}>{children}</Text>

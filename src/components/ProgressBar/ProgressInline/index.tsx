@@ -12,7 +12,7 @@ export interface IProgressInlineProps {
   theme?: any;
 }
 class ProgressInline extends Component<IProgressInlineProps> {
-  static defaultProps: any;  
+  static defaultProps: any;
 
   render() {
   const {
@@ -22,12 +22,13 @@ class ProgressInline extends Component<IProgressInlineProps> {
     title,
     infoShowed,
     theme,
+    // @ts-ignore
     ...props
   } = this.props;
   const styles = getStyles(theme, this.props);
     return (
       <View >
-        { 
+        {
           infoShowed && <View style={styles.info}>
             <Text>{title}</Text>
             <Text>{value}</Text>

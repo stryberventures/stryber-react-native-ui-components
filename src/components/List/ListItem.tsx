@@ -55,7 +55,7 @@ const ListItem: React.FC<IProps> = props => {
       {showIconWithBackground && (
         <View style={[styles.itemLeftWrapper, leftWrapperStyles]}>
           <View style={styles.itemIconWrapper}>
-            <IconComponent {...props.iconProps} />
+            {IconComponent && <IconComponent {...props.iconProps} />}
           </View>
         </View>
       )}
@@ -69,7 +69,7 @@ const ListItem: React.FC<IProps> = props => {
           <View style={styles.itemIconValueWrapper}>
             {showSimpleIcon && (
               <View style={styles.itemSimpleIconWrapper}>
-                <IconComponent {...props.iconProps} />
+                {IconComponent && <IconComponent {...props.iconProps} />}
               </View>
             )}
             <View>
