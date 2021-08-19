@@ -79,7 +79,7 @@ export default class AccordionPreview extends Component<
     activeSections: [],
     openMultiple: false,
   };
-  renderHeader = (section, index, isOpen) => {
+  renderHeader = (section, index) => {
     return (
       <View
         style={[

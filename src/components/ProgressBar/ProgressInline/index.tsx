@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
@@ -15,25 +15,16 @@ class ProgressInline extends Component<IProgressInlineProps> {
   static defaultProps: any;
 
   render() {
-  const {
-    size,
-    value,
-    totalValue,
-    title,
-    infoShowed,
-    theme,
-    // @ts-ignore
-    ...props
-  } = this.props;
-  const styles = getStyles(theme, this.props);
+    const {value, title, infoShowed, theme} = this.props;
+    const styles = getStyles(theme, this.props);
     return (
-      <View >
-        {
-          infoShowed && <View style={styles.info}>
+      <View>
+        {infoShowed && (
+          <View style={styles.info}>
             <Text>{title}</Text>
             <Text>{value}</Text>
           </View>
-        }
+        )}
         <View style={styles.inlineBar}>
           <View style={[StyleSheet.absoluteFill, styles.inlineProgress]} />
         </View>

@@ -1,34 +1,33 @@
-import * as React from "react";
-import { View } from "react-native";
+import * as React from 'react';
+import {View} from 'react-native';
 import {
   Button,
-  Text,
   Checkbox,
   Switch,
   DatePicker,
   Dropdown,
-  Input
-} from "../../../components";
+  Input,
+} from '../../../components';
 const FormRef = () => {
   const dropdownData = [
     {
-      value: "Banana"
+      value: 'Banana',
     },
     {
-      value: "Mango"
+      value: 'Mango',
     },
     {
-      value: "Pear"
+      value: 'Pear',
     },
     {
-      value: "Cocoa"
+      value: 'Cocoa',
     },
     {
-      value: "Strawberry"
+      value: 'Strawberry',
     },
     {
-      value: "Apple"
-    }
+      value: 'Apple',
+    },
   ];
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
@@ -44,7 +43,7 @@ const FormRef = () => {
       checkbox: checkboxRef.current.getValue(),
       switch: switchRef.current.getValue(),
       date: dateRef.current.getValue(),
-      dropdown: dropdownRef.current.getValue()
+      dropdown: dropdownRef.current.getValue(),
     });
   return (
     <View>
@@ -73,9 +72,7 @@ const FormRef = () => {
         label="Pick fast"
         ref={dropdownRef}
       />
-      <Button onPress={showValues}>
-        Form Submit
-      </Button>
+      <Button onPress={showValues}>Form Submit</Button>
     </View>
   );
 };

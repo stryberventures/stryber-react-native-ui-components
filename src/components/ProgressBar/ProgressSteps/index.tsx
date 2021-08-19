@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View, Text } from 'react-native';
+import {View, Text} from 'react-native';
 import withTheme from '../../withTheme';
 import getStyles from './styles';
 
@@ -13,28 +13,21 @@ class ProgressSteps extends Component<IProgressStepsProps> {
   static defaultProps: any;
 
   render() {
-  const {
-    size,
-    value,
-    totalValue,
-    theme,
-    // @ts-ignore
-    ...props
-  } = this.props;
-  const styles = getStyles(theme, this.props);
-  const steps = [];
-  for (let i=0; i<totalValue-value; i++) {
-    steps.push(<View style={styles.dot} />)
-  }
-  return <View style={styles.stepsBar}>
-    <View style={styles.stepsWrapper}>
-      <View style={styles.stepsProgress} />
-      <View style={styles.dots}>
-        {steps}
+    const {value, totalValue, theme} = this.props;
+    const styles = getStyles(theme, this.props);
+    const steps = [];
+    for (let i = 0; i < totalValue - value; i++) {
+      steps.push(<View style={styles.dot} />);
+    }
+    return (
+      <View style={styles.stepsBar}>
+        <View style={styles.stepsWrapper}>
+          <View style={styles.stepsProgress} />
+          <View style={styles.dots}>{steps}</View>
+        </View>
+        <Text style={styles.stepsText}>{`${value}/${totalValue}`}</Text>
       </View>
-    </View>
-    <Text style={styles.stepsText}>{`${value}/${totalValue}`}</Text>
-  </View>
+    );
   }
 }
 
