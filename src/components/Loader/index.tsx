@@ -51,7 +51,7 @@ class Loader extends Component<ILoaderProps> {
 
   render() {
     // @ts-ignore
-    const {size, theme, dotsAmount, ...props} = this.props;
+    const {theme} = this.props;
     const interpolated = this.state.dotAnimations.map((dot: Animated.Value) => {
       return dot.interpolate({
         inputRange: [0, 1],

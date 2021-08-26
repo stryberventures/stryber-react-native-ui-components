@@ -54,7 +54,7 @@ class Tag extends React.Component<ITagProps, ITagState> {
     });
   };
   render() {
-    const {withCross, style, children, theme, textColor, ...props} = this.props;
+    const {withCross, style, children, theme, ...props} = this.props;
     const styles: any = getStyles(theme, this.props, this.state);
     return (
       <TouchableOpacity

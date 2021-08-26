@@ -96,7 +96,7 @@ class Tags extends React.Component<ITagsProps, ITagsState> {
   }
 
   render() {
-    const {style, theme, tags, ...props} = this.props;
+    const {theme, tags, ...props} = this.props;
     const styles: any = getStyles(theme);
     return (
       <>

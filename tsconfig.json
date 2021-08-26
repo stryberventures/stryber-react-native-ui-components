@@ -28,5 +28,7 @@
     "src/storybook",
     "src/static",
     "src/storybook.test.ts",
+    "src/storyLoader.js",
+    "src/index.ts",
   ]
 }
