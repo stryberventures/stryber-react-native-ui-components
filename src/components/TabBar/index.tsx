@@ -29,6 +29,7 @@ interface ITabBarProps {
   onTabLongPress?: (...args: any[]) => any;
   tabStyle?: any;
   labelStyle?: any;
+  activeLabelStyle?: any;
   indicatorStyle?: any;
   contentContainerStyle?: any;
   style?: any;
@@ -36,9 +37,7 @@ interface ITabBarProps {
   renderIndicator?: (...args: any[]) => any;
   segmentView?: boolean;
   segmentLineColor?: string;
-  textColor?: string;
   activeTabBackground?: string;
-  activeTabTextColor?: string;
 }
 type TabBarState = {
   layout?: any;
@@ -113,20 +112,21 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
   };
   getMemoizedTabWidthGettter = memoize(
     (
-      layout: any,
-      routes: any,
-      scrollEnabled: any,
-      tabWidths: any,
-      flattenedWidth: any,
-    ) => (i: any) =>
-      this.getComputedTabWidth(
-        i,
-        layout,
-        routes,
-        scrollEnabled,
-        tabWidths,
-        flattenedWidth,
-      ),
+        layout: any,
+        routes: any,
+        scrollEnabled: any,
+        tabWidths: any,
+        flattenedWidth: any,
+      ) =>
+      (i: any) =>
+        this.getComputedTabWidth(
+          i,
+          layout,
+          routes,
+          scrollEnabled,
+          tabWidths,
+          flattenedWidth,
+        ),
   );
   getMaxScrollDistance = (tabBarWidth: any, layoutWidth: any) =>
     tabBarWidth - layoutWidth;
@@ -242,15 +242,14 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       onTabLongPress,
       tabStyle,
       labelStyle,
+      activeLabelStyle,
       indicatorStyle,
       contentContainerStyle,
       style,
       indicatorContainerStyle,
       segmentView,
       segmentLineColor,
-      textColor,
       activeTabBackground,
-      activeTabTextColor,
     } = this.props;
     const {layout, tabWidths} = this.state;
     // @ts-ignore
@@ -332,9 +331,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
             {routes.map((route: any) => (
               <Tab
                 segmentLineColor={segmentLineColor}
-                textColor={textColor}
                 activeTabBackground={activeTabBackground}
-                activeTabTextColor={activeTabTextColor}
                 segmentView={segmentView}
                 onLayout={
                   isWidthDynamic
@@ -389,6 +386,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                 }}
                 onLongPress={() => onTabLongPress && onTabLongPress({route})}
                 labelStyle={labelStyle}
+                activeLabelStyle={activeLabelStyle}
                 style={tabStyle}
               />
             ))}

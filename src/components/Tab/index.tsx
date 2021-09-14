@@ -10,27 +10,24 @@ interface ITabProps {
   position: {};
   navigationState: any;
   renderLabel?: (...args: any[]) => any;
-  renderIcon?: (...args: any[]) => any;
+  renderIcon?: (props: {route: {}; focused: boolean}) => any;
   renderBadge?: (...args: any[]) => any;
   getLabelText?: (...args: any[]) => any;
   getTestID?: (...args: any[]) => any;
   getAccessibilityLabel?: (...args: any[]) => any;
   getAccessible?: (...args: any[]) => any;
   theme?: any;
-  blackColor?: string;
-  whiteColor?: string;
   pressColor?: string;
   pressOpacity?: number;
   labelStyle?: {};
+  activeLabelStyle?: {};
   style?: {};
   onLayout?: (...args: any[]) => any;
   onPress?: (...args: any[]) => any;
   onLongPress?: (...args: any[]) => any;
   segmentView?: boolean;
   segmentLineColor?: string;
-  textColor?: string;
   activeTabBackground?: string;
-  activeTabTextColor?: string;
 }
 class Tab extends React.Component<ITabProps, {}> {
   static defaultProps: any;
@@ -69,20 +66,17 @@ class Tab extends React.Component<ITabProps, {}> {
       getAccessibilityLabel,
       getAccessible,
       theme,
-      blackColor = theme.colors.black,
-      whiteColor = theme.colors.white,
       pressColor = theme.colors.gray,
       pressOpacity,
       labelStyle,
+      activeLabelStyle,
       style,
       onLayout,
       onPress,
       onLongPress,
       segmentView,
       segmentLineColor,
-      textColor,
       activeTabBackground,
-      activeTabTextColor,
     } = this.props;
     const tabIndex = navigationState.routes.indexOf(route);
     const isFocused = navigationState.index === tabIndex;
@@ -105,12 +99,10 @@ class Tab extends React.Component<ITabProps, {}> {
       const activeIcon = renderIcon({
         route,
         focused: true,
-        color: blackColor,
       });
       const inactiveIcon = renderIcon({
         route,
         focused: false,
-        color: blackColor,
       });
       if (inactiveIcon != null && activeIcon != null) {
         icon = (
@@ -130,7 +122,7 @@ class Tab extends React.Component<ITabProps, {}> {
       renderLabelPassed !== undefined
         ? renderLabelPassed
         : // eslint-disable-next-line no-shadow
-          ({route, color}: any) => {
+          ({route}: any) => {
             const labelText = getLabelText!({route});
             const activeSegmentLabelWrapper = {
               backgroundColor: activeTabBackground || theme.colors.primary,
@@ -149,10 +141,10 @@ class Tab extends React.Component<ITabProps, {}> {
                     <Animated.Text
                       style={[
                         styles.label,
+                        isFocused && styles.activeLabel,
                         icon ? {marginTop: 0} : null,
-                        {color},
                         labelStyle,
-                        {fontFamily: theme.fonts.fontFamily},
+                        isFocused && activeLabelStyle,
                       ]}>
                       {labelText}
                     </Animated.Text>
@@ -165,10 +157,10 @@ class Tab extends React.Component<ITabProps, {}> {
                 <Animated.Text
                   style={[
                     styles.label,
+                    isFocused && styles.activeLabel,
                     icon ? {marginTop: 0} : null,
-                    {color},
                     labelStyle,
-                    {fontFamily: theme.fonts.fontFamily},
+                    isFocused && activeLabelStyle,
                   ]}>
                   {labelText}
                 </Animated.Text>
@@ -180,15 +172,10 @@ class Tab extends React.Component<ITabProps, {}> {
       const activeLabel = renderLabel({
         route,
         focused: true,
-        color:
-          isFocused && segmentView
-            ? activeTabTextColor || whiteColor
-            : textColor || blackColor,
       });
       const inactiveLabel = renderLabel({
         route,
         focused: false,
-        color: textColor || blackColor,
       });
       label = (
         <View>
