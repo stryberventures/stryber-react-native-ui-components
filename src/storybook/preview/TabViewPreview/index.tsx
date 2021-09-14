@@ -76,7 +76,16 @@ export class ScrollTabViewExample extends React.Component<
         onIndexChange={this.handleIndexChange}
         initialLayout={{width: Dimensions.get('window').width}}
         style={styles.container}
-        renderTabBar={props => <TabBar scrollEnabled {...props} />}
+        renderTabBar={props => (
+          <TabBar
+            scrollEnabled
+            {...props}
+            tabStyle={{ width: 'auto' }}
+            renderIndicator={() => null}
+            labelStyle={{ color: '#666' }}
+            activeLabelStyle={{ color: 'blue', fontWeight: '700', textDecorationLine: 'underline'}}
+          />
+        )}
       />
     );
   }
@@ -127,6 +136,9 @@ export class SegmentViewExample extends React.Component<
         navigationState={this.state}
         renderScene={renderScene}
         onIndexChange={this.handleIndexChange}
+        renderTabBar={props => (
+          <TabBar {...props} activeLabelStyle={{color: '#fff'}} />
+        )}
       />
     );
   }
@@ -159,8 +171,8 @@ export class TabViewBottomIconExample extends React.Component<
         tabBarPosition="bottom"
         renderTabBar={props => (
           <TabBar
-            renderIcon={({route, color}) => (
-              <route.icon height={40} fill={color} />
+            renderIcon={({route, focused}) => (
+              <route.icon height={40} fill={focused ? '#000' : '#999'} />
             )}
             {...props}
           />

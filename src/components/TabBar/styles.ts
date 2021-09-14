@@ -20,7 +20,6 @@ export default StyleSheet.create({
       width: 0,
     },
     zIndex: 1,
-    marginBottom: theme.spaces.xxl2,
   },
   segmentView: {
     backgroundColor: theme.colors.paleBlueGray,

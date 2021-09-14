@@ -6,9 +6,12 @@ export default StyleSheet.create({
   label: {
     margin: 4,
     backgroundColor: 'transparent',
+    fontFamily: theme.fonts.fontFamily,
     fontSize: theme.fontSizes.subhead,
     textAlign: 'center',
+    color: theme.colors.black,
   },
+  activeLabel: {},
   labelWrapper: {
     justifyContent: 'center',
   },
