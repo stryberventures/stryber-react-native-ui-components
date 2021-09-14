@@ -21,8 +21,6 @@ interface ITabBarProps {
   renderBadge?: (...args: any[]) => any;
   renderIcon?: (...args: any[]) => any;
   renderLabel?: (...args: any[]) => any;
-  activeColor?: string;
-  inactiveColor?: string;
   pressColor?: string;
   pressOpacity?: number;
   onTabPress?: (...args: any[]) => any;
@@ -234,8 +232,6 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       renderBadge,
       renderIcon,
       renderLabel,
-      activeColor,
-      inactiveColor,
       pressColor,
       pressOpacity,
       onTabPress,
@@ -365,9 +361,6 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                 renderBadge={renderBadge}
                 renderIcon={renderIcon}
                 renderLabel={renderLabel}
-                // @ts-ignore
-                activeColor={activeColor}
-                inactiveColor={inactiveColor}
                 pressColor={pressColor}
                 pressOpacity={pressOpacity}
                 onPress={() => {
