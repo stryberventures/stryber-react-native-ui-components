@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {I18nManager} from 'react-native';
+import {I18nManager, View} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import withTheme from '../withTheme';
 import {memoize} from '../other/utils';
@@ -83,20 +83,23 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
           : getTabWidth!(0)
         : width;
     return (
-      <Animated.View
-        style={[
-          styles.indicator,
-          {backgroundColor: theme.colors.primary},
-          // If layout is not available, use `left` property for positioning the indicator
-          // This avoids rendering delay until we are able to calculate translateX
-          {width: indicatorWidth},
-          layout.width
-            ? {transform: [{translateX}]}
-            : {left: `${(100 / routes.length) * navigationState.index}%`},
-          width === 'auto' ? {opacity: this.opacity} : null,
-          style,
-        ]}
-      />
+      <>
+        <Animated.View
+          style={[
+            styles.indicator,
+            {backgroundColor: theme.colors.primary},
+            // If layout is not available, use `left` property for positioning the indicator
+            // This avoids rendering delay until we are able to calculate translateX
+            {width: indicatorWidth},
+            layout.width
+              ? {transform: [{translateX}]}
+              : {left: `${(100 / routes.length) * navigationState.index}%`},
+            width === 'auto' ? {opacity: this.opacity} : null,
+            style,
+          ]}
+        />
+        <View style={styles.indicatorBottomLine} />
+      </>
     );
   }
 }
