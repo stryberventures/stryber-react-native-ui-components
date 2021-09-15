@@ -290,7 +290,6 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                   this.getFlattenedTabWidth(tabStyle),
                 ),
               })}
-              <View style={styles.indicatorBottomLine} />
             </Animated.View>
           </>
         )}

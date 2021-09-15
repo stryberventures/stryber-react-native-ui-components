@@ -81,7 +81,6 @@ export class ScrollTabViewExample extends React.Component<
             scrollEnabled
             {...props}
             tabStyle={{ width: 'auto' }}
-            renderIndicator={() => null}
             labelStyle={{ color: '#666' }}
             activeLabelStyle={{ color: 'blue', fontWeight: '700', textDecorationLine: 'underline'}}
           />
