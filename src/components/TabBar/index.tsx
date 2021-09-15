@@ -30,6 +30,7 @@ interface ITabBarProps {
   activeLabelStyle?: any;
   indicatorStyle?: any;
   contentContainerStyle?: any;
+  contentContainerOffset?: number;
   style?: any;
   indicatorContainerStyle?: any;
   renderIndicator?: (...args: any[]) => any;
@@ -130,9 +131,9 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
     tabBarWidth - layoutWidth;
   getTabBarWidth = (props: any, state: any) => {
     const {layout, tabWidths} = state;
-    const {scrollEnabled, tabStyle} = props;
+    const {scrollEnabled, tabStyle, contentContainerOffset} = props;
     const {routes} = props.navigationState;
-    return routes.reduce(
+    const tabsWidth = routes.reduce(
       (acc: any, _: any, i: any) =>
         acc +
         this.getComputedTabWidth(
@@ -145,6 +146,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
         ),
       0,
     );
+    return tabsWidth + contentContainerOffset * 2;
   };
   normalizeScrollValue = (props: any, state: any, value: any) => {
     const {layout} = state;
@@ -241,6 +243,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       activeLabelStyle,
       indicatorStyle,
       contentContainerStyle,
+      contentContainerOffset,
       style,
       indicatorContainerStyle,
       segmentView,
@@ -289,6 +292,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                   tabWidths,
                   this.getFlattenedTabWidth(tabStyle),
                 ),
+                contentContainerOffset,
               })}
             </Animated.View>
           </>
@@ -311,6 +315,9 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                 ? {width: tabBarWidth || tabBarWidthPercent}
                 : styles.container,
               contentContainerStyle,
+              {
+                marginLeft: contentContainerOffset,
+              },
             ]}
             scrollEventThrottle={16}
             onScroll={Animated.event([
@@ -400,4 +407,5 @@ TabBar.defaultProps = {
       : undefined,
   getTestID: ({route}: any) => route.testID,
   renderIndicator: (props: any) => <TabBarIndicator {...props} />,
+  contentContainerOffset: 0,
 };
