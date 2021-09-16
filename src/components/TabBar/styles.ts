@@ -38,12 +38,13 @@ export default StyleSheet.create({
     bottom: 0,
   },
   indicatorBottomLine: {
-    width: '100%',
-    height: 2,
-    backgroundColor: theme.colors.black,
     position: 'absolute',
+    left: 0,
+    right: 0,
     bottom: 0,
+    height: 2,
     opacity: 0.05,
+    backgroundColor: theme.colors.black,
   },
   indicator: {
     position: 'absolute',

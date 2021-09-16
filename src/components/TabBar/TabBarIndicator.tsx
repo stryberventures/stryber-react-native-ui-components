@@ -13,8 +13,12 @@ interface ITabBarIndicatorProps {
   style?: any;
   layout?: any;
   theme?: any;
+  contentContainerOffset?: number;
 }
 class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
+  static defaultProps = {
+    contentContainerOffset: 0,
+  };
   componentDidMount() {
     this.fadeInIndicator();
   }
@@ -72,6 +76,7 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
       style,
       layout,
       theme,
+      contentContainerOffset,
     } = this.props;
     const {routes} = navigationState;
     const translateX =
@@ -96,9 +101,21 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
               : {left: `${(100 / routes.length) * navigationState.index}%`},
             width === 'auto' ? {opacity: this.opacity} : null,
             style,
+            {
+              left: contentContainerOffset,
+              right: contentContainerOffset,
+            },
           ]}
         />
-        <View style={styles.indicatorBottomLine} />
+        <View
+          style={[
+            styles.indicatorBottomLine,
+            {
+              left: contentContainerOffset,
+              right: contentContainerOffset,
+            },
+          ]}
+        />
       </>
     );
   }

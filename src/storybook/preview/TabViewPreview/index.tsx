@@ -80,9 +80,11 @@ export class ScrollTabViewExample extends React.Component<
           <TabBar
             scrollEnabled
             {...props}
-            tabStyle={{ width: 'auto' }}
+            tabStyle={{ width: 'auto', paddingHorizontal: 14 }}
             labelStyle={{ color: '#666' }}
             activeLabelStyle={{ color: 'blue', fontWeight: '700', textDecorationLine: 'underline'}}
+            contentContainerOffset={12}
+            renderIndicator={() => null}
           />
         )}
       />
