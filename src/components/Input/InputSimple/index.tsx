@@ -13,6 +13,7 @@ export interface IInputSimpleProps extends IInputBaseProps {
   type?: 'email' | 'phone' | 'number' | 'default';
   label?: string;
   error?: string;
+  inputLabelStyle?: any;
 
   // native input props
   disabled?: boolean;
@@ -42,6 +43,7 @@ class InputSimple extends Component<IInputSimpleProps> {
       icon,
       rightIcon,
       inputBaseRef,
+      inputLabelStyle,
       ...props
     } = this.props;
     const styles = getStyles({
@@ -58,7 +60,7 @@ class InputSimple extends Component<IInputSimpleProps> {
         ref={inputBaseRef}
         renderPrefix={() => (
           <View style={styles.labelContainer}>
-            <Text style={styles.labelText}>{label}</Text>
+            <Text style={[styles.labelText, inputLabelStyle]}>{label}</Text>
           </View>
         )}
         renderInputLeft={() => (
