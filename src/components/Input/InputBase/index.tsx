@@ -27,6 +27,7 @@ export interface IInputBaseProps extends TextInputProps {
   mask?: string;
   secure?: boolean;
   defaultValue?: string;
+  customTextInputComponent?: any;
 
   // native input props
   value?: string;
@@ -177,6 +178,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       inputBoxStyle,
       color,
       inputStyle,
+      customTextInputComponent,
       ...props
     } = this.props;
     const {toggleSecure} = this.state;
@@ -190,6 +192,9 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     });
     const isSecure = toggleSecure ? false : secure;
     const InputWrapper = this.inputWrapper;
+    const TextInputComponent = customTextInputComponent
+      ? customTextInputComponent
+      : TextInput;
     return (
       <View
         style={[styles.container, style]}
@@ -208,7 +213,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
             {/*
             // @ts-ignore */}
             <InputWrapper style={styles.inputWrapper}>
-              <TextInput
+              <TextInputComponent
                 {...props}
                 // @ts-ignore
                 ref={this.inputRef}
@@ -247,6 +252,7 @@ InputBase.defaultProps = {
   secure: false,
   numberOfLines: NUMBER_OF_LINES,
   maxNumberOfLines: MAX_NUMBER_OF_LINES,
+  customTextInputComponent: null,
   inputRef: () => {},
   renderPrefix: () => {},
   renderPostfix: () => {},
