@@ -225,7 +225,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
                 keyboardType={keyboardTypes[type!]}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
-                onChangeText={val => {
+                onChangeText={(val: string) => {
                   this.controlled = false;
                   this.setState(prevState => ({
                     value: val,
