@@ -16,7 +16,6 @@ import {ButtonCounter, Text} from '@stryberventures/stryber-react-native-ui-comp
 | **\`ononCountChange\`**  | Function that will be executed when user changes count value by tapping on buttons   
 | **\`color\`** | Button background color. Default colors - colors from matterhorn styleguide            |
 | **\`shape\`** | String, set shape of button corners. One of: rectangle, rounded, round           |
-| **\`icon\`** | String, add icon inside button. One of: ArrowDown, Calendar, Check, Eye, EyeDisabled, Search, UserIcon           |
 | **\`iconProps\`** | Object, add properties to the button icon.                                          |
 | **\`style\`**  | An object with button styles 
 | **\`shadow\`**      | Boolean, add shadow to button |
