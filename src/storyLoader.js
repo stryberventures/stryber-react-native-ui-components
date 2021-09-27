@@ -10,6 +10,7 @@ function loadStories() {
   require('./storybook/stories/Button/ButtonLink.story');
   require('./storybook/stories/Button/ButtonOutlined.story');
   require('./storybook/stories/Button/ButtonPrimary.story');
+  require('./storybook/stories/ButtonCounter.story');
   require('./storybook/stories/CacheImage.story');
   require('./storybook/stories/Card.story');
   require('./storybook/stories/CardList.story');
@@ -41,6 +42,7 @@ const stories = [
   './storybook/stories/Button/ButtonLink.story',
   './storybook/stories/Button/ButtonOutlined.story',
   './storybook/stories/Button/ButtonPrimary.story',
+  './storybook/stories/ButtonCounter.story',
   './storybook/stories/CacheImage.story',
   './storybook/stories/Card.story',
   './storybook/stories/CardList.story',
