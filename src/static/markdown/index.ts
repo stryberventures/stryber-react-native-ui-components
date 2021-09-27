@@ -3,6 +3,7 @@ export { accordion } from "./accordion";
 export { badge } from "./badge";
 export { block } from "./block";
 export { button } from "./button";
+export { buttonCounter } from "./buttonCounter";
 export { cacheImage } from "./cacheImage";
 export { card } from "./card";
 export { checkbox } from "./checkbox";

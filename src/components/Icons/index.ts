@@ -8,6 +8,8 @@ import Calendar from './Calendar';
 import Speaker from './Speaker';
 import SpeakerMute from './SpeakerMute';
 import Close from './Close';
+import Plus from './Plus';
+import Minus from './Minus';
 
 export {UserIcon};
 export {Search};
@@ -19,6 +21,8 @@ export {Calendar};
 export {Speaker};
 export {SpeakerMute};
 export {Close};
+export {Plus};
+export {Minus};
 
 export default {
   UserIcon,
@@ -31,4 +35,6 @@ export default {
   Speaker,
   SpeakerMute,
   Close,
+  Plus,
+  Minus,
 };

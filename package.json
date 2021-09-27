@@ -1,6 +1,6 @@
 {
   "name": "@stryberventures/stryber-react-native-ui-components",
-  "version": "0.0.67",
+  "version": "0.0.68",
   "main": "lib/commonjs/index.js",
   "react-native": "lib/module/index.js",
   "module": "lib/module/index.js",
@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "npx react-native start",
+    "start:clean": "watchman watch-del-all && react-native start --reset-cache",
     "ios": "npx react-native run-ios",
     "android": "npx react-native run-android",
     "test": "jest",
