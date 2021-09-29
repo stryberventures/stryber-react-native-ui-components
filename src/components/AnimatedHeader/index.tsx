@@ -6,7 +6,7 @@ const HEADER_HEIGHT = 70;
 const AnimatedHeader = () => {
   const scrollY = new Animated.Value(0);
   const diffClampScrollY = Animated.diffClamp(scrollY, 0, HEADER_HEIGHT);
-  const headerY = Animated.interpolate(diffClampScrollY, {
+  const headerY = Animated.interpolateNode(diffClampScrollY, {
     inputRange: [0, HEADER_HEIGHT],
     outputRange: [0, -HEADER_HEIGHT],
   });
