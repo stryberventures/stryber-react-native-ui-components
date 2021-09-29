@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {I18nManager, View} from 'react-native';
-import Animated, {Easing} from 'react-native-reanimated';
+import Animated, {EasingNode} from 'react-native-reanimated';
 import withTheme from '../withTheme';
 import {memoize} from '../other/utils';
 import styles from './styles';
-const {interpolate, multiply, Extrapolate} = Animated;
+const {interpolateNode, multiply, Extrapolate} = Animated;
 interface ITabBarIndicatorProps {
   position?: {};
   navigationState: any;
@@ -38,7 +38,7 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
       Animated.timing(this.opacity, {
         duration: 150,
         toValue: 1,
-        easing: Easing.in(Easing.linear),
+        easing: EasingNode.in(EasingNode.linear),
       }).start();
     }
   };
@@ -51,7 +51,7 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
       if (i === 0) return [0];
       return [...acc, acc[i - 1] + getTabWidth(i - 1)];
     }, []);
-    const translateX = interpolate(position, {
+    const translateX = interpolateNode(position, {
       inputRange,
       outputRange,
       extrapolate: Extrapolate.CLAMP,
@@ -61,7 +61,7 @@ class TabBarIndicator extends React.Component<ITabBarIndicatorProps, {}> {
   getWidth = memoize((position: any, routes: any, getTabWidth: any) => {
     const inputRange = routes.map((_: any, i: any) => i);
     const outputRange = inputRange.map(getTabWidth);
-    return interpolate(position, {
+    return interpolateNode(position, {
       inputRange,
       outputRange,
       extrapolate: Extrapolate.CLAMP,
