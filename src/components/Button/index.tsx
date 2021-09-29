@@ -106,16 +106,8 @@ class Button extends React.Component<IButtonProps, IButtonState> {
   };
 
   render() {
-    const {
-      style,
-      children,
-      theme,
-      icon,
-      iconProps,
-      type,
-      textStyle,
-      ...props
-    } = this.props;
+    const {style, children, theme, icon, iconProps, type, textStyle, ...props} =
+      this.props;
     const IconComponent =
       (typeof icon === 'string' && Icons[icon]) ||
       (typeof icon === 'function' && icon);

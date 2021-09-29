@@ -304,8 +304,12 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return Math.max(this.visibleItemCount() - 2, 0);
   }
   rippleInsets() {
-    const {top = 0, right = 0, bottom = 0, left = 0} =
-      this.props.rippleInsets || {};
+    const {
+      top = 0,
+      right = 0,
+      bottom = 0,
+      left = 0,
+    } = this.props.rippleInsets || {};
     return {
       top,
       right,
@@ -388,7 +392,13 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
                   transform: [{rotate: angle}],
                 }}>
                 <ArrowDown
-                  fill={this.focused ? (color ? color : theme.colors.primary) : theme.colors.gray15}
+                  fill={
+                    this.focused
+                      ? color
+                        ? color
+                        : theme.colors.primary
+                      : theme.colors.gray15
+                  }
                 />
               </Animated.View>
             </View>

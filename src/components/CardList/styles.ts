@@ -60,7 +60,7 @@ export const getListItemStyles = (theme: any, props: IListItemProps) => {
       },
       shadowOpacity: Platform.OS === 'ios' ? 0.25 : 0.5,
       shadowRadius: 3.84,
-      elevation: 5
+      elevation: 5,
     },
     cardStyle: {
       flexDirection: 'row',

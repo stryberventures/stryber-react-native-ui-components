@@ -1,4 +1,4 @@
-import {StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 const getStyles = () => {
   return StyleSheet.create({
@@ -6,7 +6,7 @@ const getStyles = () => {
       display: 'flex',
       justifyContent: 'center',
       width: '100%',
-    }
+    },
   });
-}
+};
 export default getStyles;

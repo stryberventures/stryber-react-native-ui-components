@@ -35,7 +35,7 @@ storiesOf('DatePicker', module)
           datePickerRef.current.showModal();
         }
       };
-      const onDateSelected = (data) => {
+      const onDateSelected = data => {
         setTimeout(() => {
           Alert.alert('', `${data.name}: ${data.value}`);
         }, 0);

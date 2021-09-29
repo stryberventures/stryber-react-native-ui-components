@@ -58,15 +58,8 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     }).start();
   };
   renderRadioIcon = () => {
-    const {
-      theme,
-      radio,
-      error,
-      disabled,
-      size,
-      bgColor,
-      tickColor,
-    } = this.props;
+    const {theme, radio, error, disabled, size, bgColor, tickColor} =
+      this.props;
     const styles = getStyles({
       theme,
       radio,
@@ -109,7 +102,10 @@ class Checkbox extends Component<ICheckboxProps, CheckboxState> {
     });
 
     return (
-      <TouchableOpacity testID={testID} disabled={textClickable} onPress={this.onPress}>
+      <TouchableOpacity
+        testID={testID}
+        disabled={textClickable}
+        onPress={this.onPress}>
         <Animated.View
           style={[styles.checkbox, {transform: [{scale: springValue}]}]}>
           {(this.state.checked && iconComponent) ||

@@ -166,16 +166,20 @@ class Slider extends Component<ISliderProps, ISliderState> {
   }
 
   getValues() {
-    const valueUp = (this.state.positionUp.interpolate({
-      inputRange: [0, this.state.width],
-      outputRange: [this.props.limitDown, this.props.limitUp],
-      extrapolate: 'clamp',
-    }) as any).__getValue();
-    const valueDown = (this.state.positionDown.interpolate({
-      inputRange: [0, this.state.width],
-      outputRange: [this.props.limitDown, this.props.limitUp],
-      extrapolate: 'clamp',
-    }) as any).__getValue();
+    const valueUp = (
+      this.state.positionUp.interpolate({
+        inputRange: [0, this.state.width],
+        outputRange: [this.props.limitDown, this.props.limitUp],
+        extrapolate: 'clamp',
+      }) as any
+    ).__getValue();
+    const valueDown = (
+      this.state.positionDown.interpolate({
+        inputRange: [0, this.state.width],
+        outputRange: [this.props.limitDown, this.props.limitUp],
+        extrapolate: 'clamp',
+      }) as any
+    ).__getValue();
     return {
       valueUp: this.getRoundedValue(valueUp),
       valueDown: this.getRoundedValue(valueDown),

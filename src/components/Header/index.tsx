@@ -15,15 +15,8 @@ interface IHeaderProps extends React.HTMLAttributes<Element> {
 class Header extends Component<IHeaderProps, {}> {
   static defaultProps: any;
   render() {
-    const {
-      leftIcon,
-      text,
-      textStyle,
-      style,
-      theme,
-      rightIcon,
-      ...props
-    } = this.props;
+    const {leftIcon, text, textStyle, style, theme, rightIcon, ...props} =
+      this.props;
     const styles = getStyles(theme);
     return (
       // @ts-ignore
