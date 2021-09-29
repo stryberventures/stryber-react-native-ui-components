@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {TextInput, Keyboard, I18nManager} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
-import Animated, {Easing} from 'react-native-reanimated';
+import Animated, {EasingNode} from 'react-native-reanimated';
 import {tabView} from '../other/constants';
 import {memoize} from '../other/utils';
 import styles from './styles';
 
 export const TIMING_CONFIG = {
   duration: 200,
-  easing: Easing.out(Easing.cubic),
+  easing: EasingNode.out(EasingNode.cubic),
 };
 
 const {
