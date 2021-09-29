@@ -20,13 +20,8 @@ export interface ICardProps extends IBlockProps {
 class Card extends Component<ICardProps, {}> {
   static defaultProps: any;
   renderBgImageCard = () => {
-    const {
-      theme,
-      backgroundImage,
-      bgImageStyles,
-      children,
-      resizeMode,
-    } = this.props;
+    const {theme, backgroundImage, bgImageStyles, children, resizeMode} =
+      this.props;
     const styles = getStyles(theme, this.props);
     return (
       <ImageBackground

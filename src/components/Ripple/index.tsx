@@ -118,12 +118,8 @@ export default class Ripple extends PureComponent<IRippleProps, RippleState> {
   }
   startRipple(eventLocation: any) {
     const {width, height} = this.state;
-    const {
-      rippleDuration,
-      rippleCentered,
-      rippleSize,
-      onRippleAnimation,
-    } = this.props;
+    const {rippleDuration, rippleCentered, rippleSize, onRippleAnimation} =
+      this.props;
     const w2 = 0.5 * width!;
     const h2 = 0.5 * height!;
     const {locationX, locationY} = rippleCentered

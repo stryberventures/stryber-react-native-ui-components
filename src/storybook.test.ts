@@ -1,7 +1,7 @@
-import initStoryshots from "@storybook/addon-storyshots";
-describe("storybook tests", () => {
+import initStoryshots from '@storybook/addon-storyshots';
+describe('storybook tests', () => {
   initStoryshots({
-    configPath: "./src",
-    framework: "react-native"
+    configPath: './src',
+    framework: 'react-native',
   });
 });

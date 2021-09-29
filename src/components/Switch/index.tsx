@@ -89,32 +89,34 @@ class Switch extends Component<ISwitchProps, SwitchState> {
       error,
       disabled,
       bgColor,
-      textPosition
+      textPosition,
     } = this.props;
     const styles = getStyles({
       theme,
       size,
-      textPosition
+      textPosition,
     });
     const {checked} = this.state;
     const regularBgColor = bgColor || theme.colors.primary;
-    const SwitchText = () =>  (<Text
-      style={{
-        ...styles.text,
-        color: error
-          ? checked
-            ? theme.colors.accent2
-            : theme.colors.accent2
-          : disabled
-          ? checked
-            ? theme.colors.gray15
-            : theme.colors.gray15
-          : checked
-          ? theme.colors.black
-          : theme.colors.gray15,
-      }}>
-      {this.props.text}
-    </Text>);
+    const SwitchText = () => (
+      <Text
+        style={{
+          ...styles.text,
+          color: error
+            ? checked
+              ? theme.colors.accent2
+              : theme.colors.accent2
+            : disabled
+            ? checked
+              ? theme.colors.gray15
+              : theme.colors.gray15
+            : checked
+            ? theme.colors.black
+            : theme.colors.gray15,
+        }}>
+        {this.props.text}
+      </Text>
+    );
 
     return (
       <>

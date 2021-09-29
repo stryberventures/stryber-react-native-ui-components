@@ -34,7 +34,7 @@ class Tab extends React.Component<ITabProps, {}> {
   getActiveOpacity = memoize((position: any, routes: any, tabIndex: any) => {
     if (routes.length > 1) {
       const inputRange = routes.map((_: any, i: number) => i);
-      return Animated.interpolate(position, {
+      return Animated.interpolateNode(position, {
         inputRange,
         outputRange: inputRange.map((i: any) => (i === tabIndex ? 1 : 0)),
       });
@@ -45,7 +45,7 @@ class Tab extends React.Component<ITabProps, {}> {
   getInactiveOpacity = memoize((position: any, routes: any, tabIndex: any) => {
     if (routes.length > 1) {
       const inputRange = routes.map((_: any, i: number) => i);
-      return Animated.interpolate(position, {
+      return Animated.interpolateNode(position, {
         inputRange,
         outputRange: inputRange.map((i: any) => (i === tabIndex ? 0 : 1)),
       });

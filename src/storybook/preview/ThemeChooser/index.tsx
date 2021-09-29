@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { SafeAreaView, TouchableOpacity, View } from "react-native";
+import React, {Component} from 'react';
+import {SafeAreaView, TouchableOpacity, View} from 'react-native';
 import {
   Block,
   Text,
@@ -8,32 +8,31 @@ import {
   Checkbox,
   Switch,
   Input,
-  withTheme
-} from "../../../components";
-import { UserIcon } from "../../../components/Icons";
+  withTheme,
+} from '../../../components';
+import {UserIcon} from '../../../components/Icons';
 interface IThemeChooserProps extends React.HTMLAttributes<Element> {
   themes: any[];
   setTheme: (...args: any[]) => any;
 }
 class ThemeChooser extends Component<IThemeChooserProps, {}> {
   renderThemesPreview = () => {
-    const { setTheme, themes } = this.props;
+    const {setTheme, themes} = this.props;
     return themes.map(theme => (
       <TouchableOpacity
         key={theme.key}
-        style={{ alignItems: "center", marginHorizontal: 5 }}
+        style={{alignItems: 'center', marginHorizontal: 5}}
         flex={0}
-        onPress={() => setTheme(theme.key)}
-      >
+        onPress={() => setTheme(theme.key)}>
         <View
           style={{
             width: 50,
             height: 50,
             backgroundColor: theme.colors.primary,
-            borderRadius: theme.sizes.radius
+            borderRadius: theme.sizes.radius,
           }}
         />
-        <Text style={{ marginTop: 5 }}>{theme.key}</Text>
+        <Text style={{marginTop: 5}}>{theme.key}</Text>
       </TouchableOpacity>
     ));
   };
@@ -45,28 +44,25 @@ class ThemeChooser extends Component<IThemeChooserProps, {}> {
           <Block
             flex={0}
             row
-            style={{ width: "100%", justifyContent: "center", marginTop: 10 }}
-          >
+            style={{width: '100%', justifyContent: 'center', marginTop: 10}}>
             {this.renderThemesPreview()}
           </Block>
         </Block>
         <Block
           flex={0}
           style={{
-            height: "100%",
+            height: '100%',
             marginTop: 40,
-            justifyContent: "flex-start",
-            paddingHorizontal: 20
-          }}
-        >
+            justifyContent: 'flex-start',
+            paddingHorizontal: 20,
+          }}>
           <Block
             flex={0}
             style={{
-              width: "100%",
-              height: "60%",
-              justifyContent: "space-around"
-            }}
-          >
+              width: '100%',
+              height: '60%',
+              justifyContent: 'space-around',
+            }}>
             <Header text="Header" />
             <Button>Button</Button>
             <Input

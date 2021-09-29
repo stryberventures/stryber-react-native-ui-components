@@ -2,7 +2,11 @@ import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../other/constants';
 import {SwitchConfigs} from './constants';
 
-export const getStyles = ({theme = defaultTheme, size = 'regular', textPosition = 'right'}) => {
+export const getStyles = ({
+  theme = defaultTheme,
+  size = 'regular',
+  textPosition = 'right',
+}) => {
   // @ts-ignore
   const config = SwitchConfigs[size] || SwitchConfigs.regular;
   const {width, height, borderRadius, circleRadius, padding} = config;
@@ -30,8 +34,8 @@ export const getStyles = ({theme = defaultTheme, size = 'regular', textPosition 
       backgroundColor: theme.colors.white,
     },
     text: {
-      marginLeft: textPosition === 'right' ?  theme.spaces.xs : 0,
-      marginRight: textPosition === 'left' ?  theme.spaces.xs : 0,
+      marginLeft: textPosition === 'right' ? theme.spaces.xs : 0,
+      marginRight: textPosition === 'left' ? theme.spaces.xs : 0,
       fontSize:
         size === 'large' ? theme.fontSizes.body : theme.fontSizes.subhead,
     },

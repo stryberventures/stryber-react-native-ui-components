@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../other/constants';
 
-const getStyles = (theme=defaultTheme) => {
+const getStyles = (theme = defaultTheme) => {
   return StyleSheet.create({
     container: {
       flexDirection: 'row',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
     },
     errorContainer: {
       marginTop: theme.spaces.xxs,

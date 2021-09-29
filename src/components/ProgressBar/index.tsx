@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View } from 'react-native';
+import {View} from 'react-native';
 import ProgressInline from './ProgressInline';
 import ProgressDots from './ProgressDots';
 import ProgressSteps from './ProgressSteps';
@@ -20,22 +20,17 @@ class ProgressBar extends Component<IProgressBarProps> {
   static defaultProps: any;
 
   render() {
-    const {
-      variant,
-      infoShowed,
-      title,
-      ...props
-    } = this.props;
+    const {variant, infoShowed, title, ...props} = this.props;
     const styles = getStyles();
     return (
       <View style={styles.container}>
-        {
-          variant === 'inline' ? 
+        {variant === 'inline' ? (
           <ProgressInline title={title} infoShowed={infoShowed} {...props} />
-          : variant === 'steps' 
-            ? <ProgressSteps {...props} />
-            : <ProgressDots {...props} />
-        }
+        ) : variant === 'steps' ? (
+          <ProgressSteps {...props} />
+        ) : (
+          <ProgressDots {...props} />
+        )}
       </View>
     );
   }
@@ -47,6 +42,6 @@ ProgressBar.defaultProps = {
   variant: 'inline',
   value: 4,
   totalValue: 4,
-  infoShowed: false
+  infoShowed: false,
 };
 export default withTheme(ProgressBar);
