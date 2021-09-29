@@ -8,6 +8,7 @@ import getStyles from './styles';
 export interface IButtonCounterProps extends TouchableOpacityProps {
   style?: any;
   theme?: any;
+  initialValue?: number;
   children: React.ReactNode;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'regular' | 'small' | 'mini';
@@ -33,10 +34,15 @@ class ButtonCounter extends React.Component<
   IButtonCounterState
 > {
   static defaultProps: any;
-  state = {
-    count: 0,
-    isTouched: false,
-  };
+  constructor(props: IButtonCounterProps) {
+    super(props);
+
+    this.state = {
+      // @ts-ignore-next-line
+      count: props.initialValue,
+      isTouched: false,
+    };
+  }
 
   handlePressIn = () => {
     this.setState({
@@ -125,6 +131,7 @@ class ButtonCounter extends React.Component<
   }
 }
 ButtonCounter.defaultProps = {
+  initialValue: 0,
   iconProps: {
     fill: '#fff',
   },
