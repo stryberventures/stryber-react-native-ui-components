@@ -17,6 +17,8 @@ export interface IButtonCounterProps extends TouchableOpacityProps {
   renderContent?: (children: any, style: any) => React.ReactNode;
   countTextTemplate?: string;
   secondaryColor?: string;
+  renderMinusIcon?: () => React.ReactNode;
+  renderPlusIcon?: () => React.ReactNode;
   iconProps?: any;
   renderCount?: (i: number, style: any) => React.ReactNode;
   onCountChange: (i: number) => void;
@@ -32,7 +34,7 @@ class ButtonCounter extends React.Component<
 > {
   static defaultProps: any;
   state = {
-    count: 1,
+    count: 0,
     isTouched: false,
   };
 
@@ -74,6 +76,8 @@ class ButtonCounter extends React.Component<
       iconProps,
       renderCount = this.renderCount,
       renderContent = this.renderContent,
+      renderMinusIcon,
+      renderPlusIcon,
       ...etc
     } = this.props;
     const styles = getStyles(theme, this.props, this.state);
@@ -85,7 +89,9 @@ class ButtonCounter extends React.Component<
             <TouchableOpacity
               onPress={() => this.onButtonPress(-1)}
               style={styles.reduceButton}>
-              <Icons.Minus {...iconProps} />
+              {(renderMinusIcon && renderMinusIcon()) || (
+                <Icons.Minus {...iconProps} />
+              )}
             </TouchableOpacity>
           </View>
           <View style={styles.centerCol}>
@@ -95,7 +101,9 @@ class ButtonCounter extends React.Component<
             <TouchableOpacity
               onPress={() => this.onButtonPress(1)}
               style={styles.growButton}>
-              <Icons.Plus {...iconProps} />
+              {(renderPlusIcon && renderPlusIcon()) || (
+                <Icons.Plus {...iconProps} />
+              )}
             </TouchableOpacity>
           </View>
         </View>
