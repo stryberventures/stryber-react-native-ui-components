@@ -90,7 +90,7 @@ class ButtonCounter extends React.Component<
 
     if (this.state.count > 0) {
       return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
           <View style={styles.leftCol}>
             <TouchableOpacity
               onPress={() => this.onButtonPress(-1)}
