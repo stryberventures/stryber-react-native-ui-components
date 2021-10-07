@@ -57,6 +57,7 @@ const fontSizes = {
   subhead: 14,
   footnote: 12,
   caption: 12,
+  captionSmall: 10,
   small: 12,
 };
 const fontWeights = {
