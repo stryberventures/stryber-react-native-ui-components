@@ -19,19 +19,19 @@ const getStyles = (
     props.size === 'small'
       ? theme.fontSizes.subhead
       : props.size === 'mini'
-      ? theme.fontSizes.caption
+      ? theme.fontSizes.captionSmall
       : theme.fontSizes.button;
   const fontWeight =
     props.size === 'small'
       ? theme.fontWeights.regular
       : props.size === 'mini'
-      ? theme.fontWeights.regular
+      ? theme.fontWeights.semibold
       : theme.fontWeights.semibold;
   const buttonHeight =
     props.size === 'small'
       ? theme.spaces.xxl5
       : props.size === 'mini'
-      ? theme.spaces.xxl2
+      ? theme.spaces.m
       : theme.spaces.xxl8;
   const buttonWidth =
     props.size === 'small'
@@ -57,6 +57,8 @@ const getStyles = (
         elevation: 5,
       }
     : {};
+  const sideColWidth =
+    props.size === 'small' ? 40 : props.size === 'mini' ? 25 : 50;
 
   const buttonsConfig = {
     regular: {
@@ -75,6 +77,16 @@ const getStyles = (
       },
     },
   };
+  const buttonIconConfig =
+    props.size === 'mini'
+      ? {
+          transform: [
+            {
+              scale: 0.7,
+            },
+          ],
+        }
+      : {};
 
   return StyleSheet.create({
     container: {
@@ -106,7 +118,7 @@ const getStyles = (
       ...buttonsConfig[buttonType].buttonText,
     },
     leftCol: {
-      width: 50,
+      width: sideColWidth,
     },
     centerCol: {
       flex: 1,
@@ -114,7 +126,7 @@ const getStyles = (
       justifyContent: 'center',
     },
     rightCol: {
-      width: 50,
+      width: sideColWidth,
     },
     touchOverlay: {
       position: 'absolute',
@@ -139,6 +151,9 @@ const getStyles = (
       justifyContent: 'center',
       width: '100%',
       height: '100%',
+    },
+    buttonIcon: {
+      ...buttonIconConfig,
     },
   });
 };
