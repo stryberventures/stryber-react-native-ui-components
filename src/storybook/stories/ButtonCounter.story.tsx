@@ -23,6 +23,23 @@ storiesOf('ButtonCounter', module)
       </ButtonCounter>
     </CenterView>
   ))
+  .add('min/max value', () => (
+    <CenterView>
+      <ButtonCounter
+        color="#FDA717"
+        renderCount={(count, style) => (
+          <Text style={style}>
+            8.50 AED <Text style={[style, {color: '#fda717'}]}>x {count}</Text>
+          </Text>
+        )}
+        initialValue={1}
+        minValue={1}
+        maxValue={5}
+        onCountChange={() => null}>
+        Add item
+      </ButtonCounter>
+    </CenterView>
+  ))
   .add('mini', () => (
     <CenterView>
       <ButtonCounter

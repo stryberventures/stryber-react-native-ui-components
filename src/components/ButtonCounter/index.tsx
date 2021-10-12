@@ -9,6 +9,8 @@ export interface IButtonCounterProps extends TouchableOpacityProps {
   style?: any;
   theme?: any;
   initialValue?: number;
+  minValue?: number;
+  maxValue?: number;
   children: React.ReactNode;
   shape?: 'rectangle' | 'rounded' | 'round';
   size?: 'regular' | 'small' | 'mini';
@@ -84,19 +86,28 @@ class ButtonCounter extends React.Component<
       renderContent = this.renderContent,
       renderMinusIcon,
       renderPlusIcon,
+      minValue,
+      maxValue,
       ...etc
     } = this.props;
     const styles = getStyles(theme, this.props, this.state);
+    const minusButtonDisabled = this.state.count === minValue;
+    const plusButtonDisabled = !!maxValue && this.state.count === maxValue;
 
     if (this.state.count > 0) {
       return (
         <View style={[styles.container, style]}>
           <View style={styles.leftCol}>
             <TouchableOpacity
+              disabled={minusButtonDisabled}
               onPress={() => this.onButtonPress(-1)}
               style={styles.reduceButton}>
               {(renderMinusIcon && renderMinusIcon()) || (
-                <Icons.Minus {...iconProps} style={styles.buttonIcon} />
+                <Icons.Minus
+                  {...iconProps}
+                  fill={styles.buttonIconMinus.color}
+                  style={styles.buttonIcon}
+                />
               )}
             </TouchableOpacity>
           </View>
@@ -105,10 +116,15 @@ class ButtonCounter extends React.Component<
           </View>
           <View style={styles.rightCol}>
             <TouchableOpacity
+              disabled={plusButtonDisabled}
               onPress={() => this.onButtonPress(1)}
               style={styles.growButton}>
               {(renderPlusIcon && renderPlusIcon()) || (
-                <Icons.Plus {...iconProps} style={styles.buttonIcon} />
+                <Icons.Plus
+                  {...iconProps}
+                  fill={styles.buttonIconPlus.color}
+                  style={styles.buttonIcon}
+                />
               )}
             </TouchableOpacity>
           </View>
@@ -132,6 +148,7 @@ class ButtonCounter extends React.Component<
 }
 ButtonCounter.defaultProps = {
   initialValue: 0,
+  minValue: 0,
   iconProps: {
     fill: '#fff',
   },
