@@ -87,6 +87,8 @@ const getStyles = (
           ],
         }
       : {};
+  const reduceButtonDisabled = state.count === props.minValue;
+  const growButtonDisabled = !!props.maxValue && state.count === props.maxValue;
 
   return StyleSheet.create({
     container: {
@@ -144,6 +146,7 @@ const getStyles = (
       justifyContent: 'center',
       width: '100%',
       height: '100%',
+      opacity: reduceButtonDisabled ? 0.8 : 1,
     },
     growButton: {
       display: 'flex',
@@ -151,9 +154,16 @@ const getStyles = (
       justifyContent: 'center',
       width: '100%',
       height: '100%',
+      opacity: growButtonDisabled ? 0.8 : 1,
     },
     buttonIcon: {
       ...buttonIconConfig,
+    },
+    buttonIconMinus: {
+      color: reduceButtonDisabled ? theme.colors.gray15 : props.iconProps.fill,
+    },
+    buttonIconPlus: {
+      color: growButtonDisabled ? theme.colors.gray15 : props.iconProps.fill,
     },
   });
 };
