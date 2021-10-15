@@ -30,7 +30,7 @@ export interface IButtonCounterProps extends TouchableOpacityProps {
 export interface IButtonCounterState {
   count: number;
   isTouched: boolean;
-  prevPropValue: number | undefined;
+  prevPropValue?: number;
 }
 
 class ButtonCounter extends React.Component<
