@@ -9,6 +9,7 @@ export interface IButtonCounterProps extends TouchableOpacityProps {
   style?: any;
   theme?: any;
   initialValue?: number;
+  value?: number;
   minValue?: number;
   maxValue?: number;
   children: React.ReactNode;
@@ -29,6 +30,7 @@ export interface IButtonCounterProps extends TouchableOpacityProps {
 export interface IButtonCounterState {
   count: number;
   isTouched: boolean;
+  prevPropValue?: number;
 }
 
 class ButtonCounter extends React.Component<
@@ -36,12 +38,23 @@ class ButtonCounter extends React.Component<
   IButtonCounterState
 > {
   static defaultProps: any;
+  static getDerivedStateFromProps(
+    props: IButtonCounterProps,
+    state: IButtonCounterState,
+  ) {
+    return {
+      ...state,
+      count: state.prevPropValue !== props.value ? props.value : state.count,
+      prevPropValue: props.value,
+    };
+  }
   constructor(props: IButtonCounterProps) {
     super(props);
 
     this.state = {
       // @ts-ignore-next-line
       count: props.initialValue,
+      prevPropValue: props.value,
       isTouched: false,
     };
   }
@@ -88,6 +101,8 @@ class ButtonCounter extends React.Component<
       renderPlusIcon,
       minValue,
       maxValue,
+      // eslint-disable-next-line
+      value,
       ...etc
     } = this.props;
     const styles = getStyles(theme, this.props, this.state);
