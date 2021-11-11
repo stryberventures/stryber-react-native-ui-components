@@ -46,17 +46,10 @@ type ScrollTabViewExampleState = {
   index?: any;
 };
 
-const dummyRoutes = new Array(0).fill(1).map((item, index) => ({
+const dummyRoutes = new Array(30).fill(1).map((item, index) => ({
   key: `extra${index}`,
   title: `extra title ${index}`,
 }));
-
-const dummyScenes = dummyRoutes.reduce((accum, item) => {
-  return {
-    ...accum,
-    [`${item.key}`]: SixthRoute,
-  };
-}, {});
 
 export class ScrollTabViewExample extends React.Component<
   {},

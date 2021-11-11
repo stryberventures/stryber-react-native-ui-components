@@ -3,7 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import TouchableItem from './TouchableItem';
 import Animated from 'react-native-reanimated';
 import withTheme from '../withTheme';
-import {memoize} from '../other/utils';
 import styles from './styles';
 interface ITabProps {
   route: {};
@@ -29,33 +28,6 @@ interface ITabProps {
   segmentLineColor?: string;
   activeTabBackground?: string;
 }
-
-const getActiveOpacity = memoize(
-  (position: any, routes: any, tabIndex: any) => {
-    if (routes.length > 1) {
-      const inputRange = routes.map((_: any, i: number) => i);
-      return Animated.interpolateNode(position, {
-        inputRange,
-        outputRange: inputRange.map((i: any) => (i === tabIndex ? 1 : 0)),
-      });
-    } else {
-      return 1;
-    }
-  },
-);
-const getInactiveOpacity = memoize(
-  (position: any, routes: any, tabIndex: any) => {
-    if (routes.length > 1) {
-      const inputRange = routes.map((_: any, i: number) => i);
-      return Animated.interpolateNode(position, {
-        inputRange,
-        outputRange: inputRange.map((i: any) => (i === tabIndex ? 0 : 1)),
-      });
-    } else {
-      return 0;
-    }
-  },
-);
 
 const Tab: React.FC<ITabProps> = ({
   route,
@@ -86,16 +58,8 @@ const Tab: React.FC<ITabProps> = ({
   const lastTab = tabIndex === navigationState.routes.length - 1;
   const tabBeforeFocused = tabIndex === navigationState.index - 1;
   const showSegmentBorder = !isFocused && !lastTab && !tabBeforeFocused;
-  const activeOpacity = getActiveOpacity(
-    position,
-    navigationState.routes,
-    tabIndex,
-  );
-  const inactiveOpacity = getInactiveOpacity(
-    position,
-    navigationState.routes,
-    tabIndex,
-  );
+  const activeOpacity = tabIndex === position ? 1 : 0;
+  const inactiveOpacity = tabIndex === position ? 0 : 1;
   let icon: any = null;
   let label = null;
   if (renderIcon) {
