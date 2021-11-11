@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* StryberRnDesignSystemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* StryberRnDesignSystemTests.m */; };
 		0A5713FDB1B841DD829673B6 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAEA05CB25954376A29759CE /* OpenSans-ExtraBold.ttf */; };
-		0ED8135613E72A5DC24D5BAC /* libPods-StryberRnDesignSystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6C7A292BF377F6FF9744EB /* libPods-StryberRnDesignSystem.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -25,10 +24,11 @@
 		52ACD0E422004392913E2A62 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD2BC25726684441B57C6477 /* OpenSans-Light.ttf */; };
 		5E756408C3F749A595BB0BC4 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1FC13CC2046C40A78C93CAB7 /* OpenSans-LightItalic.ttf */; };
 		6C7904E823B4432A8ABAA745 /* OpenSans-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8136CA596C04A62A63B79D3 /* OpenSans-SemiBoldItalic.ttf */; };
-		AD80928C103C10D69960781C /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46D134D32743A6EB8C5F42CC /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a */; };
+		B40315D8F267D058E52E28D6 /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F40EC0FA44A82A2ED3DEE3 /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a */; };
 		B4F9D679A2214CD8A4286B2F /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0176F11220B4B72AD5EFF37 /* OpenSans-Italic.ttf */; };
 		B7CA36CF7B3B4D8C8537ACC6 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A15BD06627E043B68E2787F9 /* OpenSans-BoldItalic.ttf */; };
 		D2A9B67711664F32B386FF76 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6CF215083F94487CA55315CB /* OpenSans-Regular.ttf */; };
+		DA614AE260A0703D9B4108B7 /* libPods-StryberRnDesignSystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CACD7665B39ACBCDCDA56262 /* libPods-StryberRnDesignSystem.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,20 +65,19 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = StryberRnDesignSystem/main.m; sourceTree = "<group>"; };
 		1D3FF18426CEA89E003151B7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FC13CC2046C40A78C93CAB7 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../src/static/fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		22F40EC0FA44A82A2ED3DEE3 /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2369E1E6CA7C4D558A5577B4 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		24FFDE5617104496BB98000F /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../src/static/fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		2CC22BEA4467DD6404759890 /* Pods-StryberRnDesignSystem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem.debug.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* StryberRnDesignSystem-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "StryberRnDesignSystem-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* StryberRnDesignSystem-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "StryberRnDesignSystem-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B38AC6432764F1C88287060 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
-		3C6C7A292BF377F6FF9744EB /* libPods-StryberRnDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StryberRnDesignSystem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3CD7EF698316441D0F5E7F70 /* Pods-StryberRnDesignSystem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem.release.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem.release.xcconfig"; sourceTree = "<group>"; };
 		4399AEBD9ACA408FBC29A0BF /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		45E0F9AC3AEE6136B83A12FB /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig"; sourceTree = "<group>"; };
-		46D134D32743A6EB8C5F42CC /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		463C991DA1283ED39CB0674A /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig"; sourceTree = "<group>"; };
 		47614BCF9E6B4E6C87C21E27 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		66714F04A28F317C5F19637F /* Pods-StryberRnDesignSystem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem.debug.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem.debug.xcconfig"; sourceTree = "<group>"; };
 		6CF215083F94487CA55315CB /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../src/static/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		866F62900B574CCC90818788 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		9295FEA3E94297CF50D33DA9 /* Pods-StryberRnDesignSystem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem.release.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem.release.xcconfig"; sourceTree = "<group>"; };
 		944B421FD61A4B23844E25CE /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		98E4A011F5464033B0522D64 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		99483695979B42108FD5174A /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -88,8 +87,9 @@
 		BAEA05CB25954376A29759CE /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../src/static/fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		BD78B5C7AC674DEEAA167C3D /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C8136CA596C04A62A63B79D3 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../src/static/fonts/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		C939468DF5C7B055F1E6FDFC /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig"; sourceTree = "<group>"; };
+		CACD7665B39ACBCDCDA56262 /* libPods-StryberRnDesignSystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-StryberRnDesignSystem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD2BC25726684441B57C6477 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../src/static/fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		D007DEB78DF7FAB49553373B /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig"; path = "Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig"; sourceTree = "<group>"; };
 		D0176F11220B4B72AD5EFF37 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Italic.ttf"; path = "../src/static/fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		E5381E35048F4617959BCBAA /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		ECDB1B91C7D647D3BECFE549 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD80928C103C10D69960781C /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a in Frameworks */,
+				B40315D8F267D058E52E28D6 /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,7 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0ED8135613E72A5DC24D5BAC /* libPods-StryberRnDesignSystem.a in Frameworks */,
+				DA614AE260A0703D9B4108B7 /* libPods-StryberRnDesignSystem.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,8 +168,8 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				3C6C7A292BF377F6FF9744EB /* libPods-StryberRnDesignSystem.a */,
-				46D134D32743A6EB8C5F42CC /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a */,
+				CACD7665B39ACBCDCDA56262 /* libPods-StryberRnDesignSystem.a */,
+				22F40EC0FA44A82A2ED3DEE3 /* libPods-StryberRnDesignSystem-StryberRnDesignSystemTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -177,10 +177,10 @@
 		52314DC060A06B757088E877 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				66714F04A28F317C5F19637F /* Pods-StryberRnDesignSystem.debug.xcconfig */,
-				3CD7EF698316441D0F5E7F70 /* Pods-StryberRnDesignSystem.release.xcconfig */,
-				45E0F9AC3AEE6136B83A12FB /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig */,
-				D007DEB78DF7FAB49553373B /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig */,
+				2CC22BEA4467DD6404759890 /* Pods-StryberRnDesignSystem.debug.xcconfig */,
+				9295FEA3E94297CF50D33DA9 /* Pods-StryberRnDesignSystem.release.xcconfig */,
+				463C991DA1283ED39CB0674A /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig */,
+				C939468DF5C7B055F1E6FDFC /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -259,12 +259,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "StryberRnDesignSystemTests" */;
 			buildPhases = (
-				EDD3CC903F439CEBF3A17BA4 /* [CP] Check Pods Manifest.lock */,
+				203303DD3102BB963425E7A5 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				4A8BDE8208D33990FF35C47C /* [CP] Copy Pods Resources */,
-				B27EA8FD2C970778D39DE823 /* [CP] Embed Pods Frameworks */,
+				A630377979D772419240BB8D /* [CP] Embed Pods Frameworks */,
+				D53FD4A484258965A9D1F530 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,14 +280,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "StryberRnDesignSystem" */;
 			buildPhases = (
-				E94BA4417CCD9B224404FD1C /* [CP] Check Pods Manifest.lock */,
+				C8262B3264E32CA4912E57EB /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				E3946FAC7E036598C0895671 /* [CP] Copy Pods Resources */,
-				9CE68FD5A39CF47C3AD2F414 /* [CP] Embed Pods Frameworks */,
+				652F71199EDD88D54670391B /* [CP] Embed Pods Frameworks */,
+				C6BAD1E9CFB31009E19264B9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -442,6 +442,28 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		203303DD3102BB963425E7A5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -456,33 +478,15 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		4A8BDE8208D33990FF35C47C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9CE68FD5A39CF47C3AD2F414 /* [CP] Embed Pods Frameworks */ = {
+		652F71199EDD88D54670391B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/double-conversion/double-conversion.framework/double-conversion",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -494,15 +498,15 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B27EA8FD2C970778D39DE823 /* [CP] Embed Pods Frameworks */ = {
+		A630377979D772419240BB8D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/double-conversion/double-conversion.framework/double-conversion",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -514,7 +518,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E3946FAC7E036598C0895671 /* [CP] Copy Pods Resources */ = {
+		C6BAD1E9CFB31009E19264B9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -532,7 +536,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem/Pods-StryberRnDesignSystem-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E94BA4417CCD9B224404FD1C /* [CP] Check Pods Manifest.lock */ = {
+		C8262B3264E32CA4912E57EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -554,26 +558,22 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EDD3CC903F439CEBF3A17BA4 /* [CP] Check Pods Manifest.lock */ = {
+		D53FD4A484258965A9D1F530 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
+				"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-checkManifestLockResult.txt",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests/Pods-StryberRnDesignSystem-StryberRnDesignSystemTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -669,7 +669,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 45E0F9AC3AEE6136B83A12FB /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig */;
+			baseConfigurationReference = 463C991DA1283ED39CB0674A /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -692,7 +692,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D007DEB78DF7FAB49553373B /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig */;
+			baseConfigurationReference = C939468DF5C7B055F1E6FDFC /* Pods-StryberRnDesignSystem-StryberRnDesignSystemTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -712,7 +712,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66714F04A28F317C5F19637F /* Pods-StryberRnDesignSystem.debug.xcconfig */;
+			baseConfigurationReference = 2CC22BEA4467DD6404759890 /* Pods-StryberRnDesignSystem.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -739,7 +739,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3CD7EF698316441D0F5E7F70 /* Pods-StryberRnDesignSystem.release.xcconfig */;
+			baseConfigurationReference = 9295FEA3E94297CF50D33DA9 /* Pods-StryberRnDesignSystem.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

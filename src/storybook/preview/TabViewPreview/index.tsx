@@ -45,6 +45,12 @@ const SixthRoute = () => (
 type ScrollTabViewExampleState = {
   index?: any;
 };
+
+const dummyRoutes = new Array(30).fill(1).map((item, index) => ({
+  key: `extra${index}`,
+  title: `extra title ${index}`,
+}));
+
 export class ScrollTabViewExample extends React.Component<
   {},
   ScrollTabViewExampleState
@@ -95,6 +101,45 @@ export class ScrollTabViewExample extends React.Component<
     );
   }
 }
+
+
+export class ScrollTabBarExample extends React.Component<
+  {},
+  ScrollTabViewExampleState
+  > {
+  state = {
+    index: 0,
+    routes: [
+      {key: 'first', title: 'First'},
+      {key: 'second', title: 'Second'},
+      {key: 'third', title: 'Third'},
+      {key: 'forth', title: 'Forth'},
+      {key: 'fifth', title: 'Fifth'},
+      {key: 'sixth', title: 'Sixth'},
+      ...dummyRoutes,
+    ],
+  };
+  handleIndexChange = index => this.setState({index});
+  render() {
+    return (
+      <TabBar
+        scrollEnabled
+        navigationState={this.state}
+        jumpTo={(p) => this.handleIndexChange(p)}
+        tabStyle={{width: 'auto', paddingHorizontal: 14}}
+        labelStyle={{color: '#666'}}
+        activeLabelStyle={{
+          color: 'blue',
+          fontWeight: '700',
+          textDecorationLine: 'underline',
+        }}
+        contentContainerOffset={12}
+        renderIndicator={() => null}
+      />
+    );
+  }
+}
+
 type TabViewExampleState = {
   index?: any;
 };

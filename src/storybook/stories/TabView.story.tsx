@@ -4,6 +4,7 @@ import {
   TabViewExample,
   TabViewBottomIconExample,
   SegmentViewExample,
+  ScrollTabBarExample,
 } from '../preview/TabViewPreview';
 import {storiesOf} from '@storybook/react-native';
 import {tabView} from '../../static/markdown';
@@ -14,4 +15,5 @@ storiesOf('TabView', module)
   .add('default', () => <TabViewExample />)
   .add('segment view', () => <SegmentViewExample />)
   .add('with scroll', () => <ScrollTabViewExample />)
-  .add('with icons at bottom', () => <TabViewBottomIconExample />);
+  .add('with icons at bottom', () => <TabViewBottomIconExample />)
+  .add('just TabBar', () => <ScrollTabBarExample />);
