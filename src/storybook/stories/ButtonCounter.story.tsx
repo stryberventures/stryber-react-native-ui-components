@@ -51,4 +51,17 @@ storiesOf('ButtonCounter', module)
         Add item
       </ButtonCounter>
     </CenterView>
+  ))
+  .add('small', () => (
+    <CenterView>
+      <ButtonCounter
+        color="#FDA717"
+        size="small"
+        secondaryColor="black"
+        initialValue={1}
+        renderCount={(count, style) => <Text style={style}>{count}</Text>}
+        onCountChange={() => {}}>
+        Add item
+      </ButtonCounter>
+    </CenterView>
   ));

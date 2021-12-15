@@ -23,15 +23,15 @@ const getStyles = (
       : theme.fontSizes.button;
   const fontWeight =
     props.size === 'small'
-      ? theme.fontWeights.regular
+      ? theme.fontWeights.semibold
       : props.size === 'mini'
       ? theme.fontWeights.semibold
       : theme.fontWeights.semibold;
   const buttonHeight =
     props.size === 'small'
-      ? theme.spaces.xxl5
+      ? theme.spaces.xl
       : props.size === 'mini'
-      ? theme.spaces.m
+      ? theme.spaces.xl
       : theme.spaces.xxl8;
   const buttonWidth =
     props.size === 'small'
@@ -41,7 +41,7 @@ const getStyles = (
       : 'auto';
   const borderRadius =
     props.shape === 'rounded'
-      ? theme.sizes.smallRadius
+      ? theme.sizes.radius
       : props.shape === 'round'
       ? theme.sizes.largeRadius
       : 0;
@@ -58,7 +58,7 @@ const getStyles = (
       }
     : {};
   const sideColWidth =
-    props.size === 'small' ? 40 : props.size === 'mini' ? 25 : 50;
+    props.size === 'small' ? 25 : props.size === 'mini' ? 25 : 50;
 
   const buttonsConfig = {
     regular: {
@@ -78,7 +78,7 @@ const getStyles = (
     },
   };
   const buttonIconConfig =
-    props.size === 'mini'
+    props.size === 'mini' || 'small'
       ? {
           transform: [
             {
@@ -160,10 +160,18 @@ const getStyles = (
       ...buttonIconConfig,
     },
     buttonIconMinus: {
-      color: reduceButtonDisabled ? theme.colors.gray15 : props.iconProps.fill,
+      color: reduceButtonDisabled
+        ? theme.colors.gray15
+        : props.iconProps.fill ||
+          propsSecondaryColorValue ||
+          theme.colors.white,
     },
     buttonIconPlus: {
-      color: growButtonDisabled ? theme.colors.gray15 : props.iconProps.fill,
+      color: growButtonDisabled
+        ? theme.colors.gray15
+        : props.iconProps.fill ||
+          propsSecondaryColorValue ||
+          theme.colors.white,
     },
   });
 };
