@@ -78,7 +78,7 @@ const getStyles = (
     },
   };
   const buttonIconConfig =
-    props.size === 'mini' || 'small'
+    props.size === 'mini' || props.size === 'small'
       ? {
           transform: [
             {
