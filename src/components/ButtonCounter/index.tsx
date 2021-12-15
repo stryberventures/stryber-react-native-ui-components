@@ -164,9 +164,7 @@ class ButtonCounter extends React.Component<
 ButtonCounter.defaultProps = {
   initialValue: 0,
   minValue: 0,
-  iconProps: {
-    fill: '#fff',
-  },
+  iconProps: {},
   size: 'regular',
   shape: 'rounded',
   disabled: false,
