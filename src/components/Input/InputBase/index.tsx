@@ -158,6 +158,11 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     this.props.onBlur!();
   };
 
+  onChange = (text: string, name: string | undefined) => {
+    const cleanText = this.props.mask ? text.replace(/\s/g, '') : text;
+    this.props.onChange!(cleanText, name);
+  };
+
   render() {
     const {
       type,
@@ -173,6 +178,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       theme,
       secure,
       classes,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       onChange,
       style,
       inputBoxStyle,
@@ -231,7 +237,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
                     value: val,
                     isBackspace: prevState.value?.length >= val.length,
                   }));
-                  onChange!(val, name);
+                  this.onChange(val, name);
                 }}
               />
             </InputWrapper>
