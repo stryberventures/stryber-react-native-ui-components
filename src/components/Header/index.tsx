@@ -3,7 +3,7 @@ import withTheme from '../withTheme';
 import Block from '../Block';
 import Text from '../Text';
 import getStyles from './styles';
-interface IHeaderProps extends React.HTMLAttributes<Element> {
+interface IHeaderProps {
   leftIcon?: (...args: any[]) => any;
   text?: string;
   textStyle?: any;

@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // Quieting AsyncStorage warnings!
 // Per https://github.com/storybookjs/storybook/issues/6078#issuecomment-510167432
 const ReactNative = require('react-native');

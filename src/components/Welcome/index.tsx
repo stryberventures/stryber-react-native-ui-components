@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View, Text} from 'react-native';
-interface IWelcomeProps extends React.HTMLAttributes<Element> {
+interface IWelcomeProps {
   showApp?: (...args: any[]) => any;
 }
 export default class Welcome extends React.Component<IWelcomeProps, {}> {

@@ -3,7 +3,7 @@ import {TouchableOpacity, View} from 'react-native';
 import withTheme from '../withTheme';
 import Ripple from '../Ripple';
 import getStyles from './styles';
-interface IDropdownItemProps extends React.HTMLAttributes<Element> {
+interface IDropdownItemProps {
   index: number;
   style?: any;
   theme?: any;

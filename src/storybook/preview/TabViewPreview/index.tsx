@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {UserIcon, Eye, Search, ArrowDown} from '../../../components/Icons';
 import {TabView, SceneMap, TabBar, Button} from '../../../components';
-// eslint-disable-next-line react/prop-types
+
 const renderScene = ({route, jumpTo}) => {
   switch (route.key) {
     case 'first':
@@ -21,10 +21,7 @@ const FirstRoute = () => (
 const SecondRoute = props => {
   return (
     <View style={[styles.scene, {backgroundColor: '#673ab7'}]}>
-      <Button
-        style={{width: '100%'}}
-        /* eslint-disable-next-line react/prop-types */
-        onPress={() => props.jumpTo('first')}>
+      <Button style={{width: '100%'}} onPress={() => props.jumpTo('first')}>
         Jump to first
       </Button>
     </View>
@@ -102,11 +99,10 @@ export class ScrollTabViewExample extends React.Component<
   }
 }
 
-
 export class ScrollTabBarExample extends React.Component<
   {},
   ScrollTabViewExampleState
-  > {
+> {
   state = {
     index: 0,
     routes: [
@@ -125,7 +121,7 @@ export class ScrollTabBarExample extends React.Component<
       <TabBar
         scrollEnabled
         navigationState={this.state}
-        jumpTo={(p) => this.handleIndexChange(p)}
+        jumpTo={p => this.handleIndexChange(p)}
         tabStyle={{width: 'auto', paddingHorizontal: 14}}
         labelStyle={{color: '#666'}}
         activeLabelStyle={{

@@ -12,7 +12,6 @@ class SceneComponent extends React.PureComponent<ISceneComponentProps, {}> {
   }
 }
 export default function SceneMap(scenes: any) {
-  // eslint-disable-next-line react/prop-types
   return ({route, jumpTo, position}: any) => {
     return (
       <SceneComponent

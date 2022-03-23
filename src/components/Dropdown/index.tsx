@@ -16,7 +16,7 @@ import Text from '../Text';
 import {ArrowDown} from '../Icons';
 import getStyles from './styles';
 
-interface IDropdownProps extends React.HTMLAttributes<Element> {
+interface IDropdownProps {
   name?: string;
   disabled?: boolean;
   value?: string | number;

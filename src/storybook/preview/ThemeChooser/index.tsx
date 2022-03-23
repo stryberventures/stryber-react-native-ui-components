@@ -11,7 +11,8 @@ import {
   withTheme,
 } from '../../../components';
 import {UserIcon} from '../../../components/Icons';
-interface IThemeChooserProps extends React.HTMLAttributes<Element> {
+
+interface IThemeChooserProps {
   themes: any[];
   setTheme: (...args: any[]) => any;
 }
@@ -22,7 +23,6 @@ class ThemeChooser extends Component<IThemeChooserProps, {}> {
       <TouchableOpacity
         key={theme.key}
         style={{alignItems: 'center', marginHorizontal: 5}}
-        flex={0}
         onPress={() => setTheme(theme.key)}>
         <View
           style={{

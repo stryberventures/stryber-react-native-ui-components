@@ -15,7 +15,7 @@ const StorybookUIRoot = getStorybookUI({
   isUIHidden: false,
   shouldPersistSelection: false,
   asyncStorage:
-    require('@react-native-community/async-storage').default ||
+    require('@react-native-async-storage/async-storage').default ||
     require('react-native').AsyncStorage ||
     null,
 });

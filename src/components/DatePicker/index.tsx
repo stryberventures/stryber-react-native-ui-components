@@ -11,7 +11,7 @@ import styles from './styles';
 import Input, {IInputProps} from '../Input';
 import withTheme from '../withTheme';
 
-interface IDatePickerProps extends React.HTMLAttributes<Element> {
+interface IDatePickerProps {
   name?: string;
   mode?: 'date' | 'datetime' | 'time';
   startDate?: any;
