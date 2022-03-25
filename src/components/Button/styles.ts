@@ -1,11 +1,12 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../other/constants';
-import {IButtonProps, IButtonState} from './index';
+import {IButtonProps} from './index';
+import {ThemeType} from '../Theme';
 
 const getStyles = (
-  theme: any = defaultTheme,
+  theme: ThemeType = defaultTheme,
   props: IButtonProps,
-  state: IButtonState,
+  isTouched: boolean,
 ) => {
   const propsColorValue =
     theme.colors[props.color as keyof typeof defaultTheme.colors] ||
@@ -85,7 +86,7 @@ const getStyles = (
         backgroundColor: theme.colors.white,
         borderWidth: 1,
         borderColor: primaryColor,
-        ...(state.isTouched
+        ...(isTouched
           ? {
               backgroundColor: primaryColor,
             }
@@ -100,7 +101,7 @@ const getStyles = (
       buttonText: {
         textAlign: 'center' as const,
         color: primaryColor,
-        ...(state.isTouched
+        ...(isTouched
           ? {
               color: propsSecondaryColorValue || theme.colors.onPrimary,
             }
@@ -122,7 +123,7 @@ const getStyles = (
       },
       buttonText: {
         color: propsColorValue || theme.colors.link,
-        ...(state.isTouched
+        ...(isTouched
           ? {
               opacity: 0.7,
             }
@@ -160,7 +161,7 @@ const getStyles = (
       bottom: 0,
       borderRadius: borderRadius,
       backgroundColor: theme.colors.black,
-      opacity: props.type === 'regular' && state.isTouched ? 0.15 : 0,
+      opacity: props.type === 'regular' && isTouched ? 0.15 : 0,
     },
     leftIconContainer: {
       marginRight: theme.spaces.xxs,

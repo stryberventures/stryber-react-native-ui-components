@@ -16,7 +16,7 @@ const colors = {
   gray50: '#757575',
   black: '#000000',
   darkBlue: '#2a5393',
-  backgroundsArtic: '#b9fdfa',
+  backgroundsArctic: '#b9fdfa',
   mint: '#c8e6c9',
   darkPurple: '#4624bf',
   green: '#60a66b',

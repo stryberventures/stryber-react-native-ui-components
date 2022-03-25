@@ -7,6 +7,7 @@ import {Button, Block} from '../../../components';
 // @ts-ignore
 import CenterView from '../../../components/CenterView/index';
 import {button} from '../../../static/markdown';
+import {ThemeProvider} from '../../../components';
 
 const getKnobProps = () => ({
   size: select('size', ['regular', 'small', 'mini'], 'regular'),
@@ -27,11 +28,13 @@ storiesOf('Button/Primary', module)
   .addDecorator(withKnobs)
   .addDecorator((getStory: any) => <CenterView>{getStory()}</CenterView>)
   .add('general', () => (
-    <CenterView>
-      <Button {...getKnobProps()} onPress={action('clicked-shadow')}>
-        Button text
-      </Button>
-    </CenterView>
+    <ThemeProvider initial={{some: {thing: 'purple'}}}>
+      <CenterView>
+        <Button {...getKnobProps()} onPress={action('clicked-shadow')}>
+          Button text
+        </Button>
+      </CenterView>
+    </ThemeProvider>
   ))
   .add('size', () => (
     <CenterView>

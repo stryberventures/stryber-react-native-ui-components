@@ -3,9 +3,15 @@ import {addDecorator, addParameters} from '@storybook/react-native';
 import {withBackgrounds} from '@storybook/addon-ondevice-backgrounds';
 import ThemeContextProvider from '../../components/ThemeContextProvider';
 import {themes} from '../../components/other/constants/allThemes';
+import {ThemeProvider} from '../../components';
+
+const projTheme = {colors: {primary: 'black'}};
+
 addDecorator(withBackgrounds);
-addDecorator(getStory => (
-  <ThemeContextProvider themes={themes}>{getStory()}</ThemeContextProvider>
+addDecorator((getStory: React.ReactNode) => (
+  <ThemeContextProvider themes={themes}>
+    <ThemeProvider initial={projTheme}>{getStory()}</ThemeProvider>
+  </ThemeContextProvider>
 ));
 addParameters({
   backgrounds: [
