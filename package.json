@@ -40,8 +40,8 @@
       "searchDir": [
         "./src"
       ],
-      "pattern": "**/*.story.tsx",
-      "outputFile": "./src/storyLoader.js"
+      "pattern": "**/*.native.stories.tsx",
+      "outputFile": "./.storybook/storyLoader.js"
     }
   },
   "husky": {

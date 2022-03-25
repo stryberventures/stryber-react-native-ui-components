@@ -113,5 +113,3 @@ export function memoize(callback: any) {
     return result;
   };
 }
-
-export const isFunctional = (Component: any) => !Component.prototype.render;
