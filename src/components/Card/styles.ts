@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 import {ICardProps} from './index';
 
 const getStyles = (theme: any = defaultTheme, props: ICardProps) => {

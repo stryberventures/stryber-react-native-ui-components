@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {Image} from 'react-native';
-import {Card, Block, Text, Button} from '../../components';
+import {Card, Block, Text, Button} from '../../index';
 import CenterView from '../../components/CenterView';
 import {withKnobs} from '@storybook/addon-knobs';
-import {defaultTheme as theme} from '../../components/other/constants';
+import {defaultTheme as theme} from '../../constants';
 import {storiesOf} from '@storybook/react-native';
 import {card} from '../../static/markdown';
 storiesOf('Card', module)

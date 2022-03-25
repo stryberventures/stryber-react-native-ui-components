@@ -3,7 +3,7 @@ import {StyleSheet, View, I18nManager, Platform} from 'react-native';
 import Animated from 'react-native-reanimated';
 import Tab from '../Tab';
 import TabBarIndicator from './TabBarIndicator';
-import {memoize} from '../other/utils';
+import {memoize} from '../../utils';
 import styles from './styles';
 interface ITabBarProps {
   position?: {};

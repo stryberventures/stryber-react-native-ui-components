@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 import {IButtonProps} from './index';
 import {ThemeType} from '../Theme';
 

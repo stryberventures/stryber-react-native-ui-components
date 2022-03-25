@@ -6,7 +6,7 @@ import {
   View,
   TouchableNativeFeedbackProps,
 } from 'react-native';
-import {tabView} from '../other/constants';
+import {tabView} from '../../constants';
 import withTheme from '../withTheme';
 const {LOLLIPOP} = tabView;
 interface ITouchableItemProps extends TouchableNativeFeedbackProps {

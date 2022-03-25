@@ -2,8 +2,8 @@ import * as React from 'react';
 import {TextInput, Keyboard, I18nManager} from 'react-native';
 import {PanGestureHandler, State} from 'react-native-gesture-handler';
 import Animated, {EasingNode} from 'react-native-reanimated';
-import {tabView} from '../other/constants';
-import {memoize} from '../other/utils';
+import {tabView} from '../../constants';
+import {memoize} from '../../utils';
 import styles from './styles';
 
 export const TIMING_CONFIG = {

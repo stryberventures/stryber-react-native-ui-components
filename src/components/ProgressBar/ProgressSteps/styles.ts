@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../../other/constants';
+import {defaultTheme} from '../../../constants';
 import {IProgressStepsProps} from './index';
 
 const getStyles = (theme = defaultTheme, props: IProgressStepsProps) => {

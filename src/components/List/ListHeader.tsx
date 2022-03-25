@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import {IListProps} from './index';
 import getStyles from './styles';
-import {defaultTheme as theme} from '../other/constants';
+import {defaultTheme as theme} from '../../constants';
 
 const ListHeader: React.FC<Partial<IListProps>> = props => {
   if (!props.titleText) return null;

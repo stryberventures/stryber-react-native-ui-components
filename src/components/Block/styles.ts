@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 import {IBlockProps} from './index';
 
 const getStyles = (theme = defaultTheme, props: IBlockProps) =>

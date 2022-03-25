@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, Animated, TouchableOpacity, ViewProps} from 'react-native';
 import getStyles from './styles';
 import withTheme from '../withTheme';
-import {handleMargin, handlePadding} from '../other/utils';
+import {handleMargin, handlePadding} from '../../utils';
 
 export interface IBlockProps extends ViewProps {
   flex?: 1 | 0;
@@ -30,7 +30,7 @@ export interface IBlockProps extends ViewProps {
   props?: any;
   children?: any;
 }
-class Block extends React.Component<IBlockProps, {}> {
+class Block extends React.Component<IBlockProps> {
   static defaultProps: any;
   render() {
     const {

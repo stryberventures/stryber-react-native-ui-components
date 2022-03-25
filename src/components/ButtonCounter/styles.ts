@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../other/constants';
-import {IButtonCounterProps, IButtonCounterState} from '../ButtonCounter';
+import {defaultTheme} from '../../constants';
+import {IButtonCounterProps, IButtonCounterState} from './index';
 
 const getStyles = (
   theme: any = defaultTheme,

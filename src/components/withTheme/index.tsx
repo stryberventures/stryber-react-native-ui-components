@@ -1,7 +1,7 @@
 import React, {useContext, forwardRef, ComponentClass} from 'react';
-import {storage} from '../other/core';
+import {storage} from '../../core';
 import {ThemeContext} from '../ThemeContextProvider';
-import {THEME_KEY, defaultTheme} from '../other/constants';
+import {THEME_KEY, defaultTheme} from '../../constants';
 
 export type ThemeType = typeof defaultTheme;
 
@@ -27,7 +27,7 @@ const withTheme = <ComposedComponentProps extends {}>(
     } = useContext(ThemeContext) || {};
     /* eslint-disable no-shadow */
     const getTheme = (themeID: string) =>
-      themes.find(theme => theme.key === themeID);
+      themes.find((theme: any) => theme.key === themeID);
     const setTheme = (themeID: string) => {
       storage.saveString(THEME_KEY, themeID);
       // @ts-ignore

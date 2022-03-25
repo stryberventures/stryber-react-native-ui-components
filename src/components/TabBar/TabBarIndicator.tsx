@@ -2,7 +2,7 @@ import * as React from 'react';
 import {I18nManager, View} from 'react-native';
 import Animated, {EasingNode} from 'react-native-reanimated';
 import withTheme from '../withTheme';
-import {memoize} from '../other/utils';
+import {memoize} from '../../utils';
 import styles from './styles';
 const {interpolateNode, multiply, Extrapolate} = Animated;
 interface ITabBarIndicatorProps {

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {merge, cloneDeep} from 'lodash-es';
-import {storage} from '../other/core';
-import {THEME_KEY, defaultTheme} from '../other/constants';
+import {storage} from '../../core';
+import {THEME_KEY, defaultTheme} from '../../constants';
 
 // @ts-ignore
 export const ThemeContext = React.createContext();

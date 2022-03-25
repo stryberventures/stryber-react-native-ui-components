@@ -13,7 +13,7 @@ import Switch from '../Switch';
 import Icons from '../Icons';
 import {IListItem} from './index';
 import getStyles from './styles';
-import {defaultTheme as theme} from '../other/constants';
+import {defaultTheme as theme} from '../../constants';
 
 interface IProps extends IListItem {
   onItemPress?: () => void;

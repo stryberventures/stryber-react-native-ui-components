@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {View} from 'react-native';
-import {customHooks} from '../../../components/other/core';
+import {customHooks} from '../../../core';
 import {
   Button,
   Checkbox,

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-import {defaultTheme as theme} from '../other/constants';
+import {defaultTheme as theme} from '../../constants';
 
 export default StyleSheet.create({
   label: {

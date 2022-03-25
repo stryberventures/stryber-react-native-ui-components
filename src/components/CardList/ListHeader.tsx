@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 
 import {IProps} from './index';
 import {getListHeaderStyles} from './styles';
-import {defaultTheme as theme} from '../other/constants';
+import {defaultTheme as theme} from '../../constants';
 
 const ListHeader: React.FC<Partial<IProps>> = props => {
   if (!props.title) return null;

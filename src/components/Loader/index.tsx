@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Animated} from 'react-native';
 import withTheme from '../withTheme';
 import getStyles from './styles';
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 
 export interface ILoaderProps {
   size: 'small' | 'large';

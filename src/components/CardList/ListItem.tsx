@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import Card from '../Card';
 import Checkbox from '../Checkbox';
-import {defaultTheme as theme} from '../other/constants';
+import {defaultTheme as theme} from '../../constants';
 import {IListItem, IProps} from './index';
 import {getListItemStyles} from './styles';
 

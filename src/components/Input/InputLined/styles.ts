@@ -1,5 +1,5 @@
 import {StyleSheet, Platform} from 'react-native';
-import {defaultTheme} from '../../other/constants';
+import {defaultTheme} from '../../../constants';
 
 export const getStyles = ({
   theme = defaultTheme,

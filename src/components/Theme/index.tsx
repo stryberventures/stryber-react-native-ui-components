@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useMemo, useState} from 'react';
 import {merge} from 'lodash-es';
 
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 
 declare global {
   namespace DesignSystem {
@@ -24,6 +24,7 @@ interface IThemeProvider {
 
 const Context = React.createContext<IThemeContext>({
   theme: defaultTheme,
+  // eslint-disable-next-line no-console
   updateTheme: () => console.log('ThemeProvider is not rendered yet'),
 });
 
