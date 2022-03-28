@@ -1,15 +1,18 @@
 import React from 'react';
-
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 
 import Button from './index';
+import {button} from '../../static/markdown';
 
 export default {
-  title: 'Core/Button',
+  title: 'Button',
   component: Button,
   argTypes: {
     color: {control: 'color'},
     secondaryColor: {control: 'color'},
+  },
+  parameters: {
+    notes: {button},
   },
 } as ComponentMeta<typeof Button>;
 

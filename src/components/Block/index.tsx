@@ -1,8 +1,14 @@
 import * as React from 'react';
-import {View, Animated, TouchableOpacity, ViewProps} from 'react-native';
+import {
+  View,
+  Animated,
+  TouchableOpacity,
+  ViewProps,
+  ViewStyle,
+} from 'react-native';
 import getStyles from './styles';
-import withTheme from '../withTheme';
 import {handleMargin, handlePadding} from '../../utils';
+import {useTheme} from '../Theme';
 
 export interface IBlockProps extends ViewProps {
   flex?: 1 | 0;
@@ -23,78 +29,78 @@ export interface IBlockProps extends ViewProps {
   margin?: number | number[];
   animated?: boolean;
   wrap?: boolean;
-  style?: any;
-  theme?: any;
-  onPress?: (...args: any[]) => any;
+  style?: ViewStyle;
+  onPress?: () => void;
   Component?: any;
-  props?: any;
-  children?: any;
+  children?: React.ReactNode;
 }
-class Block extends React.Component<IBlockProps> {
-  static defaultProps: any;
-  render() {
-    const {
-      flex,
-      row,
-      column,
-      center,
-      middle,
-      left,
-      right,
-      top,
-      bottom,
-      card,
-      shadow,
-      color,
-      space,
-      padding,
-      margin,
-      animated,
-      wrap,
-      style,
-      children,
-      theme,
-      onPress,
-      Component = onPress ? TouchableOpacity : View,
-      ...props
-    } = this.props;
-    const styles: any = getStyles(theme, this.props);
-    const blockStyles = [
-      styles.block,
-      flex && {flex},
-      flex === 0 && {flex: 0},
-      row && styles.row,
-      column && styles.column,
-      center && styles.center,
-      middle && styles.middle,
-      left && styles.left,
-      right && styles.right,
-      top && styles.top,
-      bottom && styles.bottom,
-      margin && {...handleMargin(margin)},
-      padding && {...handlePadding(padding)},
-      card && styles.card,
-      shadow && styles.shadow,
-      space && {justifyContent: `space-${space}`},
-      wrap && {flexWrap: 'wrap'},
-      color && styles[color],
-      color && !styles[color] && {backgroundColor: color},
-      style,
-    ];
-    if (animated) {
-      return (
-        <Animated.View style={blockStyles} {...props}>
-          {children}
-        </Animated.View>
-      );
-    }
+
+const Block: React.FC<IBlockProps> = ({
+  flex,
+  row,
+  column,
+  center,
+  middle,
+  left,
+  right,
+  top,
+  bottom,
+  card,
+  shadow,
+  color,
+  space,
+  padding,
+  margin,
+  animated,
+  wrap,
+  style,
+  children,
+  onPress,
+  Component = onPress ? TouchableOpacity : View,
+  shadowType,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const styles: any = getStyles(theme, shadowType);
+
+  const blockStyles = [
+    styles.block,
+    flex && {flex},
+    flex === 0 && {flex: 0},
+    row && styles.row,
+    column && styles.column,
+    center && styles.center,
+    middle && styles.middle,
+    left && styles.left,
+    right && styles.right,
+    top && styles.top,
+    bottom && styles.bottom,
+    margin && {...handleMargin(margin)},
+    padding && {...handlePadding(padding)},
+    card && styles.card,
+    shadow && styles.shadow,
+    space && {justifyContent: `space-${space}`},
+    wrap && {flexWrap: 'wrap'},
+    color && styles[color],
+    color && !styles[color] && {backgroundColor: color},
+    style,
+  ];
+
+  if (animated) {
     return (
-      <Component onPress={onPress} style={blockStyles} {...props}>
+      <Animated.View style={blockStyles} {...rest}>
         {children}
-      </Component>
+      </Animated.View>
     );
   }
-}
+
+  return (
+    <Component onPress={onPress} style={blockStyles} {...rest}>
+      {children}
+    </Component>
+  );
+};
+
 Block.defaultProps = {
   flex: 1,
   row: false,
@@ -112,10 +118,11 @@ Block.defaultProps = {
   space: '',
   animated: false,
   wrap: false,
-  onPress: null,
+  onPress: undefined,
   style: {},
   margin: 0,
   padding: 0,
   children: null,
 };
-export default withTheme(Block);
+
+export default Block;
