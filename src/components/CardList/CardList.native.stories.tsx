@@ -14,7 +14,7 @@ import {
   CardListQuizBlue,
   CardListQuizWithoutMultiselect,
   CardListQuizWithDefaultSelection,
-} from '../preview/CardList';
+} from '../../storybook/preview/CardList';
 
 storiesOf('CardList', module)
   .addParameters({

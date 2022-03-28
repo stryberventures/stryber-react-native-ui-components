@@ -14,7 +14,7 @@ export interface IListItem {
   quizCounter?: string | number;
 }
 
-export interface IProps {
+export interface ICardList {
   data: IListItem[];
   title?: string;
   checkboxLeft?: boolean;
@@ -33,7 +33,7 @@ export interface IProps {
   scrollEnabled?: boolean;
 }
 
-const CardList: React.FC<IProps> = props => {
+const CardList: React.FC<ICardList> = props => {
   const styles = getCardListStyles();
 
   const [activeIndexes, setActiveIndexes] = useState(
@@ -46,12 +46,10 @@ const CardList: React.FC<IProps> = props => {
     const onQuizPress = () => {
       setActiveIndexes(state => {
         if (props.multiSelect) {
-          // @ts-ignore
           return state.includes(index)
             ? state.filter(element => element !== index)
             : [...state, index];
         }
-        // @ts-ignore
         return state.includes(index) ? [] : [index];
       });
       if (props.onQuizPress) {
@@ -61,7 +59,6 @@ const CardList: React.FC<IProps> = props => {
     return (
       <ListItem
         {...item}
-        // @ts-ignore
         isActive={activeIndexes.includes(index)}
         onQuizPress={onQuizPress}
         checkboxLeft={props.checkboxLeft}

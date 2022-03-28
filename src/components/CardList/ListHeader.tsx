@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-import {IProps} from './index';
+import {ICardList} from './index';
 import {getListHeaderStyles} from './styles';
 import {defaultTheme as theme} from '../../constants';
 
-const ListHeader: React.FC<Partial<IProps>> = props => {
+const ListHeader: React.FC<Partial<ICardList>> = props => {
   if (!props.title) return null;
   const styles = getListHeaderStyles(theme);
 
