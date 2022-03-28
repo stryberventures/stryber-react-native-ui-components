@@ -3,7 +3,6 @@ export {default as Badge} from './components/Badge';
 export {default as Block} from './components/Block';
 export {default as Button, IButtonProps} from './components/Button';
 export {default as ButtonCounter} from './components/ButtonCounter';
-export {default as CacheImage} from './components/CacheImage';
 export {default as Card} from './components/Card';
 export {default as Checkbox} from './components/Checkbox';
 export {default as Dropdown} from './components/Dropdown';

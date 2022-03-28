@@ -3,13 +3,13 @@ import Text from '../Text';
 import withTheme from '../withTheme';
 import getStyles from './styles';
 import Block, {IBlockProps} from '../Block';
+import {StyleProp, ViewStyle} from 'react-native';
 
 interface IBadgeProps extends IBlockProps {
   theme?: any;
   value?: string | number;
   textStyle?: any;
-  style?: any;
-  onPress?: (...args: any[]) => any;
+  style?: StyleProp<ViewStyle>;
   color?: string;
 }
 
@@ -29,7 +29,7 @@ class Badge extends Component<IBadgeProps, {}> {
         middle
         card
         onPress={onPress}
-        style={[styles.badge, ...badgeStyles]}>
+        style={[styles.badge, ...badgeStyles] as ViewStyle}>
         <Text size={theme.fonts.caption.fontSize - 2} white style={textStyle}>
           {value}
         </Text>

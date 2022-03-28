@@ -32,12 +32,10 @@ And run `react-native link` to link fonts that we use in package.
 3. Add following packages to your project package.json file(if project hasn't them already):
 
 ```json
-    "@react-native-community/async-storage": "1.6.3",
     "react-native-date-picker": "3.0.0",
     "react-native-linear-gradient": "2.5.6",
     "react-native-reanimated": "1.3.0",
     "react-native-svg": "9.13.2",
-    "rn-fetch-blob": "0.11.2",
     "react-native-gesture-handler": "^1.5.2",
 ```
 

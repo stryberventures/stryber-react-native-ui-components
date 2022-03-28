@@ -1,7 +1,6 @@
 import {AppRegistry} from 'react-native';
 import {getStorybookUI, configure} from '@storybook/react-native';
-// @ts-ignore
-import {loadStories} from '.storybook/storyLoader';
+import {loadStories} from './.storybook/storyLoader';
 import './.storybook/rn-addons';
 import {name as appName} from './app.json';
 // import stories
@@ -15,9 +14,7 @@ const StorybookUIRoot = getStorybookUI({
   isUIHidden: false,
   shouldPersistSelection: false,
   asyncStorage:
-    require('@react-native-async-storage/async-storage').default ||
-    require('react-native').AsyncStorage ||
-    null,
+    require('@react-native-async-storage/async-storage').default || null,
 });
 // If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
 // If you use Expo you can safely remove this line.

@@ -5,6 +5,7 @@ import {
   View,
   ViewStyle,
   TextStyle,
+  StyleProp,
 } from 'react-native';
 import Icons from '../Icons';
 import Text from '../Text';
@@ -23,9 +24,8 @@ export interface IButtonProps extends TouchableOpacityProps {
   size?: 'regular' | 'small' | 'mini';
   icon?: keyof typeof Icons | ((...args: any[]) => any);
   iconProps?: any;
-  props?: any;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 const Button: React.FC<IButtonProps> = props => {

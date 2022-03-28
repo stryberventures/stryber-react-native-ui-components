@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ViewProps,
   ViewStyle,
+  StyleProp,
 } from 'react-native';
 import getStyles from './styles';
 import {handleMargin, handlePadding} from '../../utils';
@@ -29,7 +30,7 @@ export interface IBlockProps extends ViewProps {
   margin?: number | number[];
   animated?: boolean;
   wrap?: boolean;
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   onPress?: () => void;
   Component?: any;
   children?: React.ReactNode;

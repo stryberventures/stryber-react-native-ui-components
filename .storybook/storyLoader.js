@@ -6,11 +6,15 @@
 function loadStories() {
   require('../src/components/Block/Block.native.stories');
   require('../src/components/Button/Button.native.stories');
+  require('../src/components/Card/Card.native.stories');
+  require('../src/components/Text/Text.native.stories');
 }
 
 const stories = [
   '../src/components/Block/Block.native.stories',
   '../src/components/Button/Button.native.stories',
+  '../src/components/Card/Card.native.stories',
+  '../src/components/Text/Text.native.stories',
 ];
 
 module.exports = {
