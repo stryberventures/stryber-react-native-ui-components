@@ -7,6 +7,9 @@ function loadStories() {
   require('../src/components/Block/Block.native.stories');
   require('../src/components/Button/Button.native.stories');
   require('../src/components/Card/Card.native.stories');
+  require('../src/components/CardList/CardList.native.stories');
+  require('../src/components/Checkbox/Checkbox.native.stories');
+  require('../src/components/DatePicker/DatePicker.native.stories');
   require('../src/components/Text/Text.native.stories');
 }
 
@@ -14,6 +17,9 @@ const stories = [
   '../src/components/Block/Block.native.stories',
   '../src/components/Button/Button.native.stories',
   '../src/components/Card/Card.native.stories',
+  '../src/components/CardList/CardList.native.stories',
+  '../src/components/Checkbox/Checkbox.native.stories',
+  '../src/components/DatePicker/DatePicker.native.stories',
   '../src/components/Text/Text.native.stories',
 ];
 

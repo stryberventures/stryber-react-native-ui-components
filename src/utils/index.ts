@@ -113,3 +113,17 @@ export function memoize(callback: any) {
     return result;
   };
 }
+
+export const getDateTimeObj = (date: any) => {
+  return {
+    date,
+    year: date ? date.getFullYear() : '',
+    // @ts-ignore
+    day: date ? `${date.getDate()}`.padStart(2, '0') : '',
+    // @ts-ignore
+    month: date ? `${date.getMonth() + 1}`.padStart(2, '0') : '',
+    hours: date ? `${date.getHours()}` : '',
+    // @ts-ignore
+    minutes: date ? `${date.getMinutes()}`.padStart(2, '0') : '',
+  };
+};
