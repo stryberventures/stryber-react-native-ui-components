@@ -5,6 +5,7 @@ import {ICheckboxProps} from '../Checkbox';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import {getCardListStyles} from './styles';
+import {ThemeType} from '../Theme';
 
 export interface IListItem {
   text: string;
@@ -23,8 +24,8 @@ export interface ICardList {
   radiobuttonRight?: boolean;
   quiz?: boolean;
   quizBackground?: string;
-  quizTextColor?: string;
-  cardBackground?: string;
+  quizTextColor?: keyof ThemeType['colors'] | string;
+  cardBackground?: keyof ThemeType['colors'] | string;
   textColor?: string;
   keyExtractor?: (item: IListItem, index: number) => string;
   onQuizPress?: (item?: IListItem, index?: number) => void;

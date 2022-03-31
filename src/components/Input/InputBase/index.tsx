@@ -6,14 +6,17 @@ import {
   TextInputProps,
   View,
   KeyboardType,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
 } from 'react-native';
 
-import withTheme from '../../withTheme';
 import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
 import {Eye, EyeDisabled} from '../../Icons';
 import Text from '../../Text';
 import Block from '../../Block';
 import {getStyles} from './styles';
+import {ThemeType} from '../../Theme';
 
 const keyboardTypes = {
   number: 'numeric' as KeyboardType,
@@ -21,6 +24,7 @@ const keyboardTypes = {
   phone: 'phone-pad' as KeyboardType,
   default: 'default' as KeyboardType,
 };
+
 export interface IInputBaseProps extends TextInputProps {
   name?: string;
   type?: 'email' | 'phone' | 'number' | 'default';
@@ -37,14 +41,14 @@ export interface IInputBaseProps extends TextInputProps {
   maxLength?: number; // how to be with multiline ?
   numberOfLines?: number;
   maxNumberOfLines?: number;
-  onFocus?: (...args: any[]) => any;
-  onBlur?: (...args: any[]) => any;
+  onFocus?: () => void;
+  onBlur?: () => void;
 
-  theme?: any;
+  theme: ThemeType;
   color?: string;
-  inputStyle?: any;
-  style?: any;
-  inputBoxStyle?: any;
+  inputStyle?: StyleProp<TextStyle>;
+  style?: StyleProp<ViewStyle>;
+  inputBoxStyle?: StyleProp<ViewStyle>;
   classes?: any;
   error?: string;
   renderPrefix?: () => any;
@@ -251,6 +255,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
     );
   }
 }
+
 InputBase.defaultProps = {
   value: '',
   inputBoxStyle: {},
@@ -269,4 +274,5 @@ InputBase.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
 };
-export default withTheme(InputBase);
+
+export default InputBase;
