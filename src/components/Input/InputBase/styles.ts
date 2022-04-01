@@ -7,6 +7,7 @@ import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
 export const getStyles = ({
   theme = defaultTheme,
   multiline = false,
+  secure = false,
   numberOfLines = NUMBER_OF_LINES,
   maxNumberOfLines = MAX_NUMBER_OF_LINES,
   classes = {},
@@ -55,6 +56,7 @@ export const getStyles = ({
     inputWrapper: {
       flex: 1,
       paddingLeft: 20,
+      paddingRight: secure ? 0 : 20,
     },
     errorText: {
       color: theme.colors.accent2,
