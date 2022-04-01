@@ -17,7 +17,7 @@ import {ArrowDown} from '../Icons';
 import getStyles from './styles';
 import {useTheme} from '../Theme';
 
-//TODO: Get rid of unused props, cover everything with types and purify code of component
+//TODO: Fix bug with double press, get rid of unused props, cover everything with types, purify code of component
 interface IDropdownProps {
   name?: string;
   disabled?: boolean;

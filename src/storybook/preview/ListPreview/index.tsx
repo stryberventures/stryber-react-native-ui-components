@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {List, Text} from '../../../components';
+import {List, Text} from '../../../index';
 import {IListItem} from '../../../components/List';
 import {defaultTheme as theme} from '../../../constants';
 

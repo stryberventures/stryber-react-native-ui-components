@@ -1,8 +1,14 @@
 import {StyleSheet} from 'react-native';
 
 import {IListItem} from './index';
+import {ThemeType} from '../Theme';
+import {defaultTheme} from '../../constants';
 
-const getStyles = (theme: any, props?: IListItem, cardOpened = false) => {
+const getStyles = (
+  theme: ThemeType = defaultTheme,
+  props?: IListItem,
+  cardOpened = false,
+) => {
   const listIsSimple =
     props && (!!props.button || (!props.iconBackground && !props.image));
   const fullHeightImage = props && props.image && props.fullHeightImage;

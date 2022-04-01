@@ -1,24 +1,27 @@
-import React, {Component} from 'react';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {View, Animated} from 'react-native';
-import withTheme from '../withTheme';
 import getStyles from './styles';
-import {defaultTheme} from '../../constants';
+import {useTheme} from '../Theme';
 
 export interface ILoaderProps {
   size: 'small' | 'large';
   dotsAmount: number;
-  theme?: any;
 }
-interface ILoaderState {
-  dotAnimations: Animated.Value[];
-}
-class Loader extends Component<ILoaderProps> {
-  static defaultProps: any;
-  state: ILoaderState = {
-    dotAnimations: [],
-  };
-  animateDot(value: Animated.Value, delay: number) {
-    return Animated.sequence([
+
+const Loader: FC<ILoaderProps> = ({size, dotsAmount}) => {
+  const {theme} = useTheme();
+  const [dotAnimations, setDotAnimations] = useState<Animated.Value[]>([]);
+  const interpolated = dotAnimations.map((dot: Animated.Value) => {
+    return dot.interpolate({
+      inputRange: [0, 1],
+      outputRange: [theme.colors.gray, theme.colors.primary],
+    });
+  });
+
+  const styles = getStyles(theme, {size, dotsAmount});
+
+  const animateDot = (value: Animated.Value, delay: number) =>
+    Animated.sequence([
       Animated.timing(value, {
         toValue: 1,
         duration: 400,
@@ -32,45 +35,41 @@ class Loader extends Component<ILoaderProps> {
         useNativeDriver: false,
       }),
     ]);
-  }
-  initializeAnimation() {
-    const dotAnimations = [];
-    for (let i = 0; i < this.props.dotsAmount; i++) {
-      dotAnimations.push(new Animated.Value(0));
-    }
-    this.setState({dotAnimations}, () => {
-      const animations: Array<any> = this.state.dotAnimations.map(
-        (value, index) => this.animateDot(value, index * 600),
-      );
-      Animated.parallel(animations).start(() => this.initializeAnimation());
-    });
-  }
-  componentDidMount() {
-    this.initializeAnimation();
-  }
 
-  render() {
-    // @ts-ignore
-    const {theme} = this.props;
-    const interpolated = this.state.dotAnimations.map((dot: Animated.Value) => {
-      return dot.interpolate({
-        inputRange: [0, 1],
-        outputRange: [theme.colors.gray, theme.colors.primary],
-      });
-    });
-    const styles = getStyles(theme, this.props);
-    return (
-      <View style={styles.container}>
-        {interpolated.map(value => (
-          <Animated.View style={[styles.dot, {backgroundColor: value}]} />
-        ))}
-      </View>
+  const initializeAnimation = useCallback(() => {
+    const initDotsArr = [];
+    for (let i = 0; i < dotsAmount; i++) {
+      initDotsArr.push(new Animated.Value(0));
+    }
+    setDotAnimations(initDotsArr);
+  }, [dotsAmount]);
+
+  useEffect(() => {
+    const animations: Array<any> = dotAnimations.map(
+      (value: Animated.Value, index: number) => animateDot(value, index * 600),
     );
-  }
-}
+    Animated.parallel(animations).start(() => initializeAnimation());
+  }, [dotAnimations, initializeAnimation]);
+
+  useEffect(() => {
+    initializeAnimation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      {interpolated.map((value, index) => (
+        <Animated.View
+          key={index}
+          style={[styles.dot, {backgroundColor: value}]}
+        />
+      ))}
+    </View>
+  );
+};
+
 Loader.defaultProps = {
   size: 'small',
   dotsAmount: 4,
-  theme: defaultTheme,
 };
-export default withTheme(Loader);
+export default Loader;
