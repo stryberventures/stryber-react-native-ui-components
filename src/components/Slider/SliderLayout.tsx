@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, ViewStyle} from 'react-native';
+import {StyleProp, View, ViewStyle} from 'react-native';
 
 interface ISliderLayoutProps {
   type?: string;
-  wrapperStyle: ViewStyle | undefined;
+  wrapperStyle?: StyleProp<ViewStyle>;
   styles: any;
   leftLabel: React.ReactNode;
   rightLabel: React.ReactNode;

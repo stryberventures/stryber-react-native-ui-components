@@ -4,7 +4,7 @@ interface ISceneComponentProps {
   component: (...args: any[]) => any;
   rest?: any;
 }
-
+//TODO: Check if we need this component
 class SceneComponent extends React.PureComponent<ISceneComponentProps, {}> {
   render() {
     const {component, ...rest} = this.props;

@@ -15,6 +15,8 @@ function loadStories() {
   require('../src/components/List/List.native.stories');
   require('../src/components/Loader/Loader.native.stories');
   require('../src/components/ProgressBar/ProgressBar.native.stories');
+  require('../src/components/SearchField/SearchField.native.stories');
+  require('../src/components/Slider/Slider.native.stories');
   require('../src/components/Text/Text.native.stories');
 }
 
@@ -30,6 +32,8 @@ const stories = [
   '../src/components/List/List.native.stories',
   '../src/components/Loader/Loader.native.stories',
   '../src/components/ProgressBar/ProgressBar.native.stories',
+  '../src/components/SearchField/SearchField.native.stories',
+  '../src/components/Slider/Slider.native.stories',
   '../src/components/Text/Text.native.stories',
 ];
 
