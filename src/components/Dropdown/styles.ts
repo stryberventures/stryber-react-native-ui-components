@@ -1,4 +1,4 @@
-import {StyleSheet, Platform} from 'react-native';
+import {StyleSheet, Platform, I18nManager} from 'react-native';
 import {defaultTheme} from '../other/constants';
 const getStyles = (theme = defaultTheme, listOnTop = false) =>
   StyleSheet.create({
@@ -59,5 +59,8 @@ const getStyles = (theme = defaultTheme, listOnTop = false) =>
       fontSize: theme.fontSizes.body,
     },
     arrowButton: {},
+    input: {
+      textAlign: I18nManager.isRTL ? 'right' : 'left',
+    },
   });
 export default getStyles;

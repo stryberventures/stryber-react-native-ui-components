@@ -194,6 +194,7 @@ class InputBase extends Component<IInputBaseProps, IInputBaseState> {
       multiline,
       numberOfLines,
       maxNumberOfLines,
+      secure,
       classes,
     });
     const isSecure = toggleSecure ? false : secure;

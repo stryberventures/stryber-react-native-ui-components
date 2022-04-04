@@ -55,16 +55,16 @@ export const getStyles = ({
       top: 6,
       height: theme.sizes.inputHeight - 14,
       transform: [
-        {rotateZ: '146deg'},
-        {rotateX: '-10rad'},
-        {rotateY: '-10rad'},
+        {rotateZ: '37deg'},
+        {rotateX: '0.54rad'},
+        {rotateY: '0.54rad'},
       ],
       borderRadius: theme.sizes.radius,
       backgroundColor: leftBlockColor,
     },
     iconContainer: {
       position: 'relative',
-      zIndex: 2,
+      zIndex: 20,
     },
     rightIconContainer: {
       width: 65,
