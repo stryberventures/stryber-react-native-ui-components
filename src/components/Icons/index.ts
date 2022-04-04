@@ -1,40 +1,12 @@
-import UserIcon from './UserIcon';
-import Search from './Search';
-import Eye from './Eye';
-import EyeDisabled from './EyeDisabled';
-import Check from './Check';
-import ArrowDown from './ArrowDown';
-import Calendar from './Calendar';
-import Speaker from './Speaker';
-import SpeakerMute from './SpeakerMute';
-import Close from './Close';
-import Plus from './Plus';
-import Minus from './Minus';
-
-export {UserIcon};
-export {Search};
-export {Eye};
-export {EyeDisabled};
-export {Check};
-export {ArrowDown};
-export {Calendar};
-export {Speaker};
-export {SpeakerMute};
-export {Close};
-export {Plus};
-export {Minus};
-
-export default {
-  UserIcon,
-  Search,
-  Eye,
-  EyeDisabled,
-  Check,
-  ArrowDown,
-  Calendar,
-  Speaker,
-  SpeakerMute,
-  Close,
-  Plus,
-  Minus,
-};
+export {default as UserIcon} from './UserIcon';
+export {default as Search} from './Search';
+export {default as Eye} from './Eye';
+export {default as EyeDisabled} from './EyeDisabled';
+export {default as Check} from './Check';
+export {default as ArrowDown} from './ArrowDown';
+export {default as Calendar} from './Calendar';
+export {default as Speaker} from './Speaker';
+export {default as SpeakerMute} from './SpeakerMute';
+export {default as Close} from './Close';
+export {default as Plus} from './Plus';
+export {default as Minus} from './Minus';

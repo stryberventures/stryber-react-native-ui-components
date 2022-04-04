@@ -1,36 +1,40 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import withTheme from '../../withTheme';
+import React, {FC} from 'react';
+import {View, Text, StyleSheet, ViewProps} from 'react-native';
 import getStyles from './styles';
+import {useTheme} from '../../Theme';
 
-export interface IProgressInlineProps {
+export interface IProgressInlineProps extends ViewProps {
   size: 'small' | 'large';
   title?: string;
   infoShowed?: boolean;
   value: number;
   totalValue: number;
-  theme?: any;
 }
-class ProgressInline extends Component<IProgressInlineProps> {
-  static defaultProps: any;
 
-  render() {
-    const {value, title, infoShowed, theme} = this.props;
-    const styles = getStyles(theme, this.props);
-    return (
-      <View>
-        {infoShowed && (
-          <View style={styles.info}>
-            <Text>{title}</Text>
-            <Text>{value}</Text>
-          </View>
-        )}
-        <View style={styles.inlineBar}>
-          <View style={[StyleSheet.absoluteFill, styles.inlineProgress]} />
+const ProgressInline: FC<IProgressInlineProps> = ({
+  value,
+  title,
+  infoShowed,
+  totalValue,
+  size,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const styles = getStyles(theme, size, value, totalValue);
+
+  return (
+    <View {...rest}>
+      {infoShowed && (
+        <View style={styles.info}>
+          <Text>{title}</Text>
+          <Text>{value}</Text>
         </View>
+      )}
+      <View style={styles.inlineBar}>
+        <View style={[StyleSheet.absoluteFill, styles.inlineProgress]} />
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
-export default withTheme(ProgressInline);
+export default ProgressInline;
