@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, View, TouchableOpacity} from 'react-native';
+import {Animated, View, TouchableOpacity, I18nManager} from 'react-native';
 import withTheme from '../withTheme';
 import {SwitchConfigs} from './constants';
 import {getStyles} from './styles';
@@ -117,6 +117,7 @@ class Switch extends Component<ISwitchProps, SwitchState> {
         {this.props.text}
       </Text>
     );
+    const RTLDirection = I18nManager.isRTL ? -1 : 1;
 
     return (
       <>
@@ -167,8 +168,8 @@ class Switch extends Component<ISwitchProps, SwitchState> {
                       translateX: this.state.animXValue.interpolate({
                         inputRange: [0, 1],
                         outputRange: [
-                          this.state.circlePosXStart,
-                          this.state.circlePosXEnd,
+                          (this.state.circlePosXStart || 0) * RTLDirection,
+                          (this.state.circlePosXEnd || 0) * RTLDirection,
                         ],
                       }),
                     },

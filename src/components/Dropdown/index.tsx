@@ -377,6 +377,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
     return (
       <Input
         {...props}
+        inputStyle={styles.input}
         value={String(this.state.value)}
         disabled={disabled}
         variant={variant}
