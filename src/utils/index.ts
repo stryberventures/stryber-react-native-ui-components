@@ -87,11 +87,16 @@ export const handlePadding = padding => {
     }
   }
 };
-export function memoize(callback: any) {
-  let previous: any;
-  let result: any;
-  return (...dependencies: any) => {
+
+export const memoize = <Result, Deps extends readonly any[]>(
+  callback: (...deps: Deps) => Result,
+) => {
+  let previous: Deps | undefined;
+  let result: Result | undefined;
+
+  return (...dependencies: Deps): Result => {
     let hasChanged = false;
+
     if (previous) {
       if (previous.length !== dependencies.length) {
         hasChanged = true;
@@ -106,13 +111,16 @@ export function memoize(callback: any) {
     } else {
       hasChanged = true;
     }
+
     previous = dependencies;
+
     if (hasChanged || result === undefined) {
       result = callback(...dependencies);
     }
+
     return result;
   };
-}
+};
 
 export const getDateTimeObj = (date: any) => {
   return {

@@ -4,33 +4,43 @@ import {
   TouchableOpacity,
   Platform,
   View,
-  TouchableNativeFeedbackProps,
+  ViewProps,
+  ViewStyle,
+  StyleProp,
 } from 'react-native';
-import {tabView} from '../../constants';
-import withTheme from '../withTheme';
+import {tabView} from '../../../constants';
+import {useTheme} from '../../Theme';
+
 const {LOLLIPOP} = tabView;
-interface ITouchableItemProps extends TouchableNativeFeedbackProps {
-  style?: any;
-  pressOpacity?: number;
-  theme?: any;
-  pressColor?: string;
+
+interface ITouchableItemProps extends ViewProps {
+  onPress: () => void;
+  onLongPress?: () => void;
+  delayPressIn?: number;
   borderless?: boolean;
-  rest?: any;
+  pressColor: string;
+  pressOpacity?: number;
+  children?: React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
+
 const TouchableItem: React.FC<ITouchableItemProps> = ({
   style,
   pressOpacity,
-  theme,
-  pressColor = theme.colors.gray,
+  pressColor,
   borderless,
   children,
   ...rest
 }) => {
+  const {theme} = useTheme();
   if (Platform.OS === 'android' && Platform.Version >= LOLLIPOP) {
     return (
       <TouchableNativeFeedback
         {...rest}
-        background={TouchableNativeFeedback.Ripple(pressColor, borderless)}>
+        background={TouchableNativeFeedback.Ripple(
+          pressColor || theme.colors.gray,
+          borderless,
+        )}>
         <View style={style}>{React.Children.only(children)}</View>
       </TouchableNativeFeedback>
     );
@@ -42,4 +52,5 @@ const TouchableItem: React.FC<ITouchableItemProps> = ({
     );
   }
 };
-export default withTheme(TouchableItem);
+
+export default TouchableItem;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {UserIcon, Eye, Search, ArrowDown} from '../../../components/Icons';
-import {TabView, SceneMap, TabBar, Button} from '../../../components';
+import {TabView, SceneMap, TabBar, Button} from '../../../index';
 
 const renderScene = ({route, jumpTo}) => {
   switch (route.key) {
@@ -13,6 +13,8 @@ const renderScene = ({route, jumpTo}) => {
       return <ThirdRoute />;
     case 'forth':
       return <ForthRoute />;
+    default:
+      return <FirstRoute />;
   }
 };
 const FirstRoute = () => (

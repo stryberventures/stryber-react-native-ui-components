@@ -5,6 +5,37 @@ import Animated, {EasingNode} from 'react-native-reanimated';
 import {tabView} from '../../constants';
 import {memoize} from '../../utils';
 import styles from './styles';
+import {
+  EventEmitterProps,
+  Layout,
+  Listener,
+  NavigationState,
+  PagerCommonProps,
+  Route,
+} from './types';
+
+export interface IPagerProps<T extends Route> extends PagerCommonProps {
+  onIndexChange: (index: number) => void;
+  navigationState: NavigationState<T>;
+  layout: Layout;
+  // Clip unfocused views to improve memory usage
+  // Don't enable this on iOS where this is buggy and views don't re-appear
+  removeClippedSubviews?: boolean;
+  children: (
+    props: EventEmitterProps & {
+      // Animated value which represents the state of current index
+      // It can include fractional digits as it represents the intermediate value
+      position: Animated.Node<number>;
+      // Function to actually render the content of the pager
+      // The parent component takes care of rendering
+      render: (children: React.ReactNode) => React.ReactNode;
+      // Callback to call when switching the tab
+      // The tab switch animation is performed even if the index in state is unchanged
+      jumpTo: (key: string) => void;
+    },
+  ) => React.ReactNode;
+  gestureHandlerProps: React.ComponentProps<typeof PanGestureHandler>;
+}
 
 export const TIMING_CONFIG = {
   duration: 200,
@@ -52,41 +83,13 @@ const {
   sub,
   timing,
 } = Animated;
-interface IPagerProps {
-  layout?: {
-    width?: number;
-  };
-  navigationState: {
-    routes?: any[];
-    index?: number;
-  };
-  swipeEnabled?: boolean;
-  removeClippedSubviews?: boolean;
-  gestureHandlerProps?: {};
-  swipeVelocityImpact?: number;
-  springVelocityScale?: number;
-  springConfig?: {
-    stiffness?: number;
-    damping?: number;
-    mass?: number;
-    overshootClamping?: boolean;
-    restDisplacementThreshold?: number;
-    restSpeedThreshold?: number;
-  };
-  timingConfig?: {
-    duration?: number;
-  };
-  keyboardDismissMode?: string;
-  onIndexChange?: (...args: any[]) => any;
-  onSwipeStart?: (...args: any[]) => any;
-  onSwipeEnd?: (...args: any[]) => any;
-  length?: any;
-  routes?: any;
-  index?: any;
-}
-export default class Pager extends React.Component<IPagerProps, {}> {
+
+export default class Pager<T extends Route> extends React.Component<
+  IPagerProps<T>,
+  {}
+> {
   static defaultProps: any;
-  componentDidUpdate(prevProps: IPagerProps, _: any, __: any) {
+  componentDidUpdate(prevProps: IPagerProps<T>, _: any, __: any) {
     const {
       navigationState,
       layout,
@@ -268,13 +271,14 @@ export default class Pager extends React.Component<IPagerProps, {}> {
   // When a gesture didn't change the tab, we can restore the focused input with this
   previouslyFocusedTextInput = null;
   // Listeners for the entered screen
-  enterListeners = [];
-  jumpToIndex = (index: any) => {
+  enterListeners: Listener[] = [];
+  jumpToIndex = (index: number) => {
     // If the index changed, we need to trigger a tab switch
     this.isSwipeGesture.setValue(FALSE);
+    // @ts-ignore
     this.nextIndex.setValue(index);
   };
-  jumpTo = (key: any) => {
+  jumpTo = (key: string) => {
     const {navigationState, keyboardDismissMode, onIndexChange} = this.props;
     const index = navigationState.routes!.findIndex(route => route.key === key);
     // A tab switch might occur when we're in the middle of a transition
@@ -289,22 +293,20 @@ export default class Pager extends React.Component<IPagerProps, {}> {
       }
     }
   };
-  addListener = (type: any, listener: any) => {
+  addListener = (type: 'enter', listener: Listener) => {
     if (type === 'enter') {
-      // @ts-ignore
       this.enterListeners.push(listener);
     }
   };
-  removeListener = (type: any, listener: any) => {
+  removeListener = (type: 'enter', listener: Listener) => {
     if (type === 'enter') {
-      // @ts-ignore
       const index = this.enterListeners.indexOf(listener);
       if (index > -1) {
         this.enterListeners.splice(index, 1);
       }
     }
   };
-  handleEnteredIndexChange = ([value]: any) => {
+  handleEnteredIndexChange = ([value]: readonly number[]) => {
     const index = Math.max(
       0,
       Math.min(value, this.props.navigationState.routes!.length - 1),
@@ -536,7 +538,11 @@ export default class Pager extends React.Component<IPagerProps, {}> {
     this.progress,
   ]);
   getTranslateX = memoize(
-    (layoutWidth: any, routesLength: any, translateX: any) =>
+    (
+      layoutWidth: Animated.Node<number>,
+      routesLength: Animated.Node<number>,
+      translateX: Animated.Node<number>,
+    ) =>
       multiply(
         // Make sure that the translation doesn't exceed the bounds to prevent overscrolling
         min(
@@ -558,12 +564,13 @@ export default class Pager extends React.Component<IPagerProps, {}> {
       removeClippedSubviews,
       gestureHandlerProps,
     } = this.props;
+
     const translateX = this.getTranslateX(
       this.layoutWidth,
       this.routesLength,
       this.translateX,
     );
-    // @ts-ignore
+
     return children({
       position: this.position,
       addListener: this.addListener,
@@ -596,6 +603,7 @@ export default class Pager extends React.Component<IPagerProps, {}> {
     });
   }
 }
+
 Pager.defaultProps = {
   swipeVelocityImpact: 0.2,
   springVelocityScale: 1,

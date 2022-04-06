@@ -1,35 +1,84 @@
 import * as React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {
+  LayoutChangeEvent,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
 import TouchableItem from './TouchableItem';
 import Animated from 'react-native-reanimated';
-import withTheme from '../withTheme';
 import styles from './styles';
-interface ITabProps {
-  route: {};
-  position: {};
-  navigationState: any;
-  renderLabel?: (...args: any[]) => any;
-  renderIcon?: (props: {route: {}; focused: boolean}) => any;
-  renderBadge?: (...args: any[]) => any;
-  getLabelText?: (...args: any[]) => any;
-  getTestID?: (...args: any[]) => any;
-  getAccessibilityLabel?: (...args: any[]) => any;
-  getAccessible?: (...args: any[]) => any;
-  theme?: any;
+import {useTheme} from '../../Theme';
+import {NavigationState, Route, Scene} from '../types';
+import {memoize} from '../../../utils';
+
+export interface ITabBarItemProps<T extends Route> {
+  position: Animated.Node<number>;
+  route: T;
+  navigationState: NavigationState<T>;
+  activeColor?: string;
+  inactiveColor?: string;
   pressColor?: string;
   pressOpacity?: number;
-  labelStyle?: {};
-  activeLabelStyle?: {};
-  style?: {};
-  onLayout?: (...args: any[]) => any;
-  onPress?: (...args: any[]) => any;
-  onLongPress?: (...args: any[]) => any;
+  getLabelText: (scene: Scene<T>) => string | undefined;
+  getAccessible: (scene: Scene<T>) => boolean | undefined;
+  getAccessibilityLabel: (scene: Scene<T>) => string | undefined;
+  getTestID: (scene: Scene<T>) => string | undefined;
+  renderLabel?: (scene: {
+    route: T;
+    focused: boolean;
+    color?: string;
+  }) => React.ReactNode;
+  renderIcon?: (scene: {
+    route: T;
+    focused: boolean;
+    color?: string;
+  }) => React.ReactNode;
+  renderBadge?: (scene: Scene<T>) => React.ReactNode;
+  onLayout?: (event: LayoutChangeEvent) => void;
+  onPress: () => void;
+  onLongPress: () => void;
+  labelStyle?: StyleProp<TextStyle>;
+  style: StyleProp<ViewStyle>;
   segmentView?: boolean;
   segmentLineColor?: string;
+  activeLabelStyle?: StyleProp<Animated.AnimateStyle<StyleProp<TextStyle>>>;
   activeTabBackground?: string;
 }
 
-const Tab: React.FC<ITabProps> = ({
+const getActiveOpacity = memoize(
+  (position: Animated.Node<number>, routes: Route[], tabIndex: number) => {
+    if (routes.length > 1) {
+      const inputRange = routes.map((_, i) => i);
+
+      return Animated.interpolateNode(position, {
+        inputRange,
+        outputRange: inputRange.map(i => (i === tabIndex ? 1 : 0)),
+      });
+    } else {
+      return 1;
+    }
+  },
+);
+
+const getInactiveOpacity = memoize(
+  (position: Animated.Node<number>, routes: Route[], tabIndex: number) => {
+    if (routes.length > 1) {
+      const inputRange = routes.map((_: Route, i: number) => i);
+
+      return Animated.interpolateNode(position, {
+        inputRange,
+        outputRange: inputRange.map((i: number) => (i === tabIndex ? 0 : 1)),
+      });
+    } else {
+      return 0;
+    }
+  },
+);
+
+const TabBarItem = <T extends Route>({
   route,
   position,
   navigationState,
@@ -40,8 +89,7 @@ const Tab: React.FC<ITabProps> = ({
   getTestID,
   getAccessibilityLabel,
   getAccessible,
-  theme,
-  pressColor = theme.colors.gray,
+  pressColor,
   pressOpacity = 0.5,
   labelStyle,
   activeLabelStyle,
@@ -52,14 +100,23 @@ const Tab: React.FC<ITabProps> = ({
   segmentView,
   segmentLineColor,
   activeTabBackground,
-}) => {
+}: ITabBarItemProps<T>) => {
+  const {theme} = useTheme();
   const tabIndex = navigationState.routes.indexOf(route);
   const isFocused = navigationState.index === tabIndex;
   const lastTab = tabIndex === navigationState.routes.length - 1;
   const tabBeforeFocused = tabIndex === navigationState.index - 1;
   const showSegmentBorder = !isFocused && !lastTab && !tabBeforeFocused;
-  const activeOpacity = tabIndex === position ? 1 : 0;
-  const inactiveOpacity = tabIndex === position ? 0 : 1;
+  const activeOpacity = getActiveOpacity(
+    position,
+    navigationState.routes,
+    tabIndex,
+  );
+  const inactiveOpacity = getInactiveOpacity(
+    position,
+    navigationState.routes,
+    tabIndex,
+  );
   let icon: any = null;
   let label = null;
   if (renderIcon) {
@@ -74,11 +131,14 @@ const Tab: React.FC<ITabProps> = ({
     if (inactiveIcon != null && activeIcon != null) {
       icon = (
         <View style={styles.icon}>
-          <Animated.View style={{opacity: inactiveOpacity}}>
+          <Animated.View style={{opacity: inactiveOpacity as number}}>
             {inactiveIcon}
           </Animated.View>
           <Animated.View
-            style={[StyleSheet.absoluteFill, {opacity: activeOpacity}]}>
+            style={[
+              StyleSheet.absoluteFill,
+              {opacity: activeOpacity as number},
+            ]}>
             {activeIcon}
           </Animated.View>
         </View>
@@ -149,7 +209,7 @@ const Tab: React.FC<ITabProps> = ({
         <Animated.View
           style={[
             segmentView && styles.labelWrapper,
-            {opacity: inactiveOpacity},
+            {opacity: inactiveOpacity as number},
           ]}>
           {inactiveLabel}
         </Animated.View>
@@ -157,7 +217,7 @@ const Tab: React.FC<ITabProps> = ({
           style={[
             segmentView && styles.labelWrapper,
             StyleSheet.absoluteFill,
-            !segmentView && {opacity: activeOpacity},
+            !segmentView && {opacity: activeOpacity as number},
           ]}>
           {activeLabel}
         </Animated.View>
@@ -176,7 +236,6 @@ const Tab: React.FC<ITabProps> = ({
   const badge = renderBadge ? renderBadge(scene) : null;
 
   return (
-    // @ts-ignore
     <TouchableItem
       borderless
       testID={getTestID!(scene)}
@@ -186,7 +245,7 @@ const Tab: React.FC<ITabProps> = ({
       accessibilityComponentType="button"
       accessibilityRole="tab"
       accessibilityStates={isFocused ? ['selected'] : []}
-      pressColor={pressColor}
+      pressColor={pressColor || theme.colors.gray}
       pressOpacity={pressOpacity}
       delayPressIn={0}
       onLayout={onLayout}
@@ -204,4 +263,4 @@ const Tab: React.FC<ITabProps> = ({
   );
 };
 
-export default withTheme(Tab);
+export default TabBarItem;

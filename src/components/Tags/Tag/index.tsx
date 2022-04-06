@@ -3,13 +3,13 @@ import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
 
 import Text from '../../Text';
 import {Close} from '../../Icons';
-import withTheme from '../../withTheme';
 import getStyles from './styles';
+import {FC, useState} from 'react';
+import {useTheme} from '../../Theme';
 
 export interface ITagProps extends TouchableOpacityProps {
   children: React.ReactNode;
   disabled?: boolean;
-  theme?: any;
   color?: string;
   textColor?: string;
   disabledColor?: string;
@@ -23,60 +23,73 @@ export interface ITagProps extends TouchableOpacityProps {
   preselected?: boolean;
   resetTag?: boolean;
 }
-export interface ITagState {
-  selected: boolean;
-}
-class Tag extends React.Component<ITagProps, ITagState> {
-  static defaultProps: any;
-  state = {
-    selected: this.props.preselected || false,
+
+const Tag: FC<ITagProps> = ({
+  disabled,
+  color,
+  disabledColor,
+  textColor,
+  size,
+  shape,
+  selectedColor,
+  shadow,
+  withCross,
+  style,
+  onTagChange,
+  preselected,
+  children,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const [selected, setSelected] = useState(preselected);
+  const styles = getStyles(
+    theme,
+    {
+      disabled,
+      color,
+      disabledColor,
+      textColor,
+      size,
+      shape,
+      selectedColor,
+      shadow,
+    },
+    selected!,
+  );
+
+  const handleChange = () => {
+    setSelected(prevSelected => !prevSelected);
+    onTagChange();
   };
 
-  componentDidUpdate(prevProps: Readonly<ITagProps>) {
-    if (prevProps.resetTag !== this.props.resetTag && this.props.resetTag) {
-      this.setState({
-        selected: false,
-      });
+  const handlePress = () => {
+    if (!withCross) {
+      handleChange();
+    } else if (!selected) {
+      handleChange();
     }
-  }
+  };
 
-  handlePress = () => {
-    if (!this.props.withCross) {
-      this.handleChange();
-    } else if (!this.state.selected) {
-      this.handleChange();
-    }
-  };
-  handleChange = () => {
-    const {onTagChange} = this.props;
-    this.setState({selected: !this.state.selected}, () => {
-      onTagChange();
-    });
-  };
-  render() {
-    const {withCross, style, children, theme, ...props} = this.props;
-    const styles: any = getStyles(theme, this.props, this.state);
-    return (
-      <TouchableOpacity
-        {...props}
-        activeOpacity={1}
-        onPress={this.handlePress}
-        style={[styles.tag, style]}>
-        <View style={styles.content}>
-          <Text style={styles.tagText}>{children}</Text>
-          {this.state.selected && withCross && (
-            <Close
-              fill={theme.colors.white}
-              // @ts-ignore
-              style={styles.closeButton}
-              onPress={this.handleChange}
-            />
-          )}
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
+  return (
+    <TouchableOpacity
+      {...rest}
+      activeOpacity={1}
+      onPress={handlePress}
+      style={[styles.tag, style]}>
+      <View style={styles.content}>
+        <Text style={styles.tagText}>{children}</Text>
+        {selected && withCross && (
+          <Close
+            fill={theme.colors.white}
+            style={styles.closeButton}
+            onPress={handleChange}
+          />
+        )}
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 Tag.defaultProps = {
   disabled: false,
   size: 'small',
@@ -85,4 +98,4 @@ Tag.defaultProps = {
   onTagChange: () => {},
   preselected: false,
 };
-export default withTheme(Tag);
+export default Tag;

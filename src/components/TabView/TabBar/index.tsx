@@ -1,62 +1,96 @@
 import * as React from 'react';
-import {StyleSheet, View, I18nManager, Platform} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  I18nManager,
+  Platform,
+  TextStyle,
+  ViewStyle,
+  StyleProp,
+  LayoutChangeEvent,
+} from 'react-native';
 import Animated from 'react-native-reanimated';
-import Tab from '../Tab';
-import TabBarIndicator from './TabBarIndicator';
-import {memoize} from '../../utils';
+import TabBarItem from '../TabBarItem';
+import TabBarIndicator, {ITabBarIndicatorProps} from './TabBarIndicator';
+import {memoize} from '../../../utils';
 import styles from './styles';
-interface ITabBarProps {
-  position?: {};
-  navigationState?: {
-    routes?: any[];
-    index?: number;
-  };
-  jumpTo?: (...args: any[]) => any;
+import {
+  Layout,
+  NavigationState,
+  Route,
+  Scene,
+  SceneRendererProps,
+} from '../types';
+
+export interface ITabBarProps<T extends Route> extends SceneRendererProps {
+  navigationState: NavigationState<T>;
   scrollEnabled?: boolean;
   bounces?: boolean;
-  getAccessibilityLabel?: (...args: any[]) => any;
-  getAccessible?: (...args: any[]) => any;
-  getLabelText?: (...args: any[]) => any;
-  getTestID?: (...args: any[]) => any;
-  renderBadge?: (...args: any[]) => any;
-  renderIcon?: (...args: any[]) => any;
-  renderLabel?: (...args: any[]) => any;
+  activeColor?: string;
+  inactiveColor?: string;
   pressColor?: string;
   pressOpacity?: number;
-  onTabPress?: (...args: any[]) => any;
-  onTabLongPress?: (...args: any[]) => any;
-  tabStyle?: any;
-  labelStyle?: any;
-  activeLabelStyle?: any;
-  indicatorStyle?: any;
-  contentContainerStyle?: any;
+  getLabelText: (scene: Scene<T>) => string | undefined;
+  getAccessible: (scene: Scene<T>) => boolean | undefined;
+  getAccessibilityLabel: (scene: Scene<T>) => string | undefined;
+  getTestID: (scene: Scene<T>) => string | undefined;
+  renderLabel?: (
+    scene: Scene<T> & {
+      focused: boolean;
+      color?: string;
+    },
+  ) => React.ReactNode;
+  renderIcon?: (
+    scene: Scene<T> & {
+      focused: boolean;
+      color?: string;
+    },
+  ) => React.ReactNode;
+  renderBadge?: (scene: Scene<T>) => React.ReactNode;
+  renderIndicator: (props: ITabBarIndicatorProps<T>) => React.ReactNode;
+  renderTabBarItem?: (
+    props: ITabBarProps<T> & {key: string},
+  ) => React.ReactElement;
+  onTabPress?: (scene: Scene<T> & Event) => void;
+  onTabLongPress?: (scene: Scene<T>) => void;
+  tabStyle?: StyleProp<ViewStyle>;
+  indicatorStyle?: StyleProp<ViewStyle>;
+  indicatorContainerStyle?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
+  contentContainerStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
+  activeLabelStyle?: StyleProp<Animated.AnimateStyle<StyleProp<TextStyle>>>;
   contentContainerOffset?: number;
-  style?: any;
-  indicatorContainerStyle?: any;
-  renderIndicator?: (...args: any[]) => any;
   segmentView?: boolean;
   segmentLineColor?: string;
   activeTabBackground?: string;
 }
+
 type TabBarState = {
-  layout?: any;
-  tabWidths?: any;
-  height?: any;
-  width?: any;
+  layout: Layout;
+  tabWidths?: {[key: string]: number};
 };
-export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
+
+export default class TabBar<T extends Route> extends React.Component<
+  ITabBarProps<T>,
+  TabBarState
+> {
   static defaultProps: any;
   state = {
     layout: {width: 0, height: 0},
     tabWidths: {},
   };
-  componentDidUpdate(prevProps: ITabBarProps, prevState: TabBarState, _: any) {
+  componentDidUpdate(
+    prevProps: ITabBarProps<T>,
+    prevState: TabBarState,
+    _: any,
+  ) {
     const {navigationState} = this.props;
     const {layout, tabWidths} = this.state;
     if (
-      prevProps!.navigationState!.routes!.length !==
-        navigationState!.routes!.length ||
-      prevProps!.navigationState!.index !== navigationState!.index ||
+      prevProps.navigationState.routes.length !==
+        navigationState.routes.length ||
+      prevProps.navigationState.index !== navigationState.index ||
       prevState.layout.width !== layout.width ||
       prevState.tabWidths !== tabWidths
     ) {
@@ -64,7 +98,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
         this.getFlattenedTabWidth(this.props.tabStyle) === 'auto' &&
         !(
           layout.width &&
-          navigationState!.routes!.every(
+          navigationState.routes.every(
             // @ts-ignore
             r => typeof tabWidths[r.key] === 'number',
           )
@@ -78,17 +112,17 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
   measuredTabWidths = {};
   scrollAmount = new Animated.Value(0);
   scrollView: any;
-  getFlattenedTabWidth = (style: any) => {
+  getFlattenedTabWidth = (style: StyleProp<ViewStyle>) => {
     const tabStyle = StyleSheet.flatten(style);
     return tabStyle ? tabStyle.width : undefined;
   };
   getComputedTabWidth = (
-    index: any,
-    layout: any,
-    routes: any,
-    scrollEnabled: any,
-    tabWidths: any,
-    flattenedWidth: any,
+    index: number,
+    layout: Layout,
+    routes: Route[],
+    scrollEnabled: boolean | undefined,
+    tabWidths: {[key: string]: number},
+    flattenedWidth: string | number | undefined,
   ) => {
     if (flattenedWidth === 'auto') {
       return tabWidths[routes[index].key] || 0;
@@ -109,13 +143,13 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
     }
     return layout.width / routes.length;
   };
-  getMemoizedTabWidthGettter = memoize(
+  getMemoizedTabWidthGetter = memoize(
     (
-        layout: any,
-        routes: any,
-        scrollEnabled: any,
-        tabWidths: any,
-        flattenedWidth: any,
+        layout: Layout,
+        routes: Route[],
+        scrollEnabled: boolean | undefined,
+        tabWidths: {[key: string]: number},
+        flattenedWidth: string | number | undefined,
       ) =>
       (i: any) =>
         this.getComputedTabWidth(
@@ -127,28 +161,32 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
           flattenedWidth,
         ),
   );
-  getMaxScrollDistance = (tabBarWidth: any, layoutWidth: any) =>
+  getMaxScrollDistance = (tabBarWidth: number, layoutWidth: number) =>
     tabBarWidth - layoutWidth;
-  getTabBarWidth = (props: any, state: any) => {
+  getTabBarWidth = (props: ITabBarProps<T>, state: TabBarState) => {
     const {layout, tabWidths} = state;
     const {scrollEnabled, tabStyle, contentContainerOffset} = props;
     const {routes} = props.navigationState;
-    const tabsWidth = routes.reduce(
-      (acc: any, _: any, i: any) =>
+    const tabsWidth = routes.reduce<number>(
+      (acc, _, i) =>
         acc +
         this.getComputedTabWidth(
           i,
           layout,
           routes,
           scrollEnabled,
-          tabWidths,
+          tabWidths!,
           this.getFlattenedTabWidth(tabStyle),
         ),
       0,
     );
-    return tabsWidth + contentContainerOffset * 2;
+    return tabsWidth + contentContainerOffset! * 2;
   };
-  normalizeScrollValue = (props: any, state: any, value: any) => {
+  normalizeScrollValue = (
+    props: ITabBarProps<T>,
+    state: TabBarState,
+    value: number,
+  ) => {
     const {layout} = state;
     const tabBarWidth = this.getTabBarWidth(props, state);
     const maxDistance = this.getMaxScrollDistance(tabBarWidth, layout.width);
@@ -174,6 +212,9 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
           tabWidths,
           this.getFlattenedTabWidth(tabStyle),
         );
+        // To get the current index centered we adjust scroll amount by width of indexes
+        // 0 through (i - 1) and add half the width of current index i
+        // @ts-ignore
         return total + (index === i ? tabWidth / 2 : tabWidth);
       },
       0,
@@ -181,7 +222,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
     const scrollAmount = centerDistance - layout.width / 2;
     return this.normalizeScrollValue(props, state, scrollAmount);
   };
-  resetScroll = (index: any) => {
+  resetScroll = (index: number) => {
     if (this.props.scrollEnabled) {
       this.scrollView &&
         this.scrollView.scrollTo({
@@ -190,7 +231,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
         });
     }
   };
-  handleLayout = (e: any) => {
+  handleLayout = (e: LayoutChangeEvent) => {
     const {height, width} = e.nativeEvent.layout;
     if (
       this.state.layout.width === width &&
@@ -212,13 +253,14 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       ),
     );
   };
-  getTranslateX = memoize((scrollAmount: any, maxScrollDistance: any) =>
-    Animated.multiply(
-      Platform.OS === 'android' && I18nManager.isRTL
-        ? Animated.sub(maxScrollDistance, scrollAmount)
-        : scrollAmount,
-      I18nManager.isRTL ? 1 : -1,
-    ),
+  getTranslateX = memoize(
+    (scrollAmount: Animated.Node<number>, maxScrollDistance: number) =>
+      Animated.multiply(
+        Platform.OS === 'android' && I18nManager.isRTL
+          ? Animated.sub(maxScrollDistance, scrollAmount)
+          : scrollAmount,
+        I18nManager.isRTL ? 1 : -1,
+      ),
   );
   render() {
     const {
@@ -251,7 +293,6 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
       activeTabBackground,
     } = this.props;
     const {layout, tabWidths} = this.state;
-    // @ts-ignore
     const {routes} = navigationState;
     const isWidthDynamic = this.getFlattenedTabWidth(tabStyle) === 'auto';
     const tabBarWidth = this.getTabBarWidth(this.props, this.state);
@@ -285,7 +326,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                 jumpTo,
                 width: isWidthDynamic ? 'auto' : `${100 / routes.length}%`,
                 style: indicatorStyle,
-                getTabWidth: this.getMemoizedTabWidthGettter(
+                getTabWidth: this.getMemoizedTabWidthGetter(
                   layout,
                   routes,
                   scrollEnabled,
@@ -331,7 +372,7 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
               this.scrollView = el && el.getNode();
             }}>
             {routes.map((route: any) => (
-              <Tab
+              <TabBarItem
                 segmentLineColor={segmentLineColor}
                 activeTabBackground={activeTabBackground}
                 segmentView={segmentView}
@@ -356,7 +397,6 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
                     : undefined
                 }
                 key={route.key}
-                // @ts-ignore
                 position={position}
                 route={route}
                 navigationState={navigationState}
@@ -395,17 +435,21 @@ export default class TabBar extends React.Component<ITabBarProps, TabBarState> {
     );
   }
 }
+
 TabBar.defaultProps = {
-  getLabelText: ({route}: any) => route.title,
-  getAccessible: ({route}: any) =>
+  getLabelText: ({route}: Scene<Route>) =>
+    typeof route.title === 'string' ? route.title.toUpperCase() : route.title,
+  getAccessible: ({route}: Scene<Route>) =>
     typeof route.accessible !== 'undefined' ? route.accessible : true,
-  getAccessibilityLabel: ({route}: any) =>
+  getAccessibilityLabel: ({route}: Scene<Route>) =>
     typeof route.accessibilityLabel === 'string'
       ? route.accessibilityLabel
       : typeof route.title === 'string'
       ? route.title
       : undefined,
-  getTestID: ({route}: any) => route.testID,
-  renderIndicator: (props: any) => <TabBarIndicator {...props} />,
+  getTestID: ({route}: Scene<Route>) => route.testID,
+  renderIndicator: (props: ITabBarIndicatorProps<Route>) => (
+    <TabBarIndicator {...props} />
+  ),
   contentContainerOffset: 0,
 };

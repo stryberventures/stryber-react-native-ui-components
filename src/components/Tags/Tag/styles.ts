@@ -1,19 +1,30 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../../../constants';
-import {ITagProps, ITagState} from './index';
+import {ITagProps} from './index';
+import {ThemeType} from '../../Theme';
+
+interface ITagStylesProps {
+  disabled: ITagProps['disabled'];
+  color: ITagProps['color'];
+  disabledColor: ITagProps['disabledColor'];
+  textColor: ITagProps['textColor'];
+  size: ITagProps['size'];
+  shape: ITagProps['shape'];
+  selectedColor: ITagProps['selectedColor'];
+  shadow: ITagProps['shadow'];
+}
 
 const getStyles = (
-  theme = defaultTheme,
-  props: ITagProps,
-  state: ITagState,
+  theme: ThemeType = defaultTheme,
+  props: ITagStylesProps,
+  selected: boolean,
 ) => {
   const propsColorValue =
-    theme.colors[props.color as keyof typeof defaultTheme.colors] ||
-    props.color;
+    theme.colors[props.color as keyof ThemeType['colors']] || props.color;
   const primaryColor = propsColorValue || theme.colors.primary;
   const textColor = props.disabled
     ? props.disabledColor || theme.colors.gray50
-    : state.selected
+    : selected
     ? props.selectedColor || theme.colors.white
     : props.textColor
     ? props.textColor
@@ -51,7 +62,7 @@ const getStyles = (
           backgroundColor: theme.colors.gray15,
           opacity: 0.7,
         }
-    : state.selected
+    : selected
     ? props.selectedColor
       ? {
           borderWidth: 1,

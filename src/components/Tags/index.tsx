@@ -2,8 +2,9 @@ import * as React from 'react';
 import {View, Text} from 'react-native';
 
 import Tag from './Tag';
-import withTheme from '../withTheme';
 import getStyles from './styles';
+import {FC, useState} from 'react';
+import {useTheme} from '../Theme';
 
 export interface ITagData {
   id: string | number;
@@ -14,7 +15,6 @@ export interface ITagData {
 
 export interface ITagsProps {
   tags: ITagData[];
-  theme?: any;
   color?: string;
   textColor?: string;
   shape?: 'rectangle' | 'rounded' | 'round';
@@ -35,99 +35,54 @@ export interface ITagsState {
 const createDefaultTags = (tags: ITagData[]): (string | number)[] =>
   tags.filter(tag => tag.preselected).map(tag => tag.id);
 
-class Tags extends React.Component<ITagsProps, ITagsState> {
-  static defaultProps: any;
-  state = {
-    selectedTags: createDefaultTags(this.props.tags),
-    resetTags: false,
+const Tags: FC<ITagsProps> = ({tags, onChange, error, ...rest}) => {
+  const {theme} = useTheme();
+  const [selectedTags, setSelectedTags] = useState(createDefaultTags(tags));
+  const styles = getStyles(theme);
+
+  const handleChange = (selectedIds: (string | number)[]) => {
+    setSelectedTags(selectedIds);
+    onChange!(selectedTags);
   };
 
-  componentDidUpdate(prevProps: ITagsProps) {
-    if (prevProps.tags.length < this.props.tags.length) {
-      const newTags = this.props.tags
-        .filter(
-          tag =>
-            !prevProps.tags.find(oldTag => oldTag.id === tag.id) &&
-            tag.preselected,
-        )
-        .map(tag => tag.id);
-      this.setState(state => ({
-        selectedTags: [...state.selectedTags, ...newTags],
-      }));
-    } else if (prevProps.tags.length > this.props.tags.length) {
-      const newTags = this.state.selectedTags.filter(tagId =>
-        this.props.tags.some(tag => tag.id === tagId),
-      );
-      this.setState({
-        selectedTags: newTags,
-      });
-    }
-  }
-
-  // this method will be used by parent component through ref
-  resetTags = () => {
-    this.setState(
-      {
-        selectedTags: [],
-        resetTags: true,
-      },
-      () => {
-        this.setState({
-          resetTags: false,
-        });
-      },
-    );
-  };
-
-  handleTagChange(tagId: string | number) {
-    // @ts-ignore
-    if (this.state.selectedTags.includes(tagId)) {
-      const filteredArr = this.state.selectedTags.filter(tag => tag !== tagId);
-      this.handleChange([...filteredArr]);
+  const handleTagChange = (tagId: string | number) => {
+    if (selectedTags.includes(tagId)) {
+      const filteredArr = selectedTags.filter(tag => tag !== tagId);
+      handleChange([...filteredArr]);
     } else {
-      this.handleChange([...this.state.selectedTags, tagId]);
+      handleChange([...selectedTags, tagId]);
     }
-  }
+  };
 
-  handleChange(selectedIds: (string | number)[]) {
-    this.setState({selectedTags: selectedIds}, () => {
-      this.props.onChange!(this.state.selectedTags);
-    });
-  }
-
-  render() {
-    const {theme, tags, ...props} = this.props;
-    const styles: any = getStyles(theme);
-    return (
-      <>
-        <View style={styles.container}>
-          {tags.map(tag => (
-            <Tag
-              resetTag={this.state.resetTags}
-              preselected={!!tag.preselected}
-              disabled={!!tag.disabled}
-              key={tag.id}
-              onTagChange={() => this.handleTagChange(tag.id)}
-              {...props}>
-              {tag.label}
-            </Tag>
-          ))}
+  return (
+    <>
+      <View style={styles.container}>
+        {tags.map(tag => (
+          <Tag
+            preselected={!!tag.preselected}
+            disabled={!!tag.disabled}
+            key={tag.id}
+            onTagChange={() => handleTagChange(tag.id)}
+            {...rest}>
+            {tag.label}
+          </Tag>
+        ))}
+      </View>
+      {!!error && (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error}</Text>
         </View>
-        {!!this.props.error && (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>{this.props.error}</Text>
-          </View>
-        )}
-      </>
-    );
-  }
-}
+      )}
+    </>
+  );
+};
+
 Tags.defaultProps = {
   tags: [],
-  size: 'regular',
+  size: 'small',
   shape: 'rounded',
   shadow: false,
   onChange: () => {},
-  onRef: () => {},
 };
-export default withTheme(Tags);
+
+export default Tags;

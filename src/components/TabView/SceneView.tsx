@@ -1,27 +1,35 @@
 import * as React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle, StyleProp} from 'react-native';
 import styles from './styles';
-interface ISceneViewProps {
-  navigationState?: {
-    index?: number;
-  };
-  index?: number;
-  layout?: any;
-  style?: any;
-  lazyPreloadDistance?: number;
-  lazy?: boolean;
-  removeListener?: (...args: any[]) => any;
-  addListener?: (...args: any[]) => any;
+import {
+  EventEmitterProps,
+  NavigationState,
+  Route,
+  SceneRendererProps,
+} from './types';
+
+interface ISceneViewProps<T extends Route>
+  extends SceneRendererProps,
+    EventEmitterProps {
+  navigationState: NavigationState<T>;
+  lazy: ((props: {route: T}) => boolean) | boolean;
+  lazyPreloadDistance: number;
+  index: number;
+  children: (props: {loading: boolean}) => React.ReactNode;
+  style?: StyleProp<ViewStyle>;
 }
+
 type SceneViewState = {
   loading?: boolean;
 };
-export default class SceneView extends React.Component<
-  ISceneViewProps,
+
+export default class SceneView<T extends Route> extends React.Component<
+  ISceneViewProps<T>,
   SceneViewState
 > {
   static getDerivedStateFromProps(
-    props: ISceneViewProps,
+    //@ts-ignore
+    props: ISceneViewProps<T>,
     state: SceneViewState,
   ) {
     if (
@@ -50,7 +58,7 @@ export default class SceneView extends React.Component<
     }
   }
   componentDidUpdate(
-    prevProps: ISceneViewProps,
+    prevProps: ISceneViewProps<T>,
     prevState: SceneViewState,
     _: any,
   ) {
@@ -69,7 +77,7 @@ export default class SceneView extends React.Component<
   componentWillUnmount() {
     this.props.removeListener!('enter', this.handleEnter);
   }
-  handleEnter = (value: any) => {
+  handleEnter = (value: number) => {
     const {index} = this.props;
     // If we're entering the current route, we need to load it
     if (value === index && this.state.loading) {
@@ -96,9 +104,9 @@ export default class SceneView extends React.Component<
           style,
         ]}>
         {
+          // Only render the route only if it's either focused or layout is available
           // When layout is not available, we must not render unfocused routes
           // so that the focused route can fill the screen
-          // @ts-ignore
           focused || layout.width ? this.props.children({loading}) : null
         }
       </View>
