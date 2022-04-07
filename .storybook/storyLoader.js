@@ -24,6 +24,7 @@ function loadStories() {
   require('../src/components/TabView/TabView.native.stories');
   require('../src/components/Tags/Tags.native.stories');
   require('../src/components/Text/Text.native.stories');
+  require('../src/components/Theme/Theme.native.stories');
 }
 
 const stories = [
@@ -47,6 +48,7 @@ const stories = [
   '../src/components/TabView/TabView.native.stories',
   '../src/components/Tags/Tags.native.stories',
   '../src/components/Text/Text.native.stories',
+  '../src/components/Theme/Theme.native.stories',
 ];
 
 module.exports = {

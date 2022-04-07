@@ -1,4 +1,3 @@
-const key = 'Default';
 const colors = {
   accent: '#d0021b',
   accent2: '#ea3546',
@@ -46,6 +45,7 @@ const colors = {
   darkGreen: '#0e6f4d',
   lightBlue: '#57aaf2',
 };
+
 const fontSizes = {
   title: 34,
   h1: 28,
@@ -60,6 +60,7 @@ const fontSizes = {
   captionSmall: 10,
   small: 12,
 };
+
 const fontWeights = {
   regular: 'normal',
   bold: 'bold',
@@ -67,6 +68,7 @@ const fontWeights = {
   medium: '500',
   light: '200',
 };
+
 const sizes = {
   // global sizes
   base: 16,
@@ -103,6 +105,7 @@ const sizes = {
   cardPadding: 16,
   cardWithImgBgMinHeight: 308,
 };
+
 const fonts = {
   h1: {
     fontSize: fontSizes.h1,
@@ -139,6 +142,7 @@ const fonts = {
   },
   fontFamily: 'Open Sans',
 };
+
 const spaces = {
   xxs: 4,
   xs: 8,
@@ -155,4 +159,4 @@ const spaces = {
   xxl16: 512,
 };
 
-export {key, colors, sizes, fontSizes, fontWeights, fonts, spaces};
+export {colors, sizes, fontSizes, fontWeights, fonts, spaces};
