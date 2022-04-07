@@ -1,11 +1,25 @@
 import {StyleSheet} from 'react-native';
 import {defaultTheme} from '../../constants';
-import {IButtonCounterProps, IButtonCounterState} from './index';
+import {IButtonCounterProps} from './index';
+import {ThemeType} from '../Theme';
+
+interface IStyleProps {
+  color: IButtonCounterProps['color'];
+  secondaryColor: IButtonCounterProps['secondaryColor'];
+  size: IButtonCounterProps['size'];
+  shape: IButtonCounterProps['shape'];
+  disabled: IButtonCounterProps['disabled'];
+  iconProps: IButtonCounterProps['iconProps'];
+  minValue: IButtonCounterProps['minValue'];
+  maxValue: IButtonCounterProps['maxValue'];
+  shadow: IButtonCounterProps['shadow'];
+}
 
 const getStyles = (
-  theme: any = defaultTheme,
-  props: IButtonCounterProps,
-  state: IButtonCounterState,
+  theme: ThemeType = defaultTheme,
+  props: IStyleProps,
+  count: number,
+  isTouched: boolean,
 ) => {
   const propsColorValue =
     theme.colors[props.color as keyof typeof defaultTheme.colors] ||
@@ -87,8 +101,8 @@ const getStyles = (
           ],
         }
       : {};
-  const reduceButtonDisabled = state.count === props.minValue;
-  const growButtonDisabled = !!props.maxValue && state.count === props.maxValue;
+  const reduceButtonDisabled = count === props.minValue;
+  const growButtonDisabled = !!props.maxValue && count === props.maxValue;
 
   return StyleSheet.create({
     container: {
@@ -138,7 +152,7 @@ const getStyles = (
       bottom: 0,
       borderRadius: borderRadius,
       backgroundColor: theme.colors.black,
-      opacity: state.isTouched ? 0.15 : 0,
+      opacity: isTouched ? 0.15 : 0,
     },
     reduceButton: {
       display: 'flex',
@@ -162,14 +176,14 @@ const getStyles = (
     buttonIconMinus: {
       color: reduceButtonDisabled
         ? theme.colors.gray15
-        : props.iconProps.fill ||
+        : props.iconProps!.fill ||
           propsSecondaryColorValue ||
           theme.colors.white,
     },
     buttonIconPlus: {
       color: growButtonDisabled
         ? theme.colors.gray15
-        : props.iconProps.fill ||
+        : props.iconProps!.fill ||
           propsSecondaryColorValue ||
           theme.colors.white,
     },

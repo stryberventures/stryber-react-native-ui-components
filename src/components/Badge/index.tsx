@@ -1,46 +1,39 @@
-import React, {Component} from 'react';
+import React, {FC} from 'react';
 import Text from '../Text';
-import withTheme from '../withTheme';
 import getStyles from './styles';
 import Block, {IBlockProps} from '../Block';
 import {StyleProp, ViewStyle} from 'react-native';
+import {useTheme} from '../Theme';
 
-interface IBadgeProps extends IBlockProps {
-  theme?: any;
+interface IBadgeProps extends Omit<IBlockProps, 'style'> {
   value?: string | number;
   textStyle?: any;
   style?: StyleProp<ViewStyle>;
   color?: string;
 }
 
-class Badge extends Component<IBadgeProps, {}> {
-  static defaultProps: any;
-  render() {
-    const {theme, value, textStyle, style, onPress, color} = this.props;
-    const styles: any = getStyles(theme);
-    const badgeStyles: any = [
-      color && styles[color],
-      color && !styles[color] && {backgroundColor: color},
-      style,
-    ];
-    return (
-      <Block
-        center
-        middle
-        card
-        onPress={onPress}
-        style={[styles.badge, ...badgeStyles] as ViewStyle}>
-        <Text size={theme.fonts.caption.fontSize - 2} white style={textStyle}>
-          {value}
-        </Text>
-      </Block>
-    );
-  }
-}
+const Badge: FC<IBadgeProps> = ({value, textStyle, style, onPress, color}) => {
+  const {theme} = useTheme();
+  const styles = getStyles(theme, color);
+
+  return (
+    <Block
+      center
+      middle
+      card
+      onPress={onPress}
+      style={[styles.badge, style] as ViewStyle}>
+      <Text size={theme.fonts.caption.fontSize - 2} white style={textStyle}>
+        {value}
+      </Text>
+    </Block>
+  );
+};
+
 Badge.defaultProps = {
   value: '',
   textStyle: {},
   style: {},
   color: '',
 };
-export default withTheme(Badge);
+export default Badge;

@@ -10,7 +10,7 @@ import Block, {IBlockProps} from '../Block/index';
 import getStyles from './styles';
 import {ThemeType, useTheme} from '../Theme';
 
-export interface ICardProps extends IBlockProps {
+export interface ICardProps extends Omit<IBlockProps, 'style'> {
   card?: boolean;
   shadow?: boolean;
   shadowType?: 'normal' | 'large';

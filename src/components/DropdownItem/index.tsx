@@ -1,6 +1,5 @@
 import React, {FC, useState} from 'react';
 import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
-import withTheme from '../withTheme';
 import getStyles from './styles';
 import {useTheme} from '../Theme';
 
@@ -56,4 +55,4 @@ DropdownItem.defaultProps = {
   onPress: () => {},
   style: {},
 };
-export default withTheme(DropdownItem);
+export default DropdownItem;

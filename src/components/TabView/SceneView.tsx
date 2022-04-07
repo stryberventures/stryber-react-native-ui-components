@@ -28,8 +28,7 @@ export default class SceneView<T extends Route> extends React.Component<
   SceneViewState
 > {
   static getDerivedStateFromProps(
-    //@ts-ignore
-    props: ISceneViewProps<T>,
+    props: ISceneViewProps<any>,
     state: SceneViewState,
   ) {
     if (

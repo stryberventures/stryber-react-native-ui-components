@@ -171,7 +171,13 @@ const DatePicker = ({
           rightIcon={
             icon
               ? icon
-              : () => <Calendar size={iconSize} fill={placeholderColor} />
+              : () => (
+                  <Calendar
+                    height={iconSize}
+                    width={iconSize}
+                    fill={placeholderColor}
+                  />
+                )
           }
           placeholder={dateStr}
           style={[{marginVertical: 0}]}

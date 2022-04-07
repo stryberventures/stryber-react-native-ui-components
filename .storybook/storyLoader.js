@@ -4,8 +4,10 @@
 // https://github.com/elderfo/react-native-storybook-loader.git
 
 function loadStories() {
+  require('../src/components/Badge/Badge.native.stories');
   require('../src/components/Block/Block.native.stories');
   require('../src/components/Button/Button.native.stories');
+  require('../src/components/ButtonCounter/ButtonCounter.native.stories');
   require('../src/components/Card/Card.native.stories');
   require('../src/components/CardList/CardList.native.stories');
   require('../src/components/Checkbox/Checkbox.native.stories');
@@ -24,8 +26,10 @@ function loadStories() {
 }
 
 const stories = [
+  '../src/components/Badge/Badge.native.stories',
   '../src/components/Block/Block.native.stories',
   '../src/components/Button/Button.native.stories',
+  '../src/components/ButtonCounter/ButtonCounter.native.stories',
   '../src/components/Card/Card.native.stories',
   '../src/components/CardList/CardList.native.stories',
   '../src/components/Checkbox/Checkbox.native.stories',

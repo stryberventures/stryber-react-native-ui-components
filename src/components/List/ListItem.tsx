@@ -10,7 +10,7 @@ import {
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Switch from '../Switch';
-import Icons from '../Icons';
+import * as Icons from '../Icons';
 import {IListItem} from './index';
 import getStyles from './styles';
 import {useTheme} from '../Theme';

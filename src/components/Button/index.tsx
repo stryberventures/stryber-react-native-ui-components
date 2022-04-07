@@ -7,7 +7,7 @@ import {
   TextStyle,
   StyleProp,
 } from 'react-native';
-import Icons from '../Icons';
+import * as Icons from '../Icons';
 import Text from '../Text';
 import getStyles from './styles';
 import {useState} from 'react';
