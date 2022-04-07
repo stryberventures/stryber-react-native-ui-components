@@ -2,7 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, text, color} from '@storybook/addon-knobs';
 import Input from './index';
-import CenterView from '../CenterView';
+import CenterView from '../../storybook/CenterView';
 import {input} from '../../static/markdown';
 import {UserIcon} from '../Icons';
 

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {storiesOf} from '@storybook/react-native';
 import {boolean, color, select, withKnobs} from '@storybook/addon-knobs';
 import Checkbox from './index';
-import CenterView from '../CenterView';
+import CenterView from '../../storybook/CenterView';
 import {checkbox} from '../../static/markdown';
 
 const getKnobProps = () => ({

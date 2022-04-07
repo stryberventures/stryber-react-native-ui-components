@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {ButtonCounter, Text} from '../../index';
-import CenterView from '../../components/CenterView';
+import CenterView from '../../storybook/CenterView';
 import {buttonCounter} from '../../static/markdown';
 
 storiesOf('ButtonCounter', module)

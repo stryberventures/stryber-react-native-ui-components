@@ -1,6 +1,6 @@
 import * as React from 'react';
 import SearchField from './index';
-import CenterView from '../../components/CenterView';
+import CenterView from '../../storybook/CenterView';
 import {storiesOf} from '@storybook/react-native';
 
 storiesOf('SearchField', module)

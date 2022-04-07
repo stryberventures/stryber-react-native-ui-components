@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Alert} from 'react-native';
 import DatePicker, {DatePickerType} from './index';
-import CenterView from '../CenterView';
+import CenterView from '../../storybook/CenterView';
 import {storiesOf} from '@storybook/react-native';
 import {datePicker} from '../../static/markdown';
 import {ArrowDown} from '../../components/Icons';

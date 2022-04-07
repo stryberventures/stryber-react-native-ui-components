@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, text, select} from '@storybook/addon-knobs';
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import Text from '../../components/Text';
 import {text as textMarkdown} from '../../static/markdown';
 storiesOf('Text', module)

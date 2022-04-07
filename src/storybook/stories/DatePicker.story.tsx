@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Alert} from 'react-native';
 import {DatePicker, Button} from '../../components';
 // @ts-ignore
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {storiesOf} from '@storybook/react-native';
 import {datePicker} from '../../static/markdown';
 import {ArrowDown} from '../../components/Icons';

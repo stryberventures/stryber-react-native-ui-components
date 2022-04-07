@@ -15,7 +15,7 @@ import SliderLayout from './SliderLayout';
 import {getStyles} from './styles';
 import {useTheme} from '../Theme';
 
-interface ISliderProps {
+export interface ISliderProps {
   valueUp: number;
   valueDown?: number;
   limitUp: number;

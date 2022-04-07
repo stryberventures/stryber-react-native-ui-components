@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react-native';
 import {action} from '@storybook/addon-actions';
 import {withKnobs, color, select, boolean} from '@storybook/addon-knobs';
 import {Button, Block} from '../../index';
-import CenterView from '../CenterView';
+import CenterView from '../../storybook/CenterView';
 import {button} from '../../static/markdown';
 import {ThemeProvider} from '../Theme';
 

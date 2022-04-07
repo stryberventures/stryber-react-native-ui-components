@@ -3,7 +3,7 @@ import Input, {IInputProps} from '../Input';
 import {Search} from '../Icons';
 import {useTheme} from '../Theme';
 
-interface ISearchFieldProps extends IInputProps {
+export interface ISearchFieldProps extends IInputProps {
   iconColor?: string;
 }
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Block from '../../components/Block';
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {block} from '../../static/markdown';
 import {storiesOf} from '@storybook/react-native';
 storiesOf('Block', module)

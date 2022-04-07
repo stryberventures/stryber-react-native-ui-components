@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ProgressBar from '../../components/ProgressBar';
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {progressBar} from '../../static/markdown';
 import {storiesOf} from '@storybook/react-native';
 storiesOf('ProgressBar', module)

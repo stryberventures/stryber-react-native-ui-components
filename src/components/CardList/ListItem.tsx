@@ -3,11 +3,11 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import Card from '../Card';
 import Checkbox from '../Checkbox';
-import {IListItem, ICardList} from './index';
+import {ICardListItem, ICardList} from './index';
 import {getListItemStyles} from './styles';
 import {useTheme} from '../Theme';
 
-export interface IListItemProps extends IListItem, Partial<ICardList> {
+export interface IListItemProps extends ICardListItem, Partial<ICardList> {
   isActive: boolean;
 }
 

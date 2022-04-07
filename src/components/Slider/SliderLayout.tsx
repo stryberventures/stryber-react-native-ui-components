@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
 
-interface ISliderLayoutProps {
+export interface ISliderLayoutProps {
   type?: string;
   wrapperStyle?: StyleProp<ViewStyle>;
   styles: any;

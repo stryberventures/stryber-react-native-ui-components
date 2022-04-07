@@ -7,7 +7,7 @@ import ListItem from './ListItem';
 import {getCardListStyles} from './styles';
 import {ThemeType} from '../Theme';
 
-export interface IListItem {
+export interface ICardListItem {
   text: string;
   secondaryText?: string;
   checkboxProps?: ICheckboxProps;
@@ -16,7 +16,7 @@ export interface IListItem {
 }
 
 export interface ICardList {
-  data: IListItem[];
+  data: ICardListItem[];
   title?: string;
   checkboxLeft?: boolean;
   checkboxRight?: boolean;
@@ -27,8 +27,8 @@ export interface ICardList {
   quizTextColor?: keyof ThemeType['colors'] | string;
   cardBackground?: keyof ThemeType['colors'] | string;
   textColor?: string;
-  keyExtractor?: (item: IListItem, index: number) => string;
-  onQuizPress?: (item?: IListItem, index?: number) => void;
+  keyExtractor?: (item: ICardListItem, index: number) => string;
+  onQuizPress?: (item?: ICardListItem, index?: number) => void;
   defaultIndex?: number;
   multiSelect?: boolean;
   scrollEnabled?: boolean;
@@ -43,7 +43,7 @@ const CardList: React.FC<ICardList> = props => {
 
   const keyExtractor = props.keyExtractor || ((_item, index) => `${index}`);
 
-  const renderItem = ({item, index}: {item: IListItem; index: number}) => {
+  const renderItem = ({item, index}: {item: ICardListItem; index: number}) => {
     const onQuizPress = () => {
       setActiveIndexes(state => {
         if (props.multiSelect) {

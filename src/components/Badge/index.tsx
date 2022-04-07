@@ -5,7 +5,7 @@ import Block, {IBlockProps} from '../Block';
 import {StyleProp, ViewStyle} from 'react-native';
 import {useTheme} from '../Theme';
 
-interface IBadgeProps extends Omit<IBlockProps, 'style'> {
+export interface IBadgeProps extends Omit<IBlockProps, 'style'> {
   value?: string | number;
   textStyle?: any;
   style?: StyleProp<ViewStyle>;

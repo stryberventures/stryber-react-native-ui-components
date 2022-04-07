@@ -4,7 +4,7 @@ import {action} from '@storybook/addon-actions';
 import {withKnobs, color, select} from '@storybook/addon-knobs';
 import {Button} from '../../../components';
 // @ts-ignore
-import CenterView from '../../../components/CenterView/index';
+import CenterView from '../../CenterView/index';
 import {button} from '../../../static/markdown';
 
 const getKnobProps = () => ({

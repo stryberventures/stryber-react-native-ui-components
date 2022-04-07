@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {cardList} from '../../static/markdown';
 import {storiesOf} from '@storybook/react-native';
 import {

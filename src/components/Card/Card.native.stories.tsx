@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Image} from 'react-native';
 import {Card, Block, Text, Button} from '../../index';
-import CenterView from '../../components/CenterView';
+import CenterView from '../../storybook/CenterView';
 import {withKnobs} from '@storybook/addon-knobs';
 import {defaultTheme as theme} from '../../constants';
 import {storiesOf} from '@storybook/react-native';

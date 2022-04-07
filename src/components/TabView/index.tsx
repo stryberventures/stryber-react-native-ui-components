@@ -15,7 +15,7 @@ import {
 } from './types';
 import {useState} from 'react';
 
-interface ITabViewProps<T extends Route> extends PagerCommonProps {
+export interface ITabViewProps<T extends Route> extends PagerCommonProps {
   position?: Animated.Value<number>;
   onIndexChange: (index: number) => void;
   navigationState: NavigationState<T>;

@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react-native';
 import {withKnobs, text, color} from '@storybook/addon-knobs';
 import Input from '../../../components/Input';
 // @ts-ignore
-import CenterView from '../../../components/CenterView/index';
+import CenterView from '../../CenterView/index';
 import {UserIcon} from '../../../components/Icons';
 import {input} from '../../../static/markdown';
 

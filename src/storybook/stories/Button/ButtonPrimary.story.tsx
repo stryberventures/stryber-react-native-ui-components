@@ -5,7 +5,7 @@ import {action} from '@storybook/addon-actions';
 import {withKnobs, color, select, boolean} from '@storybook/addon-knobs';
 import {Button, Block} from '../../../components';
 // @ts-ignore
-import CenterView from '../../../components/CenterView/index';
+import CenterView from '../../CenterView/index';
 import {button} from '../../../static/markdown';
 import {ThemeProvider} from '../../../components';
 

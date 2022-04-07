@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Badge from '../../components/Badge';
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, color} from '@storybook/addon-knobs';
 import {defaultTheme} from '../../constants';

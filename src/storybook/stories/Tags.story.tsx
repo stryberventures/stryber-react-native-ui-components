@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import TagsPreview from '../preview/TagsPreview';
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {tags} from '../../static/markdown';
 
 storiesOf('Tags', module)

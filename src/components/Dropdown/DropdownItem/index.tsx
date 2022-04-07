@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
 import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
 import getStyles from './styles';
-import {useTheme} from '../Theme';
+import {useTheme} from '../../Theme';
 
-interface IDropdownItemProps {
+export interface IDropdownItemProps {
   index: number;
   style?: StyleProp<ViewStyle>;
   onPress?: (index: number) => void;

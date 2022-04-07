@@ -27,10 +27,6 @@ export interface ITagsProps {
   disabledColor?: string;
   selectedColor?: string;
 }
-export interface ITagsState {
-  selectedTags: (string | number)[];
-  resetTags: boolean;
-}
 
 const createDefaultTags = (tags: ITagData[]): (string | number)[] =>
   tags.filter(tag => tag.preselected).map(tag => tag.id);

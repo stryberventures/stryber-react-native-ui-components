@@ -2,7 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {color, boolean, select, withKnobs} from '@storybook/addon-knobs';
 import {View} from 'react-native';
-import CenterView from '../../components/CenterView/index';
+import CenterView from '../../storybook/CenterView/index';
 import Switch from './index';
 import {switchDoc} from '../../static/markdown';
 

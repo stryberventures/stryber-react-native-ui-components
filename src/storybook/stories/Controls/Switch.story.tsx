@@ -3,7 +3,7 @@ import {storiesOf} from '@storybook/react-native';
 import {color, boolean, select, withKnobs} from '@storybook/addon-knobs';
 import {View} from 'react-native';
 // @ts-ignore
-import CenterView from '../../../components/CenterView/index';
+import CenterView from '../../CenterView/index';
 import Switch from '../../../components/Switch';
 import {switchDoc} from '../../../static/markdown';
 

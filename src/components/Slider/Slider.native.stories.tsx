@@ -2,7 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs, boolean, select, color} from '@storybook/addon-knobs';
 import {slider} from '../../static/markdown';
-import CenterView from '../../components/CenterView';
+import CenterView from '../../storybook/CenterView';
 import Slider from './index';
 import {Speaker, SpeakerMute} from '../../components/Icons';
 import {defaultTheme} from '../../constants';

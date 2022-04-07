@@ -3,7 +3,7 @@ import {Animated, StyleProp, Text, TextProps, TextStyle} from 'react-native';
 import getStyles from './styles';
 import {useTheme} from '../Theme';
 
-interface ITypographyProps extends TextProps {
+export interface ITypographyProps extends TextProps {
   title?: boolean;
   h1?: boolean;
   h2?: boolean;

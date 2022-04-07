@@ -2,7 +2,7 @@ import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import Dropdown from '../../components/Dropdown';
 // @ts-ignore
-import CenterView from '../../components/CenterView';
+import CenterView from '../CenterView';
 import {dropdown} from '../../static/markdown';
 storiesOf('Dropdown', module)
   .addParameters({

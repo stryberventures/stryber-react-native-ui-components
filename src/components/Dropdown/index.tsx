@@ -9,7 +9,7 @@ import {
   Platform,
   LayoutChangeEvent,
 } from 'react-native';
-import DropdownItem from '../DropdownItem';
+import DropdownItem from './DropdownItem';
 import Input, {IInputProps} from '../Input';
 import InputBase from '../Input/InputBase';
 import Text from '../Text';
@@ -18,7 +18,7 @@ import getStyles from './styles';
 import {useTheme} from '../Theme';
 
 //TODO: Fix bug with double press, get rid of unused props, cover everything with types, purify code of component
-interface IDropdownProps {
+export interface IDropdownProps {
   name?: string;
   disabled?: boolean;
   value?: string | number;

@@ -4,7 +4,7 @@ import {storiesOf} from '@storybook/react-native';
 import {boolean, color, select, withKnobs} from '@storybook/addon-knobs';
 import Checkbox from '../../../components/Checkbox';
 // @ts-ignore
-import CenterView from '../../../components/CenterView/index';
+import CenterView from '../../CenterView/index';
 import {checkbox} from '../../../static/markdown';
 
 const getKnobProps = () => ({

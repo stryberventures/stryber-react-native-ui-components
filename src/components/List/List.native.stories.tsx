@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {storiesOf} from '@storybook/react-native';
 import {withKnobs} from '@storybook/addon-knobs';
-import CenterView from '../../components/CenterView';
+import CenterView from '../../storybook/CenterView';
 import {list} from '../../static/markdown';
 import {
   SimpleList,
