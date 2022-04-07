@@ -13,6 +13,7 @@ function loadStories() {
   require('../src/components/Checkbox/Checkbox.native.stories');
   require('../src/components/DatePicker/DatePicker.native.stories');
   require('../src/components/Dropdown/Dropdown.native.stories');
+  require('../src/components/Icons/Icons.native.stories');
   require('../src/components/Input/Input.native.stories');
   require('../src/components/List/List.native.stories');
   require('../src/components/Loader/Loader.native.stories');
@@ -35,6 +36,7 @@ const stories = [
   '../src/components/Checkbox/Checkbox.native.stories',
   '../src/components/DatePicker/DatePicker.native.stories',
   '../src/components/Dropdown/Dropdown.native.stories',
+  '../src/components/Icons/Icons.native.stories',
   '../src/components/Input/Input.native.stories',
   '../src/components/List/List.native.stories',
   '../src/components/Loader/Loader.native.stories',

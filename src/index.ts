@@ -1,3 +1,5 @@
+import * as Icons from './components/Icons';
+export {Icons};
 export {default as DatePicker} from './components/DatePicker';
 export {default as Badge} from './components/Badge';
 export {default as Block} from './components/Block';
@@ -21,7 +23,6 @@ export {default as ProgressBar} from './components/ProgressBar';
 export {default as Loader} from './components/Loader';
 export {default as Tags} from './components/Tags';
 export {ThemeProvider, useTheme} from './components/Theme';
-export * as Icons from './components/Icons';
 
 export type {ThemeType} from './components/Theme';
 export type {IButtonProps} from './components/Button';
