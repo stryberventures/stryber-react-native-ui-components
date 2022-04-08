@@ -13,8 +13,6 @@ const StorybookUIRoot = getStorybookUI({
   onDeviceUI: true,
   isUIHidden: false,
   shouldPersistSelection: false,
-  asyncStorage:
-    require('@react-native-async-storage/async-storage').default || null,
 });
 // If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
 // If you use Expo you can safely remove this line.
