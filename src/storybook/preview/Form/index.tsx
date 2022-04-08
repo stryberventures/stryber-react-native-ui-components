@@ -8,7 +8,7 @@ import {
   DatePicker,
   Dropdown,
   Input,
-} from '../../../components';
+} from '../../../index';
 const Form = () => {
   const [values, handleChange] = customHooks.useForm({
     email: 'some@Mail',
@@ -76,9 +76,10 @@ const Form = () => {
       <DatePicker
         name="date"
         label="Choose date"
-        value={values.date}
-        onChange={handleChange}
+        startDate={values.date}
+        onDateSelected={handleChange}
         saveDateOnCancel
+        modalMode={false}
       />
       <Dropdown
         name="picker"

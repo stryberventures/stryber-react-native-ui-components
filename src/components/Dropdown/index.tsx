@@ -17,7 +17,7 @@ import {ArrowDown} from '../Icons';
 import getStyles from './styles';
 import {useTheme} from '../Theme';
 
-//TODO: Fix bug with double press, get rid of unused props, cover everything with types, purify code of component
+//TODO: Cover everything with types, purify code of component
 export interface IDropdownProps {
   name?: string;
   disabled?: boolean;
@@ -132,8 +132,8 @@ const Dropdown: FC<IDropdownProps> = props => {
     value: value || '',
     listOnTop: false,
   });
-  const isMountedRef = useRef(false);
-  const isFocusedRef = useRef(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<InputBase>(null);
   const listContainerRef = useRef<View>(null);
   const scrollRef = useRef<FlatList>(null);
@@ -142,11 +142,11 @@ const Dropdown: FC<IDropdownProps> = props => {
   const styles = getStyles(theme, dropdownState.listOnTop);
 
   useEffect(() => {
-    isMountedRef.current = true;
+    setIsMounted(true);
     return () => {
-      isMountedRef.current = false;
+      setIsMounted(false);
     };
-  });
+  }, []);
 
   const selectedIndex = () => {
     const {value: currentValue} = dropdownState;
@@ -205,7 +205,7 @@ const Dropdown: FC<IDropdownProps> = props => {
     if (!dataItemCount) {
       return;
     }
-    isFocusedRef.current = true;
+    setIsFocused(true);
     if (typeof onFocus === 'function') {
       onFocus();
     }
@@ -247,14 +247,14 @@ const Dropdown: FC<IDropdownProps> = props => {
           listOnTop,
         }));
 
-        if (isMountedRef.current) {
+        if (isMounted) {
           resetScrollOffset();
           Animated.timing(opacity, {
             duration: animationDuration,
             toValue: 1,
             useNativeDriver,
           }).start(() => {
-            if (isMountedRef.current && Platform.OS === 'ios') {
+            if (isMounted && Platform.OS === 'ios') {
               const {flashScrollIndicators} = scrollRef.current || {};
               if (typeof flashScrollIndicators === 'function') {
                 flashScrollIndicators.call(scrollRef.current);
@@ -268,12 +268,13 @@ const Dropdown: FC<IDropdownProps> = props => {
 
   const onClose = () => {
     const {opacity} = dropdownState;
+    setDropdownState(state => ({...state, modal: false}));
     Animated.timing(opacity, {
       duration: animationDuration,
       toValue: 0,
       useNativeDriver,
     }).start(() => {
-      isFocusedRef.current = false;
+      setIsFocused(false);
       if (typeof onBlur === 'function') {
         onBlur();
       }
@@ -286,11 +287,10 @@ const Dropdown: FC<IDropdownProps> = props => {
     if (typeof onChange === 'function') {
       onChange(currentVal, name, index);
     }
-    if (isMountedRef.current) {
+    if (isMounted) {
       setDropdownState(state => ({
         ...state,
         value: currentVal,
-        modal: false,
       }));
       inputRef.current!.setValue(currentVal.toString());
     }
@@ -322,7 +322,7 @@ const Dropdown: FC<IDropdownProps> = props => {
                 }}>
                 <ArrowDown
                   fill={
-                    isFocusedRef.current
+                    isFocused
                       ? color
                         ? color
                         : theme.colors.primary

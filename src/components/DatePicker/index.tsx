@@ -17,7 +17,7 @@ import {getDateTimeObj} from '../../utils';
 interface IDatePickerCommon {
   name?: string;
   mode?: 'date' | 'datetime' | 'time';
-  startDate?: any;
+  startDate?: Date;
   onDateSelected?: (name: string, date: Date) => void;
   onClose?: () => void;
   minDate?: Date;
@@ -28,13 +28,13 @@ interface IDatePickerCommon {
   modalStyle?: StyleProp<ViewStyle>;
   modalBtnContainerStyle?: StyleProp<ViewStyle>;
   saveDateOnCancel?: boolean;
-  showDateModal: boolean;
+  showDateModal?: boolean;
   modalMode?: boolean;
 }
 
 type DatePickerModalVariantType =
   | {
-      modalMode: true;
+      modalMode?: true;
       inputStyle?: never;
       variant?: never;
       error?: never;
@@ -48,13 +48,13 @@ type DatePickerModalVariantType =
       textColor?: never;
     }
   | {
-      modalMode: false;
+      modalMode?: false;
       inputStyle?: IInputProps['inputStyle'];
       variant?: IInputProps['variant'];
       error?: string;
       iconSize?: number;
       icon?: (...args: any[]) => any;
-      onPress: () => void;
+      onPress?: () => void;
       inputBoxStyle?: IInputProps['inputBoxStyle'];
       label?: string;
       style?: StyleProp<ViewStyle>;
@@ -93,6 +93,7 @@ const DatePicker = ({
 }: DatePickerType) => {
   const {theme} = useTheme();
   const [date, setDate] = useState(startDate);
+  const [showModal, setShowModal] = useState(false);
   const {year, month, day, hours, minutes} = getDateTimeObj(date);
   const dateSet = day && month && year;
   const valueFormat = {
@@ -108,14 +109,19 @@ const DatePicker = ({
     : theme.colors.gray;
   const inputColor = textColor ? textColor : theme.colors.darkGrey;
 
-  const handleModalSetDate = () => {
-    onDateSelected!(name!, date);
+  const handlePress = () => {
+    setShowModal(true);
+    onPress!();
+  };
 
+  const handleModalSetDate = () => {
+    onDateSelected!(name!, date!);
+    setShowModal(false);
     onClose && onClose();
   };
 
   const handleModalClose = () => {
-    setDate(startDate);
+    setShowModal(false);
     onClose && onClose();
   };
 
@@ -125,7 +131,7 @@ const DatePicker = ({
     <Modal
       animationType="slide"
       transparent
-      visible={showDateModal}
+      visible={!modalMode ? showModal : showDateModal}
       onRequestClose={handleModalClose}>
       <View style={[styles.overlay, modalOverlayStyle]}>
         <View style={[styles.modal, modalStyle]}>
@@ -161,7 +167,7 @@ const DatePicker = ({
   }
 
   return (
-    <TouchableWithoutFeedback style={style} onPress={onPress}>
+    <TouchableWithoutFeedback style={style} onPress={handlePress}>
       <View pointerEvents="box-only">
         {renderModal()}
         <Input
@@ -195,6 +201,7 @@ DatePicker.defaultProps = {
   startDate: new Date(),
   onDateSelected: () => {},
   onClose: () => {},
+  onPress: () => {},
   modalButtonSelectText: 'Done',
   modalButtonCloseText: 'Cancel',
   name: 'datepicker',

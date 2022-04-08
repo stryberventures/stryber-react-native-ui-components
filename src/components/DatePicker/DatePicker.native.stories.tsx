@@ -33,8 +33,6 @@ const Template = ({modalMode, ...rest}: Partial<DatePickerType>) => {
   return (
     <DatePicker
       {...rest}
-      onPress={() => setShowDateModal(true)}
-      onClose={() => setShowDateModal(false)}
       onDateSelected={onDateSelected}
       showDateModal={showDateModal}
     />
