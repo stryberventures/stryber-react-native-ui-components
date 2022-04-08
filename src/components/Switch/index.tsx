@@ -155,7 +155,8 @@ const Switch: FC<ISwitchProps> = ({
                       inputRange: [0, 1],
                       outputRange: [
                         (startPos || 0) * RTLDirection,
-                        (endPos || 0) * RTLDirection],
+                        (endPos || 0) * RTLDirection,
+                      ],
                     }),
                   },
                 ],
