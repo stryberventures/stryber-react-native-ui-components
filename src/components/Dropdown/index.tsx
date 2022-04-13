@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {
   View,
   FlatList,
@@ -7,16 +7,18 @@ import {
   TouchableWithoutFeedback,
   Dimensions,
   Platform,
+  LayoutChangeEvent,
 } from 'react-native';
-import withTheme from '../withTheme';
-import DropdownItem from '../DropdownItem';
-import Ripple from '../Ripple';
+import DropdownItem from './DropdownItem';
 import Input, {IInputProps} from '../Input';
+import InputBase from '../Input/InputBase';
 import Text from '../Text';
 import {ArrowDown} from '../Icons';
 import getStyles from './styles';
+import {useTheme} from '../Theme';
 
-interface IDropdownProps extends React.HTMLAttributes<Element> {
+//TODO: Cover everything with types, purify code of component
+export interface IDropdownProps {
   name?: string;
   disabled?: boolean;
   value?: string | number;
@@ -25,7 +27,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   defaultValue?: string;
   variant?: IInputProps['variant'];
   hitSlop?: {};
-  data?: any[];
+  data: any[];
   valueExtractor?: (...args: any[]) => any;
   labelExtractor?: (...args: any[]) => any;
   propsExtractor?: (...args: any[]) => any;
@@ -39,17 +41,6 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
     max: number;
   };
   dropdownPosition?: number;
-  rippleCentered?: boolean;
-  rippleSequential?: boolean;
-  rippleInsets?: {
-    top?: number;
-    right?: number;
-    bottom?: number;
-    left?: number;
-  };
-  rippleOpacity?: number;
-  shadeOpacity?: number;
-  rippleDuration?: number;
   animationDuration?: number;
   fontSize?: number;
   color?: string;
@@ -59,7 +50,7 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   baseColor?: string;
   itemCount?: number;
   itemPadding?: number;
-  onLayout?: (...args: any[]) => any;
+  onLayout?: (event: LayoutChangeEvent) => void;
   onFocus?: (...args: any[]) => any;
   onBlur?: (...args: any[]) => any;
   onChange?: (...args: any[]) => any;
@@ -72,14 +63,12 @@ interface IDropdownProps extends React.HTMLAttributes<Element> {
   nativeID?: any;
   accessible?: any;
   accessibilityLabel?: any;
-  theme?: any;
-  props?: any;
   selectedItemColor?: any;
   disabledItemColor?: any;
   itemTextStyle?: any;
-  rippleColor?: any;
   error?: string;
 }
+
 type DropdownState = {
   opacity?: any;
   selected?: number;
@@ -88,244 +77,95 @@ type DropdownState = {
   width?: number;
   top?: number;
   left?: number;
-  leftInset?: any;
-  rightInset?: any;
+  leftInset?: number;
+  rightInset?: number;
   listOnTop?: boolean;
 };
-class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
-  static defaultProps: any;
-  blur: any;
-  listContainer: any;
-  focus: (event: any) => void;
-  focused: any;
-  inputRef: any;
-  mounted: any;
-  ripple: any;
-  scroll: any;
 
-  static getDerivedStateFromProps(
-    nextProps: IDropdownProps,
-    nextState: DropdownState,
-  ) {
-    if (nextProps.value) {
-      return {
-        value: nextProps.value,
-      };
-    }
-    return {
-      value: nextState.value,
-    };
-  }
+const Dropdown: FC<IDropdownProps> = props => {
+  const {theme} = useTheme();
+  const {
+    containerStyle,
+    overlayStyle: overlayStyleOverrides,
+    pickerStyle: pickerStyleOverrides,
+    hitSlop,
+    pressRetentionOffset,
+    testID,
+    nativeID,
+    accessible,
+    accessibilityLabel,
+    value,
+    data,
+    disabled,
+    onFocus,
+    dropdownOffset,
+    // @ts-ignore
+    dropdownMargins: {min: minMargin, max: maxMargin},
+    animationDuration,
+    useNativeDriver = false,
+    valueExtractor,
+    itemCount,
+    dropdownPosition,
+    onBlur,
+    onChange,
+    name,
+    label,
+    placeholder,
+    variant,
+    color,
+    textColor = theme.colors.gray70,
+    itemColor = theme.colors.gray70,
+    itemBgColor = theme.colors.white,
+    baseColor = theme.colors.gray,
+    selectedItemColor = textColor,
+    disabledItemColor = baseColor,
+    fontSize,
+    itemTextStyle,
+    labelExtractor,
+    onLayout,
+    propsExtractor,
+  } = props;
+  const [dropdownState, setDropdownState] = useState<DropdownState>({
+    opacity: new Animated.Value(0),
+    selected: -1,
+    modal: false,
+    value: value || '',
+    listOnTop: false,
+  });
+  const [isMounted, setIsMounted] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const inputRef = useRef<InputBase>(null);
+  const listContainerRef = useRef<View>(null);
+  const scrollRef = useRef<FlatList>(null);
+  const itemSize = theme.spaces.xxl5;
 
-  constructor(props: IDropdownProps) {
-    super(props);
-    this.ripple = React.createRef();
-    this.listContainer = React.createRef();
-    this.scroll = React.createRef();
-    this.inputRef = React.createRef();
-    this.blur = () => this.onClose();
-    this.focus = this.onPress;
-    this.mounted = false;
-    this.focused = false;
-    this.state = {
-      opacity: new Animated.Value(0),
-      selected: -1,
-      modal: false,
-      value: this.props.value || '',
-      listOnTop: false,
+  const styles = getStyles(theme, dropdownState.listOnTop);
+
+  useEffect(() => {
+    setIsMounted(true);
+    return () => {
+      setIsMounted(false);
     };
-  }
-  componentDidMount() {
-    this.mounted = true;
-  }
-  componentWillUnmount() {
-    this.mounted = false;
-  }
-  getValue = () => this.state.value;
-  onPress = (event: any) => {
-    const {
-      data,
-      disabled,
-      onFocus,
-      rippleDuration,
-      dropdownOffset,
-      // @ts-ignore
-      dropdownMargins: {min: minMargin, max: maxMargin},
-      animationDuration,
-      useNativeDriver = false,
-      theme,
-    } = this.props;
-    if (disabled) {
-      return;
-    }
-    const itemCount = data!.length;
-    const timestamp = Date.now();
-    if (event != null) {
-      /* Adjust event location */
-      const eventLocation = {
-        locationY: event.nativeEvent.locationY - this.rippleInsets().top,
-        locationX: event.nativeEvent.locationX - this.rippleInsets().left,
-      };
-      /* Start ripple directly from event */
-      this.ripple.current.startRipple(eventLocation);
-    }
-    if (!itemCount) {
-      return;
-    }
-    this.focused = true;
-    if (typeof onFocus === 'function') {
-      onFocus();
-    }
-    this.inputRef.current.onFocus();
-    const dimensions = Dimensions.get('window');
-    this.listContainer.current.measureInWindow(
-      (x: number, y: number, containerWidth: number) => {
-        const {opacity} = this.state;
-        const delay = Math.max(
-          0,
-          rippleDuration! - animationDuration! - (Date.now() - timestamp),
-        );
-        const selected = this.selectedIndex();
-        let leftInset;
-        let left = x + dropdownOffset!.left - maxMargin;
-        if (left > minMargin) {
-          leftInset = maxMargin;
-        } else {
-          left = minMargin;
-          leftInset = minMargin;
-        }
-        let right = x + containerWidth + maxMargin;
-        let rightInset;
-        if (dimensions.width - right > minMargin) {
-          rightInset = maxMargin;
-        } else {
-          right = dimensions.width - minMargin;
-          rightInset = minMargin;
-        }
-        const visibleItemCount = this.visibleItemCount();
-        const itemSize = this.itemSize();
-        const height = itemSize * visibleItemCount;
-        const listOnTop = dimensions.height < y + height;
-        const top = listOnTop ? y - height - theme.sizes.inputHeight : y;
-        this.setState({
-          modal: true,
-          width: right - left,
-          top,
-          left,
-          leftInset,
-          rightInset,
-          selected,
-          listOnTop,
-        });
-        setTimeout(() => {
-          if (this.mounted) {
-            this.resetScrollOffset();
-            Animated.timing(opacity, {
-              duration: animationDuration,
-              toValue: 1,
-              useNativeDriver,
-            }).start(() => {
-              if (this.mounted && Platform.OS === 'ios') {
-                const {flashScrollIndicators} = this.scroll || {};
-                if (typeof flashScrollIndicators === 'function') {
-                  flashScrollIndicators.call(this.scroll);
-                }
-              }
-            });
-          }
-        }, delay);
-      },
-    );
-  };
-  onClose = (value = this.state.value) => {
-    const {onBlur, animationDuration, useNativeDriver = false} = this.props;
-    const {opacity} = this.state;
-    Animated.timing(opacity, {
-      duration: animationDuration,
-      toValue: 0,
-      useNativeDriver,
-    }).start(() => {
-      this.focused = false;
-      if (typeof onBlur === 'function') {
-        onBlur();
-      }
-      this.inputRef.current.onBlur();
-      if (this.mounted) {
-        this.setState({value, modal: false});
-        this.inputRef.current.setValue(value.toString());
-      }
-    });
-  };
-  onSelect = (index: any) => {
-    const {
-      data,
-      valueExtractor,
-      onChange,
-      animationDuration,
-      rippleDuration,
-      name,
-    } = this.props;
-    const value = valueExtractor!(data![index]);
-    const delay = Math.max(0, rippleDuration! - animationDuration!);
-    if (typeof onChange === 'function') {
-      onChange(value, name, index);
-    }
-    setTimeout(() => this.onClose(value), delay);
-  };
-  onLayout = (event: any) => {
-    const {onLayout} = this.props;
-    if (typeof onLayout === 'function') {
-      onLayout(event);
-    }
-  };
-  selectedIndex() {
-    const {value} = this.state;
-    const {data, valueExtractor} = this.props;
+  }, []);
+
+  const selectedIndex = () => {
+    const {value: currentValue} = dropdownState;
     return data!.findIndex(
-      item => item != null && value === valueExtractor!(item),
+      item => item != null && currentValue === valueExtractor!(item),
     );
-  }
-  selectedItem() {
-    const {data} = this.props;
-    return data![this.selectedIndex()];
-  }
-  isFocused() {
-    return this.focused;
-  }
-  itemSize() {
-    const {theme} = this.props;
-    return theme.spaces.xxl5;
-  }
-  visibleItemCount() {
-    const {data, itemCount} = this.props;
-    return Math.min(data!.length, itemCount!);
-  }
-  tailItemCount() {
-    return Math.max(this.visibleItemCount() - 2, 0);
-  }
-  rippleInsets() {
-    const {
-      top = 0,
-      right = 0,
-      bottom = 0,
-      left = 0,
-    } = this.props.rippleInsets || {};
-    return {
-      top,
-      right,
-      bottom,
-      left,
-    };
-  }
-  resetScrollOffset() {
-    const {selected} = this.state;
-    const {data, dropdownPosition} = this.props;
+  };
+
+  const getVisibleItemCount = () => Math.min(data!.length, itemCount!);
+
+  const getTailItemCount = () => Math.max(getVisibleItemCount() - 2, 0);
+
+  const resetScrollOffset = () => {
+    const {selected} = dropdownState;
     let offset = 0;
-    const itemCount = data!.length;
-    const itemSize = this.itemSize();
-    const tailItemCount = this.tailItemCount();
-    const visibleItemCount = this.visibleItemCount();
-    if (itemCount > visibleItemCount) {
+    const dataItemCount = data!.length;
+    const tailItemCount = getTailItemCount();
+    const visibleItemCount = getVisibleItemCount();
+    if (dataItemCount > visibleItemCount) {
       if (dropdownPosition == null) {
         switch (selected) {
           case -1:
@@ -334,8 +174,8 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
           case 1:
             break;
           default:
-            if (selected! >= itemCount - tailItemCount) {
-              offset = itemSize * (itemCount - visibleItemCount);
+            if (selected! >= dataItemCount - tailItemCount) {
+              offset = itemSize * (dataItemCount - visibleItemCount);
             } else {
               offset = itemSize * (selected! - 1);
             }
@@ -346,44 +186,132 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
           index -= visibleItemCount;
         }
         index = Math.max(0, index);
-        index = Math.min(index, itemCount - visibleItemCount);
+        index = Math.min(index, dataItemCount - visibleItemCount);
         if (selected! >= 0) {
           offset = itemSize * index;
         }
       }
     }
-    if (this.scroll) {
-      this.scroll.current.scrollToOffset({offset, animated: false});
+    if (scrollRef.current) {
+      scrollRef.current.scrollToOffset({offset, animated: false});
     }
-  }
-  keyExtractor = (item: any, index: any) => {
-    const {valueExtractor} = this.props;
-    return `${index}-${valueExtractor!(item)}`;
   };
-  cropStringToAccepted = (value: any) => {
-    if (value.length > 45) {
-      return `${value.slice(0, 42)}...`;
+
+  const onPress = () => {
+    if (disabled) {
+      return;
     }
-    return value;
+    const dataItemCount = data!.length;
+    if (!dataItemCount) {
+      return;
+    }
+    setIsFocused(true);
+    if (typeof onFocus === 'function') {
+      onFocus();
+    }
+    inputRef.current!.onFocus();
+    const dimensions = Dimensions.get('window');
+    listContainerRef.current!.measureInWindow(
+      (x: number, y: number, containerWidth: number) => {
+        const {opacity} = dropdownState;
+        const selected = selectedIndex();
+        let leftInset: number;
+        let left = x + dropdownOffset!.left - maxMargin;
+        if (left > minMargin) {
+          leftInset = maxMargin;
+        } else {
+          left = minMargin;
+          leftInset = minMargin;
+        }
+        let right = x + containerWidth + maxMargin;
+        let rightInset: number;
+        if (dimensions.width - right > minMargin) {
+          rightInset = maxMargin;
+        } else {
+          right = dimensions.width - minMargin;
+          rightInset = minMargin;
+        }
+        const visibleItemCount = getVisibleItemCount();
+        const height = itemSize * visibleItemCount;
+        const listOnTop = dimensions.height < y + height;
+        const top = listOnTop ? y - height - theme.sizes.inputHeight : y;
+        setDropdownState(state => ({
+          ...state,
+          modal: true,
+          width: right - left,
+          top,
+          left,
+          leftInset,
+          rightInset,
+          selected,
+          listOnTop,
+        }));
+
+        if (isMounted) {
+          resetScrollOffset();
+          Animated.timing(opacity, {
+            duration: animationDuration,
+            toValue: 1,
+            useNativeDriver,
+          }).start(() => {
+            if (isMounted && Platform.OS === 'ios') {
+              const {flashScrollIndicators} = scrollRef.current || {};
+              if (typeof flashScrollIndicators === 'function') {
+                flashScrollIndicators.call(scrollRef.current);
+              }
+            }
+          });
+        }
+      },
+    );
   };
-  renderBase(props: any) {
-    const {label, placeholder, variant, theme, disabled, color} = this.props;
-    const angle = this.state.opacity.interpolate({
+
+  const onClose = () => {
+    const {opacity} = dropdownState;
+    setDropdownState(state => ({...state, modal: false}));
+    Animated.timing(opacity, {
+      duration: animationDuration,
+      toValue: 0,
+      useNativeDriver,
+    }).start(() => {
+      setIsFocused(false);
+      if (typeof onBlur === 'function') {
+        onBlur();
+      }
+      inputRef.current!.onBlur();
+    });
+  };
+
+  const onSelect = (index: number) => {
+    const currentVal = valueExtractor!(data![index]);
+    if (typeof onChange === 'function') {
+      onChange(currentVal, name, index);
+    }
+    if (isMounted) {
+      setDropdownState(state => ({
+        ...state,
+        value: currentVal,
+      }));
+      inputRef.current!.setValue(currentVal.toString());
+    }
+    onClose();
+  };
+
+  const renderBase = () => {
+    const angle = dropdownState.opacity.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '180deg'],
     });
-    const styles = getStyles(theme);
 
     return (
       <Input
-        {...props}
         inputStyle={styles.input}
-        value={String(this.state.value)}
+        value={String(dropdownState.value)}
         disabled={disabled}
         variant={variant}
         label={label}
         placeholder={placeholder}
-        ref={this.inputRef}
+        ref={inputRef}
         rightIcon={() => (
           <>
             <View style={styles.arrowButton}>
@@ -394,7 +322,7 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
                 }}>
                 <ArrowDown
                   fill={
-                    this.focused
+                    isFocused
                       ? color
                         ? color
                         : theme.colors.primary
@@ -403,110 +331,53 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
                 />
               </Animated.View>
             </View>
-            {this.renderRipple()}
           </>
         )}
       />
     );
-  }
-  renderRipple() {
-    const {
-      theme,
-      baseColor = theme.colors.gray,
-      rippleColor = baseColor,
-      rippleOpacity,
-      rippleDuration,
-      rippleCentered,
-      rippleSequential,
-    } = this.props;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {bottom, ...insets} = this.rippleInsets();
-    const style = {
-      ...insets,
-      height: theme.sizes.inputHeight,
-      position: 'absolute',
-    };
-    return (
-      <Ripple
-        style={style}
-        rippleColor={rippleColor}
-        rippleDuration={rippleDuration}
-        rippleOpacity={rippleOpacity}
-        rippleCentered={rippleCentered}
-        rippleSequential={rippleSequential}
-        ref={this.ripple}
-      />
-    );
-  }
-  renderItem = ({item, index}: {item: any; index: any}) => {
+  };
+
+  const keyExtractor = (item: any, index: any) =>
+    `${index}-${valueExtractor!(item)}`;
+
+  const renderItem = ({item, index}: {item: any; index: any}) => {
     if (item == null) {
       return null;
     }
-    const {selected, leftInset, rightInset} = this.state;
-    const {
-      valueExtractor,
-      labelExtractor,
-      propsExtractor,
-      theme,
-      textColor = theme.colors.gray70,
-      itemColor = theme.colors.gray70,
-      itemBgColor = theme.colors.white,
-      baseColor = theme.colors.gray,
-      selectedItemColor = textColor,
-      disabledItemColor = baseColor,
-      fontSize,
-      itemTextStyle,
-      rippleOpacity,
-      rippleDuration,
-      shadeOpacity,
-    } = this.props;
-    const styles: any = getStyles(theme);
-    let props = propsExtractor!(item, index);
-    props = {
-      rippleDuration,
-      rippleOpacity,
-      rippleColor: baseColor,
+    const {selected} = dropdownState;
+    let itemProps = propsExtractor!(item, index);
+    itemProps = {
       shadeColor: baseColor,
-      shadeOpacity,
-      ...props,
-      onPress: this.onSelect,
+      ...itemProps,
+      onPress: onSelect,
     };
-    const {style, disabled} = props;
-    const value = valueExtractor!(item);
-    const label = labelExtractor!(item);
-    const title = label == null ? value : label;
+    const itemValue = valueExtractor!(item);
+    const itemLabel = labelExtractor!(item);
+    const title = itemLabel == null ? itemValue : itemLabel;
     let bgColor = itemBgColor;
-    let color;
+    let renderItemColor;
     if (disabled) {
-      color = disabledItemColor;
+      renderItemColor = disabledItemColor;
     } else if (selected! >= 0) {
       if (index === selected) {
-        color = selectedItemColor;
+        renderItemColor = selectedItemColor;
         bgColor = theme.colors.gray5;
       } else {
-        color = itemColor;
+        renderItemColor = itemColor;
       }
     } else {
-      color = selectedItemColor;
+      renderItemColor = selectedItemColor;
     }
     const itemStyle = {
       backgroundColor: bgColor,
     };
-    const textStyle = {color, fontSize};
-    props.style = [
-      style,
-      {
-        height: this.itemSize(),
-        paddingLeft: leftInset,
-        paddingRight: rightInset,
-      },
-    ];
+    const textStyle = {color: renderItemColor, fontSize};
     const containerLastBorder =
-      index === this!.props!.data!.length - 1 ? {borderBottomWidth: 0} : {};
+      index === data!.length - 1 ? {borderBottomWidth: 0} : {};
     return (
       <DropdownItem
         index={index}
-        {...props}
+        {...itemProps}
         underlayColor={theme.colors.gray5}
         style={[styles.item, itemTextStyle, itemStyle, containerLastBorder]}>
         <Text
@@ -517,86 +388,63 @@ class Dropdown extends PureComponent<IDropdownProps, DropdownState> {
       </DropdownItem>
     );
   };
-  render() {
-    const {
-      containerStyle,
-      overlayStyle: overlayStyleOverrides,
-      pickerStyle: pickerStyleOverrides,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      rippleInsets,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      rippleOpacity,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      rippleCentered,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      rippleSequential,
-      hitSlop,
-      pressRetentionOffset,
-      testID,
-      nativeID,
-      accessible,
-      accessibilityLabel,
-      theme,
-      ...props
-    } = this.props;
-    const styles = getStyles(theme, this.state.listOnTop);
-    const {data, disabled} = props;
-    const {left, top, width, opacity, modal} = this.state;
-    const itemCount = data!.length;
-    const visibleItemCount = this.visibleItemCount();
-    const itemSize = this.itemSize();
-    const height = itemSize * visibleItemCount;
-    const overlayStyle = {opacity};
-    const pickerStyle = {
-      width,
-      height,
-      top,
-      left,
-    };
-    const touchableProps = {
-      disabled,
-      hitSlop,
-      pressRetentionOffset,
-      onPress: this.onPress,
-      testID,
-      nativeID,
-      accessible,
-      accessibilityLabel,
-    };
-    return (
-      <View onLayout={this.onLayout} style={containerStyle}>
-        <TouchableWithoutFeedback {...touchableProps}>
-          <View pointerEvents="box-only">{this.renderBase(props)}</View>
-        </TouchableWithoutFeedback>
-        <View ref={this.listContainer} nativeID="listContainer">
-          <Modal visible={modal} transparent onRequestClose={this.blur}>
-            <Animated.View
-              style={[styles.overlay, overlayStyle, overlayStyleOverrides]}
-              onStartShouldSetResponder={() => true}
-              onResponderRelease={this.blur}>
-              <View
-                style={[styles.picker, pickerStyle, pickerStyleOverrides]}
-                onStartShouldSetResponder={() => true}>
-                <View style={styles.scrollWrapper}>
-                  <FlatList
-                    ref={this.scroll}
-                    data={data}
-                    style={[styles.scroll]}
-                    renderItem={this.renderItem}
-                    keyExtractor={this.keyExtractor}
-                    scrollEnabled={visibleItemCount < itemCount}
-                    contentContainerStyle={styles.scrollContainer}
-                  />
-                </View>
+
+  const touchableProps = {
+    disabled,
+    hitSlop,
+    pressRetentionOffset,
+    onPress,
+    testID,
+    nativeID,
+    accessible,
+    accessibilityLabel,
+  };
+  const allItemCount = data.length;
+  const overlayStyle = {opacity: dropdownState.opacity};
+  const height = itemSize * getVisibleItemCount();
+  const pickerStyle = {
+    width: dropdownState.width,
+    height: height,
+    top: dropdownState.top,
+    left: dropdownState.left,
+  };
+
+  return (
+    <View onLayout={onLayout} style={containerStyle}>
+      <TouchableWithoutFeedback {...touchableProps}>
+        <View pointerEvents="box-only">{renderBase()}</View>
+      </TouchableWithoutFeedback>
+      <View ref={listContainerRef} nativeID="listContainer">
+        <Modal
+          visible={dropdownState.modal}
+          transparent
+          onRequestClose={onClose}>
+          <Animated.View
+            style={[styles.overlay, overlayStyle, overlayStyleOverrides]}
+            onStartShouldSetResponder={() => true}
+            onResponderRelease={onClose}>
+            <View
+              style={[styles.picker, pickerStyle, pickerStyleOverrides]}
+              onStartShouldSetResponder={() => true}>
+              <View style={styles.scrollWrapper}>
+                <FlatList
+                  ref={scrollRef}
+                  data={data}
+                  style={[styles.scroll]}
+                  renderItem={renderItem}
+                  keyExtractor={keyExtractor}
+                  scrollEnabled={getVisibleItemCount() < allItemCount}
+                  contentContainerStyle={styles.scrollContainer}
+                />
               </View>
-            </Animated.View>
-          </Modal>
-        </View>
+            </View>
+          </Animated.View>
+        </Modal>
       </View>
-    );
-  }
-}
-export default withTheme(Dropdown);
+    </View>
+  );
+};
+
 Dropdown.defaultProps = {
   name: 'dropdown',
   hitSlop: {
@@ -621,17 +469,6 @@ Dropdown.defaultProps = {
     min: 0,
     max: 0,
   },
-  rippleCentered: false,
-  rippleSequential: true,
-  rippleInsets: {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  },
-  rippleOpacity: 0.54,
-  shadeOpacity: 0.12,
-  rippleDuration: 400,
   animationDuration: 225,
   fontSize: 16,
   itemCount: 3,
@@ -641,5 +478,7 @@ Dropdown.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
   onChange: () => {},
-  dropdownPosition: null,
+  dropdownPosition: undefined,
 };
+
+export default Dropdown;

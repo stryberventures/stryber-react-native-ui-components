@@ -1,25 +1,51 @@
-import {AppRegistry} from 'react-native';
-import {getStorybookUI, configure} from '@storybook/react-native';
-// @ts-ignore
-import {loadStories} from './storyLoader';
-import './storybook/rn-addons';
-import {name as appName} from '../app.json';
-// import stories
-configure(() => {
-  loadStories();
-}, module);
-// Refer to https://github.com/storybookjs/storybook/tree/master/app/react-native#start-command-parameters
-// To find allowed options for getStorybookUI
-const StorybookUIRoot = getStorybookUI({
-  onDeviceUI: true,
-  isUIHidden: false,
-  shouldPersistSelection: false,
-  asyncStorage:
-    require('@react-native-community/async-storage').default ||
-    require('react-native').AsyncStorage ||
-    null,
-});
-// If you are using React Native vanilla and after installation you don't see your app name here, write it manually.
-// If you use Expo you can safely remove this line.
-AppRegistry.registerComponent(appName, () => StorybookUIRoot);
-export default StorybookUIRoot;
+import * as Icons from './components/Icons';
+export {Icons};
+export {default as DatePicker} from './components/DatePicker';
+export {default as Badge} from './components/Badge';
+export {default as Block} from './components/Block';
+export {default as Button} from './components/Button';
+export {default as ButtonCounter} from './components/ButtonCounter';
+export {default as Card} from './components/Card';
+export {default as Checkbox} from './components/Checkbox';
+export {default as Dropdown} from './components/Dropdown';
+export {default as Input} from './components/Input';
+export {default as InputBase} from './components/Input/InputBase';
+export {default as Switch} from './components/Switch';
+export {default as Text} from './components/Text';
+export {default as SearchField} from './components/SearchField';
+export {default as TabBarItem} from './components/TabView/TabBarItem';
+export {default as TabBar} from './components/TabView/TabBar';
+export {default as TabView} from './components/TabView';
+export {default as SceneMap} from './components/TabView/SceneMap';
+export {default as List} from './components/List';
+export {default as Slider} from './components/Slider';
+export {default as CardList} from './components/CardList';
+export {default as ProgressBar} from './components/ProgressBar';
+export {default as Loader} from './components/Loader';
+export {default as Tags} from './components/Tags';
+export {ThemeProvider, useTheme} from './components/Theme';
+
+export type {ThemeType} from './components/Theme';
+export type {IButtonProps} from './components/Button';
+export type {DatePickerType} from './components/DatePicker';
+export type {IBadgeProps} from './components/Badge';
+export type {IBlockProps} from './components/Block';
+export type {IButtonCounterProps} from './components/ButtonCounter';
+export type {ICardProps} from './components/Card';
+export type {ICheckboxProps} from './components/Checkbox';
+export type {IDropdownProps} from './components/Dropdown';
+export type {IInputProps} from './components/Input';
+export type {ISwitchProps} from './components/Switch';
+export type {ITypographyProps} from './components/Text';
+export type {ISearchFieldProps} from './components/SearchField';
+export type {ITabBarItemProps} from './components/TabView/TabBarItem';
+export type {ITabBarProps} from './components/TabView/TabBar';
+export type {ITabViewProps} from './components/TabView';
+export type {SceneRendererProps} from './components/TabView/types';
+export type {IListProps, IListItem} from './components/List';
+export type {ISliderProps} from './components/Slider';
+export type {ICardList, ICardListItem} from './components/CardList';
+export type {IProgressBarProps} from './components/ProgressBar';
+export type {ILoaderProps} from './components/Loader';
+export type {ITagData, ITagsProps} from './components/Tags';
+export type {IInputBaseProps} from './components/Input/InputBase';

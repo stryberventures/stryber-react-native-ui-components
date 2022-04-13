@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src/components/",
+    "baseUrl": "./src",
     "paths": {
-      "@stryberventures/stryber-react-native-ui-components": ["./src/components/index"]
+      "@stryberventures/stryber-react-native-ui-components": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
@@ -23,12 +23,14 @@
     "strict": true,
     "target": "esnext"
   },
+  "include": ["./src/index.ts"],
   "exclude": [
     "node_modules",
+    "src/**/*.stories.@(js|jsx|ts|tsx)",
     "src/storybook",
     "src/static",
     "src/storybook.test.ts",
-    "src/storyLoader.js",
-    "src/index.ts",
+    ".storybook",
+    "lib"
   ]
 }

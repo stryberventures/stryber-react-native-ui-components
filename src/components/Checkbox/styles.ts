@@ -1,9 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 
 import {ICheckboxProps, CheckboxState} from './index';
+import {ThemeType} from '../Theme';
 
-type StylesType = Partial<ICheckboxProps> & Partial<CheckboxState>;
+type StylesType = Partial<ICheckboxProps> &
+  Partial<CheckboxState> & {theme: ThemeType};
 
 const getStyles = ({
   theme = defaultTheme,

@@ -1,15 +1,22 @@
 import * as React from 'react';
-import {TouchableOpacity, TouchableOpacityProps, View} from 'react-native';
-import withTheme from '../withTheme';
-import Icons from '../Icons';
+import {
+  StyleProp,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewStyle,
+} from 'react-native';
+import * as Icons from '../Icons';
 import Text from '../Text';
 import getStyles from './styles';
+import {SvgProps} from 'react-native-svg';
+import {FC, useState} from 'react';
+import {useTheme} from '../Theme';
 
 export interface IButtonCounterProps extends TouchableOpacityProps {
-  style?: any;
-  theme?: any;
+  style?: StyleProp<ViewStyle>;
   initialValue?: number;
-  value?: number;
   minValue?: number;
   maxValue?: number;
   children: React.ReactNode;
@@ -18,149 +25,121 @@ export interface IButtonCounterProps extends TouchableOpacityProps {
   disabled?: boolean;
   shadow?: boolean;
   color?: string;
-  renderContent?: (children: any, style: any) => React.ReactNode;
+  renderContent?: (
+    children: any,
+    style: StyleProp<TextStyle>,
+  ) => React.ReactNode;
   countTextTemplate?: string;
   secondaryColor?: string;
   renderMinusIcon?: () => React.ReactNode;
   renderPlusIcon?: () => React.ReactNode;
-  iconProps?: any;
-  renderCount?: (i: number, style: any) => React.ReactNode;
+  iconProps?: SvgProps;
+  renderCount?: (i: number, style: StyleProp<TextStyle>) => React.ReactNode;
   onCountChange: (count: number, i: number) => void;
 }
-export interface IButtonCounterState {
-  count: number;
-  isTouched: boolean;
-  prevPropValue?: number;
-}
 
-class ButtonCounter extends React.Component<
-  IButtonCounterProps,
-  IButtonCounterState
-> {
-  static defaultProps: any;
-  static getDerivedStateFromProps(
-    props: IButtonCounterProps,
-    state: IButtonCounterState,
-  ) {
-    return {
-      ...state,
-      count: state.prevPropValue !== props.value ? props.value : state.count,
-      prevPropValue: props.value,
-    };
-  }
-  constructor(props: IButtonCounterProps) {
-    super(props);
-
-    this.state = {
-      // @ts-ignore-next-line
-      count: props.initialValue,
-      prevPropValue: props.value,
-      isTouched: false,
-    };
-  }
-
-  handlePressIn = () => {
-    this.setState({
-      isTouched: true,
-    });
-  };
-  handlePressOut = () => {
-    this.setState({
-      isTouched: false,
-    });
-  };
-
-  renderCount = (count: number, style: any) => (
-    <Text style={style}>{count}</Text>
-  );
-
-  renderContent = (children: React.ReactNode, textStyle: any) => (
-    <Text style={textStyle}>{children}</Text>
-  );
-
-  onButtonPress = (increment: number) => {
-    this.setState(
-      {
-        count: this.state.count + increment,
-      },
-      () => {
-        this.props.onCountChange(this.state.count, increment);
-      },
-    );
-  };
-
-  render() {
-    const {
-      style,
-      theme,
-      children,
+const ButtonCounter: FC<IButtonCounterProps> = ({
+  initialValue,
+  onCountChange,
+  style,
+  children,
+  iconProps,
+  renderCount,
+  renderContent,
+  renderMinusIcon,
+  renderPlusIcon,
+  minValue,
+  maxValue,
+  color,
+  secondaryColor,
+  size,
+  shape,
+  disabled,
+  shadow,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const [count, setCount] = useState(initialValue!);
+  const [isTouched, setIsTouched] = useState(false);
+  const minusButtonDisabled = count === minValue;
+  const plusButtonDisabled = !!maxValue && count === maxValue;
+  const styles = getStyles(
+    theme,
+    {
+      color,
+      secondaryColor,
+      size,
+      shape,
+      disabled,
       iconProps,
-      renderCount = this.renderCount,
-      renderContent = this.renderContent,
-      renderMinusIcon,
-      renderPlusIcon,
       minValue,
       maxValue,
-      // eslint-disable-next-line
-      value,
-      ...etc
-    } = this.props;
-    const styles = getStyles(theme, this.props, this.state);
-    const minusButtonDisabled = this.state.count === minValue;
-    const plusButtonDisabled = !!maxValue && this.state.count === maxValue;
+      shadow,
+    },
+    count,
+    isTouched,
+  );
 
-    if (this.state.count > 0) {
-      return (
-        <View style={[styles.container, style]}>
-          <View style={styles.leftCol}>
-            <TouchableOpacity
-              disabled={minusButtonDisabled}
-              onPress={() => this.onButtonPress(-1)}
-              style={styles.reduceButton}>
-              {(renderMinusIcon && renderMinusIcon()) || (
-                <Icons.Minus
-                  {...iconProps}
-                  fill={styles.buttonIconMinus.color}
-                  style={styles.buttonIcon}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-          <View style={styles.centerCol}>
-            {renderCount(this.state.count, styles.buttonText)}
-          </View>
-          <View style={styles.rightCol}>
-            <TouchableOpacity
-              disabled={plusButtonDisabled}
-              onPress={() => this.onButtonPress(1)}
-              style={styles.growButton}>
-              {(renderPlusIcon && renderPlusIcon()) || (
-                <Icons.Plus
-                  {...iconProps}
-                  fill={styles.buttonIconPlus.color}
-                  style={styles.buttonIcon}
-                />
-              )}
-            </TouchableOpacity>
-          </View>
-        </View>
-      );
-    }
+  const handlePressIn = () => setIsTouched(true);
+  const handlePressOut = () => setIsTouched(false);
 
+  const onButtonPress = (increment: number) => {
+    setCount(countState => countState + increment);
+    onCountChange(count + increment, increment);
+  };
+
+  if (count > 0) {
     return (
-      <TouchableOpacity
-        {...etc}
-        activeOpacity={1}
-        onPressIn={this.handlePressIn}
-        onPressOut={this.handlePressOut}
-        onPress={() => this.onButtonPress(1)}
-        style={[styles.button, style]}>
-        {renderContent(children, styles.buttonText)}
-        <View style={styles.touchOverlay} />
-      </TouchableOpacity>
+      <View style={[styles.container, style]}>
+        <View style={styles.leftCol}>
+          <TouchableOpacity
+            disabled={minusButtonDisabled}
+            onPress={() => onButtonPress(-1)}
+            style={styles.reduceButton}>
+            {(renderMinusIcon && renderMinusIcon()) || (
+              <Icons.Minus
+                {...iconProps}
+                fill={styles.buttonIconMinus.color}
+                style={styles.buttonIcon}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.centerCol}>
+          {renderCount!(count, styles.buttonText)}
+        </View>
+        <View style={styles.rightCol}>
+          <TouchableOpacity
+            disabled={plusButtonDisabled}
+            onPress={() => onButtonPress(1)}
+            style={styles.growButton}>
+            {(renderPlusIcon && renderPlusIcon()) || (
+              <Icons.Plus
+                {...iconProps}
+                fill={styles.buttonIconPlus.color}
+                style={styles.buttonIcon}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
-}
+
+  return (
+    <TouchableOpacity
+      {...rest}
+      activeOpacity={1}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      onPress={() => onButtonPress(1)}
+      style={[styles.button, style]}>
+      {renderContent!(children, styles.buttonText)}
+      <View style={styles.touchOverlay} />
+    </TouchableOpacity>
+  );
+};
+
 ButtonCounter.defaultProps = {
   initialValue: 0,
   minValue: 0,
@@ -170,5 +149,13 @@ ButtonCounter.defaultProps = {
   disabled: false,
   shadow: false,
   onPress: () => {},
+  renderCount: (count: number, style: StyleProp<TextStyle>) => (
+    <Text style={style}>{count}</Text>
+  ),
+  renderContent: (
+    children: React.ReactNode,
+    textStyle: StyleProp<TextStyle>,
+  ) => <Text style={textStyle}>{children}</Text>,
 };
-export default withTheme(ButtonCounter);
+
+export default ButtonCounter;

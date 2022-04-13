@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {List, Text} from '../../../components';
+import {List, Text} from '../../../index';
 import {IListItem} from '../../../components/List';
-import {defaultTheme as theme} from '../../../components/other/constants';
+import {defaultTheme as theme} from '../../../constants';
 
 const middleLengthText =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.";

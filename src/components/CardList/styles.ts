@@ -1,6 +1,10 @@
 import {Platform, StyleSheet} from 'react-native';
 
 import {IListItemProps} from './ListItem';
+import {ThemeType} from '../Theme';
+import {defaultTheme} from '../../constants';
+
+type ThemeColorsType = keyof ThemeType['colors'];
 
 export const getCardListStyles = () =>
   StyleSheet.create({
@@ -9,7 +13,7 @@ export const getCardListStyles = () =>
     },
   });
 
-export const getListHeaderStyles = (theme: any) => {
+export const getListHeaderStyles = (theme: ThemeType = defaultTheme) => {
   return StyleSheet.create({
     titleWrapper: {
       marginBottom: 10,
@@ -22,23 +26,30 @@ export const getListHeaderStyles = (theme: any) => {
   });
 };
 
-export const getListItemStyles = (theme: any, props: IListItemProps) => {
+export const getListItemStyles = (
+  theme: ThemeType = defaultTheme,
+  props: IListItemProps,
+) => {
   const quizBackground = props.quizBackground
-    ? theme.colors[props.quizBackground] || props.quizBackground
+    ? theme.colors[props.quizBackground as ThemeColorsType] ||
+      props.quizBackground
     : theme.colors.primary;
   const cardBackground = props.cardBackground
-    ? theme.colors[props.cardBackground] || props.cardBackground
+    ? theme.colors[props.cardBackground as ThemeColorsType] ||
+      props.cardBackground
     : theme.colors.white;
   const cardBorderColor = props.isActive
     ? quizBackground
     : props.cardBackground
-    ? theme.colors[props.cardBackground] || props.cardBackground
+    ? theme.colors[props.cardBackground as ThemeColorsType] ||
+      props.cardBackground
     : 'transparent';
   const quizBTextColor = props.quizTextColor
-    ? theme.colors[props.quizTextColor] || props.quizTextColor
+    ? theme.colors[props.quizTextColor as ThemeColorsType] ||
+      props.quizTextColor
     : theme.colors.white;
   const textColor = props.textColor
-    ? theme.colors[props.textColor] || props.textColor
+    ? theme.colors[props.textColor as ThemeColorsType] || props.textColor
     : theme.colors.black;
 
   return StyleSheet.create({

@@ -10,16 +10,17 @@ import {
 import Checkbox from '../Checkbox';
 import Button from '../Button';
 import Switch from '../Switch';
-import Icons from '../Icons';
+import * as Icons from '../Icons';
 import {IListItem} from './index';
 import getStyles from './styles';
-import {defaultTheme as theme} from '../other/constants';
+import {useTheme} from '../Theme';
 
 interface IProps extends IListItem {
   onItemPress?: () => void;
 }
 
 const ListItem: React.FC<IProps> = props => {
+  const {theme} = useTheme();
   const [cardOpened, setCardOpened] = useState(false);
   const [leftWrapperStyles, setLeftWrapperStyles] = useState({
     width: 0,

@@ -1,36 +1,21 @@
-import React, {Component} from 'react';
-import {View} from 'react-native';
+import React, {FC} from 'react';
 import Input, {IInputProps} from '../Input';
-import withTheme from '../withTheme';
 import {Search} from '../Icons';
+import {useTheme} from '../Theme';
 
-interface ISearchFieldProps extends IInputProps {
-  theme?: any;
-  props?: any;
+export interface ISearchFieldProps extends IInputProps {
   iconColor?: string;
 }
-type SearchFieldState = {
-  value?: any;
+
+const SearchField: FC<ISearchFieldProps> = ({iconColor, ...rest}) => {
+  const {theme} = useTheme();
+
+  return (
+    <Input
+      {...rest}
+      icon={() => <Search fill={iconColor || theme.colors.primary} />}
+    />
+  );
 };
-class SearchField extends Component<ISearchFieldProps, SearchFieldState> {
-  static defaultProps: any;
-  state = {
-    value: '',
-  };
-  onRequestChange = (value: any) => this.setState({value});
-  render() {
-    const {theme, iconColor, ...props} = this.props;
-    return (
-      <View>
-        <Input
-          {...props}
-          // @ts-ignore
-          icon={() => <Search fill={iconColor || theme.colors.primary} />}
-          onChange={this.onRequestChange}
-        />
-      </View>
-    );
-  }
-}
-SearchField.defaultProps = {};
-export default withTheme(SearchField);
+
+export default SearchField;

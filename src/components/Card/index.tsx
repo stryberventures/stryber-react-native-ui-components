@@ -1,72 +1,79 @@
-import React, {Component} from 'react';
-import {ImageBackground, Platform} from 'react-native';
+import React, {FC} from 'react';
+import {
+  ImageBackground,
+  ImageSourcePropType,
+  Platform,
+  StyleProp,
+  ViewStyle,
+} from 'react-native';
 import Block, {IBlockProps} from '../Block/index';
-import withTheme from '../withTheme';
 import getStyles from './styles';
+import {ThemeType, useTheme} from '../Theme';
 
-export interface ICardProps extends IBlockProps {
+export interface ICardProps extends Omit<IBlockProps, 'style'> {
   card?: boolean;
   shadow?: boolean;
   shadowType?: 'normal' | 'large';
   bgImageStyles?: any;
   resizeMode?: 'center' | 'cover' | 'contain' | 'stretch' | 'repeat';
-  backgroundImage?: any;
-  theme?: any;
-  style?: any;
-  props?: any;
-  containerStyles?: any;
-  background?: string;
+  backgroundImage?: ImageSourcePropType;
+  style?: StyleProp<ViewStyle>;
+  containerStyles?: StyleProp<ViewStyle>;
+  background?: keyof ThemeType['colors'] | string;
 }
-class Card extends Component<ICardProps, {}> {
-  static defaultProps: any;
-  renderBgImageCard = () => {
-    const {theme, backgroundImage, bgImageStyles, children, resizeMode} =
-      this.props;
-    const styles = getStyles(theme, this.props);
+
+const Card: FC<ICardProps> = ({
+  backgroundImage,
+  background,
+  children,
+  shadow,
+  shadowType,
+  style,
+  containerStyles,
+  bgImageStyles,
+  resizeMode,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const styles = getStyles(theme, background, shadow);
+
+  const renderBgImageCard = () => {
     return (
       <ImageBackground
         resizeMode={resizeMode}
         imageStyle={[styles.imageBgStyles, bgImageStyles]}
         style={{minHeight: theme.sizes.cardWithImgBgMinHeight}}
-        source={backgroundImage}>
+        source={backgroundImage!}>
         {children}
       </ImageBackground>
     );
   };
-  render() {
-    const {
-      theme,
-      backgroundImage,
-      children,
-      shadow,
-      shadowType,
-      // eslint-disable-next-line
-      style,
-      containerStyles,
-      ...rest
-    } = this.props;
-    const styles = getStyles(theme, this.props);
-    return Platform.OS === 'ios' ? (
+
+  if (Platform.OS === 'ios') {
+    return (
       <Block
         flex={0}
-        style={{borderRadius: theme.sizes.blockRadius, ...containerStyles}}
+        style={[{borderRadius: theme.sizes.blockRadius}, containerStyles]}
         shadow={shadow}
         shadowType={shadowType}>
-        <Block style={styles.cardStyles} {...rest}>
-          {backgroundImage ? this.renderBgImageCard() : children}
+        <Block style={[styles.cardStyles, style]} {...rest}>
+          {backgroundImage ? renderBgImageCard() : children}
         </Block>
-      </Block>
-    ) : (
-      <Block
-        shadow={shadow}
-        shadowType={shadowType}
-        style={styles.cardStyles}
-        {...rest}>
-        {backgroundImage ? this.renderBgImageCard() : children}
       </Block>
     );
   }
-}
+
+  return (
+    <Block
+      shadow={shadow}
+      shadowType={shadowType}
+      style={styles.cardStyles}
+      {...rest}>
+      {backgroundImage ? renderBgImageCard() : children}
+    </Block>
+  );
+};
+
 Card.defaultProps = {
   card: true,
   shadow: false,
@@ -74,4 +81,5 @@ Card.defaultProps = {
   resizeMode: 'cover',
   style: {},
 };
-export default withTheme(Card);
+
+export default Card;

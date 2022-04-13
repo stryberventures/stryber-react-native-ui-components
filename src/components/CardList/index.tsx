@@ -5,8 +5,9 @@ import {ICheckboxProps} from '../Checkbox';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import {getCardListStyles} from './styles';
+import {ThemeType} from '../Theme';
 
-export interface IListItem {
+export interface ICardListItem {
   text: string;
   secondaryText?: string;
   checkboxProps?: ICheckboxProps;
@@ -14,8 +15,8 @@ export interface IListItem {
   quizCounter?: string | number;
 }
 
-export interface IProps {
-  data: IListItem[];
+export interface ICardList {
+  data: ICardListItem[];
   title?: string;
   checkboxLeft?: boolean;
   checkboxRight?: boolean;
@@ -23,17 +24,17 @@ export interface IProps {
   radiobuttonRight?: boolean;
   quiz?: boolean;
   quizBackground?: string;
-  quizTextColor?: string;
-  cardBackground?: string;
+  quizTextColor?: keyof ThemeType['colors'] | string;
+  cardBackground?: keyof ThemeType['colors'] | string;
   textColor?: string;
-  keyExtractor?: (item: IListItem, index: number) => string;
-  onQuizPress?: (item?: IListItem, index?: number) => void;
+  keyExtractor?: (item: ICardListItem, index: number) => string;
+  onQuizPress?: (item?: ICardListItem, index?: number) => void;
   defaultIndex?: number;
   multiSelect?: boolean;
   scrollEnabled?: boolean;
 }
 
-const CardList: React.FC<IProps> = props => {
+const CardList: React.FC<ICardList> = props => {
   const styles = getCardListStyles();
 
   const [activeIndexes, setActiveIndexes] = useState(
@@ -42,16 +43,14 @@ const CardList: React.FC<IProps> = props => {
 
   const keyExtractor = props.keyExtractor || ((_item, index) => `${index}`);
 
-  const renderItem = ({item, index}: {item: IListItem; index: number}) => {
+  const renderItem = ({item, index}: {item: ICardListItem; index: number}) => {
     const onQuizPress = () => {
       setActiveIndexes(state => {
         if (props.multiSelect) {
-          // @ts-ignore
           return state.includes(index)
             ? state.filter(element => element !== index)
             : [...state, index];
         }
-        // @ts-ignore
         return state.includes(index) ? [] : [index];
       });
       if (props.onQuizPress) {
@@ -61,7 +60,6 @@ const CardList: React.FC<IProps> = props => {
     return (
       <ListItem
         {...item}
-        // @ts-ignore
         isActive={activeIndexes.includes(index)}
         onQuizPress={onQuizPress}
         checkboxLeft={props.checkboxLeft}

@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 // @ts-ignore
 import {merge} from 'lodash-es';
-import {defaultTheme} from '../../other/constants';
+import {defaultTheme} from '../../../constants';
 import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
 
 export const getStyles = ({

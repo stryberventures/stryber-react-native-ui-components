@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
+import React, {forwardRef, useRef, useState} from 'react';
 import {Animated, Easing, View} from 'react-native';
-import withTheme from '../../withTheme';
 
 import InputBase, {IInputBaseProps} from '../InputBase';
 import Block from '../../Block';
 import {getStyles} from './styles';
+import {useTheme} from '../../Theme';
 
-export interface IInputLinedProps extends IInputBaseProps {
+export interface IInputLinedProps extends Omit<IInputBaseProps, 'theme'> {
   name?: string;
-  inputBaseRef: React.Ref<any>;
   type?: 'email' | 'phone' | 'number' | 'default';
   label?: string;
   error?: string;
@@ -21,164 +20,123 @@ export interface IInputLinedProps extends IInputBaseProps {
   maxLength?: number; // how to be with multiline ?
   numberOfLines?: number;
   maxNumberOfLines?: number;
-  onFocus?: (...args: any[]) => any;
-  onBlur?: (...args: any[]) => any;
+  onFocus?: () => void;
+  onBlur?: () => void;
 
-  style?: any;
-  theme: any;
   color?: string;
 
   // specific props
-  icon?: (...args: any[]) => any;
-  rightIcon?: (...args: any[]) => any;
+  icon?: () => any;
+  rightIcon?: () => any;
   iconBackground?: boolean;
 }
 
-interface IInputLibedState {
-  translateY?: any;
-  animated?: {
-    translateY: any;
-    label: {fontSize: any; fontColor: any; positionTop: any};
-  };
-  moveLabel: boolean;
-}
-
-class InputLined extends Component<IInputLinedProps, IInputLibedState> {
-  static defaultProps: any;
-  state = {
-    animated: {
-      translateY: new Animated.Value(0),
-      label: {
-        fontSize: new Animated.Value(this!.props!.theme!.sizes!.font || 14),
-        fontColor: new Animated.Value(0.0001),
-        positionTop: new Animated.Value(0),
-      },
+const InputLined = forwardRef<InputBase, IInputLinedProps>(
+  (
+    {
+      label,
+      required,
+      disabled,
+      error,
+      value,
+      color,
+      multiline,
+      icon,
+      iconBackground,
+      rightIcon,
+      onFocus,
+      onBlur,
+      ...rest
     },
-    moveLabel: false,
-  };
-
-  constructor(props: IInputLinedProps) {
-    super(props);
-    if (this.props.value && this.props.label) {
-      this.state.moveLabel = true;
-      this.state.animated.label.fontSize.setValue(12);
-      this.state.animated.label.positionTop.setValue(3);
-      this.state.animated.translateY.setValue(1);
-    }
-  }
-
-  animateLabel() {
-    if (!this.props.label) {
-      return;
-    }
-    const animatedLabel = !this.state.moveLabel
-      ? [
-          Animated.timing(this.state.animated.label.fontSize, {
-            toValue: 12,
-            duration: 100,
-            easing: Easing.linear,
-            useNativeDriver: false,
-          }),
-          Animated.timing(this.state.animated.label.positionTop, {
-            toValue: 3,
-            duration: 100,
-            easing: Easing.linear,
-            useNativeDriver: false,
-          }),
-        ]
-      : [];
-    Animated.parallel([
-      Animated.timing(this.state.animated.translateY, {
-        toValue: 1,
-        duration: 100,
-        easing: Easing.linear,
-        useNativeDriver: true,
-      }),
-      ...animatedLabel,
-    ]).start();
-    this.setState({moveLabel: true});
-  }
-
-  renderLabel() {
-    const {theme, label, required, disabled, error, color} = this.props;
+    ref,
+  ) => {
+    const {theme} = useTheme();
+    const isValueInside = value && label;
+    const [moveLabel, setMoveLabel] = useState(!!isValueInside);
     const styles = getStyles({
       theme,
       color,
       disabled,
       error: !!error,
+      moveLabel,
     });
+    const labelFadeInAnimation = useRef(
+      new Animated.Value(moveLabel ? 1 : 0),
+    ).current;
 
-    if (!this.state.moveLabel) {
-      return null;
-    }
+    const getLabelFadeInInterpolation = (...args: [number, number]) =>
+      labelFadeInAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: args,
+      });
 
-    return (
-      <Animated.View
-        shouldRasterizeIOS
-        renderToHardwareTextureAndroid
-        style={[styles.label, {top: this.state.animated.label.positionTop}]}>
-        <Animated.Text
-          // @ts-ignore
+    const animateLabel = () => {
+      if (!label) {
+        return;
+      }
+      if (!moveLabel) {
+        Animated.timing(labelFadeInAnimation, {
+          toValue: 1,
+          duration: 100,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        }).start();
+      }
+      setMoveLabel(true);
+    };
+
+    const renderLabel = () => {
+      return (
+        <Animated.View
           shouldRasterizeIOS
           renderToHardwareTextureAndroid
           style={[
-            styles.labelText,
-            styles.labelAnimatedText,
-            {fontSize: this.state.animated.label.fontSize},
-            error ? styles.labelAnimatedTextError : {},
+            styles.label,
+            {
+              top: getLabelFadeInInterpolation(0, 3),
+              opacity: labelFadeInAnimation,
+            },
           ]}>
-          {`${label} ${required ? '*' : ''}`}
-        </Animated.Text>
-      </Animated.View>
-    );
-  }
-
-  render() {
-    const {
-      theme,
-      disabled,
-      error,
-      icon,
-      iconBackground,
-      multiline,
-      rightIcon,
-      inputBaseRef,
-      ...props
-    } = this.props;
-    const styles = getStyles({
-      theme,
-      color: props.color,
-      disabled,
-      error: !!error,
-      moveLabel: this.state.moveLabel,
-    });
+          <Animated.Text
+            style={[
+              styles.labelText,
+              styles.labelAnimatedText,
+              {fontSize: getLabelFadeInInterpolation(14, 12)},
+              error ? styles.labelAnimatedTextError : {},
+            ]}>
+            {`${label} ${required ? '*' : ''}`}
+          </Animated.Text>
+        </Animated.View>
+      );
+    };
 
     return (
       <InputBase
-        {...props}
-        ref={inputBaseRef}
+        {...rest}
+        ref={ref}
         error={error}
+        theme={theme}
         disabled={disabled!}
+        value={value}
         multiline={multiline}
         inputWrapperComponent={({children, style}: any) => {
           return (
             <Block style={style}>
               <Block
                 animated
-                style={{
-                  transform: [
-                    {
-                      translateY: this.state.animated.translateY.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 7],
-                      }),
-                    },
-                  ],
-                  ...styles.textInput,
-                }}>
+                style={[
+                  {
+                    transform: [
+                      {
+                        translateY: getLabelFadeInInterpolation(0, 7),
+                      },
+                    ],
+                  },
+                  styles.textInput,
+                ]}>
                 {children}
               </Block>
-              {!!this.props.label && this.renderLabel()}
+              {!!label && renderLabel()}
             </Block>
           );
         }}
@@ -206,22 +164,23 @@ class InputLined extends Component<IInputLinedProps, IInputLibedState> {
         renderInputRight={() => (
           <>
             {!!rightIcon && (
-              <View style={styles.rightIconContainer}>{rightIcon!()}</View>
+              <View style={styles.rightIconContainer}>{rightIcon()}</View>
             )}
           </>
         )}
         onFocus={() => {
-          this.animateLabel();
-          this.props.onFocus!();
+          animateLabel();
+          onFocus!();
         }}
         onBlur={() => {
-          this.animateLabel();
-          this.props.onBlur!();
+          animateLabel();
+          onBlur!();
         }}
       />
     );
-  }
-}
+  },
+);
+
 InputLined.defaultProps = {
   name: '',
   type: 'default',
@@ -236,4 +195,5 @@ InputLined.defaultProps = {
   onFocus: () => {},
   onBlur: () => {},
 };
-export default withTheme(InputLined);
+
+export default InputLined;

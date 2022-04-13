@@ -1,12 +1,17 @@
 import {StyleSheet} from 'react-native';
 
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 import {ICardProps} from './index';
+import {ThemeType} from '../Theme';
 
-const getStyles = (theme: any = defaultTheme, props: ICardProps) => {
-  const cardBackground = props.background
-    ? theme.colors[props.background] || props.background
-    : props.shadow
+const getStyles = (
+  theme: ThemeType = defaultTheme,
+  background: ICardProps['background'],
+  shadow: ICardProps['shadow'],
+) => {
+  const cardBackground = background
+    ? theme.colors[background as keyof ThemeType['colors']] || background
+    : shadow
     ? theme.colors.white
     : undefined;
 
@@ -22,7 +27,6 @@ const getStyles = (theme: any = defaultTheme, props: ICardProps) => {
       elevation: 5,
     },
     cardStyles: {
-      ...props.style,
       borderRadius: theme.sizes.blockRadius,
       flex: 0,
       backgroundColor: cardBackground,

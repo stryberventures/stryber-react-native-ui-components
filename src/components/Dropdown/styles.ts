@@ -1,5 +1,5 @@
 import {StyleSheet, Platform, I18nManager} from 'react-native';
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 const getStyles = (theme = defaultTheme, listOnTop = false) =>
   StyleSheet.create({
     accessory: {

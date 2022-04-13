@@ -1,83 +1,72 @@
-import React, {Component} from 'react';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
-import {
-  Block,
-  Text,
-  Header,
-  Button,
-  Checkbox,
-  Switch,
-  Input,
-  withTheme,
-} from '../../../components';
-import {UserIcon} from '../../../components/Icons';
-interface IThemeChooserProps extends React.HTMLAttributes<Element> {
-  themes: any[];
-  setTheme: (...args: any[]) => any;
-}
-class ThemeChooser extends Component<IThemeChooserProps, {}> {
-  renderThemesPreview = () => {
-    const {setTheme, themes} = this.props;
-    return themes.map(theme => (
+import * as React from 'react';
+import {ThemeProvider, useTheme} from '../../../components/Theme';
+import Input from '../../../components/Input';
+import Switch from '../../../components/Switch';
+import Checkbox from '../../../components/Checkbox';
+import Button from '../../../components/Button';
+import {TouchableOpacity, View} from 'react-native';
+import Text from '../../../components/Text';
+
+const initTheme = {colors: {primary: '#ea3590'}};
+
+const themeVariants = [
+  {colors: {primary: '#ea3590'}},
+  {colors: {primary: '#757575'}},
+  {colors: {primary: '#4624bf'}},
+  {colors: {primary: '#a64825'}},
+  {colors: {primary: '#33acbb'}},
+];
+
+const ThemePreview = () => {
+  const {theme, updateTheme} = useTheme();
+
+  const renderThemeVariants = () =>
+    themeVariants.map(themeVariant => (
       <TouchableOpacity
-        key={theme.key}
-        style={{alignItems: 'center', marginHorizontal: 5}}
-        flex={0}
-        onPress={() => setTheme(theme.key)}>
+        style={{
+          width: 50,
+          height: 50,
+          backgroundColor: themeVariant.colors.primary,
+          borderRadius: 5,
+        }}
+        onPress={() => updateTheme(themeVariant)}
+      />
+    ));
+
+  return (
+    <View
+      style={{
+        justifyContent: 'space-around',
+        height: '100%',
+        paddingHorizontal: 20,
+      }}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+        {renderThemeVariants()}
+      </View>
+      <Input placeholder="Input" variant="lined" />
+      <Switch text="Switch" value={true} />
+      <Checkbox text="Checkbox" value={true} />
+      <Button>Button</Button>
+      <View style={{flexDirection: 'row'}}>
+        <Text>Current theme primary color:</Text>
         <View
           style={{
-            width: 50,
-            height: 50,
             backgroundColor: theme.colors.primary,
-            borderRadius: theme.sizes.radius,
+            width: 20,
+            height: 20,
+            borderRadius: 5,
+            marginLeft: 10,
           }}
         />
-        <Text style={{marginTop: 5}}>{theme.key}</Text>
-      </TouchableOpacity>
-    ));
-  };
-  render() {
-    return (
-      <SafeAreaView>
-        <Block flex={0}>
-          <Text center>Choose Theme:</Text>
-          <Block
-            flex={0}
-            row
-            style={{width: '100%', justifyContent: 'center', marginTop: 10}}>
-            {this.renderThemesPreview()}
-          </Block>
-        </Block>
-        <Block
-          flex={0}
-          style={{
-            height: '100%',
-            marginTop: 40,
-            justifyContent: 'flex-start',
-            paddingHorizontal: 20,
-          }}>
-          <Block
-            flex={0}
-            style={{
-              width: '100%',
-              height: '60%',
-              justifyContent: 'space-around',
-            }}>
-            <Header text="Header" />
-            <Button>Button</Button>
-            <Input
-              email
-              withLeftBorder={false}
-              placeholder="Input"
-              icon={() => <UserIcon />}
-            />
-            <Checkbox text="Checkbox" value={true} />
-            <Checkbox text="Radio" radio value={true} />
-            <Switch text="Switch" value={true} />
-          </Block>
-        </Block>
-      </SafeAreaView>
-    );
-  }
-}
-export default withTheme(ThemeChooser);
+      </View>
+    </View>
+  );
+};
+
+const ThemeChooser = () => (
+  <ThemeProvider initial={initTheme}>
+    <ThemePreview />
+  </ThemeProvider>
+);
+
+export default ThemeChooser;

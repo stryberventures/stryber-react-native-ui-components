@@ -1,8 +1,9 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../other/constants';
+import {defaultTheme} from '../../constants';
 import {ILoaderProps} from './index';
+import {ThemeType} from '../Theme';
 
-const getStyles = (theme = defaultTheme, props: ILoaderProps) => {
+const getStyles = (theme: ThemeType = defaultTheme, props: ILoaderProps) => {
   const dotSize = props.size === 'small' ? theme.spaces.xs : theme.spaces.s;
   return StyleSheet.create({
     container: {

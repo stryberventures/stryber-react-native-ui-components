@@ -1,40 +1,47 @@
-import React, {Component} from 'react';
-import {View} from 'react-native';
+import React, {FC} from 'react';
+import {StyleProp, View, ViewStyle} from 'react-native';
 import ProgressInline from './ProgressInline';
 import ProgressDots from './ProgressDots';
 import ProgressSteps from './ProgressSteps';
-import withTheme from '../withTheme';
 import getStyles from './styles';
 
+//TODO: Fix types for different progress bars, rewrite progress bars variants render
 export interface IProgressBarProps {
   size: 'small' | 'large';
-  variant: 'steps' | 'inline' | 'dots';
+  variant?: 'steps' | 'inline' | 'dots';
   value: number;
   totalValue: number;
   title?: string;
-  theme?: any;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
   infoShowed?: boolean;
 }
-class ProgressBar extends Component<IProgressBarProps> {
-  static defaultProps: any;
 
-  render() {
-    const {variant, infoShowed, title, ...props} = this.props;
-    const styles = getStyles();
-    return (
-      <View style={styles.container}>
-        {variant === 'inline' ? (
-          <ProgressInline title={title} infoShowed={infoShowed} {...props} />
-        ) : variant === 'steps' ? (
-          <ProgressSteps {...props} />
-        ) : (
-          <ProgressDots {...props} />
-        )}
-      </View>
-    );
-  }
-}
+const ProgressBar: FC<IProgressBarProps> = ({
+  variant,
+  infoShowed,
+  title,
+  ...rest
+}) => {
+  const styles = getStyles();
+
+  const renderProgressVariant = () => {
+    switch (variant) {
+      case 'inline':
+        return (
+          <ProgressInline title={title} infoShowed={infoShowed} {...rest} />
+        );
+      case 'steps':
+        return <ProgressSteps {...rest} />;
+      case 'dots':
+        return <ProgressDots {...rest} />;
+      default:
+        return <ProgressDots {...rest} />;
+    }
+  };
+
+  return <View style={styles.container}>{renderProgressVariant()}</View>;
+};
+
 ProgressBar.defaultProps = {
   style: {},
   size: 'small',
@@ -44,4 +51,5 @@ ProgressBar.defaultProps = {
   totalValue: 4,
   infoShowed: false,
 };
-export default withTheme(ProgressBar);
+
+export default ProgressBar;

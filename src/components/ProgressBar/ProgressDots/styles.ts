@@ -1,12 +1,16 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../../other/constants';
+import {defaultTheme} from '../../../constants';
 import {IProgressDotsProps} from './index';
 
-const getStyles = (theme = defaultTheme, props: IProgressDotsProps) => {
-  const dotSize = props.size === 'small' ? theme.spaces.xs : theme.spaces.s;
+const getStyles = (
+  theme = defaultTheme,
+  size: IProgressDotsProps['size'],
+  totalValue: IProgressDotsProps['totalValue'],
+) => {
+  const dotSize = size === 'small' ? theme.spaces.xs : theme.spaces.s;
   return StyleSheet.create({
-    wraper: {
-      width: dotSize * props.totalValue + 8 * (props.totalValue - 1),
+    wrapper: {
+      width: dotSize * totalValue + 8 * (totalValue - 1),
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',

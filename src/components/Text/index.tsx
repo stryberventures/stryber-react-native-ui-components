@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {Animated, Text, TextProps} from 'react-native';
-import withTheme from '../withTheme';
+import React, {FC} from 'react';
+import {Animated, StyleProp, Text, TextProps, TextStyle} from 'react-native';
 import getStyles from './styles';
+import {useTheme} from '../Theme';
 
-interface ITypographyProps extends TextProps {
+export interface ITypographyProps extends TextProps {
   title?: boolean;
   h1?: boolean;
   h2?: boolean;
@@ -39,103 +39,98 @@ interface ITypographyProps extends TextProps {
   gray?: boolean;
   gray2?: boolean;
   animated?: boolean;
-  style?: any;
-  theme?: any;
-  props?: any;
-  children: any;
+  style?: StyleProp<TextStyle>;
 }
-class Typography extends Component<ITypographyProps, {}> {
-  static defaultProps: any;
-  render() {
-    const {
-      title,
-      h1,
-      h2,
-      h3,
-      headline,
-      body,
-      button,
-      subhead,
-      footnote,
-      caption,
-      small,
-      size,
-      transform,
-      align,
-      regular,
-      bold,
-      semibold,
-      medium,
-      weight,
-      light,
-      center,
-      right,
-      left,
-      spacing,
-      height,
-      color,
-      accent,
-      primary,
-      secondary,
-      tertiary,
-      black,
-      white,
-      gray,
-      gray2,
-      style,
-      animated,
-      children,
-      theme,
-      ...props
-    } = this.props;
-    const styles: any = getStyles(theme);
-    const textStyles = [
-      styles.text,
-      title && styles.title,
-      h1 && styles.h1,
-      h2 && styles.h2,
-      h3 && styles.h3,
-      headline && styles.headline,
-      body && styles.body,
-      button && styles.button,
-      subhead && styles.subhead,
-      footnote && styles.footnote,
-      caption && styles.caption,
-      small && styles.small,
-      size && {fontSize: size},
-      transform && {textTransform: transform},
-      align && {textAlign: align},
-      height && {lineHeight: height},
-      spacing && {letterSpacing: spacing},
-      weight && {fontWeight: weight},
-      regular && styles.regular,
-      bold && styles.bold,
-      semibold && styles.semibold,
-      medium && styles.medium,
-      light && styles.light,
-      center && styles.center,
-      right && styles.right,
-      left && styles.left,
-      color && styles[color],
-      color && !styles[color] && {color},
-      accent && styles.accent,
-      primary && styles.primary,
-      secondary && styles.secondary,
-      tertiary && styles.tertiary,
-      black && styles.black,
-      white && styles.white,
-      gray && styles.gray,
-      gray2 && styles.gray2,
-      style,
-    ];
-    const TextComponent = (animated ? Animated.Text : Text) as any;
-    return (
-      <TextComponent style={textStyles} {...props}>
-        {children}
-      </TextComponent>
-    );
-  }
-}
+
+const Typography: FC<ITypographyProps> = ({
+  title,
+  h1,
+  h2,
+  h3,
+  headline,
+  body,
+  button,
+  subhead,
+  footnote,
+  caption,
+  small,
+  size,
+  transform,
+  align,
+  regular,
+  bold,
+  semibold,
+  medium,
+  weight,
+  light,
+  center,
+  right,
+  left,
+  spacing,
+  height,
+  color,
+  accent,
+  primary,
+  secondary,
+  tertiary,
+  black,
+  white,
+  gray,
+  gray2,
+  style,
+  animated,
+  children,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const styles = getStyles(theme);
+
+  const textStyles = [
+    styles.text,
+    title && styles.title,
+    h1 && styles.h1,
+    h2 && styles.h2,
+    h3 && styles.h3,
+    headline && styles.headline,
+    body && styles.body,
+    button && styles.button,
+    subhead && styles.subhead,
+    footnote && styles.footnote,
+    caption && styles.caption,
+    small && styles.small,
+    size && {fontSize: size},
+    transform && {textTransform: transform},
+    align && {textAlign: align},
+    height && {lineHeight: height},
+    spacing && {letterSpacing: spacing},
+    weight && {fontWeight: weight},
+    regular && styles.regular,
+    bold && styles.bold,
+    semibold && styles.semibold,
+    medium && styles.medium,
+    light && styles.light,
+    center && styles.center,
+    right && styles.right,
+    left && styles.left,
+    color && {color},
+    accent && styles.accent,
+    primary && styles.primary,
+    secondary && styles.secondary,
+    tertiary && styles.tertiary,
+    black && styles.black,
+    white && styles.white,
+    gray && styles.gray,
+    gray2 && styles.gray2,
+    style,
+  ];
+  const TextComponent = (animated ? Animated.Text : Text) as any;
+  return (
+    <TextComponent style={textStyles} {...rest}>
+      {children}
+    </TextComponent>
+  );
+};
+
 Typography.defaultProps = {
   title: false,
   h1: false,
@@ -162,7 +157,7 @@ Typography.defaultProps = {
   left: false,
   spacing: 0,
   height: 0,
-  color: '',
+  color: 'black',
   accent: false,
   primary: false,
   secondary: false,
@@ -174,4 +169,5 @@ Typography.defaultProps = {
   animated: false,
   style: {},
 };
-export default withTheme(Typography);
+
+export default Typography;

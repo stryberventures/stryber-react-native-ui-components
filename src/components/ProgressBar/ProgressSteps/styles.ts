@@ -1,9 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {defaultTheme} from '../../other/constants';
+import {defaultTheme} from '../../../constants';
 import {IProgressStepsProps} from './index';
+import {ThemeType} from '../../Theme';
 
-const getStyles = (theme = defaultTheme, props: IProgressStepsProps) => {
-  const stepsHeight = props.size === 'small' ? theme.spaces.xs : theme.spaces.s;
+const getStyles = (
+  theme: ThemeType = defaultTheme,
+  size: IProgressStepsProps['size'],
+  value: IProgressStepsProps['value'],
+  totalValue: IProgressStepsProps['totalValue'],
+) => {
+  const stepsSize = size === 'small' ? theme.spaces.xs : theme.spaces.s;
   return StyleSheet.create({
     stepsBar: {
       display: 'flex',
@@ -12,7 +18,7 @@ const getStyles = (theme = defaultTheme, props: IProgressStepsProps) => {
       flexWrap: 'wrap',
     },
     stepsWrapper: {
-      width: props.totalValue * stepsHeight + +8 * (props.totalValue - 1),
+      width: totalValue * stepsSize + 8 * (totalValue - 1),
       display: 'flex',
       alignSelf: 'center',
       flexDirection: 'row',
@@ -22,9 +28,9 @@ const getStyles = (theme = defaultTheme, props: IProgressStepsProps) => {
     },
     stepsProgress: {
       backgroundColor: theme.colors.primary,
-      height: stepsHeight,
+      height: stepsSize,
       marginRight: 8,
-      width: stepsHeight * props.value + 8 * (props.value - 1),
+      width: stepsSize * value + 8 * (value - 1),
       borderRadius: 8,
     },
     stepsText: {
@@ -39,10 +45,10 @@ const getStyles = (theme = defaultTheme, props: IProgressStepsProps) => {
       justifyContent: 'space-between',
     },
     dot: {
-      width: stepsHeight,
-      height: stepsHeight,
+      width: stepsSize,
+      height: stepsSize,
       backgroundColor: theme.colors.gray,
-      borderRadius: stepsHeight,
+      borderRadius: stepsSize,
     },
   });
 };

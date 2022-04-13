@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
+import React, {forwardRef} from 'react';
 import {View} from 'react-native';
-import withTheme from '../../withTheme';
 
 import {NUMBER_OF_LINES, MAX_NUMBER_OF_LINES} from '../constants';
 import Text from '../../Text';
 import InputBase, {IInputBaseProps} from '../InputBase';
 import {getStyles} from './styles';
+import {useTheme} from '../../Theme';
 
-export interface IInputSimpleProps extends IInputBaseProps {
+export interface IInputSimpleProps extends Omit<IInputBaseProps, 'theme'> {
   name?: string;
-  inputBaseRef: React.Ref<any>;
   type?: 'email' | 'phone' | 'number' | 'default';
   label?: string;
   error?: string;
@@ -22,30 +21,18 @@ export interface IInputSimpleProps extends IInputBaseProps {
   maxLength?: number; // how to be with multiline ?
   numberOfLines?: number;
   maxNumberOfLines?: number;
-  inputStyle?: any;
-  style?: any;
-  inputBoxStyle?: any;
-  theme: any;
 
   // specific props
-  icon?: (...args: any[]) => any;
-  rightIcon?: (...args: any[]) => any;
+  icon?: () => any;
+  rightIcon?: () => any;
 }
-class InputSimple extends Component<IInputSimpleProps> {
-  static defaultProps: any;
 
-  render() {
-    const {
-      theme,
-      label,
-      disabled,
-      error,
-      icon,
-      rightIcon,
-      inputBaseRef,
-      inputLabelStyle,
-      ...props
-    } = this.props;
+const InputSimple = forwardRef<InputBase, IInputSimpleProps>(
+  (
+    {label, disabled, error, icon, rightIcon, inputLabelStyle, ...rest},
+    ref,
+  ) => {
+    const {theme} = useTheme();
     const styles = getStyles({
       theme,
       error: !!error,
@@ -54,10 +41,11 @@ class InputSimple extends Component<IInputSimpleProps> {
 
     return (
       <InputBase
-        {...props}
+        {...rest}
         error={error}
         disabled={disabled!}
-        ref={inputBaseRef}
+        theme={theme}
+        ref={ref}
         renderPrefix={() => (
           <View style={styles.labelContainer}>
             <Text style={[styles.labelText, inputLabelStyle]}>{label}</Text>
@@ -75,8 +63,9 @@ class InputSimple extends Component<IInputSimpleProps> {
         )}
       />
     );
-  }
-}
+  },
+);
+
 InputSimple.defaultProps = {
   name: '',
   type: 'default',
@@ -88,4 +77,5 @@ InputSimple.defaultProps = {
   numberOfLines: NUMBER_OF_LINES,
   maxNumberOfLines: MAX_NUMBER_OF_LINES,
 };
-export default withTheme(InputSimple);
+
+export default InputSimple;

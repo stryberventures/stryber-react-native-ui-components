@@ -1,31 +1,40 @@
-import React, {Component} from 'react';
-import {View} from 'react-native';
-import withTheme from '../../withTheme';
+import React, {FC} from 'react';
+import {StyleProp, View, ViewProps, ViewStyle} from 'react-native';
 import getStyles from './styles';
+import {useTheme} from '../../Theme';
 
-export interface IProgressDotsProps {
+export interface IProgressDotsProps extends ViewProps {
   size: 'small' | 'large';
   value: number;
   totalValue: number;
-  theme?: any;
-}
-class ProgressDots extends Component<IProgressDotsProps> {
-  static defaultProps: any;
-
-  render() {
-    const {value, totalValue, theme} = this.props;
-    const styles = getStyles(theme, this.props);
-    const initializeDots = () => {
-      const dots = [];
-      for (let i = 0; i < totalValue; i++) {
-        i === value - 1
-          ? dots.push(<View style={[styles.dot, styles.current]} />)
-          : dots.push(<View style={styles.dot} />);
-      }
-      return dots;
-    };
-    return <View style={styles.wraper}>{initializeDots()}</View>;
-  }
+  style?: StyleProp<ViewStyle>;
 }
 
-export default withTheme(ProgressDots);
+const ProgressDots: FC<IProgressDotsProps> = ({
+  value,
+  totalValue,
+  size,
+  style,
+  ...rest
+}) => {
+  const {theme} = useTheme();
+  const styles = getStyles(theme, size, totalValue);
+
+  const initializeDots = () => {
+    const dots = [];
+    for (let i = 0; i < totalValue; i++) {
+      i === value - 1
+        ? dots.push(<View style={[styles.dot, styles.current]} />)
+        : dots.push(<View style={styles.dot} />);
+    }
+    return dots;
+  };
+
+  return (
+    <View style={[styles.wrapper, style]} {...rest}>
+      {initializeDots()}
+    </View>
+  );
+};
+
+export default ProgressDots;

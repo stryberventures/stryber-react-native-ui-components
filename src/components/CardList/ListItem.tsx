@@ -3,15 +3,16 @@ import {View, Text, TouchableOpacity} from 'react-native';
 
 import Card from '../Card';
 import Checkbox from '../Checkbox';
-import {defaultTheme as theme} from '../other/constants';
-import {IListItem, IProps} from './index';
+import {ICardListItem, ICardList} from './index';
 import {getListItemStyles} from './styles';
+import {useTheme} from '../Theme';
 
-export interface IListItemProps extends IListItem, Partial<IProps> {
+export interface IListItemProps extends ICardListItem, Partial<ICardList> {
   isActive: boolean;
 }
 
 const ListItem: React.FC<IListItemProps> = props => {
+  const {theme} = useTheme();
   const styles = getListItemStyles(theme, props);
 
   const toggleQuiz = () => {
