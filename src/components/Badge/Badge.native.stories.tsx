@@ -13,7 +13,7 @@ storiesOf('Badge', module)
   })
   .add('default', () => {
     const badgeBackground = color(
-      'Badge Background Color',
+      'Badge Background',
       defaultTheme.colors.accent,
       'Badge',
     );
