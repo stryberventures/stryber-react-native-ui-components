@@ -5,6 +5,7 @@ import {storiesOf} from '@storybook/react-native';
 import {withKnobs, color} from '@storybook/addon-knobs';
 import {defaultTheme} from '../../constants';
 import {badge} from '../../static/markdown';
+
 storiesOf('Badge', module)
   .addDecorator(withKnobs)
   .addDecorator(getStory => <CenterView middle>{getStory()}</CenterView>)
@@ -13,7 +14,7 @@ storiesOf('Badge', module)
   })
   .add('default', () => {
     const badgeBackground = color(
-      'Badge Background Color',
+      'Badge Background',
       defaultTheme.colors.accent,
       'Badge',
     );
