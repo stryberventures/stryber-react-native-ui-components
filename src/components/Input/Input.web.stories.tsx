@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
+import '../../storybook/styles/disableInputOutline.css';
 
 import Input from './index';
 import {input} from '../../static/markdown';
